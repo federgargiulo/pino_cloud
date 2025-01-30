@@ -1,12 +1,11 @@
-package it.cogito.equipment.model;
+package it.cogito.equipment.io;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
-@Entity
-public class Sensor {
+import java.io.Serializable;
 
-    private @Id String sensorId;
+public class SensorIO implements Serializable {
+
+    private String sensorId;
 
     private String equipmentId;
 
@@ -37,6 +36,5 @@ public class Sensor {
     public String getName() {
         return name;
     }
-
 
 }

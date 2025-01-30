@@ -1,16 +1,16 @@
 package it.cogito.equipment.controller;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
+import it.cogito.equipment.io.EquipmentIO;
 import it.cogito.equipment.model.Equipment;
 import it.cogito.equipment.model.Sensor;
 import it.cogito.equipment.repository.EquipmentRepository;
 import it.cogito.equipment.repository.SensorRepository;
+import it.cogito.equipment.service.EquipmentService;
+import it.cogito.equipment.service.EquipmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.hateoas.EntityModel;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +21,17 @@ public class EquipmentController {
     private EquipmentRepository equipmentRepository;
     @Autowired
     private SensorRepository sensorRepository;
+
+    @Autowired
+    private EquipmentService equipmentService;
+
+    public EquipmentService getEquipmentService() {
+        return equipmentService;
+    }
+
+    public void setEquipmentService(EquipmentService equipmentService) {
+        this.equipmentService = equipmentService;
+    }
 
     public EquipmentRepository getEquipmentRepository() {
         return equipmentRepository;
@@ -41,10 +52,8 @@ public class EquipmentController {
 
 
     @GetMapping("/equipments")
-    List<Equipment> all() {
-
-        return equipmentRepository.findAll();
-
+    public List<EquipmentIO> all() {
+        return equipmentService.all();
     }
 
     @GetMapping("/equipments/{id}")
@@ -61,7 +70,6 @@ public class EquipmentController {
     public ResponseEntity<Equipment> createTutorial(@RequestBody Equipment equipment) {
         try {
             equipment = equipmentRepository.save( equipment);
-
             return new ResponseEntity<>(equipment, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -107,7 +115,6 @@ public class EquipmentController {
     public String diagnostic( @PathVariable("id") String id , @RequestBody List<Sensor> sensors ) {
        Equipment eq = equipmentRepository.getReferenceById( id );
        return "OK";
-
     }
 
 
