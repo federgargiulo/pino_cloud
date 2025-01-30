@@ -1,16 +1,3 @@
 springdoc:
   swagger-ui:
     path: "api-docs.html"
-
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:25432/equipment
-    username: postgres
-    password: postgres
-  jpa:
-    hibernate:
- # <create | create-drop | update | validate | none>
-      ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect

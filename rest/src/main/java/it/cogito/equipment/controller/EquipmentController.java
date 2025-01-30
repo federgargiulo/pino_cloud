@@ -57,8 +57,9 @@ public class EquipmentController {
     }
 
     @GetMapping("/equipments/{id}")
-    public Optional<Equipment> getEquipmentById(@PathVariable("id") String id) {
-       return equipmentRepository.findById( id );
+    public  EquipmentIO getEquipmentById(@PathVariable("id") String id) {
+        return equipmentService.findById(id);
+
     }
 
     @GetMapping("/equipments/{id}/status")

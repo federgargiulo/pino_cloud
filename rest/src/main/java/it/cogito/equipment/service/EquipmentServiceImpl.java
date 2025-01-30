@@ -9,6 +9,7 @@ import it.cogito.equipment.service.ConvertUtils.*;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Transactional
@@ -41,5 +42,12 @@ public class EquipmentServiceImpl implements  EquipmentService{
         return  ConvertUtils.equipmentData2IO( equipments ) ;
 
 
+    }
+
+    @Override
+    public EquipmentIO findById(String id) {
+        Optional<Equipment> e = equipmentRepository.findById(id);
+        EquipmentIO eIO = ConvertUtils.equipmentData2IO( e.get());
+        return eIO;
     }
 }

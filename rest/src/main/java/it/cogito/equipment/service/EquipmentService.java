@@ -7,4 +7,5 @@ import java.util.List;
 public interface EquipmentService {
     public List<EquipmentIO> all();
     public EquipmentIO create( EquipmentIO io );
+    public EquipmentIO findById (String id);
 }
