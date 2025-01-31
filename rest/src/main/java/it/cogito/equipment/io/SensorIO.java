@@ -9,6 +9,14 @@ public class SensorIO implements Serializable {
 
     private String equipmentId;
 
+    public String getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
+    }
+
     public void setSensorId(String sensorId) {
         this.sensorId = sensorId;
     }

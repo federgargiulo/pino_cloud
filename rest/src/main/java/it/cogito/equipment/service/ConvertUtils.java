@@ -62,4 +62,13 @@ public class ConvertUtils {
     }
 
 
+    public static Sensor senorIO2Data(SensorIO sio) {
+        if ( sio == null ) return null;
+        Sensor data = new Sensor();
+        data.setName( sio.getName() );
+        data.setSensorId( sio.getSensorId( ) );
+        data.setEquipmentId( sio.getSensorId( ) );
+        data.setUnitOfMeasurement( sio.getUnitOfMeasurement() );
+        return data;
+    }
 }

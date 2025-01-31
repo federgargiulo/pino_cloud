@@ -1,6 +1,7 @@
 package it.cogito.equipment.controller;
 
 import it.cogito.equipment.io.EquipmentIO;
+import it.cogito.equipment.io.SensorIO;
 import it.cogito.equipment.model.Equipment;
 import it.cogito.equipment.model.Sensor;
 import it.cogito.equipment.repository.EquipmentRepository;
@@ -68,9 +69,9 @@ public class EquipmentController {
     }
 
     @PostMapping("/equipments")
-    public ResponseEntity<Equipment> createTutorial(@RequestBody Equipment equipment) {
+    public ResponseEntity<EquipmentIO> createTutorial(@RequestBody EquipmentIO equipment) {
         try {
-            equipment = equipmentRepository.save( equipment);
+            equipment = equipmentService.save( equipment);
             return new ResponseEntity<>(equipment, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,10 +79,10 @@ public class EquipmentController {
     }
 
     @PutMapping("/equipments/{id}")
-    public ResponseEntity<Equipment> updateTutorial(@PathVariable("id") String id , @RequestBody Equipment equipment ) {
+    public ResponseEntity<EquipmentIO> updateTutorial(@PathVariable("id") String id , @RequestBody EquipmentIO equipment ) {
         try {
             equipment.setEquipmentId( id );
-            equipment = equipmentRepository.save( equipment );
+            equipment = equipmentService.save( equipment );
 
             return new ResponseEntity<>(equipment, HttpStatus.OK );
         } catch (Exception e) {
@@ -90,10 +91,9 @@ public class EquipmentController {
     }
 
     @DeleteMapping("/equipments/{id}")
-    public ResponseEntity<Equipment> updateTutorial(@PathVariable("id") String id  ) {
+    public ResponseEntity<EquipmentIO> updateEquipment(@PathVariable("id") String id  ) {
         try {
-            Equipment equipment = equipmentRepository.getReferenceById( id );
-            equipmentRepository.delete( equipment );
+            EquipmentIO equipment = equipmentService.findById( id );
             return new ResponseEntity<>(equipment, HttpStatus.OK );
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -106,9 +106,9 @@ public class EquipmentController {
     }
 
     @PostMapping("/equipment/{id}/sensor")
-    public Sensor addSensor( @PathVariable("id") String id , @RequestBody Sensor sensor ) {
-          Equipment eq = equipmentRepository.getReferenceById( id );
-            return sensor;
+    public SensorIO addSensor( @PathVariable("id") String id , @RequestBody SensorIO sensor ) {
+        sensor.setEquipmentId( id );
+        return equipmentService.addSensor( sensor );
 
     }
 
