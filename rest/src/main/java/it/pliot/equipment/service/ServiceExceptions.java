@@ -1,4 +1,4 @@
-package it.cogito.equipment.service;
+package it.pliot.equipment.service;
 
 public class ServiceExceptions extends RuntimeException{
 

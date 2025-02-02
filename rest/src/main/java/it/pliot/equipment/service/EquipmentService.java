@@ -1,7 +1,7 @@
-package it.cogito.equipment.service;
+package it.pliot.equipment.service;
 
-import it.cogito.equipment.io.EquipmentIO;
-import it.cogito.equipment.io.SensorIO;
+import it.pliot.equipment.io.EquipmentIO;
+import it.pliot.equipment.io.SensorIO;
 
 import java.util.List;
 

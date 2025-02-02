@@ -1,15 +1,8 @@
-package it.cogito.equipment.io;
-
-import it.cogito.equipment.model.Sensor;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+package it.pliot.equipment.io;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 
 
 public class EquipmentIO implements Serializable {

@@ -1,6 +1,6 @@
-package it.cogito.equipment.repository;
+package it.pliot.equipment.repository;
 
-import it.cogito.equipment.model.Equipment;
+import it.pliot.equipment.model.Equipment;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

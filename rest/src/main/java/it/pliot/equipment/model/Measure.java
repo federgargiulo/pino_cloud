@@ -1,4 +1,4 @@
-package it.cogito.equipment.model;
+package it.pliot.equipment.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

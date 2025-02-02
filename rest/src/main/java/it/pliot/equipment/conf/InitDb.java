@@ -1,8 +1,8 @@
-package it.cogito.equipment.conf;
+package it.pliot.equipment.conf;
 
-import it.cogito.equipment.io.EquipmentIO;
-import it.cogito.equipment.service.EquipmentService;
-import it.cogito.equipment.service.EquipmentServiceImpl;
+import it.pliot.equipment.io.EquipmentIO;
+import it.pliot.equipment.service.EquipmentService;
+import it.pliot.equipment.service.EquipmentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

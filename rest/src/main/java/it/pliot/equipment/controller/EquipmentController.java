@@ -1,13 +1,12 @@
-package it.cogito.equipment.controller;
+package it.pliot.equipment.controller;
 
-import it.cogito.equipment.io.EquipmentIO;
-import it.cogito.equipment.io.SensorIO;
-import it.cogito.equipment.model.Equipment;
-import it.cogito.equipment.model.Sensor;
-import it.cogito.equipment.repository.EquipmentRepository;
-import it.cogito.equipment.repository.SensorRepository;
-import it.cogito.equipment.service.EquipmentService;
-import it.cogito.equipment.service.EquipmentServiceImpl;
+import it.pliot.equipment.io.EquipmentIO;
+import it.pliot.equipment.io.SensorIO;
+import it.pliot.equipment.model.Equipment;
+import it.pliot.equipment.model.Sensor;
+import it.pliot.equipment.repository.EquipmentRepository;
+import it.pliot.equipment.repository.SensorRepository;
+import it.pliot.equipment.service.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

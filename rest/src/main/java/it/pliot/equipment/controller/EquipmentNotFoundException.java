@@ -1,4 +1,4 @@
-package it.cogito.equipment.controller;
+package it.pliot.equipment.controller;
 
 public class EquipmentNotFoundException extends RuntimeException{
 

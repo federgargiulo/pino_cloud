@@ -1,9 +1,9 @@
-package it.cogito.equipment.service;
+package it.pliot.equipment.service;
 
-import it.cogito.equipment.io.EquipmentIO;
-import it.cogito.equipment.io.SensorIO;
-import it.cogito.equipment.model.Equipment;
-import it.cogito.equipment.model.Sensor;
+import it.pliot.equipment.io.EquipmentIO;
+import it.pliot.equipment.io.SensorIO;
+import it.pliot.equipment.model.Equipment;
+import it.pliot.equipment.model.Sensor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class ConvertUtils {
 
     }
 
-    public static SensorIO sensorData2IO( Sensor s ){
+    public static SensorIO sensorData2IO(Sensor s ){
         if ( s==null)
             return  null;
         SensorIO io = new SensorIO();

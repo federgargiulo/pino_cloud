@@ -1,4 +1,4 @@
-package it.cogito.equipment.io;
+package it.pliot.equipment.io;
 
 
 import java.io.Serializable;

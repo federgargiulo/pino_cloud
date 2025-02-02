@@ -1,15 +1,13 @@
-package it.cogito.equipment.service;
+package it.pliot.equipment.service;
 
-import it.cogito.equipment.io.EquipmentIO;
-import it.cogito.equipment.io.SensorIO;
-import it.cogito.equipment.model.Equipment;
-import it.cogito.equipment.model.Sensor;
-import it.cogito.equipment.repository.EquipmentRepository;
-import it.cogito.equipment.repository.SensorRepository;
+import it.pliot.equipment.io.EquipmentIO;
+import it.pliot.equipment.io.SensorIO;
+import it.pliot.equipment.model.Equipment;
+import it.pliot.equipment.model.Sensor;
+import it.pliot.equipment.repository.EquipmentRepository;
+import it.pliot.equipment.repository.SensorRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import it.cogito.equipment.service.ConvertUtils.*;
-import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 import java.util.Optional;
