@@ -2,6 +2,33 @@ springdoc:
   swagger-ui:
     path: "api-docs.html"
 
+spring:
+  activemq:
+    broker-url: "tcp://localhost:9876"
+    user: "admin"
+    password: "secret"
+    pool:
+      enabled: true
+      max-connections: 10
+  artemis:
+    mode: native
+    host: localhost
+    port: 9876
+    user: admin
+    password: secret
+
+
+  #
+# https://hawt.io/docs/get-started.html
+#
+
+  jmx:
+    enabled: true
+
+
+#
+# Postgres
+#
 #spring:
 #  datasource:
 #    url: jdbc:postgresql://localhost:25432/equipment
@@ -10,7 +37,23 @@ springdoc:
 #  jpa:
 #    hibernate:
       # <create | create-drop | update | validate | none>
+
 #      ddl-auto: create
 #    properties:
 #      hibernate:
 #        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hawtio,jolokia
+      base-path: "/actuator"
+      path-mapping:
+        hawtio: "hawtio/console"
+  management:
+    security:
+      enabled: false
+
+hawtio:
+  authenticationEnabled: false

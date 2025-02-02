@@ -16,22 +16,19 @@
 	<properties>
 		<java.version>17</java.version>
 		<equipment.version>0.0.1-SNAPSHOT</equipment.version>
+		<hawtio-springboot.version>4.2.0</hawtio-springboot.version>
+		<camel.version>4.9.0</camel.version>
 	</properties>
 	<modules>
 
 	<module>data</module>
 	<module>service</module>
-	<!--	<module>rest</module>-->
-
+		<module>rest</module>
 
 	</modules>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-dependencies</artifactId>
-			<version>3.4.2</version>
-			<type>pom</type>
-		</dependency>
+
+
 	</dependencies>
 
 
