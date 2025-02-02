@@ -7,38 +7,35 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.2</version>
  	</parent>
+
 	<groupId>it.pliot.equipment</groupId>
-	<artifactId>equipment-ms</artifactId>
+	<artifactId>equipment</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<java.version>17</java.version>
+		<equipment.version>0.0.1-SNAPSHOT</equipment.version>
 	</properties>
 	<modules>
 
-		<module>rest</module>
+	<module>data</module>
+	<module>service</module>
+	<!--	<module>rest</module>-->
+
 
 	</modules>
-
 	<dependencies>
-
-
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-dependencies</artifactId>
+			<version>3.4.2</version>
+			<type>pom</type>
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+
+
+
 
 </project>
