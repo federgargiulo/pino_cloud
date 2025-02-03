@@ -29,11 +29,18 @@
             <artifactId>service</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <artifactId>pliot-ui</artifactId>
+            <groupId>it.pliot.equipment</groupId>
+            <version>${project.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
+
        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -88,4 +95,27 @@
 
 
     </dependencies>
+    <build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-resources</id>
+                    <phase>validate</phase>
+                    <goals><goal>copy-resources</goal></goals>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}/classes/static</outputDirectory>
+                        <resources>
+                            <resource>
+                                <directory>${project.parent.basedir}/pliot-ui/dist/pliot-ui/browser</directory>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+    </plugins>
+    </build>
 </project>
