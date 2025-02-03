@@ -22,4 +22,6 @@ public class UpdateEquipmentServiceImpl implements UpdateEquipmentService {
 
 
     }
+
+
 }
