@@ -36,7 +36,11 @@ spring:
   jpa:
     dialect: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create
+     ddl-auto: create
+  h2:
+   console:
+     enabled: true
+
 #
 # Postgres
 #
