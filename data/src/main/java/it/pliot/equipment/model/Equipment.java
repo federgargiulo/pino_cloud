@@ -4,12 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-public class Equipment {
+public class Equipment extends BaseEntity{
 
     private @Id String equipmentId;
     public Equipment( String name ){
@@ -17,6 +18,44 @@ public class Equipment {
         this.name = name;
 
     }
+
+    private Date createdDttm;
+
+    public Date getCreatedDttm() {
+        return createdDttm;
+    }
+
+    public void setCreatedDttm(Date createdDttm) {
+        this.createdDttm = createdDttm;
+    }
+
+    public Date getUpdateDttm() {
+        return updateDttm;
+    }
+
+    public void setUpdateDttm(Date updateDttm) {
+        this.updateDttm = updateDttm;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setSensors(List<Sensor> sensors) {
+        this.sensors = sensors;
+    }
+
+    private Date updateDttm;
+
+    private String version;
 
     private String status;
 

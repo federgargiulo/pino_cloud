@@ -27,6 +27,10 @@ public class ConvertUtils {
         io.setEquipmentId(  equipment.getEquipmentId() );
         io.setName( equipment.getName() );
         io.setSensors( sensorListData2IO( equipment.getSensors() ) );
+        io.setCreatedDttm( equipment.getCreatedDttm() );
+        io.setUpdateDttm( equipment.getUpdateDttm() );
+        io.setVersion( equipment.getVersion() );
+
         return  io;
 
     }
@@ -38,6 +42,15 @@ public class ConvertUtils {
         io.setSensorId( s.getSensorId() );
         io.setName( s.getName( ) ) ;
         io.setUnitOfMeasurement( s.getUnitOfMeasurement() );
+        io.setDownRedLimit( s.getDownRedLimit() );
+        io.setDownYellowLimit( s.getDownYellowLimit() );
+        io.setUpYellowLimit( s.getUpYellowLimit() );
+        io.setUpRedLimit( s.getUpRedLimit());
+        io.setMaxVal( s.getMaxVal() );
+        io.setMinVal( s.getMinVal());
+        io.setCreatedDttm( s.getCreatedDttm() );
+        io.setUpdateDttm( s.getUpdateDttm() );
+        io.setVersion( s.getVersion() );
         return io;
     }
 
@@ -57,6 +70,7 @@ public class ConvertUtils {
         Equipment equipment  = new Equipment();
         equipment.setEquipmentId(  equipmentIO.getEquipmentId() );
         equipment.setName( equipmentIO.getName() );
+        equipment.setVersion( equipmentIO.getVersion() );
         return  equipment;
 
     }
@@ -69,6 +83,13 @@ public class ConvertUtils {
         data.setSensorId( sio.getSensorId( ) );
         data.setEquipmentId( sio.getSensorId( ) );
         data.setUnitOfMeasurement( sio.getUnitOfMeasurement() );
+        data.setDownRedLimit( sio.getDownRedLimit() );
+        data.setMaxVal( sio.getMaxVal() );
+        data.setMinVal( sio.getMinVal() );
+        data.setDownRedLimit( sio.getDownRedLimit() );
+        data.setDownRedLimit( sio.getDownRedLimit() );
+        data.setUpRedLimit( sio.getUpRedLimit() );
+        data.setUpYellowLimit( sio.getUpYellowLimit());
         return data;
     }
 }

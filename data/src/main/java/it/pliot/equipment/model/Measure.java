@@ -3,10 +3,12 @@ package it.pliot.equipment.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
 import java.util.Date;
 
+
 @Entity
-public class Measure {
+public class Measure  implements Serializable {
     @Id
     private String mesaureId;
 

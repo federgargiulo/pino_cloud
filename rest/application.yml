@@ -20,7 +20,7 @@ spring:
     password: secret
 
 
-  #
+#
 # https://hawt.io/docs/get-started.html
 #
 
@@ -28,6 +28,15 @@ spring:
     enabled: true
 
 
+  datasource:
+    url: jdbc:h2:file:./equipment
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
 #
 # Postgres
 #

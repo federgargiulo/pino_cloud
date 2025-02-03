@@ -2,12 +2,106 @@ package it.pliot.equipment.io;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class SensorIO implements Serializable {
 
     private String sensorId;
 
     private String equipmentId;
+
+    private String version;
+
+    private String name;
+
+    private String minVal;
+
+    private String maxVal;
+
+    private String downRedLimit;
+
+    private String downYellowLimit;
+
+    private String upRedLimit;
+
+    private Date createdDttm;
+
+    private Date updateDttm;
+
+    public Date getCreatedDttm() {
+        return createdDttm;
+    }
+
+    public void setCreatedDttm(Date createdDttm) {
+        this.createdDttm = createdDttm;
+    }
+
+    public Date getUpdateDttm() {
+        return updateDttm;
+    }
+
+    public void setUpdateDttm(Date updateDttm) {
+        this.updateDttm = updateDttm;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getMinVal() {
+        return minVal;
+    }
+
+    public void setMinVal(String minVal) {
+        this.minVal = minVal;
+    }
+
+    public String getMaxVal() {
+        return maxVal;
+    }
+
+    public void setMaxVal(String maxVal) {
+        this.maxVal = maxVal;
+    }
+
+    public String getDownRedLimit() {
+        return downRedLimit;
+    }
+
+    public void setDownRedLimit(String downRedLimit) {
+        this.downRedLimit = downRedLimit;
+    }
+
+    public String getDownYellowLimit() {
+        return downYellowLimit;
+    }
+
+    public void setDownYellowLimit(String downYellowLimit) {
+        this.downYellowLimit = downYellowLimit;
+    }
+
+    public String getUpRedLimit() {
+        return upRedLimit;
+    }
+
+    public void setUpRedLimit(String upRedLimit) {
+        this.upRedLimit = upRedLimit;
+    }
+
+    public String getUpYellowLimit() {
+        return upYellowLimit;
+    }
+
+    public void setUpYellowLimit(String upYellowLimit) {
+        this.upYellowLimit = upYellowLimit;
+    }
+
+    private String upYellowLimit;
+
 
     public String getEquipmentId() {
         return equipmentId;
@@ -35,7 +129,6 @@ public class SensorIO implements Serializable {
         return sensorId;
     }
 
-    private String name;
 
     public String getUnitOfMeasurement() {
         return unitOfMeasurement;
