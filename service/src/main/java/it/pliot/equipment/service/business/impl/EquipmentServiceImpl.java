@@ -1,4 +1,4 @@
-package it.pliot.equipment.service;
+package it.pliot.equipment.service.business.impl;
 
 import it.pliot.equipment.io.EquipmentIO;
 import it.pliot.equipment.io.SensorIO;
@@ -6,6 +6,9 @@ import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.repository.SensorRepository;
+import it.pliot.equipment.service.business.errors.ServiceExceptions;
+import it.pliot.equipment.service.business.api.EquipmentService;
+import it.pliot.equipment.service.business.util.ConvertUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Transactional
-public class EquipmentServiceImpl implements  EquipmentService{
+public class EquipmentServiceImpl implements EquipmentService {
 
     @Autowired
     private EquipmentRepository equipmentRepository;
@@ -38,36 +41,12 @@ public class EquipmentServiceImpl implements  EquipmentService{
         this.equipmentRepository = equipmentRepository;
     }
 
-    public List<EquipmentIO> all() {
-        List<EquipmentIO> equipments =  ConvertUtils.equipmentListData2IO( equipmentRepository.findAll() );
-        return  equipments;
 
 
-    }
-
-    public EquipmentIO create( EquipmentIO io ) {
-        if ( io == null )
-            throw new ServiceExceptions( "NULLIO");
-        io.setEquipmentId( UUID.randomUUID().toString() );
-        return save( io );
-
-    }
-    public EquipmentIO save( EquipmentIO io ) {
-        if ( io == null )
-            throw new ServiceExceptions( "NULLIO");
-        Equipment equipments =  ConvertUtils.equipmentIO2Data( io );
-        equipments = equipmentRepository.save( equipments );
-        return  ConvertUtils.equipmentData2IO( equipments ) ;
 
 
-    }
 
-    @Override
-    public EquipmentIO findById(String id) {
-        Optional<Equipment> e = equipmentRepository.findById(id);
-        EquipmentIO eIO = ConvertUtils.equipmentData2IO( e.get());
-        return eIO;
-    }
+
 
     public SensorIO addSensor (SensorIO sio){
         sio.setSensorId( UUID.randomUUID().toString() );

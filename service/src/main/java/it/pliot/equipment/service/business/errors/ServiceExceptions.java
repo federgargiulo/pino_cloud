@@ -1,4 +1,4 @@
-package it.pliot.equipment.service;
+package it.pliot.equipment.service.business.errors;
 
 public class ServiceExceptions extends RuntimeException{
 

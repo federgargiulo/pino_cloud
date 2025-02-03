@@ -1,4 +1,4 @@
-package it.pliot.equipment.service;
+package it.pliot.equipment.service.business.util;
 
 import it.pliot.equipment.io.EquipmentIO;
 import it.pliot.equipment.io.SensorIO;

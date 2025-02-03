@@ -6,7 +6,7 @@ import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.repository.SensorRepository;
-import it.pliot.equipment.service.EquipmentService;
+import it.pliot.equipment.service.business.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,28 +18,23 @@ import java.util.Optional;
 @RestController
 public class EquipmentController {
     @Autowired
-    private EquipmentRepository equipmentRepository;
+    private CreateEquipmentService createEquipmentService;
+
     @Autowired
-    private SensorRepository sensorRepository;
+    private UpdateEquipmentService updateEquipmentService;
+
+    @Autowired
+    private FindEquipmentService findEquipmentService;
+
+    @Autowired
+    private ReadEquipmentsService readEquipmentService;
 
     @Autowired
     private EquipmentService equipmentService;
 
-    public EquipmentService getEquipmentService() {
-        return equipmentService;
-    }
+    @Autowired
+    private SensorRepository sensorRepository;
 
-    public void setEquipmentService(EquipmentService equipmentService) {
-        this.equipmentService = equipmentService;
-    }
-
-    public EquipmentRepository getEquipmentRepository() {
-        return equipmentRepository;
-    }
-
-    public void setEquipmentRepository(EquipmentRepository equipmentRepository) {
-        this.equipmentRepository = equipmentRepository;
-    }
 
     public void setSensorRepository(SensorRepository sensorRepository) {
         this.sensorRepository = sensorRepository;
@@ -49,16 +44,14 @@ public class EquipmentController {
         return sensorRepository;
     }
 
-
-
     @GetMapping("/equipments")
     public List<EquipmentIO> all() {
-        return equipmentService.all();
+        return readEquipmentService.all();
     }
 
     @GetMapping("/equipments/{id}")
     public  EquipmentIO getEquipmentById(@PathVariable("id") String id) {
-        return equipmentService.findById(id);
+        return findEquipmentService.findById(id);
 
     }
 
@@ -70,7 +63,7 @@ public class EquipmentController {
     @PostMapping("/equipments")
     public ResponseEntity<EquipmentIO> createTutorial(@RequestBody EquipmentIO equipment) {
         try {
-            equipment = equipmentService.save( equipment);
+            equipment = updateEquipmentService.save( equipment);
             return new ResponseEntity<>(equipment, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -81,7 +74,7 @@ public class EquipmentController {
     public ResponseEntity<EquipmentIO> updateTutorial(@PathVariable("id") String id , @RequestBody EquipmentIO equipment ) {
         try {
             equipment.setEquipmentId( id );
-            equipment = equipmentService.save( equipment );
+            equipment = updateEquipmentService.save( equipment );
 
             return new ResponseEntity<>(equipment, HttpStatus.OK );
         } catch (Exception e) {
@@ -92,7 +85,7 @@ public class EquipmentController {
     @DeleteMapping("/equipments/{id}")
     public ResponseEntity<EquipmentIO> updateEquipment(@PathVariable("id") String id  ) {
         try {
-            EquipmentIO equipment = equipmentService.findById( id );
+            EquipmentIO equipment = findEquipmentService.findById( id );
             return new ResponseEntity<>(equipment, HttpStatus.OK );
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -113,10 +106,8 @@ public class EquipmentController {
 
     @PostMapping("/equipment/{id}/diagnostics ")
     public String diagnostic( @PathVariable("id") String id , @RequestBody List<Sensor> sensors ) {
-       Equipment eq = equipmentRepository.getReferenceById( id );
+    //   Equipment eq = equipmentRepository.getReferenceById( id );
        return "OK";
     }
-
-
 
 }
