@@ -16,7 +16,6 @@ public class Equipment extends BaseEntity{
     public Equipment( String name ){
         equipmentId  = UUID.randomUUID().toString();
         this.name = name;
-
     }
 
     private Date createdDttm;

@@ -1,6 +1,12 @@
 
 
 <section class="listing">
+  <a [routerLink]="['equipment-details', equipment.equipmentId]">
     {{equipment.name}}
-   
-<section> 
+  </a>
+<section>
+
+
+  <section class="content">
+    <router-outlet></router-outlet>
+  </section>

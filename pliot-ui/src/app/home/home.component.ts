@@ -1,6 +1,6 @@
 import { Component , inject } from '@angular/core';
 import { EquipmentListComponent } from '../equipment-list/equipment-list.component';
-import { Equipment } from '../equipment';
+import { Equipment } from '../data/equipment';
 import { CommonModule } from '@angular/common';
 import { EquipmentService } from '../service/equipment.service';
 
@@ -16,9 +16,9 @@ export class HomeComponent {
 
     equipmentService: EquipmentService = inject(EquipmentService);
 
-  
+
     equipments: Equipment[] =[]
-        
+
     constructor() {
       this.equipmentService.getAllEquipments().then((equipments: Equipment[]) => {
         this.equipments = equipments;
