@@ -24,8 +24,9 @@
 	<module>data</module>
 	<module>service</module>
 		<module>rest</module>
+        <module>pliot-ui</module>
 
-	</modules>
+    </modules>
 	<dependencies>
 
 

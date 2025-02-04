@@ -49,17 +49,20 @@ public class EquipmentController {
         return readEquipmentService.all();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/equipments/{id}")
     public  EquipmentIO getEquipmentById(@PathVariable("id") String id) {
         return findEquipmentService.findById(id);
 
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/equipments/{id}/status")
     public String getEquipmentStatus(@PathVariable("id") String id) {
         return "status";
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/equipments")
     public ResponseEntity<EquipmentIO> createTutorial(@RequestBody EquipmentIO equipment) {
         try {
