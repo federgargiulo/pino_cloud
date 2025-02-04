@@ -3,7 +3,6 @@ package it.pliot.equipment.controller;
 import it.pliot.equipment.io.EquipmentIO;
 import it.pliot.equipment.io.SensorIO;
 import it.pliot.equipment.model.Sensor;
-import it.pliot.equipment.repository.SensorRepository;
 import it.pliot.equipment.service.business.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,25 +21,17 @@ public class EquipmentController {
     private UpdateEquipmentService updateEquipmentService;
 
     @Autowired
-    private FindEquipmentService findEquipmentService;
+    private FindEquipmentByIdService findEquipmentService;
 
     @Autowired
     private ReadEquipmentsService readEquipmentService;
 
-    @Autowired
-    private EquipmentService equipmentService;
 
     @Autowired
-    private SensorRepository sensorRepository;
+    private AddSensorService addSensorService;
 
-
-    public void setSensorRepository(SensorRepository sensorRepository) {
-        this.sensorRepository = sensorRepository;
-    }
-
-    public SensorRepository getSensorRepository() {
-        return sensorRepository;
-    }
+    @Autowired
+    private FindSensorByIdService findSensorByIdService;
 
     @GetMapping("/equipments")
     public List<EquipmentIO> all() {
@@ -94,14 +85,14 @@ public class EquipmentController {
     }
 
     @GetMapping("/equipments/{id}/sensors/{idSensor}")
-    public Optional<Sensor> getSensorById(@PathVariable("idSensor") String id) {
-        return sensorRepository.findById( id );
+    public SensorIO getSensorById(@PathVariable("idSensor") String id) {
+        return findSensorByIdService.findById( id );
     }
 
     @PostMapping("/equipment/{id}/sensor")
     public SensorIO addSensor( @PathVariable("id") String id , @RequestBody SensorIO sensor ) {
         sensor.setEquipmentId( id );
-        return equipmentService.addSensor( sensor );
+        return addSensorService.addSensor( sensor );
 
     }
 
