@@ -2,9 +2,7 @@ package it.pliot.equipment.controller;
 
 import it.pliot.equipment.io.EquipmentIO;
 import it.pliot.equipment.io.SensorIO;
-import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.model.Sensor;
-import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.repository.SensorRepository;
 import it.pliot.equipment.service.business.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

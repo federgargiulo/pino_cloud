@@ -19,39 +19,4 @@ import java.util.UUID;
 @Transactional
 public class EquipmentServiceImpl implements EquipmentService {
 
-    @Autowired
-    private EquipmentRepository equipmentRepository;
-
-    @Autowired
-    private SensorRepository sensorRepository;
-
-    public SensorRepository getSensorRepository() {
-        return sensorRepository;
-    }
-
-    public void setSensorRepository(SensorRepository sensorRepository) {
-        this.sensorRepository = sensorRepository;
-    }
-
-    public EquipmentRepository getEquipmentRepository() {
-        return equipmentRepository;
-    }
-
-    public void setEquipmentRepository(EquipmentRepository equipmentRepository) {
-        this.equipmentRepository = equipmentRepository;
-    }
-
-
-
-
-
-
-
-
-    public SensorIO addSensor (SensorIO sio){
-        sio.setSensorId( UUID.randomUUID().toString() );
-        Sensor s = ConvertUtils.senorIO2Data( sio );
-        s = sensorRepository.save( s );
-        return ConvertUtils.sensorData2IO( s );
-    }
 }

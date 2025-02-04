@@ -6,5 +6,5 @@ import it.pliot.equipment.io.SensorIO;
 import java.util.List;
 
 public interface EquipmentService {
-    public SensorIO addSensor (SensorIO sio);
+
 }
