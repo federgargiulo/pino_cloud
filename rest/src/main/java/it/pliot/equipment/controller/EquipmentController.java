@@ -2,6 +2,7 @@ package it.pliot.equipment.controller;
 
 import it.pliot.equipment.io.EquipmentIO;
 import it.pliot.equipment.io.SensorIO;
+import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.service.business.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,10 @@ public class EquipmentController {
 
     @Autowired
     private FindSensorByIdService findSensorByIdService;
+
+    @Autowired
+    private ReadReferenceByIdService readReferenceByIdService;
+
 
     @GetMapping("/equipments")
     public List<EquipmentIO> all() {
@@ -98,7 +103,7 @@ public class EquipmentController {
 
     @PostMapping("/equipment/{id}/diagnostics ")
     public String diagnostic( @PathVariable("id") String id , @RequestBody List<Sensor> sensors ) {
-    //   Equipment eq = equipmentRepository.getReferenceById( id );
+       EquipmentIO eq = readReferenceByIdService.getReferenceById( id );
        return "OK";
     }
 
