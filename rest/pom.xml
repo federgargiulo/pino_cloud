@@ -29,11 +29,11 @@
             <artifactId>service</artifactId>
             <version>${project.version}</version>
         </dependency>
-     <!--    <dependency>
+        <dependency>
             <artifactId>pliot-ui</artifactId>
             <groupId>it.pliot.equipment</groupId>
             <version>${project.version}</version>
-        </dependency> -->
+        </dependency>  
 
 
         <dependency>
