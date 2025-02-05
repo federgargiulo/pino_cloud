@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { EquipmentDetailComponent } from './equipment-detail/equipment-detail.component';
-import { EquipmentListComponent } from './equipment-list/equipment-list.component'
+import { EquipmentDetailComponent } from './equipment/equipment-detail.component';
+import { EquipmentListComponent } from './equipment/equipment-list.component'
 
 const routeConfig: Routes = [
   {
@@ -14,11 +14,11 @@ const routeConfig: Routes = [
     component: EquipmentDetailComponent,
     title: 'Home details'
   },
-     {
-       path: 'equipment',
-       component: EquipmentListComponent,
-       title: 'Equipments'
-     }
+  {
+    path: 'equipment',
+    component: EquipmentListComponent,
+    title: 'Equipments'
+  }
 ];
 
 export default routeConfig;

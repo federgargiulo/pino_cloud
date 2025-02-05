@@ -1,5 +1,5 @@
 import { Component , inject } from '@angular/core';
-import { EquipmentListComponent } from '../equipment-list/equipment-list.component';
+import { EquipmentListComponent } from '../equipment/equipment-list.component';
 import { Equipment } from '../data/equipment';
 import { CommonModule } from '@angular/common';
 import { EquipmentService } from '../service/equipment.service';
