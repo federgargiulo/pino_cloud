@@ -6,11 +6,14 @@ import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.repository.SensorRepository;
 import it.pliot.equipment.service.business.api.AddSensorService;
 import it.pliot.equipment.service.business.util.ConvertUtils;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 @Component
+@Transactional
+
 public class AddSensorServiceImpl implements AddSensorService {
 
     @Autowired
@@ -21,4 +24,6 @@ public class AddSensorServiceImpl implements AddSensorService {
         s = sensorRepository.save( s );
         return ConvertUtils.sensorData2IO( s );
     }
+
+
 }

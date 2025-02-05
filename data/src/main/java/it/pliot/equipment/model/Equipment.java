@@ -1,8 +1,6 @@
 package it.pliot.equipment.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
@@ -12,9 +10,10 @@ import java.util.UUID;
 @Entity
 public class Equipment extends BaseEntity{
 
-    private @Id String equipmentId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     public Equipment( String name ){
-        equipmentId  = UUID.randomUUID().toString();
         this.name = name;
     }
 
@@ -71,8 +70,8 @@ public class Equipment extends BaseEntity{
 
     public Equipment(){}
 
-    public void setEquipmentId(String equipmentId) {
-        this.equipmentId = equipmentId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -81,8 +80,8 @@ public class Equipment extends BaseEntity{
 
     private String name;
 
-    public String getEquipmentId() {
-        return equipmentId;
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -90,18 +89,18 @@ public class Equipment extends BaseEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Equipment equipment = (Equipment) o;
-        return equipmentId.equals(equipment.equipmentId);
+        return id.equals(equipment.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(equipmentId);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "Equipment{" +
-                "equipmentId='" + equipmentId + '\'' +
+                "equipmentId='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }

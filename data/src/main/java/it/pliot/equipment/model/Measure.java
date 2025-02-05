@@ -1,6 +1,8 @@
 package it.pliot.equipment.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
@@ -10,16 +12,17 @@ import java.util.Date;
 @Entity
 public class Measure  implements Serializable {
     @Id
-    private String mesaureId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     private String sensorId;
 
-    public String getMesaureId() {
-        return mesaureId;
+    public String getId() {
+        return id;
     }
 
-    public void setMesaureId(String mesaureId) {
-        this.mesaureId = mesaureId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getSensorId() {

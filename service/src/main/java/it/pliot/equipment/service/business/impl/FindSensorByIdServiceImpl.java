@@ -10,12 +10,14 @@ import it.pliot.equipment.service.business.api.AddSensorService;
 import it.pliot.equipment.service.business.api.FindEquipmentByIdService;
 import it.pliot.equipment.service.business.api.FindSensorByIdService;
 import it.pliot.equipment.service.business.util.ConvertUtils;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@Transactional
 public class FindSensorByIdServiceImpl implements FindSensorByIdService {
     @Autowired
     private SensorRepository sensorRepository;

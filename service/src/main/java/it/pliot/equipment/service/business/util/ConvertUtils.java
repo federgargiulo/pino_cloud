@@ -24,7 +24,7 @@ public class ConvertUtils {
         if ( equipment == null )
             return null;
         EquipmentIO io  = new EquipmentIO();
-        io.setEquipmentId(  equipment.getEquipmentId() );
+        io.setEquipmentId(  equipment.getId() );
         io.setName( equipment.getName() );
         io.setSensors( sensorListData2IO( equipment.getSensors() ) );
         io.setCreatedDttm( equipment.getCreatedDttm() );
@@ -39,7 +39,7 @@ public class ConvertUtils {
         if ( s==null)
             return  null;
         SensorIO io = new SensorIO();
-        io.setSensorId( s.getSensorId() );
+        io.setSensorId( s.getId() );
         io.setName( s.getName( ) ) ;
         io.setUnitOfMeasurement( s.getUnitOfMeasurement() );
         io.setDownRedLimit( s.getDownRedLimit() );
@@ -68,7 +68,7 @@ public class ConvertUtils {
         if ( equipmentIO == null )
             return null;
         Equipment equipment  = new Equipment();
-        equipment.setEquipmentId(  equipmentIO.getEquipmentId() );
+        equipment.setId(  equipmentIO.getEquipmentId() );
         equipment.setName( equipmentIO.getName() );
         equipment.setVersion( equipmentIO.getVersion() );
         return  equipment;
@@ -80,7 +80,7 @@ public class ConvertUtils {
         if ( sio == null ) return null;
         Sensor data = new Sensor();
         data.setName( sio.getName() );
-        data.setSensorId( sio.getSensorId( ) );
+        data.setId( sio.getSensorId( ) );
         data.setEquipmentId( sio.getSensorId( ) );
         data.setUnitOfMeasurement( sio.getUnitOfMeasurement() );
         data.setDownRedLimit( sio.getDownRedLimit() );

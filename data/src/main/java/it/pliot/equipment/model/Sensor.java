@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity
 public class Sensor  extends BaseEntity {
 
-    private @Id String sensorId;
+    private @Id String id;
 
     private String equipmentId;
 
@@ -115,8 +115,8 @@ public class Sensor  extends BaseEntity {
         this.equipmentId = equipmentId;
     }
 
-    public void setSensorId(String sensorId) {
-        this.sensorId = sensorId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setUnitOfMeasurement(String unitOfMeasurement) {
@@ -127,8 +127,8 @@ public class Sensor  extends BaseEntity {
         this.name = name;
     }
 
-    public String getSensorId() {
-        return sensorId;
+    public String getId() {
+        return id;
     }
 
     public String getUnitOfMeasurement() {
