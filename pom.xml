@@ -20,12 +20,10 @@
 		<camel.version>4.9.0</camel.version>
 	</properties>
 	<modules>
-
-	<module>data</module>
-	<module>service</module>
+		<module>data</module>
+		<module>service</module>
 		<module>rest</module>
-        <module>pliot-ui</module>
-
+	<!--	<module>pliot-ui</module> -->
     </modules>
 	<dependencies>
 
