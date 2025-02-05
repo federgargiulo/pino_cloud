@@ -33,7 +33,7 @@
             <artifactId>pliot-ui</artifactId>
             <groupId>it.pliot.equipment</groupId>
             <version>${project.version}</version>
-        </dependency>
+        </dependency>  
 
 
         <dependency>

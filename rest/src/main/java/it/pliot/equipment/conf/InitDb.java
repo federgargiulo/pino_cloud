@@ -1,8 +1,9 @@
 package it.pliot.equipment.conf;
 
 import it.pliot.equipment.io.EquipmentIO;
-import it.pliot.equipment.service.EquipmentService;
-import it.pliot.equipment.service.EquipmentServiceImpl;
+import it.pliot.equipment.service.business.api.CreateEquipmentService;
+import it.pliot.equipment.service.business.api.EquipmentService;
+import it.pliot.equipment.service.business.impl.EquipmentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +16,7 @@ public class InitDb {
     private static final Logger log = LoggerFactory.getLogger(InitDb.class);
 
     @Bean
-    CommandLineRunner initDatabase(EquipmentServiceImpl service) {
+    CommandLineRunner initDatabase(CreateEquipmentService service) {
 
         return args -> {
             log.info("Preloading " + service.create( new EquipmentIO( "Pump" )));
