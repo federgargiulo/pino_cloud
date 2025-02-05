@@ -2,9 +2,9 @@ springdoc:
   swagger-ui:
     path: "api-docs.html"
 
+#jms:
+ #  jndi-name: "java:/MyConnectionFactory"
 spring:
-  #jms:
-  #  jndi-name: "java:/MyConnectionFactory"
   activemq:
     broker-url: "tcp://localhost:9876"
     user: "admin"
@@ -27,31 +27,31 @@ spring:
   jmx:
     enabled: true
 
-
- # datasource:
- #   url: jdbc:h2:file:./equipment
- #   username: sa
- #   password: password
- #   driverClassName: org.h2.Driver
- # jpa:
- #   dialect: org.hibernate.dialect.H2Dialect
- #   hibernate:
- #    ddl-auto: create
- # h2:
- #  console:
- #    enabled: true
+  datasource:
+    url: jdbc:h2:file:./equipment
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+    jpa:
+      dialect: org.hibernate.dialect.H2Dialect
+      hibernate:
+        ddl-auto: create
+      show-sql: true
+  h2:
+    console:
+      enabled: true
 
 #
 # Postgres
 #
 #spring:
-  datasource:
-    url: jdbc:postgresql://localhost:25432/test
-    username: postgres
-    password: postgres
-  jpa:
-     hibernate: create
-      # <create | create-drop | update | validate | none>
+# datasource:
+#    url: jdbc:postgresql://localhost:25432/test
+#    username: postgres
+#    password: postgres
+#  jpa:
+#     hibernate: create
+#      # <create | create-drop | update | validate | none>
 
 #      ddl-auto: create
 #    properties:

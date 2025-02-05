@@ -13,8 +13,8 @@ import java.io.IOException;
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+    public void addResourceHandlers0(ResourceHandlerRegistry registry) {
 
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
