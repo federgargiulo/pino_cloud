@@ -19,8 +19,8 @@ public class InitDb {
     CommandLineRunner initDatabase(CreateEquipmentService service) {
 
         return args -> {
-           // log.info("Preloading " + service.create( new EquipmentIO( "Pump" )));
-           // log.info("Preloading " + service.create( new EquipmentIO("Inverter" )));
+            log.info("Preloading " + service.create( new EquipmentIO( "Pump" )));
+            log.info("Preloading " + service.create( new EquipmentIO("Inverter" )));
         };
     }
 

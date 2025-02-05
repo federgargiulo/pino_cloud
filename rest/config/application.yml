@@ -32,11 +32,14 @@ spring:
     username: sa
     password: password
     driverClassName: org.h2.Driver
-    jpa:
-      dialect: org.hibernate.dialect.H2Dialect
+  jpa:
+    dialect: org.hibernate.dialect.H2Dialect
+    properties:
       hibernate:
-        ddl-auto: create
-      show-sql: true
+        format_sql=true:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
   h2:
     console:
       enabled: true
