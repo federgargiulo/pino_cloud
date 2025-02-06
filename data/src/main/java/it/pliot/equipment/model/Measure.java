@@ -33,12 +33,12 @@ public class Measure  implements Serializable {
         this.sensorId = sensorId;
     }
 
-    public String getMeasure() {
-        return measure;
+    public String getValue() {
+        return value;
     }
 
-    public void setMeasure(String measure) {
-        this.measure = measure;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Date getMesure_dttm() {
@@ -49,7 +49,7 @@ public class Measure  implements Serializable {
         this.mesure_dttm = mesure_dttm;
     }
 
-    private String measure;
+    private String value;
 
     private Date mesure_dttm;
 

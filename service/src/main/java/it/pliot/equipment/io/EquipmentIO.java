@@ -7,7 +7,25 @@ import java.util.List;
 
 
 public class EquipmentIO implements Serializable {
-    public  EquipmentIO( String name ){
+
+    public static EquipmentIO newEquipment(String name , String tenant ){
+        EquipmentIO e = new EquipmentIO();
+        e.setName( name );
+        e.setTenant( tenant );
+        return e;
+    }
+
+    private String tenant;
+
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
+    public  EquipmentIO(String name ){
         this.name = name;
     }
     private  String equipmentId;

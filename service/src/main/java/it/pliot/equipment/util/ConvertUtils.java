@@ -1,4 +1,4 @@
-package it.pliot.equipment.service.business.util;
+package it.pliot.equipment.util;
 
 import it.pliot.equipment.io.EquipmentIO;
 import it.pliot.equipment.io.SensorIO;
@@ -26,6 +26,7 @@ public class ConvertUtils {
         EquipmentIO io  = new EquipmentIO();
         io.setEquipmentId(  equipment.getId() );
         io.setName( equipment.getName() );
+        io.setTenant( equipment.getTenant() );
         io.setSensors( sensorListData2IO( equipment.getSensors() ) );
         io.setCreatedDttm( equipment.getCreatedDttm() );
         io.setUpdateDttm( equipment.getUpdateDttm() );
@@ -71,6 +72,7 @@ public class ConvertUtils {
         equipment.setId(  equipmentIO.getEquipmentId() );
         equipment.setName( equipmentIO.getName() );
         equipment.setVersion( equipmentIO.getVersion() );
+        equipment.setTenant( equipmentIO.getTenant() );
         return  equipment;
 
     }

@@ -1,15 +1,10 @@
 package it.pliot.equipment.service.business.impl;
 
-import it.pliot.equipment.io.EquipmentIO;
 import it.pliot.equipment.io.SensorIO;
-import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.model.Sensor;
-import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.repository.SensorRepository;
-import it.pliot.equipment.service.business.api.AddSensorService;
-import it.pliot.equipment.service.business.api.FindEquipmentByIdService;
 import it.pliot.equipment.service.business.api.FindSensorByIdService;
-import it.pliot.equipment.service.business.util.ConvertUtils;
+import it.pliot.equipment.util.ConvertUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

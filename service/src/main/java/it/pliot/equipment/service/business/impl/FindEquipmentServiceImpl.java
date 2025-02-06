@@ -4,7 +4,7 @@ import it.pliot.equipment.io.EquipmentIO;
 import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.service.business.api.FindEquipmentByIdService;
-import it.pliot.equipment.service.business.util.ConvertUtils;
+import it.pliot.equipment.util.ConvertUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

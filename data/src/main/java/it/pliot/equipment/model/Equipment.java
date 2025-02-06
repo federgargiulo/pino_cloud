@@ -17,6 +17,16 @@ public class Equipment extends BaseEntity{
         this.name = name;
     }
 
+    private String tenant;
+
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
     private Date createdDttm;
 
     public Date getCreatedDttm() {
