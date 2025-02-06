@@ -1,7 +1,7 @@
-package it.pliot.equipment.service.business.impl;
+package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.service.business.errors.ServiceExceptions;
-import it.pliot.equipment.util.BaseConvertUtil;
+import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class BaseServiceImpl<T,K> {

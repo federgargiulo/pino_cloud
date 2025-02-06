@@ -1,4 +1,4 @@
-package it.pliot.equipment.util;
+package it.pliot.equipment.service.dbms.util;
 
 import java.util.ArrayList;
 import java.util.List;

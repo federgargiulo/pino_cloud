@@ -2,12 +2,12 @@ package it.pliot.equipment.conf;
 
 import it.pliot.equipment.io.EquipmentIO;
 import it.pliot.equipment.io.RoleIO;
+import it.pliot.equipment.io.SensorIO;
 import it.pliot.equipment.io.TenantIO;
+import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.RoleServices;
+import it.pliot.equipment.service.business.SensorServices;
 import it.pliot.equipment.service.business.TenanServices;
-import it.pliot.equipment.service.business.api.CreateEquipmentService;
-import it.pliot.equipment.service.business.api.EquipmentService;
-import it.pliot.equipment.service.business.impl.EquipmentServiceImpl;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,10 @@ public class InitDb {
     private TenanServices tenanServices;
 
     @Autowired
-    private EquipmentService equipmentService;
+    private EquipmentServices equipmentService;
+
+    @Autowired
+    private SensorServices sensorServices;
 
 
     @PostConstruct
@@ -38,9 +41,19 @@ public class InitDb {
 
         log.info("Preloading Tenant" +  t ) ;
 
+        EquipmentIO eq = equipmentService.create( EquipmentIO.newEquipment( "Pump" , "full descricption ") );
+        log.info("Preloading  EquipmentIO" + eq );
+        SensorIO s1 = SensorIO.newEmptyInstance( eq.getEquipmentId() , " TEMPERATURA ESTERNA");
+        s1 = sensorServices.create( s1 );
+        log.info("Preloading  Sensor" + s1 );
 
-        log.info("Preloading " + equipmentService.create(  EquipmentIO.newEquipment( "Pump" , "full descricption ")));
-        log.info("Preloading " + equipmentService.create( EquipmentIO.newEquipment( "Inverter" , "full description ")));
+        EquipmentIO eq2 =equipmentService.create( EquipmentIO.newEquipment( "Inverter" , "full description ") );
+        SensorIO s2 = SensorIO.newEmptyInstance( eq2.getEquipmentId() , "PRESSIONE_INTERNA");
+        s1 = sensorServices.create( s2 );
+        log.info("Preloading  Sensor" + s1 );
+
+
+        log.info("Preloading " +  eq2 );
 
     }
 

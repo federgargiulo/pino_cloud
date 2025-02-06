@@ -1,14 +1,17 @@
 package it.pliot.equipment.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.Date;
 
 @Entity
 public class Sensor  extends BaseEntity {
-
-    private @Id String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     private String equipmentId;
 

@@ -4,7 +4,7 @@ import it.pliot.equipment.io.SensorIO;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.repository.SensorRepository;
 import it.pliot.equipment.service.business.api.FindSensorByIdService;
-import it.pliot.equipment.util.ConvertUtils;
+import it.pliot.equipment.service.dbms.util.ConvertUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

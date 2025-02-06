@@ -1,4 +1,4 @@
-package it.pliot.equipment.util;
+package it.pliot.equipment.service.dbms.util;
 
 import it.pliot.equipment.io.UserIO;
 import it.pliot.equipment.model.User;

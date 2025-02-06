@@ -6,6 +6,14 @@ import java.util.Date;
 
 public class SensorIO implements Serializable {
 
+    public static SensorIO newEmptyInstance( String equipmentId , String name ){
+        SensorIO io = new SensorIO();
+        io.setEquipmentId( equipmentId );
+        io.setName( name );
+        return io;
+    }
+
+
     private String sensorId;
 
     private String equipmentId;
