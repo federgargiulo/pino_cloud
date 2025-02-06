@@ -2,6 +2,7 @@ package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.io.MeasureIO;
 import it.pliot.equipment.io.RoleIO;
+import it.pliot.equipment.model.Measure;
 import it.pliot.equipment.repository.MeasureRepository;
 import it.pliot.equipment.repository.RoleRepository;
 import it.pliot.equipment.service.business.MeasureServices;
@@ -13,6 +14,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @Transactional
@@ -30,4 +33,7 @@ public class MeasureServiceImpl extends BaseServiceImpl<MeasureIO, String> imple
     public BaseConvertUtil getConverter() {
         return MeasureUtils.instance();
     }
+
+
+
 }

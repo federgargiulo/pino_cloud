@@ -22,7 +22,7 @@ public class MeasureUtils extends BaseConvertUtil<Measure, MeasureIO>{
         Measure out = new Measure();
         out.setId( in.getId() );
         out.setMesure_dttm( in.getMesure_dttm() );
-        out.setValue( in.getValue() );
+        out.setValore( in.getVal() );
         out.setSensorId( in.getSensorId() );
         return out;
     }
@@ -33,7 +33,7 @@ public class MeasureUtils extends BaseConvertUtil<Measure, MeasureIO>{
         MeasureIO out = new MeasureIO();
         out.setId( in.getId() );
         out.setMesure_dttm( in.getMesure_dttm() );
-        out.setValue( in.getValue() );
+        out.setVal( in.getVal() );
         out.setSensorId( in.getSensorId() );
         return out;
     }

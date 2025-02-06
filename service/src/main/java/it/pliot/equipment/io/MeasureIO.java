@@ -9,6 +9,10 @@ public class MeasureIO implements Serializable {
 
     private String sensorId;
 
+    private String val;
+
+    private Date mesure_dttm;
+
     public String getId() {
         return id;
     }
@@ -25,12 +29,12 @@ public class MeasureIO implements Serializable {
         this.sensorId = sensorId;
     }
 
-    public String getValue() {
-        return value;
+    public String getVal() {
+        return val;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setVal(String val) {
+        this.val = val;
     }
 
     public Date getMesure_dttm() {
@@ -41,8 +45,6 @@ public class MeasureIO implements Serializable {
         this.mesure_dttm = mesure_dttm;
     }
 
-    private String value;
 
-    private Date mesure_dttm;
 
 }
