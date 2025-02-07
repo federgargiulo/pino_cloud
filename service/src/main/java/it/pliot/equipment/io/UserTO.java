@@ -1,13 +1,11 @@
 package it.pliot.equipment.io;
 
 import it.pliot.equipment.model.BaseEntity;
-import it.pliot.equipment.model.Role;
-import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserIO extends BaseEntity {
+public class UserTO extends BaseEntity {
 
 
 
@@ -81,11 +79,11 @@ public class UserIO extends BaseEntity {
         this.password = password;
     }
 
-    public List<RoleIO> getRoles() {
+    public List<RoleTO> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleIO> roles) {
+    public void setRoles(List<RoleTO> roles) {
         this.roles = roles;
     }
 
@@ -101,5 +99,5 @@ public class UserIO extends BaseEntity {
 
     private String password;
 
-    private List<RoleIO> roles = new ArrayList<>();
+    private List<RoleTO> roles = new ArrayList<>();
 }

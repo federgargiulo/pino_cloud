@@ -4,10 +4,10 @@ package it.pliot.equipment.io;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SensorIO implements Serializable {
+public class SensorTO implements Serializable {
 
-    public static SensorIO newEmptyInstance( String equipmentId , String name ){
-        SensorIO io = new SensorIO();
+    public static SensorTO newEmptyInstance(String equipmentId , String name ){
+        SensorTO io = new SensorTO();
         io.setEquipmentId( equipmentId );
         io.setName( name );
         return io;

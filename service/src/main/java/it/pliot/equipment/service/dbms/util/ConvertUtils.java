@@ -1,7 +1,7 @@
 package it.pliot.equipment.service.dbms.util;
 
-import it.pliot.equipment.io.EquipmentIO;
-import it.pliot.equipment.io.SensorIO;
+import it.pliot.equipment.io.EquipmentTO;
+import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.model.Sensor;
 
@@ -10,8 +10,8 @@ import java.util.List;
 
 public class ConvertUtils {
 
-    public static List<EquipmentIO> equipmentListData2IO(List<Equipment> equipment ){
-        List<EquipmentIO> eqio = new ArrayList<EquipmentIO>();
+    public static List<EquipmentTO> equipmentListData2IO(List<Equipment> equipment ){
+        List<EquipmentTO> eqio = new ArrayList<EquipmentTO>();
         if( equipment != null )
             equipment.forEach( e -> eqio.add( equipmentData2IO( e ) ) );
         return eqio;
@@ -19,11 +19,11 @@ public class ConvertUtils {
 
     }
 
-    public static EquipmentIO equipmentData2IO( Equipment equipment ){
+    public static EquipmentTO equipmentData2IO(Equipment equipment ){
 
         if ( equipment == null )
             return null;
-        EquipmentIO io  = new EquipmentIO();
+        EquipmentTO io  = new EquipmentTO();
         io.setEquipmentId(  equipment.getId() );
         io.setName( equipment.getName() );
         io.setTenant( equipment.getTenant() );
@@ -36,10 +36,10 @@ public class ConvertUtils {
 
     }
 
-    public static SensorIO sensorData2IO(Sensor s ){
+    public static SensorTO sensorData2IO(Sensor s ){
         if ( s==null)
             return  null;
-        SensorIO io = new SensorIO();
+        SensorTO io = new SensorTO();
         io.setSensorId( s.getId() );
         io.setName( s.getName( ) ) ;
         io.setUnitOfMeasurement( s.getUnitOfMeasurement() );
@@ -55,8 +55,8 @@ public class ConvertUtils {
         return io;
     }
 
-    public static List<SensorIO> sensorListData2IO(List<Sensor> sensors ){
-        ArrayList<SensorIO> sio = new ArrayList<SensorIO>();
+    public static List<SensorTO> sensorListData2IO(List<Sensor> sensors ){
+        ArrayList<SensorTO> sio = new ArrayList<SensorTO>();
         if ( sensors == null )
             return sio;
         sensors.forEach( s -> sio.add( sensorData2IO( s ) ) );
@@ -64,21 +64,21 @@ public class ConvertUtils {
     }
 
 
-    public static Equipment equipmentIO2Data( EquipmentIO equipmentIO ){
+    public static Equipment equipmentIO2Data( EquipmentTO equipmentTO){
 
-        if ( equipmentIO == null )
+        if ( equipmentTO == null )
             return null;
         Equipment equipment  = new Equipment();
-        equipment.setId(  equipmentIO.getEquipmentId() );
-        equipment.setName( equipmentIO.getName() );
-        equipment.setVersion( equipmentIO.getVersion() );
-        equipment.setTenant( equipmentIO.getTenant() );
+        equipment.setId(  equipmentTO.getEquipmentId() );
+        equipment.setName( equipmentTO.getName() );
+        equipment.setVersion( equipmentTO.getVersion() );
+        equipment.setTenant( equipmentTO.getTenant() );
         return  equipment;
 
     }
 
 
-    public static Sensor senorIO2Data(SensorIO sio) {
+    public static Sensor senorIO2Data(SensorTO sio) {
         if ( sio == null ) return null;
         Sensor data = new Sensor();
         data.setName( sio.getName() );

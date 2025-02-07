@@ -1,6 +1,6 @@
 package it.pliot.equipment.service.business.impl;
 
-import it.pliot.equipment.io.EquipmentIO;
+import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.service.business.api.ReadEquipmentsService;
 import it.pliot.equipment.service.dbms.util.ConvertUtils;
@@ -14,8 +14,8 @@ import java.util.List;
 public class ReadEquipmentsServiceImpl implements ReadEquipmentsService {
     @Autowired
     private EquipmentRepository equipmentRepository;
-    public List<EquipmentIO> all() {
-        List<EquipmentIO> equipments =  ConvertUtils.equipmentListData2IO( equipmentRepository.findAll() );
+    public List<EquipmentTO> all() {
+        List<EquipmentTO> equipments =  ConvertUtils.equipmentListData2IO( equipmentRepository.findAll() );
         return  equipments;
 
 

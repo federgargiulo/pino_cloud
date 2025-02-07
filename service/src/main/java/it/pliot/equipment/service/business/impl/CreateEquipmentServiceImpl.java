@@ -1,6 +1,6 @@
 package it.pliot.equipment.service.business.impl;
 
-import it.pliot.equipment.io.EquipmentIO;
+import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.service.business.api.CreateEquipmentService;
 import it.pliot.equipment.service.business.api.UpdateEquipmentService;
 import it.pliot.equipment.service.business.errors.ServiceExceptions;
@@ -15,7 +15,7 @@ public class CreateEquipmentServiceImpl implements CreateEquipmentService {
     @Autowired
     private UpdateEquipmentService updateEquipment;
 
-    public EquipmentIO create(EquipmentIO io ) {
+    public EquipmentTO create(EquipmentTO io ) {
         if ( io == null )
             throw new ServiceExceptions( "NULLIO");
 

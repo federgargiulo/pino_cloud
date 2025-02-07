@@ -1,9 +1,8 @@
 package it.pliot.equipment.service.business;
 
-import it.pliot.equipment.io.EquipmentIO;
-import it.pliot.equipment.io.TenantIO;
+import it.pliot.equipment.io.EquipmentTO;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface EquipmentServices extends BaseServiceInterface<EquipmentIO,String> {
+public interface EquipmentServices extends BaseServiceInterface<EquipmentTO,String> {
 }

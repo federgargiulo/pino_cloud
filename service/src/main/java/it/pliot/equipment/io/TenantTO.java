@@ -1,22 +1,18 @@
 package it.pliot.equipment.io;
 
 import it.pliot.equipment.model.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 import java.util.Objects;
 
 
-public class TenantIO extends BaseEntity {
+public class TenantTO extends BaseEntity {
     private String id;
 
     private String name;
     private String description;
 
-    public static TenantIO newrtenant(String edge, String descr) {
-        TenantIO t = new TenantIO();
+    public static TenantTO newrtenant(String edge, String descr) {
+        TenantTO t = new TenantTO();
         t.setName( edge );
         t.setDescription( descr );
         return t;
@@ -30,8 +26,8 @@ public class TenantIO extends BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TenantIO tenantIO = (TenantIO) o;
-        return Objects.equals(id, tenantIO.id);
+        TenantTO tenantTO = (TenantTO) o;
+        return Objects.equals(id, tenantTO.id);
     }
 
     @Override

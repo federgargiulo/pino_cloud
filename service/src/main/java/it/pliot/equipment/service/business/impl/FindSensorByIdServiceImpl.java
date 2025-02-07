@@ -1,6 +1,6 @@
 package it.pliot.equipment.service.business.impl;
 
-import it.pliot.equipment.io.SensorIO;
+import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.repository.SensorRepository;
 import it.pliot.equipment.service.business.api.FindSensorByIdService;
@@ -19,10 +19,10 @@ public class FindSensorByIdServiceImpl implements FindSensorByIdService {
 
 
     @Override
-    public SensorIO findById(String id) {
+    public SensorTO findById(String id) {
 
             Optional<Sensor> e = sensorRepository.findById(id);
-            SensorIO eIO = ConvertUtils.sensorData2IO( e.get());
+            SensorTO eIO = ConvertUtils.sensorData2IO( e.get());
             return eIO;
 
     }

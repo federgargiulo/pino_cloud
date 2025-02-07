@@ -6,10 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 
-public class EquipmentIO implements Serializable {
+public class EquipmentTO implements Serializable {
 
-    public static EquipmentIO newEquipment(String name , String tenant ){
-        EquipmentIO e = new EquipmentIO();
+    public static EquipmentTO newEquipment(String name , String tenant ){
+        EquipmentTO e = new EquipmentTO();
         e.setName( name );
         e.setTenant( tenant );
         return e;
@@ -25,7 +25,7 @@ public class EquipmentIO implements Serializable {
         this.tenant = tenant;
     }
 
-    public  EquipmentIO(String name ){
+    public EquipmentTO(String name ){
         this.name = name;
     }
     private  String equipmentId;
@@ -40,19 +40,19 @@ public class EquipmentIO implements Serializable {
         this.status = status;
     }
 
-    public void setSensors(List<SensorIO> sensors) {
+    public void setSensors(List<SensorTO> sensors) {
         this.sensors = sensors;
     }
 
-    public List<SensorIO> getSensors() {
+    public List<SensorTO> getSensors() {
         if ( sensors == null )
-            sensors = new ArrayList<SensorIO>();
+            sensors = new ArrayList<SensorTO>();
         return sensors;
     }
 
-    private List<SensorIO> sensors;
+    private List<SensorTO> sensors;
 
-    public EquipmentIO(){}
+    public EquipmentTO(){}
 
     public void setEquipmentId(String equipmentId) {
         this.equipmentId = equipmentId;

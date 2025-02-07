@@ -1,9 +1,9 @@
 package it.pliot.equipment.service.dbms.util;
 
-import it.pliot.equipment.io.SensorIO;
+import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.model.Sensor;
 
-public class SensorUtils  extends BaseConvertUtil<Sensor, SensorIO>{
+public class SensorUtils  extends BaseConvertUtil<Sensor, SensorTO>{
 
     private static SensorUtils INSTANCE = new SensorUtils();
 
@@ -14,7 +14,7 @@ public class SensorUtils  extends BaseConvertUtil<Sensor, SensorIO>{
 
 
     @Override
-    public Sensor io2data(SensorIO sio) {
+    public Sensor io2data(SensorTO sio) {
         if ( sio == null ) return null;
         Sensor data = new Sensor();
         data.setName( sio.getName() );
@@ -32,10 +32,10 @@ public class SensorUtils  extends BaseConvertUtil<Sensor, SensorIO>{
     }
 
     @Override
-    public SensorIO data2io(Sensor s) {
+    public SensorTO data2io(Sensor s) {
         if ( s==null)
             return  null;
-        SensorIO io = new SensorIO();
+        SensorTO io = new SensorTO();
         io.setSensorId( s.getId() );
         io.setName( s.getName( ) ) ;
         io.setUnitOfMeasurement( s.getUnitOfMeasurement() );

@@ -1,6 +1,6 @@
 package it.pliot.equipment.service.business.impl;
 
-import it.pliot.equipment.io.SensorIO;
+import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.repository.SensorRepository;
 import it.pliot.equipment.service.business.api.AddSensorService;
@@ -17,7 +17,7 @@ public class AddSensorServiceImpl implements AddSensorService {
 
     @Autowired
     private SensorRepository sensorRepository;
-    public SensorIO addSensor (SensorIO sio){
+    public SensorTO addSensor (SensorTO sio){
         sio.setSensorId( UUID.randomUUID().toString() );
         Sensor s = ConvertUtils.senorIO2Data( sio );
         s = sensorRepository.save( s );

@@ -3,7 +3,7 @@ package it.pliot.equipment.io;
 import java.io.Serializable;
 import java.util.Date;
 
-public class MeasureIO implements Serializable {
+public class MeasureTO implements Serializable {
 
     private String id;
 

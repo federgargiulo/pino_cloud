@@ -1,7 +1,6 @@
 package it.pliot.equipment.service.dbms;
 
-import it.pliot.equipment.io.SensorIO;
-import it.pliot.equipment.model.Sensor;
+import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.repository.SensorRepository;
 import it.pliot.equipment.service.business.SensorServices;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
@@ -11,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @Transactional
-public class SensorServiceImpl extends BaseServiceImpl<SensorIO,String> implements SensorServices {
+public class SensorServiceImpl extends BaseServiceImpl<SensorTO,String> implements SensorServices {
 
     @Autowired
     private SensorRepository repo;

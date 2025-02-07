@@ -1,9 +1,9 @@
 package it.pliot.equipment.service.dbms.util;
 
-import it.pliot.equipment.io.EquipmentIO;
+import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.model.Equipment;
 
-public class EquipmentUtls extends BaseConvertUtil<Equipment, EquipmentIO>{
+public class EquipmentUtls extends BaseConvertUtil<Equipment, EquipmentTO>{
 
     private static EquipmentUtls INSTANCE = new EquipmentUtls();
 
@@ -12,22 +12,22 @@ public class EquipmentUtls extends BaseConvertUtil<Equipment, EquipmentIO>{
       }
 
     @Override
-    public Equipment io2data(EquipmentIO equipmentIO) {
-        if ( equipmentIO == null )
+    public Equipment io2data(EquipmentTO equipmentTO) {
+        if ( equipmentTO == null )
             return null;
         Equipment equipment  = new Equipment();
-        equipment.setId(  equipmentIO.getEquipmentId() );
-        equipment.setName( equipmentIO.getName() );
-        equipment.setVersion( equipmentIO.getVersion() );
-        equipment.setTenant( equipmentIO.getTenant() );
+        equipment.setId(  equipmentTO.getEquipmentId() );
+        equipment.setName( equipmentTO.getName() );
+        equipment.setVersion( equipmentTO.getVersion() );
+        equipment.setTenant( equipmentTO.getTenant() );
         return  equipment;
     }
 
     @Override
-    public EquipmentIO data2io(Equipment equipment) {
+    public EquipmentTO data2io(Equipment equipment) {
         if ( equipment == null )
             return null;
-        EquipmentIO io  = new EquipmentIO();
+        EquipmentTO io  = new EquipmentTO();
         io.setEquipmentId(  equipment.getId() );
         io.setName( equipment.getName() );
         io.setTenant( equipment.getTenant() );

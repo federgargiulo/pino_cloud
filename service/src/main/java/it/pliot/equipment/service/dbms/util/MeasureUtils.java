@@ -1,12 +1,9 @@
 package it.pliot.equipment.service.dbms.util;
 
-import it.pliot.equipment.io.MeasureIO;
-import it.pliot.equipment.io.RoleIO;
+import it.pliot.equipment.io.MeasureTO;
 import it.pliot.equipment.model.Measure;
-import it.pliot.equipment.model.Role;
-import it.pliot.equipment.service.business.MeasureServices;
 
-public class MeasureUtils extends BaseConvertUtil<Measure, MeasureIO>{
+public class MeasureUtils extends BaseConvertUtil<Measure, MeasureTO>{
 
     private static MeasureUtils INSTANCE = new MeasureUtils();
 
@@ -17,7 +14,7 @@ public class MeasureUtils extends BaseConvertUtil<Measure, MeasureIO>{
     }
 
     @Override
-    public Measure io2data(MeasureIO in) {
+    public Measure io2data(MeasureTO in) {
         if ( in == null ) return  null;
         Measure out = new Measure();
         out.setId( in.getId() );
@@ -28,9 +25,9 @@ public class MeasureUtils extends BaseConvertUtil<Measure, MeasureIO>{
     }
 
     @Override
-    public MeasureIO data2io(Measure in) {
+    public MeasureTO data2io(Measure in) {
         if ( in == null ) return  null;
-        MeasureIO out = new MeasureIO();
+        MeasureTO out = new MeasureTO();
         out.setId( in.getId() );
         out.setMesure_dttm( in.getMesure_dttm() );
         out.setVal( in.getVal() );

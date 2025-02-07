@@ -1,8 +1,7 @@
 package it.pliot.equipment.controller;
 
-import it.pliot.equipment.io.EquipmentIO;
-import it.pliot.equipment.io.SensorIO;
-import it.pliot.equipment.model.Equipment;
+import it.pliot.equipment.io.EquipmentTO;
+import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.service.business.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class EquipmentController {
@@ -39,13 +37,13 @@ public class EquipmentController {
 
 
     @GetMapping("/equipments")
-    public List<EquipmentIO> all() {
+    public List<EquipmentTO> all() {
         return readEquipmentService.all();
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/equipments/{id}")
-    public  EquipmentIO getEquipmentById(@PathVariable("id") String id) {
+    public EquipmentTO getEquipmentById(@PathVariable("id") String id) {
         return findEquipmentService.findById(id);
 
     }
@@ -58,7 +56,7 @@ public class EquipmentController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/equipments")
-    public ResponseEntity<EquipmentIO> createTutorial(@RequestBody EquipmentIO equipment) {
+    public ResponseEntity<EquipmentTO> createTutorial(@RequestBody EquipmentTO equipment) {
         try {
             equipment = updateEquipmentService.save( equipment);
             return new ResponseEntity<>(equipment, HttpStatus.CREATED);
@@ -68,7 +66,7 @@ public class EquipmentController {
     }
 
     @PutMapping("/equipments/{id}")
-    public ResponseEntity<EquipmentIO> updateTutorial(@PathVariable("id") String id , @RequestBody EquipmentIO equipment ) {
+    public ResponseEntity<EquipmentTO> updateTutorial(@PathVariable("id") String id , @RequestBody EquipmentTO equipment ) {
         try {
             equipment.setEquipmentId( id );
             equipment = updateEquipmentService.save( equipment );
@@ -80,9 +78,9 @@ public class EquipmentController {
     }
 
     @DeleteMapping("/equipments/{id}")
-    public ResponseEntity<EquipmentIO> updateEquipment(@PathVariable("id") String id  ) {
+    public ResponseEntity<EquipmentTO> updateEquipment(@PathVariable("id") String id  ) {
         try {
-            EquipmentIO equipment = findEquipmentService.findById( id );
+            EquipmentTO equipment = findEquipmentService.findById( id );
             return new ResponseEntity<>(equipment, HttpStatus.OK );
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -90,12 +88,12 @@ public class EquipmentController {
     }
 
     @GetMapping("/equipments/{id}/sensors/{idSensor}")
-    public SensorIO getSensorById(@PathVariable("idSensor") String id) {
+    public SensorTO getSensorById(@PathVariable("idSensor") String id) {
         return findSensorByIdService.findById( id );
     }
 
     @PostMapping("/equipment/{id}/sensor")
-    public SensorIO addSensor( @PathVariable("id") String id , @RequestBody SensorIO sensor ) {
+    public SensorTO addSensor(@PathVariable("id") String id , @RequestBody SensorTO sensor ) {
         sensor.setEquipmentId( id );
         return addSensorService.addSensor( sensor );
 
@@ -103,7 +101,7 @@ public class EquipmentController {
 
     @PostMapping("/equipment/{id}/diagnostics ")
     public String diagnostic( @PathVariable("id") String id , @RequestBody List<Sensor> sensors ) {
-       EquipmentIO eq = readReferenceByIdService.getReferenceById( id );
+       EquipmentTO eq = readReferenceByIdService.getReferenceById( id );
        return "OK";
     }
 

@@ -1,14 +1,12 @@
 package it.pliot.equipment.io;
 
-import jakarta.persistence.Id;
-
 import java.util.Objects;
 
 
-public class RoleIO extends BaseIO {
+public class RoleTO extends BaseTO {
 
-    public static RoleIO newroleio( String name , String description ){
-        RoleIO r = new RoleIO();
+    public static RoleTO newroleio(String name , String description ){
+        RoleTO r = new RoleTO();
         r.setRole( name );
         r.setDescription( description );
         return r;
@@ -26,7 +24,7 @@ public class RoleIO extends BaseIO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RoleIO role1 = (RoleIO) o;
+        RoleTO role1 = (RoleTO) o;
         return Objects.equals(role, role1.role);
     }
 

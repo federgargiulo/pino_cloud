@@ -1,11 +1,11 @@
 package it.pliot.equipment.service.business.api;
 
-import it.pliot.equipment.io.SensorIO;
+import it.pliot.equipment.io.SensorTO;
 import org.springframework.stereotype.Service;
 
 @Service
 @FunctionalInterface
 public interface FindSensorByIdService {
 
-    public SensorIO findById(String id );
+    public SensorTO findById(String id );
 }

@@ -1,7 +1,6 @@
 package it.pliot.equipment.service.dbms;
 
-import it.pliot.equipment.io.UserIO;
-import it.pliot.equipment.model.User;
+import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.service.business.UserServices;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
@@ -11,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @Transactional
-public class UserServiceImpl extends BaseServiceImpl<UserIO,String> implements UserServices {
+public class UserServiceImpl extends BaseServiceImpl<UserTO,String> implements UserServices {
 
     @Autowired
     private EquipmentRepository userRepo;

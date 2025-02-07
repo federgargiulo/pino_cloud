@@ -1,6 +1,6 @@
 package it.pliot.equipment.service.business.impl;
 
-import it.pliot.equipment.io.EquipmentIO;
+import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.service.business.api.FindEquipmentByIdService;
@@ -17,9 +17,9 @@ public class FindEquipmentServiceImpl implements FindEquipmentByIdService {
     @Autowired
     private EquipmentRepository equipmentRepository;
     @Override
-    public EquipmentIO findById(String id) {
+    public EquipmentTO findById(String id) {
         Optional<Equipment> e = equipmentRepository.findById(id);
-        EquipmentIO eIO = ConvertUtils.equipmentData2IO( e.get());
+        EquipmentTO eIO = ConvertUtils.equipmentData2IO( e.get());
         return eIO;
     }
 }

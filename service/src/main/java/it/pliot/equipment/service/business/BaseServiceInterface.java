@@ -1,9 +1,5 @@
 package it.pliot.equipment.service.business;
 
-import it.pliot.equipment.io.UserIO;
-
-import java.util.List;
-
 public interface BaseServiceInterface<T,K> {
 
 

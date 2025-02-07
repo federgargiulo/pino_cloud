@@ -1,9 +1,9 @@
 package it.pliot.equipment.service.dbms.util;
 
-import it.pliot.equipment.io.UserIO;
+import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.model.User;
 
-public class UserUtils extends BaseConvertUtil<User, UserIO>{
+public class UserUtils extends BaseConvertUtil<User, UserTO>{
 
 
     private static UserUtils INSTANCE = new UserUtils();
@@ -14,7 +14,7 @@ public class UserUtils extends BaseConvertUtil<User, UserIO>{
     private UserUtils(){}
 
     @Override
-    public User io2data(UserIO in) {
+    public User io2data(UserTO in) {
         if ( in == null ) return null;
         User out = new User();
         out.setAddress( in.getAddress() );
@@ -32,9 +32,9 @@ public class UserUtils extends BaseConvertUtil<User, UserIO>{
     }
 
     @Override
-    public UserIO data2io(User in) {
+    public UserTO data2io(User in) {
         if ( in == null ) return null;
-        UserIO out = new UserIO();
+        UserTO out = new UserTO();
         out.setAddress( in.getAddress() );
         out.setAge( in.getAge());
         out.setName( in.getName() );
