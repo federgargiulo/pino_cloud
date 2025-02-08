@@ -4,10 +4,16 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HelpAngularComponent } from './common/help-angular/help-angular.component';
+import { HeaderComponent } from './common/header/header.component';
+import { HomeComponent } from './common/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HelpAngularComponent,
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
