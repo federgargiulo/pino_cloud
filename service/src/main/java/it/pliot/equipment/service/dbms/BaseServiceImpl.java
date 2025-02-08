@@ -4,6 +4,8 @@ import it.pliot.equipment.service.business.errors.ServiceExceptions;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public abstract class BaseServiceImpl<T,K> {
 
     public abstract JpaRepository getRepo();
@@ -19,6 +21,9 @@ public abstract class BaseServiceImpl<T,K> {
     public T update( T io ){
         return saveorupdate( io );
     }
+    public void delete( T d ) { getRepo().delete( d );}
+    public List<T> findAll(){ return getRepo().findAll(); }
+    public T findByKey( K key) { return ( T ) getRepo().findById( key ); }
 
     private T saveorupdate(T io ){
         if ( io == null )
