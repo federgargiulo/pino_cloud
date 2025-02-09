@@ -4,7 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
-public class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable,AuditObject {
 
     private Date createdDttm;
 

@@ -4,6 +4,7 @@ import it.pliot.equipment.conf.InitDb;
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.model.Sensor;
+import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,9 @@ import java.util.List;
 public class EquipmentController {
 
     private static final Logger log = LoggerFactory.getLogger(InitDb.class);
+
+    @Autowired
+    private EquipmentServices equipmentService;
 
     @Autowired
     private CreateEquipmentService createEquipmentService;
@@ -65,7 +69,7 @@ public class EquipmentController {
     public ResponseEntity<EquipmentTO> createEquipment(@RequestBody EquipmentTO equipment) {
         try {
             log.info( " create a new Equipment");
-            equipment = updateEquipmentService.save( equipment);
+            equipment = equipmentService.create( equipment);
             return new ResponseEntity<>(equipment, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
