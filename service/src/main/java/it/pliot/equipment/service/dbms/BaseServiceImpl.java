@@ -36,6 +36,6 @@ public abstract class BaseServiceImpl<T,K> {
 
     public T findById( K id ){
        Object o = getRepo().findById( id );
-       return ( T ) getConverter().io2data( o );
+       return ( T ) getConverter().data2io( o );
     }
 }
