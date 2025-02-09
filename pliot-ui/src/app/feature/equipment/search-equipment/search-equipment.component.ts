@@ -1,0 +1,44 @@
+import { Component, Input, OnInit, Type ,  ViewChild } from '@angular/core';
+import { EquipmentServices } from '../../../service/equipment.service';
+
+
+@Component({
+  selector: 'app-search-equipment',
+  standalone: false,
+  templateUrl: './search-equipment.component.html',
+  styleUrl: './search-equipment.component.css'
+})
+
+
+
+export class SearchEquipmentComponent implements OnInit  {
+
+  equipmentList: any = [];
+  constructor(  private equipmentServices : EquipmentServices) { }
+
+  ngOnInit(): void {
+    console.log( "init " )
+    this.getAllEquipment();
+  }
+
+  async getAllEquipment() {
+    console.log( "get all equipment" )
+    this.equipmentServices.getAllEquipment().subscribe((data : any) => {
+      if (data != null && data.body != null) {
+        var resultData = data.body;
+        if (resultData) {
+          this.equipmentList = resultData;
+        }
+      }
+    },
+    (error : any)=> {
+        if (error) {
+          if (error.status == 404) {
+            if(error.error && error.error.message){
+              this.equipmentList = [];
+            }
+          }
+        }
+      });
+  }
+}

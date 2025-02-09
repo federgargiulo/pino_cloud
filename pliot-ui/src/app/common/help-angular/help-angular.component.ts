@@ -8,5 +8,5 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './help-angular.component.css'
 })
 export class HelpAngularComponent {
-  constructor(private modalService: NgbModal) {}
+  constructor(public ngModal: NgbModal ) {}
 }
