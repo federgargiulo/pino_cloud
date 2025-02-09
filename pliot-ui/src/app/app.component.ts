@@ -1,22 +1,20 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { MenuComponent} from './menu/menu.component'
-
-import { RouterModule } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterOutlet ,
-    HomeComponent ,
-    RouterModule,
-    MenuComponent,
-  ],
   templateUrl: './app.component.html',
+  standalone: false,
   styleUrl: './app.component.css'
 })
+
+
 export class AppComponent {
-  title = 'Home Component';
+  title = 'pliot-ui';
+  constructor(private modalService: NgbModal) {
+  }
+
+  public open(modal: any): void {
+    this.modalService.open(modal);
+  }
 }

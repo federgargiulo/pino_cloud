@@ -1,38 +1,41 @@
-import { Injectable, isDevMode } from '@angular/core';
-import { Equipment } from '../data/equipment';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpProviderService } from './http-provider.service';
+import { Equipment } from './data/equipment';
+var apiUrl = "http://localhost:8080";
+var version="";
 
-import { Location, LocationStrategy } from '@angular/common';
-
+var httpLink = {
+  getAllEquipment: apiUrl + version + "/equipments",
+  deleteEquipmentById: apiUrl + version + "/equipments",
+  getEquipmentDetailById: apiUrl + version +  "/equipments",
+  saveEquipment: apiUrl + version +  "/equipments"
+}
 
 @Injectable({
   providedIn: 'root'
-})
-export class EquipmentService {
+})export class EquipmentServices {
 
-  static readonly BASE_DEV_URL  ="http://localhost:8080";
-  static readonly BASE_PROD_URL ="http://localhost:8080";
-  static readonly BASE_EQUIPMENT_RESOURCE ="/equipments";
+  constructor(private webApiService: HttpProviderService) { }
 
-  url = "" ;
-
-  constructor( location: Location , locationStrateg : LocationStrategy) {
-
-    console.log( "location path " + location.path() )
-    console.log( "location Strateg " + locationStrateg.path() )
-    console.log( "location getBaseHref " + locationStrateg.getBaseHref() )
-
-    const baseUrl = isDevMode() ? EquipmentService.BASE_DEV_URL : EquipmentService.BASE_PROD_URL;
-
-    this.url = baseUrl + EquipmentService.BASE_EQUIPMENT_RESOURCE;
-
-    console.log( "Endpoint " + this.url );
-
+  public getAllEquipment(): Observable<any> {
+    return this.webApiService.get(httpLink.getAllEquipment );
   }
-
-
-
-  async getAllEquipments(): Promise<Equipment[]> {
-      const data = await fetch(this.url);
-      return await data.json() ?? [];
+  
+  public deleteEquipmentById(model: any): Observable<any> {
+    return this.webApiService.delete(httpLink.deleteEquipmentById + '/' + model );
+  }
+  
+  public getEquipmentDetailById(model: any): Observable<any> {
+    return this.webApiService.get(httpLink.getEquipmentDetailById + '/' + model);
+  }
+  
+  public saveEquipment(model: any): Observable<any> {
+    console.info( "Service is calling " + httpLink.saveEquipment + " With data " + model )
+    return this.webApiService.post( httpLink.saveEquipment , model );
+  }
+  
+  public updateEquipment( idobject:any ,model: any): Observable<any> {
+    return this.webApiService.post( httpLink.saveEquipment + '/' + idobject , model );
   }
 }

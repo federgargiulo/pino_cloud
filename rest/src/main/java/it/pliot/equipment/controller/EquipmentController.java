@@ -1,9 +1,12 @@
 package it.pliot.equipment.controller;
 
+import it.pliot.equipment.conf.InitDb;
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.service.business.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,9 @@ import java.util.List;
 
 @RestController
 public class EquipmentController {
+
+    private static final Logger log = LoggerFactory.getLogger(InitDb.class);
+
     @Autowired
     private CreateEquipmentService createEquipmentService;
 
@@ -41,23 +47,24 @@ public class EquipmentController {
         return readEquipmentService.all();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @GetMapping("/equipments/{id}")
     public EquipmentTO getEquipmentById(@PathVariable("id") String id) {
         return findEquipmentService.findById(id);
 
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @GetMapping("/equipments/{id}/status")
     public String getEquipmentStatus(@PathVariable("id") String id) {
         return "status";
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @PostMapping("/equipments")
-    public ResponseEntity<EquipmentTO> createTutorial(@RequestBody EquipmentTO equipment) {
+    public ResponseEntity<EquipmentTO> createEquipment(@RequestBody EquipmentTO equipment) {
         try {
+            log.info( " create a new Equipment");
             equipment = updateEquipmentService.save( equipment);
             return new ResponseEntity<>(equipment, HttpStatus.CREATED);
         } catch (Exception e) {

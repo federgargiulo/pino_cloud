@@ -1,32 +1,4 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<main>
-  <a [routerLink]="['/']">
-    <header class="brand-name">
-      <img class="brand-logo" src="/assets/logo.png" alt="logo" aria-hidden="true">
-      <ul>
-        <li>http://localhost:8080/actuator/hawtio/console/camel/contexts</li>
-        <li>http://localhost:8080/h2-console/l</li>
-      </ul>
-    </header>
-  </a>
-
-  <div class="split-view-container">
-    <span class="left">
-      <app-menu></app-menu>
-    </span>
-    <span class="right">
-        <router-outlet></router-outlet>
-    </span>
-  </div>
-
-
-
-</main>
+<app-header />
+<div>
+  <router-outlet></router-outlet>
+</div>
