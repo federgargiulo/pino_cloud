@@ -3,15 +3,45 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { HttpHeaders, HttpClient, provideHttpClient } from '@angular/common/http';
+import { LocationStrategy, PathLocationStrategy , Location } from '@angular/common';
+ 
+ 
 
 @Injectable({ providedIn: 'root' })
 export class HttpProviderService {
  
-  constructor(private httpClient: HttpClient ) { }
+  BASE_URL:string = "";
+  constructor(private httpClient: HttpClient , 
+            locationStrateg : LocationStrategy , 
+            location: Location ) {
+              
+    console.log( "host     " + window.location.host );
+    console.log( "protocol     " + window.location.protocol );
+    console.log( "location path " + location.path() );
+    console.log( "location Strateg " + locationStrateg.path() );
+    console.log( "location getBaseHref " + locationStrateg.getBaseHref() );
 
+    var DEV:string = "localhost:4200";
+    var LOCAL_HOST:string = "localhost:8080";
+    let x : string = "";
+    if ( window.location.host.indexOf( DEV ) >= 0 ){
+          x = window.location.protocol + "////" + LOCAL_HOST;
+     }   
+     else{
+         x = window.location.protocol + "////" + window.location.host;
+     }
+     this.BASE_URL = x;
+  }    
+   
+  
+  
+  
+  
+  
   // Get call method
   // Param 1 : url
   get(url: string): Observable<any> {
+    
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -21,7 +51,7 @@ export class HttpProviderService {
       observe: "response" as 'body'
     };
     return this.httpClient.get(
-      url,
+      this.BASE_URL + url,
       httpOptions
     )
     .pipe(
@@ -34,6 +64,7 @@ export class HttpProviderService {
   // Param 1 : url
   // Param 2 : model
   post(url: string, model: any): Observable<any> {
+    console.info(" path " + this.BASE_URL + url )
     console.info( "object " +   model.name )
     const httpOptions = {
       headers: new HttpHeaders({
@@ -42,7 +73,7 @@ export class HttpProviderService {
       observe: "response" as 'body'
     };
     return this.httpClient.post(
-      url,
+      this.BASE_URL + url,
       model,
       httpOptions)
       .pipe(
@@ -60,7 +91,7 @@ export class HttpProviderService {
       observe: "response" as 'body'
     };
     return this.httpClient.put(
-      url,
+      this.BASE_URL + url,
       model,
       httpOptions)
       .pipe(
@@ -78,7 +109,7 @@ export class HttpProviderService {
       observe: "response" as 'body'
     };
     return this.httpClient.delete(
-      url,
+      this.BASE_URL + url,
       httpOptions)
       .pipe(
         map((response: any) => this.ReturnResponseData(response)),
@@ -94,4 +125,6 @@ export class HttpProviderService {
   private handleError(error: any) {
     return throwError(error);
   }
+
 }
+

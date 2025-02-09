@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+
 @Component({
   selector: 'app-header',
   standalone: false,
@@ -8,5 +9,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private modalService: NgbModal) {}
+  
+  constructor(private modalService: NgbModal) {
+
+    console.info( " ")
+  }
 }

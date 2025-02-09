@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpProviderService } from './http-provider.service';
 import { Equipment } from './data/equipment';
-var apiUrl = "http://localhost:8080";
+ 
 var version="";
 
 var httpLink = {
-  getAllEquipment: apiUrl + version + "/equipments",
-  deleteEquipmentById: apiUrl + version + "/equipments",
-  getEquipmentDetailById: apiUrl + version +  "/equipments",
-  saveEquipment: apiUrl + version +  "/equipments"
+  getAllEquipment:  version + "/equipments",
+  deleteEquipmentById:   version + "/equipments",
+  getEquipmentDetailById:   version +  "/equipments",
+  saveEquipment:  version +  "/equipments"
 }
 
 @Injectable({
   providedIn: 'root'
 })export class EquipmentServices {
 
-  constructor(private webApiService: HttpProviderService) { }
-
+  constructor(private webApiService: HttpProviderService   ) { }
+  
   public getAllEquipment(): Observable<any> {
     return this.webApiService.get(httpLink.getAllEquipment );
   }

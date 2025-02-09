@@ -8,9 +8,10 @@ import { HelpAngularComponent } from './common/help-angular/help-angular.compone
 import { HeaderComponent } from './common/header/header.component';
 import { HomeComponent } from './common/home/home.component';
 import { AddEquipmentComponent } from './feature/equipment/add-equipment/add-equipment.component';
-import { HttpHeaders, HttpClient, provideHttpClient } from '@angular/common/http';
+import {  provideHttpClient } from '@angular/common/http';
 
 import { SearchEquipmentComponent } from './feature/equipment/search-equipment/search-equipment.component';
+
 
 
 @NgModule({
@@ -22,12 +23,14 @@ import { SearchEquipmentComponent } from './feature/equipment/search-equipment/s
     AddEquipmentComponent,
     SearchEquipmentComponent,
     
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    
    
   ],
   providers: [

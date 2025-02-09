@@ -6,6 +6,7 @@ import { HomeComponent } from './common/home/home.component';
 import { AddEquipmentComponent } from './feature/equipment/add-equipment/add-equipment.component';
 import { SearchEquipmentComponent } from './feature/equipment/search-equipment/search-equipment.component';
 
+
 const routes: Routes = [
   { path: 'help-angular', component: HelpAngularComponent, title: 'Help Angular' },
   { path: 'add-equipment', component: AddEquipmentComponent, title: 'Add Equipment' },
@@ -17,4 +18,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+  
+
+
+}
