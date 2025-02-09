@@ -2,7 +2,7 @@ package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.repository.TenantRepository;
-import it.pliot.equipment.service.business.TenanServices;
+import it.pliot.equipment.service.business.TenantServices;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
 import it.pliot.equipment.service.dbms.util.TenantUtils;
 import jakarta.transaction.Transactional;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Transactional
-public class TenantServiceImpl extends BaseServiceImpl<TenantTO,String> implements TenanServices {
+public class TenantServiceImpl extends BaseServiceImpl<TenantTO,String> implements TenantServices {
 
     @Autowired
     private TenantRepository repo;

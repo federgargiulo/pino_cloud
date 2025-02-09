@@ -2,8 +2,10 @@ package it.pliot.equipment.service.dbms.util;
 
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.SensorTO;
+import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.model.Sensor;
+import it.pliot.equipment.model.Tenant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,5 +95,35 @@ public class ConvertUtils {
         data.setUpRedLimit( sio.getUpRedLimit() );
         data.setUpYellowLimit( sio.getUpYellowLimit());
         return data;
+    }
+
+    public static Tenant tenantTO2Data(TenantTO tenantTO){
+
+        if ( tenantTO == null )
+            return null;
+        Tenant tenant  = new Tenant();
+        tenant.setId(  tenantTO.getId() );
+        tenant.setName( tenantTO.getName() );
+        tenant.setVersion( tenantTO.getVersion() );
+        tenant.setCreatedDttm( tenantTO.getCreatedDttm() );
+        tenant.setUpdateDttm( tenantTO.getUpdateDttm() );
+        tenant.setDescription( tenantTO.getDescription() );
+        return  tenant;
+
+    }
+
+    public static TenantTO data2TenantTO(Tenant tenant){
+
+        if ( tenant == null )
+            return null;
+        TenantTO tenantTO  = new TenantTO();
+        tenantTO.setId(  tenant.getId() );
+        tenantTO.setName( tenant.getName() );
+        tenantTO.setVersion( tenant.getVersion() );
+        tenantTO.setCreatedDttm( tenant.getCreatedDttm() );
+        tenantTO.setUpdateDttm( tenant.getUpdateDttm() );
+        tenantTO.setDescription( tenant.getDescription() );
+        return  tenantTO;
+
     }
 }

@@ -7,7 +7,7 @@ import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.RoleServices;
 import it.pliot.equipment.service.business.SensorServices;
-import it.pliot.equipment.service.business.TenanServices;
+import it.pliot.equipment.service.business.TenantServices;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class InitDb {
     @Autowired
     private RoleServices roleService;
     @Autowired
-    private TenanServices tenanServices;
+    private TenantServices tenanServices;
 
     @Autowired
     private EquipmentServices equipmentService;
