@@ -11,6 +11,7 @@ import { AddEquipmentComponent } from './feature/equipment/add-equipment/add-equ
 import {  provideHttpClient } from '@angular/common/http';
 
 import { SearchEquipmentComponent } from './feature/equipment/search-equipment/search-equipment.component';
+import { DashMeasureComponent } from './dashboard/dash-measure/dash-measure.component';
 
 
 
@@ -22,6 +23,7 @@ import { SearchEquipmentComponent } from './feature/equipment/search-equipment/s
     HomeComponent,
     AddEquipmentComponent,
     SearchEquipmentComponent,
+    DashMeasureComponent,
     
     
   ],
