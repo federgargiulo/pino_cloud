@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseServiceImpl<T,K> {
 
@@ -49,7 +50,8 @@ public abstract class BaseServiceImpl<T,K> {
 
 
     public T findById( K id ){
-       Object o = getRepo().findById( id );
-       return ( T ) getConverter().data2io( o );
+       Optional op = getRepo().findById( id );
+       if ( op.isEmpty() ) return null;
+       return ( T ) getConverter().data2io( op.get() );
     }
 }
