@@ -48,7 +48,7 @@
                     </execution>
 
                     <execution>
-                        <id>npm run build --configuration=production</id>
+                        <id>npm run build</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
