@@ -50,8 +50,10 @@ public abstract class BaseServiceImpl<T,K> {
 
 
     public T findById( K id ){
-       Optional op = getRepo().findById( id );
-       if ( op.isEmpty() ) return null;
-       return ( T ) getConverter().data2io( op.get() );
+ 
+       Optional o = getRepo().findById( id );
+       if(o.isEmpty()) return null;
+       return ( T ) getConverter().data2io( o.get() );
+
     }
 }
