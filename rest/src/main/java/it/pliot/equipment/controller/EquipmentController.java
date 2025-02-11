@@ -5,7 +5,7 @@ import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.service.business.EquipmentServices;
-import it.pliot.equipment.service.business.api.*;
+import it.pliot.equipment.service.business.SensorServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,37 +24,20 @@ public class EquipmentController {
     private EquipmentServices equipmentService;
 
     @Autowired
-    private CreateEquipmentService createEquipmentService;
-
-    @Autowired
-    private UpdateEquipmentService updateEquipmentService;
-
-    @Autowired
-    private FindEquipmentByIdService findEquipmentService;
-
-    @Autowired
-    private ReadEquipmentsService readEquipmentService;
+    private SensorServices sensorServices;
 
 
-    @Autowired
-    private AddSensorService addSensorService;
-
-    @Autowired
-    private FindSensorByIdService findSensorByIdService;
-
-    @Autowired
-    private ReadReferenceByIdService readReferenceByIdService;
 
 
     @GetMapping("/equipments")
     public List<EquipmentTO> all() {
-        return readEquipmentService.all();
+        return equipmentService.findAll();
     }
 
 
     @GetMapping("/equipments/{id}")
     public EquipmentTO getEquipmentById(@PathVariable("id") String id) {
-        return findEquipmentService.findById(id);
+        return equipmentService.findById(id);
 
     }
 
@@ -80,7 +63,7 @@ public class EquipmentController {
     public ResponseEntity<EquipmentTO> updateTutorial(@PathVariable("id") String id , @RequestBody EquipmentTO equipment ) {
         try {
             equipment.setEquipmentId( id );
-            equipment = updateEquipmentService.save( equipment );
+            equipment = equipmentService.save( equipment );
 
             return new ResponseEntity<>(equipment, HttpStatus.OK );
         } catch (Exception e) {
@@ -91,7 +74,7 @@ public class EquipmentController {
     @DeleteMapping("/equipments/{id}")
     public ResponseEntity<EquipmentTO> updateEquipment(@PathVariable("id") String id  ) {
         try {
-            EquipmentTO equipment = findEquipmentService.findById( id );
+            EquipmentTO equipment = equipmentService.findById( id );
             return new ResponseEntity<>(equipment, HttpStatus.OK );
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -100,19 +83,19 @@ public class EquipmentController {
 
     @GetMapping("/equipments/{id}/sensors/{idSensor}")
     public SensorTO getSensorById(@PathVariable("idSensor") String id) {
-        return findSensorByIdService.findById( id );
+        return sensorServices.findById( id );
     }
 
     @PostMapping("/equipment/{id}/sensor")
     public SensorTO addSensor(@PathVariable("id") String id , @RequestBody SensorTO sensor ) {
         sensor.setEquipmentId( id );
-        return addSensorService.addSensor( sensor );
+        return sensorServices.save( sensor );
 
     }
 
     @PostMapping("/equipment/{id}/diagnostics ")
     public String diagnostic( @PathVariable("id") String id , @RequestBody List<Sensor> sensors ) {
-       EquipmentTO eq = readReferenceByIdService.getReferenceById( id );
+       EquipmentTO eq = equipmentService.findById( id );
        return "OK";
     }
 

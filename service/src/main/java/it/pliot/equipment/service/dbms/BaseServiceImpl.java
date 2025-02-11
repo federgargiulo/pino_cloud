@@ -28,7 +28,7 @@ public abstract class BaseServiceImpl<T,K> {
     public T update( T io ){
         return saveorupdate( io , DBOPERATION.UPDATE );
     }
-    public void delete( T d ) { getRepo().delete( d );}
+    public void delete( K d ) { getRepo().deleteById( d );}
     public List<T> findAll(){ return getRepo().findAll(); }
     public T findByKey( K key) { return ( T ) getRepo().findById( key ); }
 
