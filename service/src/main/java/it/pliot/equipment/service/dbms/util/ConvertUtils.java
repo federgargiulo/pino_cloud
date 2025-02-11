@@ -12,6 +12,10 @@ import java.util.List;
 
 public class ConvertUtils {
 
+
+    public static boolean isNullOrEmpty( String x ){
+        return  ( x == null || x.trim().length() == 0 );
+    }
     public static List<EquipmentTO> equipmentListData2IO(List<Equipment> equipment ){
         List<EquipmentTO> eqio = new ArrayList<EquipmentTO>();
         if( equipment != null )
