@@ -18,7 +18,7 @@ public class EquipmentUtls extends BaseConvertUtil<Equipment, EquipmentTO>{
         Equipment equipment  = new Equipment();
         equipment.setId(  equipmentTO.getEquipmentId() );
         equipment.setName( equipmentTO.getName() );
-        equipment.setVersion( equipmentTO.getVersion() );
+        equipment.setVersion( ConvertUtils.string2long( equipmentTO.getVersion() ) );
         equipment.setTenant( equipmentTO.getTenant() );
         return  equipment;
     }

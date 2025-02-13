@@ -37,6 +37,7 @@ public class SensorUtils  extends BaseConvertUtil<Sensor, SensorTO>{
             return  null;
         SensorTO io = new SensorTO();
         io.setSensorId( s.getId() );
+        io.setEquipmentId( s.getEquipmentId() );
         io.setName( s.getName( ) ) ;
         io.setUnitOfMeasurement( s.getUnitOfMeasurement() );
         io.setDownRedLimit( s.getDownRedLimit() );
@@ -47,7 +48,7 @@ public class SensorUtils  extends BaseConvertUtil<Sensor, SensorTO>{
         io.setMinVal( s.getMinVal());
         io.setCreatedDttm( s.getCreatedDttm() );
         io.setUpdateDttm( s.getUpdateDttm() );
-        io.setVersion( s.getVersion() );
+        io.setVersion( String.valueOf( s.getVersion() ) );
         return io;
     }
 }

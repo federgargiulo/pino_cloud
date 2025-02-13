@@ -7,14 +7,11 @@ import java.util.Date;
 @Entity
 public class Sensor  extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String equipmentId;
 
     private String unitOfMeasurement;
-    @Version
-    private String version;
 
     private String name;
 

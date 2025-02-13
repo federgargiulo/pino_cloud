@@ -1,5 +1,7 @@
 package it.pliot.equipment.service.business;
 
+import java.util.List;
+
 public interface BaseServiceInterface<T,K> {
 
 
@@ -10,5 +12,9 @@ public interface BaseServiceInterface<T,K> {
     public T save( T io );
 
     public T findById( K id );
+
+    public List<T> findAll();
+
+    public void delete(K d );
 
 }

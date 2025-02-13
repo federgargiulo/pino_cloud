@@ -30,14 +30,14 @@ public class BaseEntity implements Serializable,AuditObject {
 
     private Date updateDttm;
     @Version
-    @Column(name = "optlock", columnDefinition = "integer DEFAULT 0", nullable = false)
-    private long version;
+    @Column(name = "optlock", columnDefinition = "long DEFAULT 0", nullable = false)
+    private Long version;
 
-    public long getVersion() {
+    public Long getVersion() {
         return version;
     }
 
-    public void setVersion(long version) {
+    public void setVersion(Long version) {
         this.version = version;
     }
 }
