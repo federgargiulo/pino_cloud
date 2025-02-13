@@ -1,9 +1,6 @@
 package it.pliot.equipment.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -16,7 +13,7 @@ public class Sensor  extends BaseEntity {
     private String equipmentId;
 
     private String unitOfMeasurement;
-
+    @Version
     private String version;
 
     private String name;
@@ -51,14 +48,6 @@ public class Sensor  extends BaseEntity {
 
     public void setUpdateDttm(Date updateDttm) {
         this.updateDttm = updateDttm;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
     }
 
     public String getMinVal() {

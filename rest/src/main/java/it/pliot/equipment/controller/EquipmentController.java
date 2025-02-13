@@ -68,7 +68,7 @@ public class EquipmentController {
     @PostMapping("/equipments")
     public ResponseEntity<EquipmentTO> createEquipment(@RequestBody EquipmentTO equipment) {
         try {
-            log.info( " create a new Equipment");
+            log.info( " create a new Equipment"  + equipment );
             equipment = equipmentService.create( equipment);
             return new ResponseEntity<>(equipment, HttpStatus.CREATED);
         } catch (Exception e) {

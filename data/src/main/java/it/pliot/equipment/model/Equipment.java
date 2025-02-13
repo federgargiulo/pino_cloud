@@ -45,17 +45,13 @@ public class Equipment extends BaseEntity{
         this.updateDttm = updateDttm;
     }
 
-    public String getVersion() {
-        return version;
-    }
 
-    public void setVersion(String version) {
-        this.version = version;
-    }
 
     public void setStatus(String status) {
         this.status = status;
     }
+
+
 
     public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
@@ -63,7 +59,6 @@ public class Equipment extends BaseEntity{
 
     private Date updateDttm;
 
-    private String version;
 
     private String status;
 

@@ -33,7 +33,7 @@ public class EquipmentUtls extends BaseConvertUtil<Equipment, EquipmentTO>{
         io.setTenant( equipment.getTenant() );
         io.setCreatedDttm( equipment.getCreatedDttm() );
         io.setUpdateDttm( equipment.getUpdateDttm() );
-        io.setVersion( equipment.getVersion() );
+        io.setVersion( Long.toString( equipment.getVersion() ) );
         return  io;
     }
 }

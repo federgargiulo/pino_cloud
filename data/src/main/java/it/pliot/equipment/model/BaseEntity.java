@@ -1,5 +1,8 @@
 package it.pliot.equipment.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Version;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
@@ -24,16 +27,17 @@ public class BaseEntity implements Serializable,AuditObject {
         this.updateDttm = updateDttm;
     }
 
-    public String getVersion() {
+
+    private Date updateDttm;
+    @Version
+    @Column(name = "optlock", columnDefinition = "integer DEFAULT 0", nullable = false)
+    private long version;
+
+    public long getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(long version) {
         this.version = version;
     }
-
-    private Date updateDttm;
-
-    private String version;
-
 }
