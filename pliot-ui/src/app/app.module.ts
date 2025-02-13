@@ -13,6 +13,7 @@ import {  provideHttpClient } from '@angular/common/http';
 import { SearchEquipmentComponent } from './feature/equipment/search-equipment/search-equipment.component';
 import { DashMeasureComponent } from './dashboard/dash-measure/dash-measure.component';
 
+import { DetailEquipmentComponent } from './feature/equipment/detail-equipment/detail-equipment.component';
 
 
 @NgModule({
@@ -24,20 +25,20 @@ import { DashMeasureComponent } from './dashboard/dash-measure/dash-measure.comp
     AddEquipmentComponent,
     SearchEquipmentComponent,
     DashMeasureComponent,
-    
-    
+    DetailEquipmentComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    
-   
+
+
   ],
   providers: [
     provideClientHydration(withEventReplay()), provideHttpClient()
-     
+
   ],
   bootstrap: [AppComponent]
 })

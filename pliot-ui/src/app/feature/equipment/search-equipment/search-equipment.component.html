@@ -17,9 +17,16 @@
       <td>{{ equipment.status }}</td>
       <td>{{ equipment.createdDttm }}</td>
       <td>{{ equipment.updateDttm}}</td>
+      <!--<td>
+        <a  routerLink="/detail-xxx/{{equipment.equipmentId}}" class="btn">Detail</a>
+      </td> -->
       <td>
-        <a href="#" href="['/ViewEmployee/', equipment.equipmentId]" class="btn"><i class='fas fa-eye view'></i></a>
-        <a href="#" href="['/EditEmployee/', equipment.equipmentId]" class="btn"><i class="fa fa-edit edit"></i></a>
+        <a  [routerLink]="['/detail-xxx/{{equipment.equipmentId}}']" class="btn">Detail2</a>
+      </td>
+
+      <td>
+       <!-- <a href="#" href="['/ViewEmployee/', equipment.equipmentId]" class="btn"><i class='fas fa-eye view'></i></a>
+        <a href="#" href="['/EditEmployee/', equipment.equipmentId]" class="btn"><i class="fa fa-edit edit"></i></a> -->
        </td>
     </tr>
     <tr>
