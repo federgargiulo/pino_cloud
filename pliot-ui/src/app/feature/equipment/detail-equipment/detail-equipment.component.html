@@ -1,1 +1,16 @@
-<p>detail-equipment works!</p>
+
+<div *ngIf="equipmentDetail">
+  <p><strong>ID:</strong> {{ equipmentId }}</p>
+  <p><strong>tenant:</strong> {{ this.equipmentDetail.tenant }}</p>
+  <p><strong>name:</strong> {{ this.equipmentDetail.name }}</p>
+  <p><strong>status:</strong> {{ this.equipmentDetail.status }}</p>
+  <p><strong>updateDttm:</strong> {{ this.equipmentDetail.updateDttm }}</p>
+  <p><strong>createdDttm:</strong> {{ this.equipmentDetail.createdDttm }}</p>
+</div>
+<!-- Messaggio di caricamento -->
+<div *ngIf="!equipmentDetail">
+  <p>Caricamento in corso...</p>
+</div>
+
+
+

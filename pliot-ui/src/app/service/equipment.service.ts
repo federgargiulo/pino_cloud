@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpProviderService } from './http-provider.service';
-import { Equipment } from './data/equipment';
+//import { Equipment } from './data/equipment';
 
 
 var version="";
@@ -11,7 +11,25 @@ var httpLink = {
   deleteEquipmentById:   version + "/equipments",
   getEquipmentDetailById:   version +  "/equipments",
   saveEquipment:  version +  "/equipments",
-  getEquipmentById: version +  "/equipments"
+  getEquipmentById: version +  "/equipments",
+  getEquipmentDetail: version +  "/equipments"
+}
+
+export interface Equipment { // Anche questa deve essere esportata
+  equipmentId: string,
+  status: string,
+  name: string,
+  version: string,
+  updateDttm: string,
+  createdDttm: string
+}
+
+export interface EquipmentDetail { // Anche questa deve essere esportata
+  equipmentId: string,
+  name: string;
+  status: string;
+  version: string;
+  createdDttm: string;
 }
 
 @Injectable({
@@ -42,7 +60,9 @@ var httpLink = {
     return this.webApiService.post( httpLink.saveEquipment + '/' + idobject , model );
   }
 
-  public getEquipmentById(id: number): Observable<any> {
+  public getEquipmentById(id: string): Observable<any> {
+      console.info( "Service is calling getEquipmentById" + httpLink.getEquipmentById + " With id: " + id )
       return this.webApiService.get(httpLink.getEquipmentById + '/' + id);
     }
+
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Type ,  ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { EquipmentServices } from '../../../service/equipment.service';
+import { Equipment, EquipmentServices } from '../../../service/equipment.service';
 
 
 @Component({
@@ -14,26 +14,25 @@ import { EquipmentServices } from '../../../service/equipment.service';
 export class SearchEquipmentComponent implements OnInit  {
 
   equipmentList: any = [];
+
+
   constructor(  private equipmentServices: EquipmentServices, private router: Router) {}
 
   ngOnInit(): void {
     console.log( "init " )
     this.getAllEquipment();
-    //this.equipmentServices.getAllEquipment().subscribe(data => this.equipmentList = data);
+
   }
 
 
-
-  viewEquipmentDetails(id: number) {
-    console.log('Equipment Details:', id);
-      //this.router.navigate(['/equipment', id]);
-  }
 
   async getAllEquipment() {
     console.log( "get all equipment" )
     this.equipmentServices.getAllEquipment().subscribe((data : any) => {
+     //console.log("Dati ricevuti dal server:", data)
       if (data != null && data.body != null) {
         var resultData = data.body;
+        //console.log("Dati ricevuti dal server:", resultData)
         if (resultData) {
           this.equipmentList = resultData;
         }
@@ -49,4 +48,5 @@ export class SearchEquipmentComponent implements OnInit  {
         }
       });
   }
+
 }

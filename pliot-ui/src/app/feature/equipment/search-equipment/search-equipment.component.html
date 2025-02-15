@@ -12,16 +12,16 @@
     </thead>
 <tbody>
     <tr *ngFor="let equipment of equipmentList" class="center-align">
-      <td>{{ equipment.equipmentId }}</td>
-      <td>{{ equipment.name }}</td>
-      <td>{{ equipment.status }}</td>
-      <td>{{ equipment.createdDttm }}</td>
-      <td>{{ equipment.updateDttm}}</td>
+      <td>{{equipment.id}}</td>
+      <td>{{equipment.name}}</td>
+      <td>{{equipment.status}}</td>
+      <td>{{equipment.createdDttm}}</td>
+      <td>{{equipment.updateDttm}}</td>
       <!--<td>
         <a  routerLink="/detail-xxx/{{equipment.equipmentId}}" class="btn">Detail</a>
       </td> -->
       <td>
-        <a  [routerLink]="['/detail-xxx/{{equipment.equipmentId}}']" class="btn">Detail2</a>
+        <a [routerLink]="['/detail-equipment', equipment.id]" class="btn">Detail2</a>
       </td>
 
       <td>
