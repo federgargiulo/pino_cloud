@@ -1,16 +1,42 @@
+<h2>Equipment Detail</h2>
 
-<div *ngIf="equipmentDetail">
-  <p><strong>ID:</strong> {{ equipmentId }}</p>
-  <p><strong>tenant:</strong> {{ this.equipmentDetail.tenant }}</p>
-  <p><strong>name:</strong> {{ this.equipmentDetail.name }}</p>
-  <p><strong>status:</strong> {{ this.equipmentDetail.status }}</p>
-  <p><strong>updateDttm:</strong> {{ this.equipmentDetail.updateDttm }}</p>
-  <p><strong>createdDttm:</strong> {{ this.equipmentDetail.createdDttm }}</p>
-</div>
-<!-- Messaggio di caricamento -->
-<div *ngIf="!equipmentDetail">
-  <p>Caricamento in corso...</p>
-</div>
+<form [formGroup]="equipmentForm" (ngSubmit)="updateEquipment()">
+  <!-- ID (non modificabile) -->
+  <div class="form-group">
+    <label>ID:</label>
+    <input type="text" class="form-control" formControlName="equipmentId" >
+  </div>
 
+  <!-- Nome -->
+  <div class="form-group">
+    <label>Name:</label>
+    <input type="text" class="form-control" formControlName="name">
+  </div>
 
+  <!-- Tenant -->
+  <div class="form-group">
+    <label>Tenant:</label>
+    <input type="text" class="form-control" formControlName="tenant">
+  </div>
 
+  <!-- Stato -->
+  <div class="form-group">
+    <label>Status:</label>
+    <input type="text" class="form-control" formControlName="status">
+  </div>
+
+  <!-- Data di Creazione (non modificabile) -->
+  <div class="form-group">
+    <label>Date Create:</label>
+    <input type="text" class="form-control" formControlName="createdDttm" >
+  </div>
+
+  <!-- Data di Creazione (non modificabile) -->
+  <div class="form-group">
+    <label>Date Update:</label>
+    <input type="text" class="form-control" formControlName="updateDttm" >
+  </div>
+
+  <!-- Pulsante per Salvare -->
+  <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
+</form>
