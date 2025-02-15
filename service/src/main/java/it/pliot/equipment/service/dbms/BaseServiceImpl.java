@@ -1,6 +1,7 @@
 package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.model.AuditObject;
+import it.pliot.equipment.service.business.BaseServiceInterface;
 import it.pliot.equipment.service.business.errors.ServiceExceptions;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class BaseServiceImpl<T,K> {
+public abstract class BaseServiceImpl<T,K> implements BaseServiceInterface<T,K> {
 
     enum DBOPERATION { CREATE , UPDATE }
 
@@ -55,5 +56,12 @@ public abstract class BaseServiceImpl<T,K> {
        if(o.isEmpty()) return null;
        return ( T ) getConverter().data2io( o.get() );
 
+    }
+
+    public List<T> saveAll(List<T> iterable ){
+        List<Object> data = getConverter().converListIO2data( iterable );
+        data = getRepo().saveAllAndFlush( data ) ;
+
+        return  getConverter().converListData2IO( data );
     }
 }

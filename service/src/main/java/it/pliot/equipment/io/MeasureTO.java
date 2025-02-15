@@ -9,6 +9,16 @@ public class MeasureTO implements Serializable {
 
     private String sensorId;
 
+    private String srcId;
+
+    public String getSrcId() {
+        return srcId;
+    }
+
+    public void setSrcId(String srcId) {
+        this.srcId = srcId;
+    }
+
     private String val;
 
     private Date mesure_dttm;

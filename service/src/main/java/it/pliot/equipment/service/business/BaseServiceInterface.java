@@ -17,4 +17,6 @@ public interface BaseServiceInterface<T,K> {
 
     public void delete(K d );
 
+    public List<T> saveAll(List<T> iterable );
+
 }
