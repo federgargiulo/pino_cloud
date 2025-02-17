@@ -37,7 +37,7 @@ export class DetailEquipmentComponent implements OnInit {
          this.equipmentForm = this.formBuilder.group({
            equipmentId: [{ value: '', disabled: true }], // Campo non modificabile
            name: [''],
-           tenant: [''],
+           tenant: [{ value: '', disabled: true }], // Campo non modificabile
            status: [''],
            updateDttm: [{ value: '', disabled: true }], // Campo non modificabile
            createdDttm: [{ value: '', disabled: true }] // Campo non modificabile
@@ -61,12 +61,23 @@ export class DetailEquipmentComponent implements OnInit {
        });
      }
 
- // Metodo per aggiornare i dati
-  updateEquipment(): void {
-    if (this.equipmentForm.valid) {
-      const updatedData = this.equipmentForm.getRawValue(); // Ottieni i valori del form
-      console.log("Dati aggiornati:", updatedData);
-      // Puoi ora inviare questi dati al backend
+  // **Aggiornare Nome e Stato**
+    updateEquipment(): void {
+      if (!this.equipmentId) {
+        console.error("Errore: ID equipment mancante!");
+        return;
+      }
+
+      this.equipmentService.updateEquipment(this.equipmentId, this.equipmentForm.value).subscribe({
+        next: () => {
+          console.log("Aggiornato con successo!", this.equipmentForm.value);
+
+        },
+        error: (err) => {
+          console.error("Errore nell'aggiornamento:", err);
+          alert("Errore nell'aggiornamento dell'Equipment.");
+        }
+      });
     }
   }
-}
+

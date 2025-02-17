@@ -57,7 +57,7 @@ export interface EquipmentDetail { // Anche questa deve essere esportata
   }
 
   public updateEquipment( idobject:any ,model: any): Observable<any> {
-    return this.webApiService.post( httpLink.saveEquipment + '/' + idobject , model );
+    return this.webApiService.put( httpLink.saveEquipment + '/' + idobject , model );
   }
 
   public getEquipmentById(id: string): Observable<any> {

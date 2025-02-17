@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'add-equipment', component: AddEquipmentComponent, title: 'Add Equipment' },
   { path: 'search-equipment', component: SearchEquipmentComponent, title: 'Search Equipment' },
   { path: 'dash-measure', component: DashMeasureComponent, title: 'Search Equipment' },
-  { path: 'detail-equipment/:id', component: DetailEquipmentComponent, title: 'Equipment Detail'}
+  { path: 'detail-equipment/:id', component: DetailEquipmentComponent, title: 'Detail Equipment'},
+  { path: 'delete-equipment/:id', component: SearchEquipmentComponent, title: 'Delete Equipment' }
 
 
 

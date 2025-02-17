@@ -29,6 +29,7 @@ import { DetailEquipmentComponent } from './feature/equipment/detail-equipment/d
     DetailEquipmentComponent,
 
 
+
   ],
   imports: [
     BrowserModule,

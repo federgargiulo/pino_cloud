@@ -20,6 +20,7 @@ public class EquipmentUtls extends BaseConvertUtil<Equipment, EquipmentTO>{
         equipment.setName( equipmentTO.getName() );
         equipment.setVersion( ConvertUtils.string2long( equipmentTO.getVersion() ) );
         equipment.setTenant( equipmentTO.getTenant() );
+        equipment.setStatus( equipmentTO.getStatus() );
         return  equipment;
     }
 
@@ -33,6 +34,7 @@ public class EquipmentUtls extends BaseConvertUtil<Equipment, EquipmentTO>{
         io.setTenant( equipment.getTenant() );
         io.setCreatedDttm( equipment.getCreatedDttm() );
         io.setUpdateDttm( equipment.getUpdateDttm() );
+        io.setStatus( equipment.getStatus() );
         if (null != equipment.getVersion() && !"".equals(equipment.getVersion()))
             io.setVersion( Long.toString( equipment.getVersion() ) );
         return  io;

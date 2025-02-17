@@ -29,7 +29,7 @@ export class SearchEquipmentComponent implements OnInit  {
   async getAllEquipment() {
     console.log( "get all equipment" )
     this.equipmentServices.getAllEquipment().subscribe((data : any) => {
-     //console.log("Dati ricevuti dal server:", data)
+     console.log("Dati ricevuti dal server:", data)
       if (data != null && data.body != null) {
         var resultData = data.body;
         //console.log("Dati ricevuti dal server:", resultData)
@@ -48,5 +48,29 @@ export class SearchEquipmentComponent implements OnInit  {
         }
       });
   }
+
+
+
+  // **Eliminare un Equipment**
+   deleteEquipment(id: string): void {
+     if (!confirm("Sei sicuro di voler eliminare questo Equipment?")) {
+       return;
+     }
+
+     this.equipmentServices.deleteEquipmentById(id).subscribe({
+       next: () => {
+         console.log(`Equipment con ID ${id} eliminato con successo!`);
+         alert("Equipment eliminato con successo!");
+
+         // **Ora TypeScript sa che `e` è di tipo `Equipment`**
+         this.equipmentList = this.equipmentList.filter((e: Equipment) => e.equipmentId !== id);
+       },
+       error: (err) => {
+         console.error("Errore durante l'eliminazione:", err);
+         alert("Errore nell'eliminazione dell'Equipment.");
+       }
+     });
+   }
+
 
 }

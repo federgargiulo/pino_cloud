@@ -7,6 +7,12 @@ import java.util.List;
 
 
 public class EquipmentTO implements Serializable {
+    private String tenant;
+    private  String equipmentId;
+    private String name;
+    private String status;
+
+    private List<SensorTO> sensors;
 
     public static EquipmentTO newEquipment(String name , String tenant ){
         EquipmentTO e = new EquipmentTO();
@@ -15,7 +21,7 @@ public class EquipmentTO implements Serializable {
         return e;
     }
 
-    private String tenant;
+
 
     public String getTenant() {
         return tenant;
@@ -28,9 +34,7 @@ public class EquipmentTO implements Serializable {
     public EquipmentTO(String name ){
         this.name = name;
     }
-    private  String equipmentId;
 
-    private String status;
 
     public String getStatus() {
         return status;
@@ -50,7 +54,7 @@ public class EquipmentTO implements Serializable {
         return sensors;
     }
 
-    private List<SensorTO> sensors;
+
 
     public EquipmentTO(){}
 
@@ -62,7 +66,7 @@ public class EquipmentTO implements Serializable {
         this.name = name;
     }
 
-    private String name;
+
 
     public String getEquipmentId() {
         return equipmentId;
