@@ -1,5 +1,6 @@
 
-<table class="table table-striped table-hover table-bordered table-content">
+<div class="table-container">
+<table>
     <thead>
       <tr class="center-align">
         <th>Id</th>
@@ -7,7 +8,7 @@
         <th>Status</th>
         <th>Created</th>
         <th>Last Update</th>
-        <th>Actions</th>
+        <th colspan="2">Actions</th>
       </tr>
     </thead>
 <tbody>
@@ -21,7 +22,10 @@
         <a  routerLink="/detail-xxx/{{equipment.equipmentId}}" class="btn">Detail</a>
       </td> -->
       <td>
-        <a [routerLink]="['/detail-equipment', equipment.id]" class="btn">Detail2</a>
+        <a [routerLink]="['/detail-equipment', equipment.id]" class="button">Detail</a>
+      </td>
+      <td>
+        <a [routerLink]="['/detail-equipment', equipment.id]" class="button">Delete</a>
       </td>
 
       <td>
@@ -34,3 +38,4 @@
     </tr>
   </tbody>
   </table>
+</div>
