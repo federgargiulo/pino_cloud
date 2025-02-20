@@ -71,7 +71,7 @@ public class EquipmentController {
         }
     }
 
-    @DeleteMapping("/equipments/{id}")
+    @PatchMapping("/equipments/{id}")
     public ResponseEntity<EquipmentTO> updateEquipment(@PathVariable("id") String id  ) {
         try {
             EquipmentTO equipment = equipmentService.findById( id );
@@ -80,6 +80,13 @@ public class EquipmentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/equipments/{id}")
+    public ResponseEntity<Void> deleteEquipment(@PathVariable("id") String id  ) {
+            equipmentService.delete( id );
+            return ResponseEntity.noContent().build();
+    }
+
 
     @GetMapping("/equipments/{id}/sensors/{idSensor}")
     public SensorTO getSensorById(@PathVariable("idSensor") String id) {

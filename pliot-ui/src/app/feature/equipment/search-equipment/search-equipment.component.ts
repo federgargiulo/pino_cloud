@@ -50,7 +50,6 @@ export class SearchEquipmentComponent implements OnInit  {
   }
 
 
-
   // **Eliminare un Equipment**
    deleteEquipment(id: string): void {
      if (!confirm("Sei sicuro di voler eliminare questo Equipment?")) {
@@ -60,10 +59,10 @@ export class SearchEquipmentComponent implements OnInit  {
      this.equipmentServices.deleteEquipmentById(id).subscribe({
        next: () => {
          console.log(`Equipment con ID ${id} eliminato con successo!`);
-         alert("Equipment eliminato con successo!");
 
          // **Ora TypeScript sa che `e` è di tipo `Equipment`**
          this.equipmentList = this.equipmentList.filter((e: Equipment) => e.equipmentId !== id);
+         console.log(`this.equipmentList`, this.equipmentList);
        },
        error: (err) => {
          console.error("Errore durante l'eliminazione:", err);

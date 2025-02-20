@@ -25,7 +25,8 @@
         <a [routerLink]="['/detail-equipment', equipment.id]" class="button">Detail</a>
       </td>
       <td>
-        <a [routerLink]="['/delete-equipment', equipment.id]" class="button">Delete</a>
+
+        <button (click)="deleteEquipment(equipment.id)">❌ Elimina</button>
       </td>
 
       <td>
