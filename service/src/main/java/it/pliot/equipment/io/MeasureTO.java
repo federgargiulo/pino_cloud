@@ -9,15 +9,26 @@ public class MeasureTO implements Serializable {
 
     private String sensorId;
 
-    private String srcId;
+    private String tenantId;
 
-    public String getSrcId() {
-        return srcId;
+    public String getTenantId() {
+        return tenantId;
     }
 
-    public void setSrcId(String srcId) {
-        this.srcId = srcId;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
+
+    public String getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
+    }
+
+    private String equipmentId;
+
 
     private String val;
 
