@@ -1,6 +1,7 @@
 package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.io.SensorTO;
+import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.repository.SensorRepository;
 import it.pliot.equipment.service.business.SensorServices;
@@ -10,9 +11,11 @@ import it.pliot.equipment.service.dbms.util.ConvertUtils;
 import it.pliot.equipment.service.dbms.util.SensorUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -41,6 +44,13 @@ public class SensorServiceImpl extends BaseServiceImpl<SensorTO,String> implemen
             io.setSensorId( UUID.randomUUID().toString() );
 
         return super.create(  io  );
+    }
+
+    public List<SensorTO> getSensorsByEquipmentId(String equipmentId) {
+        SensorTO probe = new SensorTO();
+        probe.setEquipmentId(equipmentId);
+        Example<SensorTO> example = Example.of(probe);
+        return getRepo().findAll(example);
     }
 
 }

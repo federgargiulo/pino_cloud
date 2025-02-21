@@ -60,13 +60,11 @@ export class SearchEquipmentComponent implements OnInit  {
        next: () => {
          console.log(`Equipment con ID ${id} eliminato con successo!`);
 
-         // **Ora TypeScript sa che `e` è di tipo `Equipment`**
          this.equipmentList = this.equipmentList.filter((e: Equipment) => e.equipmentId !== id);
          console.log(`this.equipmentList`, this.equipmentList);
        },
        error: (err) => {
          console.error("Errore durante l'eliminazione:", err);
-         alert("Errore nell'eliminazione dell'Equipment.");
        }
      });
    }

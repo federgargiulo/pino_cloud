@@ -93,10 +93,17 @@ public class EquipmentController {
         return sensorServices.findById( id );
     }
 
+    @GetMapping("/equipments/{id}/sensors")
+    public ResponseEntity<List<SensorTO>> getSensors(@PathVariable String equipmentId) {
+        List<SensorTO> sensors = sensorServices.getSensorsByEquipmentId(equipmentId);
+        return ResponseEntity.ok(sensors);
+    }
+
     @PostMapping("/equipment/{id}/sensor")
     public SensorTO addSensor(@PathVariable("id") String id , @RequestBody SensorTO sensor ) {
+
         sensor.setEquipmentId( id );
-        return sensorServices.save( sensor );
+        return sensorServices.create( sensor );
 
     }
 
