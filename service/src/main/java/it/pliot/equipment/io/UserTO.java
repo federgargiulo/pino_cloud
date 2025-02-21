@@ -8,7 +8,7 @@ import java.util.List;
 public class UserTO extends BaseEntity {
 
 
-
+    private String userId;
     private String type;
 
     private String name;
@@ -87,6 +87,14 @@ public class UserTO extends BaseEntity {
         this.roles = roles;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     private Integer age;
 
     private String phone;
@@ -100,4 +108,6 @@ public class UserTO extends BaseEntity {
     private String password;
 
     private List<RoleTO> roles = new ArrayList<>();
+
+
 }

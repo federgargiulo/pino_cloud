@@ -2,6 +2,7 @@ package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.repository.EquipmentRepository;
+import it.pliot.equipment.repository.UserRepository;
 import it.pliot.equipment.service.business.UserServices;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
 import it.pliot.equipment.service.dbms.util.UserUtils;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class UserServiceImpl extends BaseServiceImpl<UserTO,String> implements UserServices {
 
     @Autowired
-    private EquipmentRepository userRepo;
+    private UserRepository userRepo;
 
     @Override
     public JpaRepository getRepo() {

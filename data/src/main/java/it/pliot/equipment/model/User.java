@@ -9,13 +9,27 @@ import java.util.List;
 @Table(name="users")
 public class User extends BaseEntity {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     private String type;
 
     private String name;
-    @Id
+
     private String email;
+
+    private Integer age;
+
+    private String phone;
+
+
+    private String gender;
+
+
+    private String address;
+
+    private String password;
 
     public String getType() {
         return type;
@@ -89,17 +103,15 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
-    private Integer age;
+    public String getId() {
+        return id;
+    }
 
-    private String phone;
+    public void setId(String id) {
+        this.id = id;
+    }
 
 
-    private String gender;
-
-
-    private String address;
-
-    private String password;
 
     @ManyToMany(fetch = FetchType.EAGER )
     @JoinTable(

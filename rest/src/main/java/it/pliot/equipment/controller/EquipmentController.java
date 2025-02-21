@@ -3,6 +3,7 @@ package it.pliot.equipment.controller;
 import it.pliot.equipment.conf.InitDb;
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.SensorTO;
+import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.SensorServices;
@@ -72,9 +73,10 @@ public class EquipmentController {
     }
 
     @PatchMapping("/equipments/{id}")
-    public ResponseEntity<EquipmentTO> updateEquipment(@PathVariable("id") String id  ) {
+    public ResponseEntity<EquipmentTO> updateEquipment(@PathVariable("id") String id , @RequestBody EquipmentTO equipment ) {
         try {
-            EquipmentTO equipment = equipmentService.findById( id );
+            equipment.setEquipmentId( id );
+            equipment = equipmentService.save( equipment );
             return new ResponseEntity<>(equipment, HttpStatus.OK );
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -99,7 +101,7 @@ public class EquipmentController {
         return ResponseEntity.ok(sensors);
     }
 
-    @PostMapping("/equipment/{id}/sensor")
+    @PostMapping("/equipments/{id}/sensor")
     public SensorTO addSensor(@PathVariable("id") String id , @RequestBody SensorTO sensor ) {
 
         sensor.setEquipmentId( id );
@@ -107,10 +109,28 @@ public class EquipmentController {
 
     }
 
-    @PostMapping("/equipment/{id}/diagnostics ")
+    @PostMapping("/equipments/{id}/diagnostics ")
     public String diagnostic( @PathVariable("id") String id , @RequestBody List<Sensor> sensors ) {
        EquipmentTO eq = equipmentService.findById( id );
        return "OK";
     }
+
+    @DeleteMapping("/equipments/{id}/sensor/{idSensor}")
+    public ResponseEntity<Void> deleteSensorById(@PathVariable("idSensor") String idSensor  ) {
+        sensorServices.delete( idSensor );
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/equipments/{id}/sensors/{idSensor}")
+    public ResponseEntity<SensorTO> updateSensor(@PathVariable("id") String id , @RequestBody SensorTO sensorTO) {
+        try {
+            sensorTO.setSensorId( id );
+            sensorTO = sensorServices.save( sensorTO );
+            return new ResponseEntity<>(sensorTO, HttpStatus.OK );
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
