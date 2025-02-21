@@ -93,8 +93,8 @@ public class EquipmentController {
         return sensorServices.findById( id );
     }
 
-    @GetMapping("/equipments/{id}/sensors")
-    public ResponseEntity<List<SensorTO>> getSensors(@PathVariable String equipmentId) {
+    @GetMapping("/equipments/{equipmentId}/sensors")
+    public ResponseEntity<List<SensorTO>> getSensors(@PathVariable ("equipmentId") String equipmentId) {
         List<SensorTO> sensors = sensorServices.getSensorsByEquipmentId(equipmentId);
         return ResponseEntity.ok(sensors);
     }

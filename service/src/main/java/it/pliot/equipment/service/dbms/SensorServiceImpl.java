@@ -47,10 +47,11 @@ public class SensorServiceImpl extends BaseServiceImpl<SensorTO,String> implemen
     }
 
     public List<SensorTO> getSensorsByEquipmentId(String equipmentId) {
-        SensorTO probe = new SensorTO();
+        Sensor probe = new Sensor();
         probe.setEquipmentId(equipmentId);
-        Example<SensorTO> example = Example.of(probe);
-        return getRepo().findAll(example);
+        Example<Sensor> example = Example.of(probe);
+        List<Sensor> sens= getRepo().findAll(example);
+        return SensorUtils.instance().converListData2IO(sens);
     }
 
 }
