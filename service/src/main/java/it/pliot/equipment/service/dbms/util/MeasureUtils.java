@@ -18,7 +18,8 @@ public class MeasureUtils extends BaseConvertUtil<Measure, MeasureTO>{
         if ( in == null ) return  null;
         Measure out = new Measure();
         out.setId( in.getId() );
-        out.setSrcId( in.getSrcId() );
+        out.setTenantId( in.getTenantId() );
+        out.setEquipmentId( in.getTenantId() );
         out.setMesure_dttm( in.getMesure_dttm() );
         out.setValore( in.getVal() );
         out.setSensorId( in.getSensorId() );
@@ -30,7 +31,8 @@ public class MeasureUtils extends BaseConvertUtil<Measure, MeasureTO>{
         if ( in == null ) return  null;
         MeasureTO out = new MeasureTO();
         out.setId( in.getId() );
-        out.setSrcId( in.getSrcId() );
+        out.setEquipmentId( in.getEquipmentId() );
+        out.setTenantId( in.getTenantId() );
         out.setMesure_dttm( in.getMesure_dttm() );
         out.setVal( in.getVal() );
         out.setSensorId( in.getSensorId() );

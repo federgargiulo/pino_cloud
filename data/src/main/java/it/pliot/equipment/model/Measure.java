@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 
 @Entity
@@ -15,19 +16,41 @@ public class Measure  implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    public String getSrcId() {
-        return srcId;
+    private String tenantId;
+
+    private String equipmentId;
+
+    public String getTenantId() {
+        return tenantId;
     }
 
-    public void setSrcId(String srcId) {
-        this.srcId = srcId;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public String getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     public void setVal(String val) {
         this.val = val;
     }
 
-    private String srcId;
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Measure measure = (Measure) o;
+        return Objects.equals(id, measure.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
     private String sensorId;
 
