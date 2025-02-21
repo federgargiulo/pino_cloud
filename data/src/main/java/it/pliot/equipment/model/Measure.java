@@ -16,6 +16,16 @@ public class Measure  implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    private String srcId;
+
+    public String getSrcId() {
+        return srcId;
+    }
+
+    public void setSrcId(String srcId) {
+        this.srcId = srcId;
+    }
+
     private String tenantId;
 
     private String equipmentId;

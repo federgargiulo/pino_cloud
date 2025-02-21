@@ -7,7 +7,17 @@ public class MeasureTO implements Serializable {
 
     private String id;
 
+    private String srcId;
+
     private String sensorId;
+
+    public String getSrcId() {
+        return srcId;
+    }
+
+    public void setSrcId(String srcId) {
+        this.srcId = srcId;
+    }
 
     private String tenantId;
 
