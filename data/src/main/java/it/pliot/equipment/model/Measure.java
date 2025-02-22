@@ -62,7 +62,7 @@ public class Measure  implements Serializable {
         return Objects.hashCode(id);
     }
 
-    private String sensorId;
+    private String signalId;
 
     private String val;
 
@@ -76,12 +76,12 @@ public class Measure  implements Serializable {
         this.id = id;
     }
 
-    public String getSensorId() {
-        return sensorId;
+    public String getSignalId() {
+        return signalId;
     }
 
-    public void setSensorId(String sensorId) {
-        this.sensorId = sensorId;
+    public void setSignalId(String signalId) {
+        this.signalId = signalId;
     }
 
     public String getVal() {

@@ -2,11 +2,9 @@ package it.pliot.equipment.controller;
 
 import it.pliot.equipment.conf.InitDb;
 import it.pliot.equipment.io.EquipmentTO;
-import it.pliot.equipment.io.SensorTO;
-import it.pliot.equipment.io.TenantTO;
-import it.pliot.equipment.model.Sensor;
+import it.pliot.equipment.io.SignalTO;
 import it.pliot.equipment.service.business.EquipmentServices;
-import it.pliot.equipment.service.business.SensorServices;
+import it.pliot.equipment.service.business.SignalServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class EquipmentController {
     private EquipmentServices equipmentService;
 
     @Autowired
-    private SensorServices sensorServices;
+    private SignalServices signalServices;
 
 
 
@@ -90,43 +88,43 @@ public class EquipmentController {
     }
 
 
-    @GetMapping("/equipments/{id}/sensors/{idSensor}")
-    public SensorTO getSensorById(@PathVariable("idSensor") String id) {
-        return sensorServices.findById( id );
+    @GetMapping("/equipments/{id}/signals/{idSignal}")
+    public SignalTO getSignalById(@PathVariable("idSignal") String id) {
+        return signalServices.findById( id );
     }
 
-    @GetMapping("/equipments/{equipmentId}/sensors")
-    public ResponseEntity<List<SensorTO>> getSensors(@PathVariable ("equipmentId") String equipmentId) {
-        List<SensorTO> sensors = sensorServices.getSensorsByEquipmentId(equipmentId);
-        return ResponseEntity.ok(sensors);
+    @GetMapping("/equipments/{equipmentId}/signals")
+    public ResponseEntity<List<SignalTO>> getSignals(@PathVariable ("equipmentId") String equipmentId) {
+        List<SignalTO> signals = signalServices.getSignalsByEquipmentId(equipmentId);
+        return ResponseEntity.ok(signals);
     }
 
-    @PostMapping("/equipments/{id}/sensor")
-    public SensorTO addSensor(@PathVariable("id") String id , @RequestBody SensorTO sensor ) {
+    @PostMapping("/equipments/{id}/signals")
+    public SignalTO addSignal(@PathVariable("id") String id , @RequestBody SignalTO signalTO ) {
 
-        sensor.setEquipmentId( id );
-        return sensorServices.create( sensor );
+        signalTO.setEquipmentId( id );
+        return signalServices.create( signalTO );
 
     }
 
     @PostMapping("/equipments/{id}/diagnostics ")
-    public String diagnostic( @PathVariable("id") String id , @RequestBody List<Sensor> sensors ) {
+    public String diagnostic( @PathVariable("id") String id , @RequestBody List<SignalTO> signals ) {
        EquipmentTO eq = equipmentService.findById( id );
        return "OK";
     }
 
-    @DeleteMapping("/equipments/{id}/sensor/{idSensor}")
-    public ResponseEntity<Void> deleteSensorById(@PathVariable("idSensor") String idSensor  ) {
-        sensorServices.delete( idSensor );
+    @DeleteMapping("/equipments/{id}/signals/{idSignal}")
+    public ResponseEntity<Void> deleteSignalById(@PathVariable("idSignal") String idSignal  ) {
+        signalServices.delete( idSignal );
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/equipments/{id}/sensors/{idSensor}")
-    public ResponseEntity<SensorTO> updateSensor(@PathVariable("id") String id , @RequestBody SensorTO sensorTO) {
+    @PatchMapping("/equipments/{id}/signals/{idSignal}")
+    public ResponseEntity<SignalTO> updateSignal(@PathVariable("idSignal") String idSignal , @RequestBody SignalTO signalTO) {
         try {
-            sensorTO.setSensorId( id );
-            sensorTO = sensorServices.save( sensorTO );
-            return new ResponseEntity<>(sensorTO, HttpStatus.OK );
+            signalTO.setSignalId( idSignal );
+            signalTO = signalServices.save( signalTO );
+            return new ResponseEntity<>(signalTO, HttpStatus.OK );
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

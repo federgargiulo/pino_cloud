@@ -4,17 +4,17 @@ package it.pliot.equipment.io;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SensorTO implements Serializable {
+public class SignalTO implements Serializable {
 
-    public static SensorTO newEmptyInstance(String equipmentId , String name ){
-        SensorTO io = new SensorTO();
+    public static SignalTO newEmptyInstance(String equipmentId , String name ){
+        SignalTO io = new SignalTO();
         io.setEquipmentId( equipmentId );
         io.setName( name );
         return io;
     }
 
 
-    private String sensorId;
+    private String signalId;
 
     private String equipmentId;
 
@@ -119,8 +119,12 @@ public class SensorTO implements Serializable {
         this.equipmentId = equipmentId;
     }
 
-    public void setSensorId(String sensorId) {
-        this.sensorId = sensorId;
+    public String getSignalId() {
+        return signalId;
+    }
+
+    public void setSignalId(String signalId) {
+        this.signalId = signalId;
     }
 
     public void setUnitOfMeasurement(String unitOfMeasurement) {
@@ -133,9 +137,7 @@ public class SensorTO implements Serializable {
 
     private String unitOfMeasurement;
 
-    public String getSensorId() {
-        return sensorId;
-    }
+
 
 
     public String getUnitOfMeasurement() {

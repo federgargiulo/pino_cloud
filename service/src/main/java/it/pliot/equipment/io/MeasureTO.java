@@ -9,7 +9,7 @@ public class MeasureTO implements Serializable {
 
     private String srcId;
 
-    private String sensorId;
+    private String signalId;
 
     public String getSrcId() {
         return srcId;
@@ -52,12 +52,12 @@ public class MeasureTO implements Serializable {
         this.id = id;
     }
 
-    public String getSensorId() {
-        return sensorId;
+    public String getSignalId() {
+        return signalId;
     }
 
-    public void setSensorId(String sensorId) {
-        this.sensorId = sensorId;
+    public void setSignalId(String signalId) {
+        this.signalId = signalId;
     }
 
     public String getVal() {

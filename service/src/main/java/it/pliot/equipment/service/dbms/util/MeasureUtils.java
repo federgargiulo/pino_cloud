@@ -23,7 +23,7 @@ public class MeasureUtils extends BaseConvertUtil<Measure, MeasureTO>{
         out.setEquipmentId( in.getEquipmentId() );
         out.setMesure_dttm( in.getMesure_dttm() );
         out.setValore( in.getVal() );
-        out.setSensorId( in.getSensorId() );
+        out.setSignalId( in.getSignalId() );
         return out;
     }
 
@@ -37,7 +37,7 @@ public class MeasureUtils extends BaseConvertUtil<Measure, MeasureTO>{
         out.setTenantId( in.getTenantId() );
         out.setMesure_dttm( in.getMesure_dttm() );
         out.setVal( in.getVal() );
-        out.setSensorId( in.getSensorId() );
+        out.setSignalId( in.getSignalId() );
         return out;
     }
 }

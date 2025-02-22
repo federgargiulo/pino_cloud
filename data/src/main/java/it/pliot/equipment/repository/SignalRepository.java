@@ -1,9 +1,9 @@
 package it.pliot.equipment.repository;
 
-import it.pliot.equipment.model.Sensor;
+import it.pliot.equipment.model.Signal;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Transactional
-public interface SensorRepository extends JpaRepository<Sensor, String>{
+public interface SignalRepository extends JpaRepository<Signal, String>{
 }

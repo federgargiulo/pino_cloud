@@ -1,14 +1,7 @@
 package it.pliot.equipment.service.dbms.util;
 
-import it.pliot.equipment.io.EquipmentTO;
-import it.pliot.equipment.io.SensorTO;
 import it.pliot.equipment.io.TenantTO;
-import it.pliot.equipment.model.Equipment;
-import it.pliot.equipment.model.Sensor;
 import it.pliot.equipment.model.Tenant;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConvertUtils {
 

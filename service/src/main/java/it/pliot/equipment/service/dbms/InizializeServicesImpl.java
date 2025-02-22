@@ -1,11 +1,10 @@
 package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.io.EquipmentTO;
-import it.pliot.equipment.io.SensorTO;
-import it.pliot.equipment.model.Sensor;
+import it.pliot.equipment.io.SignalTO;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.InizializeServices;
-import it.pliot.equipment.service.business.SensorServices;
+import it.pliot.equipment.service.business.SignalServices;
 import it.pliot.equipment.service.business.errors.ServiceExceptions;
 import it.pliot.equipment.service.dbms.util.ConvertUtils;
 import jakarta.transaction.Transactional;
@@ -25,36 +24,36 @@ public class InizializeServicesImpl implements InizializeServices {
     private EquipmentServices equipment;
 
     @Autowired
-    private SensorServices sensorServices;
+    private SignalServices signalServices;
 
     private static String EQ_NAME = "Initialize Equipment";
 
-    public SensorTO inizialize( SensorTO sensor , String equipmentName){
-        log.info( " create new sensor " + sensor.getName() );
+    public SignalTO inizialize(SignalTO signal , String equipmentName){
+        log.info( " create new signal " + signal.getName() );
         EquipmentTO eq = null;
 
-        if ( sensor == null || ConvertUtils.isNullOrEmpty( sensor.getSensorId() ) )
-            throw new ServiceExceptions( " Sensor and Sensor id must not be null in the inialization phase ");
+        if ( signal == null || ConvertUtils.isNullOrEmpty( signal.getSignalId() ) )
+            throw new ServiceExceptions( " signal  and signal id must not be null in the inialization phase ");
 
-        SensorTO s = sensorServices.findById( sensor.getSensorId() );
+        SignalTO s = signalServices.findById( signal.getSignalId() );
         if ( s != null )
             return  s;
 
 
-        if ( ConvertUtils.isNullOrEmpty( sensor.getEquipmentId() ) ){
+        if ( ConvertUtils.isNullOrEmpty( signal.getEquipmentId() ) ){
             eq = initEquipment(equipmentName);
-            sensor.setEquipmentId( eq.getEquipmentId() );
+            signal.setEquipmentId( eq.getEquipmentId() );
 
         }
         else{
-            eq = equipment.findById( sensor.getEquipmentId() );
+            eq = equipment.findById( signal.getEquipmentId() );
             if ( eq == null )
                 eq = initEquipment( equipmentName );
-            sensor.setEquipmentId( eq.getEquipmentId() );
+            signal.setEquipmentId( eq.getEquipmentId() );
             if ( eq == null )
-                throw new ServiceExceptions(" Equipment id " + sensor.getEquipmentId() + " does not exist ");
+                throw new ServiceExceptions(" Equipment id " + signal.getEquipmentId() + " does not exist ");
         }
-        return sensorServices.create( sensor );
+        return signalServices.create( signal );
 
     }
 

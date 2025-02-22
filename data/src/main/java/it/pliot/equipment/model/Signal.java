@@ -1,11 +1,12 @@
 package it.pliot.equipment.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 import java.util.Date;
 
 @Entity
-public class Sensor  extends BaseEntity {
+public class Signal extends BaseEntity {
     @Id
     private String id;
 

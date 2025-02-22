@@ -1,24 +1,24 @@
 package it.pliot.equipment.service.dbms.util;
 
-import it.pliot.equipment.io.SensorTO;
-import it.pliot.equipment.model.Sensor;
+import it.pliot.equipment.io.SignalTO;
+import it.pliot.equipment.model.Signal;
 
-public class SensorUtils  extends BaseConvertUtil<Sensor, SensorTO>{
+public class SignalUtils extends BaseConvertUtil<Signal, SignalTO>{
 
-    private static SensorUtils INSTANCE = new SensorUtils();
+    private static SignalUtils INSTANCE = new SignalUtils();
 
-    public static SensorUtils instance(){
+    public static SignalUtils instance(){
         return INSTANCE;
     }
-    private SensorUtils(){}
+    private SignalUtils(){}
 
 
     @Override
-    public Sensor io2data(SensorTO sio) {
+    public Signal io2data(SignalTO sio) {
         if ( sio == null ) return null;
-        Sensor data = new Sensor();
+        Signal data = new Signal();
         data.setName( sio.getName() );
-        data.setId( sio.getSensorId( ) );
+        data.setId( sio.getSignalId( ) );
         data.setEquipmentId( sio.getEquipmentId() );
         data.setUnitOfMeasurement( sio.getUnitOfMeasurement() );
         data.setDownRedLimit( sio.getDownRedLimit() );
@@ -32,11 +32,11 @@ public class SensorUtils  extends BaseConvertUtil<Sensor, SensorTO>{
     }
 
     @Override
-    public SensorTO data2io(Sensor s) {
+    public SignalTO data2io(Signal s) {
         if ( s==null)
             return  null;
-        SensorTO io = new SensorTO();
-        io.setSensorId( s.getId() );
+        SignalTO io = new SignalTO();
+        io.setSignalId( s.getId() );
         io.setEquipmentId( s.getEquipmentId() );
         io.setName( s.getName( ) ) ;
         io.setUnitOfMeasurement( s.getUnitOfMeasurement() );

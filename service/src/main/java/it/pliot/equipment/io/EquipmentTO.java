@@ -12,7 +12,7 @@ public class EquipmentTO implements Serializable {
     private String name;
     private String status;
 
-    private List<SensorTO> sensors;
+    private List<SignalTO> signals;
 
     public static EquipmentTO newEquipment(String name , String tenant ){
         EquipmentTO e = new EquipmentTO();
@@ -44,14 +44,14 @@ public class EquipmentTO implements Serializable {
         this.status = status;
     }
 
-    public void setSensors(List<SensorTO> sensors) {
-        this.sensors = sensors;
+    public void setSignals(List<SignalTO> signals) {
+        this.signals = signals;
     }
 
-    public List<SensorTO> getSensors() {
-        if ( sensors == null )
-            sensors = new ArrayList<SensorTO>();
-        return sensors;
+    public List<SignalTO> getSignals() {
+        if ( signals == null )
+            signals = new ArrayList<SignalTO>();
+        return signals;
     }
 
 

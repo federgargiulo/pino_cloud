@@ -2,11 +2,11 @@ package it.pliot.equipment.conf;
 
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.RoleTO;
-import it.pliot.equipment.io.SensorTO;
+import it.pliot.equipment.io.SignalTO;
 import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.RoleServices;
-import it.pliot.equipment.service.business.SensorServices;
+import it.pliot.equipment.service.business.SignalServices;
 import it.pliot.equipment.service.business.TenantServices;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ public class InitDb {
     private EquipmentServices equipmentService;
 
     @Autowired
-    private SensorServices sensorServices;
+    private SignalServices signalServices;
 
 
     @PostConstruct
@@ -43,13 +43,13 @@ public class InitDb {
 
         EquipmentTO eq = equipmentService.create( EquipmentTO.newEquipment( "Pump" , "full descricption ") );
         log.info("Preloading  EquipmentIO" + eq );
-        SensorTO s1 = SensorTO.newEmptyInstance( eq.getEquipmentId() , " TEMPERATURA ESTERNA");
-        s1 = sensorServices.create( s1 );
+        SignalTO s1 = SignalTO.newEmptyInstance( eq.getEquipmentId() , " TEMPERATURA ESTERNA");
+        s1 = signalServices.create( s1 );
         log.info("Preloading  Sensor" + s1 );
 
         EquipmentTO eq2 =equipmentService.create( EquipmentTO.newEquipment( "Inverter" , "full description ") );
-        SensorTO s2 = SensorTO.newEmptyInstance( eq2.getEquipmentId() , "PRESSIONE_INTERNA");
-        s1 = sensorServices.create( s2 );
+        SignalTO s2 = SignalTO.newEmptyInstance( eq2.getEquipmentId() , "PRESSIONE_INTERNA");
+        s1 = signalServices.create( s2 );
         log.info("Preloading  Sensor" + s1 );
 
 

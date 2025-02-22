@@ -1,23 +1,23 @@
 package it.pliot.equipment.controller.io;
 
-import it.pliot.equipment.io.SensorTO;
+import it.pliot.equipment.io.SignalTO;
 
 import java.io.Serializable;
 
-public class InitializeSensorTO implements Serializable  {
+public class InitializeSignalTO implements Serializable  {
 
-    private SensorTO sensor;
+    private SignalTO signalTO;
 
     private String equipmentName;
 
     private String accessKey;
 
-    public SensorTO getSensor() {
-        return sensor;
+    public SignalTO getSignalTO() {
+        return signalTO;
     }
 
-    public void setSensor(SensorTO sensor) {
-        this.sensor = sensor;
+    public void setSignalTO(SignalTO signalTO) {
+        this.signalTO = signalTO;
     }
 
     public String getEquipmentName() {

@@ -53,9 +53,7 @@ public class Equipment extends BaseEntity{
 
 
 
-    public void setSensors(List<Sensor> sensors) {
-        this.sensors = sensors;
-    }
+
 
     private Date updateDttm;
 
@@ -66,12 +64,16 @@ public class Equipment extends BaseEntity{
         return status;
     }
 
-    public List<Sensor> getSensors() {
-        return sensors;
+    public List<Signal> getSignals() {
+        return signals;
+    }
+
+    public void setSignals(List<Signal> signals) {
+        this.signals = signals;
     }
 
     @OneToMany
-    private List<Sensor> sensors;
+    private List<Signal> signals;
 
     public Equipment(){}
 

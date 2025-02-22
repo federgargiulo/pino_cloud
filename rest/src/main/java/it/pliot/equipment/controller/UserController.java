@@ -1,9 +1,6 @@
 package it.pliot.equipment.controller;
 
-import it.pliot.equipment.io.EquipmentTO;
-import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.io.UserTO;
-import it.pliot.equipment.service.business.SensorServices;
 import it.pliot.equipment.service.business.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package it.pliot.equipment.controller;
 
-import it.pliot.equipment.controller.io.InitializeSensorTO;
-import it.pliot.equipment.io.SensorTO;
+import it.pliot.equipment.controller.io.InitializeSignalTO;
+import it.pliot.equipment.io.SignalTO;
 
 import it.pliot.equipment.service.business.InizializeServices;
 import org.slf4j.Logger;
@@ -20,10 +20,10 @@ public class InizializeController {
     private InizializeServices inizializeServices;
 
     @PostMapping("/init/sensor")
-    public InitializeSensorTO initSensor(@RequestBody InitializeSensorTO initTo ){
-        log.info( "init sensor " );
-        SensorTO sensor = inizializeServices.inizialize( initTo.getSensor() , initTo.getEquipmentName() );
-        initTo.setSensor( sensor );
+    public InitializeSignalTO initSignal(@RequestBody InitializeSignalTO initTo ){
+        log.info( "init signal " );
+        SignalTO signal = inizializeServices.inizialize( initTo.getSignalTO() , initTo.getEquipmentName() );
+        initTo.setSignalTO( signal );
         return initTo;
 
     }
