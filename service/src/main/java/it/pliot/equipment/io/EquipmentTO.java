@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EquipmentTO implements Serializable {
     private String tenant;
-    private  String equipmentId;
+    private String equipmentId;
     private String name;
     private String status;
 
