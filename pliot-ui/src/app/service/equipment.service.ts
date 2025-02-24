@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpProviderService } from './http-provider.service';
-//import { Equipment } from './data/equipment';
 
 
 var version="";
@@ -12,7 +11,8 @@ var httpLink = {
   getEquipmentDetailById:   version +  "/equipments",
   saveEquipment:  version +  "/equipments",
   getEquipmentById: version +  "/equipments",
-  getEquipmentDetail: version +  "/equipments"
+  getEquipmentDetail: version +  "/equipments",
+  getEquipmentForCurrentTenant: version + "/tenants/curr/equipments"
 }
 
 export interface Equipment { // Anche questa deve essere esportata
@@ -40,6 +40,10 @@ export interface EquipmentDetail { // Anche questa deve essere esportata
 
   public getAllEquipment(): Observable<any> {
     return this.webApiService.get(httpLink.getAllEquipment );
+  }
+
+  public getAllEquipment4CurrentTenant(): Observable<any> {
+    return this.webApiService.get(httpLink.getEquipmentForCurrentTenant );
   }
 
   public deleteEquipmentById(id: string): Observable<any> {

@@ -15,6 +15,8 @@ import { SearchEquipmentComponent } from './feature/equipment/search-equipment/s
 import { DashMeasureComponent } from './dashboard/dash-measure/dash-measure.component';
 
 import { DetailEquipmentComponent } from './feature/equipment/detail-equipment/detail-equipment.component';
+import { UserdashboardListComponent } from './dashboard/userdashboard-list/userdashboard-list.component';
+import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userdashboard-view.component';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { DetailEquipmentComponent } from './feature/equipment/detail-equipment/d
     SearchEquipmentComponent,
     DashMeasureComponent,
     DetailEquipmentComponent,
+    UserdashboardListComponent,
+    UserdashboardViewComponent,
 
 
 

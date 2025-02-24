@@ -3,6 +3,7 @@ package it.pliot.equipment.controller;
 import it.pliot.equipment.conf.InitDb;
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.SignalTO;
+import it.pliot.equipment.security.UserContext;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.SignalServices;
 import org.slf4j.Logger;
@@ -29,7 +30,8 @@ public class EquipmentController {
 
 
     @GetMapping("/equipments")
-    public List<EquipmentTO> all() {
+    public List<EquipmentTO> all( ) {
+
         return equipmentService.findAll();
     }
 
@@ -51,6 +53,8 @@ public class EquipmentController {
     public ResponseEntity<EquipmentTO> createEquipment(@RequestBody EquipmentTO equipment) {
         try {
             log.info( " create a new Equipment"  + equipment );
+            equipment.setTenant(UserContext.currentUser().getTenantId());
+
             equipment = equipmentService.create( equipment);
             return new ResponseEntity<>(equipment, HttpStatus.CREATED);
         } catch (Exception e) {

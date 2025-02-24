@@ -7,8 +7,8 @@ import { AddEquipmentComponent } from './feature/equipment/add-equipment/add-equ
 import { SearchEquipmentComponent } from './feature/equipment/search-equipment/search-equipment.component';
 import { DashMeasureComponent } from './dashboard/dash-measure/dash-measure.component';
 import { DetailEquipmentComponent } from './feature/equipment/detail-equipment/detail-equipment.component';
-
-
+import { UserdashboardListComponent } from './dashboard/userdashboard-list/userdashboard-list.component';
+import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userdashboard-view.component';
 
 const routes: Routes = [
 
@@ -18,7 +18,9 @@ const routes: Routes = [
   { path: 'search-equipment', component: SearchEquipmentComponent, title: 'Search Equipment' },
   { path: 'dash-measure', component: DashMeasureComponent, title: 'Search Equipment' },
   { path: 'detail-equipment/:id', component: DetailEquipmentComponent, title: 'Detail Equipment'},
-
+  { path: 'userdashboard-list', component: UserdashboardListComponent, title: 'Detail Equipment'},
+  { path: 'userdashboard-new', component: UserdashboardViewComponent, title: 'Detail Equipment'},
+  
 ];
 
 

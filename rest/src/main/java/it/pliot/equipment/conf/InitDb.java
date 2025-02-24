@@ -1,5 +1,6 @@
 package it.pliot.equipment.conf;
 
+import it.pliot.equipment.Const;
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.RoleTO;
 import it.pliot.equipment.io.SignalTO;
@@ -37,17 +38,17 @@ public class InitDb {
         log.info("Preloading Role" + roleService.save( RoleTO.newroleio( "ADMIN" , "ADMINISTRATOR " ) ) );
         log.info("Preloading Role" + roleService.save(  RoleTO.newroleio( "USER" , "USER " ) ));
         log.info("Preloading Role" + roleService.save( RoleTO.newroleio( "TENAT_ADMIN" , "Tenant Administrator " ) ) );
-        TenantTO t = tenanServices.save( TenantTO.newrtenant( "EDGE" , "EDGE TENANT" ) );
+        TenantTO t = tenanServices.save( TenantTO.newrtenant(Const.DEV_TENANT_ID , Const.DEV_TENANT_NAME , Const.DEV_TENANT_DESC ) );
 
         log.info("Preloading Tenant" +  t ) ;
 
-        EquipmentTO eq = equipmentService.create( EquipmentTO.newEquipment( "Pump" , "full descricption ") );
+        EquipmentTO eq = equipmentService.create( EquipmentTO.newEquipment( "Pump" , Const.DEV_TENANT_ID ) );
         log.info("Preloading  EquipmentIO" + eq );
-        SignalTO s1 = SignalTO.newEmptyInstance( eq.getEquipmentId() , " TEMPERATURA ESTERNA");
+        SignalTO s1 = SignalTO.newEmptyInstance( eq.getEquipmentId() , Const.DEV_TENANT_ID);
         s1 = signalServices.create( s1 );
         log.info("Preloading  Sensor" + s1 );
 
-        EquipmentTO eq2 =equipmentService.create( EquipmentTO.newEquipment( "Inverter" , "full description ") );
+        EquipmentTO eq2 =equipmentService.create( EquipmentTO.newEquipment( "Inverter" , Const.DEV_TENANT_ID ) );
         SignalTO s2 = SignalTO.newEmptyInstance( eq2.getEquipmentId() , "PRESSIONE_INTERNA");
         s1 = signalServices.create( s2 );
         log.info("Preloading  Sensor" + s1 );

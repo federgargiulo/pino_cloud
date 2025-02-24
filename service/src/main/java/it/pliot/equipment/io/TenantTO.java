@@ -11,9 +11,10 @@ public class TenantTO extends BaseEntity {
     private String name;
     private String description;
 
-    public static TenantTO newrtenant(String edge, String descr) {
+    public static TenantTO newrtenant( String tenId , String name, String descr) {
         TenantTO t = new TenantTO();
-        t.setName( edge );
+        t.setId( tenId );
+        t.setName( name );
         t.setDescription( descr );
         return t;
     }

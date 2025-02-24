@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 @Entity
 public class Tenant extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String name;
     private String description;
