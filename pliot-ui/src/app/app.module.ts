@@ -17,6 +17,8 @@ import { DashMeasureComponent } from './dashboard/dash-measure/dash-measure.comp
 import { DetailEquipmentComponent } from './feature/equipment/detail-equipment/detail-equipment.component';
 import { UserdashboardListComponent } from './dashboard/userdashboard-list/userdashboard-list.component';
 import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userdashboard-view.component';
+import { SearchTenantComponent } from './feature/tenant/search-tenant/search-tenant.component';
+import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.component';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userd
     DetailEquipmentComponent,
     UserdashboardListComponent,
     UserdashboardViewComponent,
+    SearchTenantComponent,
+    AddTenantComponent,
 
 
 

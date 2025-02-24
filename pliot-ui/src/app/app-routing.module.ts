@@ -9,6 +9,8 @@ import { DashMeasureComponent } from './dashboard/dash-measure/dash-measure.comp
 import { DetailEquipmentComponent } from './feature/equipment/detail-equipment/detail-equipment.component';
 import { UserdashboardListComponent } from './dashboard/userdashboard-list/userdashboard-list.component';
 import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userdashboard-view.component';
+import { SearchTenantComponent } from './feature/tenant/search-tenant/search-tenant.component';
+import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.component';
 
 const routes: Routes = [
 
@@ -20,7 +22,9 @@ const routes: Routes = [
   { path: 'detail-equipment/:id', component: DetailEquipmentComponent, title: 'Detail Equipment'},
   { path: 'userdashboard-list', component: UserdashboardListComponent, title: 'Detail Equipment'},
   { path: 'userdashboard-new', component: UserdashboardViewComponent, title: 'Detail Equipment'},
-  
+  { path: 'search-tenant', component: SearchTenantComponent, title: 'Search Tenant' },
+  { path: 'add-tenant', component: AddTenantComponent, title: 'Add Tenant' },
+
 ];
 
 

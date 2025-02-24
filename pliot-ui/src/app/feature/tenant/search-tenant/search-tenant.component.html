@@ -1,0 +1,38 @@
+
+<div class="table-container">
+  <table>
+    <thead>
+    <tr class="center-align">
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Created</th>
+      <th>Last Update</th>
+      <th colspan="2">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tenant of tenantList" class="center-align">
+      <td>{{tenant.id}}</td>
+      <td>{{tenant.name}}</td>
+      <td>{{tenant.description}}</td>
+      <td>{{tenant.createdDttm}}</td>
+      <td>{{tenant.updateDttm}}</td>
+
+      <td>
+        <!--      <a [routerLink]="['/detail-tenant', tenant.id]" class="button">Detail</a> -->
+      </td>
+      <td>
+
+        <button (click)="deleteTenant(tenant.id)">❌ Elimina</button>
+      </td>
+
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td *ngIf="tenantList.length == 0" colspan="6">No Tenant Found</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

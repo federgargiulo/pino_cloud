@@ -2,6 +2,7 @@ package it.pliot.equipment.io;
 
 import it.pliot.equipment.model.BaseEntity;
 
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -10,6 +11,10 @@ public class TenantTO extends BaseEntity {
 
     private String name;
     private String description;
+
+    private Date createdDttm;
+
+    private Date updateDttm;
 
     public static TenantTO newrtenant( String tenId , String name, String descr) {
         TenantTO t = new TenantTO();
@@ -53,5 +58,25 @@ public class TenantTO extends BaseEntity {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public Date getUpdateDttm() {
+        return updateDttm;
+    }
+
+    @Override
+    public void setUpdateDttm(Date updateDttm) {
+        this.updateDttm = updateDttm;
+    }
+
+    @Override
+    public Date getCreatedDttm() {
+        return createdDttm;
+    }
+
+    @Override
+    public void setCreatedDttm(Date createdDttm) {
+        this.createdDttm = createdDttm;
     }
 }
