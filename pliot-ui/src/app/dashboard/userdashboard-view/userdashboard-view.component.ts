@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { EquipmentServices } from '../../service/equipment.service';
 import { Router } from '@angular/router';
-import { OnInit } from '@angular/core';
+import { OnInit ,ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-userdashboard-view',
   standalone: false,
@@ -10,6 +12,11 @@ import { OnInit } from '@angular/core';
 })
 
 export class UserdashboardViewComponent implements OnInit {
+
+  dashboardForm: DashboardForm = new DashboardForm();
+    @ViewChild("dashboardForm")
+    DashboardForm!: NgForm;
+
    constructor(private router: Router, private equipmentServices: EquipmentServices ) { }
 
    equipment: any[] = [];
@@ -30,7 +37,10 @@ export class UserdashboardViewComponent implements OnInit {
         }
       )
     }
-
+  
+    addDashboardForm(isValid: any): void{
+      
+    }
 
 }
 

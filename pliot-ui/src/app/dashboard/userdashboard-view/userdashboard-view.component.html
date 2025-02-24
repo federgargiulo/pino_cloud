@@ -1,29 +1,59 @@
+<form #dashboardForm="ngForm">
 
-
-<div class="container mt-4">
-    <h4 class="mb-3">Seleziona un'opzione</h4>
-  
-    <!-- Loader Bootstrap -->
-    <div *ngIf="isLoading" class="text-center">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Caricamento...</span>
-      </div>
+    <div class="container mt-4">
+        <div class="table-content">
+            <div class="form-group p-10 row">
+                <div class="col-sm-3">
+                    <label for="name" class="p-t-b-10">Name<span class="requiredStar">*</span></label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="name" required maxlength="255"
+                    [(ngModel)]="dashboardForm.name" name="name" #name="ngModel">  
+                </div>
+               
+            </div>
+            
+            <div class="form-group p-10 row">
+                <div class="col-sm-3">
+                        <label for="equipmentId" class="p-t-b-10">Equipment<span class="requiredStar">*</span></label>
+                </div>
+                <!-- Loader Bootstrap -->
+                <div class="col-sm-9">
+                        <div *ngIf="isLoading" class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Caricamento...</span>
+                            </div>
+                        </div>
+                    
+                    <!-- Select con Bootstrap -->
+                        <div *ngIf="!isLoading">
+                            <select class="form-select" [(ngModel)]="selectedEquipment">
+                                <option value="" disabled selected>Seleziona un'opzione</option>
+                                <option *ngFor="let option of equipment" [value]="option.equipmentId">
+                                {{ option.name }}
+                                </option>
+                            </select>
+                        </div>
+                </div>
+            </div>
+            
+            <div class="form-group p-8 row">
+                <div class="col-sm-3">
+                    <label for="name" class="p-t-b-10">Descrizione<span class="requiredStar">*</span></label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="name" required maxlength="255"
+                    [(ngModel)]="dashboardForm.name" name="name" #name="ngModel">  
+                </div>
+            </div>
+       
+        </div>  
+        
+        <div class="table-footer">
+            <button class="btn btn-success" (click)="addDashboardForm(DashboardForm.form.valid)">Submit</button>
+        </div>      
     </div>
-  
-    <!-- Select con Bootstrap -->
-    <div *ngIf="!isLoading">
-      <select class="form-select" [(ngModel)]="selectedEquipment">
-        <option value="" disabled selected>Seleziona un'opzione</option>
-        <option *ngFor="let option of equipment" [value]="option.equipmentId">
-          {{ option.name }}
-        </option>
-      </select>
-    </div>
-  
-    <!-- Valore selezionato -->
-    <div class="mt-3">
-      <p *ngIf="selectedEquipment" class="alert alert-success">
-        Hai selezionato: <strong>{{ selectedEquipment }}</strong>
-      </p>
-    </div>
-  </div>
+        
+   
+   
+</form>
