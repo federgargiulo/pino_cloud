@@ -19,6 +19,7 @@ import { UserdashboardListComponent } from './dashboard/userdashboard-list/userd
 import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userdashboard-view.component';
 import { SearchTenantComponent } from './feature/tenant/search-tenant/search-tenant.component';
 import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.component';
+import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-tenant.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.compo
     UserdashboardViewComponent,
     SearchTenantComponent,
     AddTenantComponent,
+    DetailTenantComponent,
 
 
 
