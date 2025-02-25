@@ -58,7 +58,7 @@ public class TenantController {
     @PatchMapping("/tenants/{id}")
     public ResponseEntity<TenantTO> updateTenant(@PathVariable("id") String id , @RequestBody TenantTO tenant) {
         try {
-            tenant.setId( id );
+            tenant.setTenantId( id );
             tenant = tenantServices.save( tenant );
             return new ResponseEntity<>(tenant, HttpStatus.OK );
         } catch (Exception e) {

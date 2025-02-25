@@ -7,7 +7,7 @@ import java.util.Objects;
 
 
 public class TenantTO extends BaseEntity {
-    private String id;
+    private String tenantId;
 
     private String name;
     private String description;
@@ -16,11 +16,30 @@ public class TenantTO extends BaseEntity {
 
     private Date updateDttm;
 
-    public static TenantTO newrtenant( String tenId , String name, String descr) {
+    private String email;
+
+    private String profile;
+
+    private String country;
+
+    private String state;
+
+    private String zipCode;
+
+    private String address;
+
+
+    public static TenantTO newrtenant( String tenId , String name, String descr, String email, String address, String zipCode, String country,String profile, String state) {
         TenantTO t = new TenantTO();
-        t.setId( tenId );
+        t.setTenantId( tenId );
         t.setName( name );
         t.setDescription( descr );
+        t.setEmail(email);
+        t.setAddress(address);
+        t.setZipCode(zipCode);
+        t.setCountry(country);
+        t.setProfile(profile);
+        t.setState(state);
         return t;
     }
 
@@ -33,12 +52,12 @@ public class TenantTO extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TenantTO tenantTO = (TenantTO) o;
-        return Objects.equals(id, tenantTO.id);
+        return Objects.equals(tenantId, tenantTO.tenantId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(tenantId);
     }
 
     public void setName(String name) {
@@ -52,12 +71,13 @@ public class TenantTO extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getId() {
-        return id;
+
+    public String getTenantId() {
+        return tenantId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -78,5 +98,53 @@ public class TenantTO extends BaseEntity {
     @Override
     public void setCreatedDttm(Date createdDttm) {
         this.createdDttm = createdDttm;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

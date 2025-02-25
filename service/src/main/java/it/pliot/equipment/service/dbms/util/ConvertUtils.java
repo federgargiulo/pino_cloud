@@ -20,7 +20,7 @@ public class ConvertUtils {
         if ( tenantTO == null )
             return null;
         Tenant tenant  = new Tenant();
-        tenant.setId(  tenantTO.getId() );
+        tenant.setId(  tenantTO.getTenantId() );
         tenant.setName( tenantTO.getName() );
         tenant.setVersion( tenantTO.getVersion() );
         tenant.setCreatedDttm( tenantTO.getCreatedDttm() );
@@ -35,7 +35,7 @@ public class ConvertUtils {
         if ( tenant == null )
             return null;
         TenantTO tenantTO  = new TenantTO();
-        tenantTO.setId(  tenant.getId() );
+        tenantTO.setTenantId(  tenant.getId() );
         tenantTO.setName( tenant.getName() );
         tenantTO.setVersion( tenant.getVersion() );
         tenantTO.setCreatedDttm( tenant.getCreatedDttm() );

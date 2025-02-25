@@ -15,7 +15,7 @@ export class AddEquipmentComponent implements OnInit {
   @ViewChild("equipmentForm")
   EquipmentForm!: NgForm;
 
-  
+
 
   isSubmitted: boolean = false;
   constructor(private router: Router, private httpProvider: EquipmentServices ) { }
@@ -30,7 +30,7 @@ export class AddEquipmentComponent implements OnInit {
           if (data != null && data.body != null) {
             var resultData = data.body;
             if (resultData != null && resultData.isSuccess) {
-              
+
               setTimeout(() => {
                 this.router.navigate(['/']);
               }, 500);
@@ -39,7 +39,7 @@ export class AddEquipmentComponent implements OnInit {
         }
       },
         async error => {
-          
+
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 500);

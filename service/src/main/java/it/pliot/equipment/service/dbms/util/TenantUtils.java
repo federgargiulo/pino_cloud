@@ -17,11 +17,17 @@ public class TenantUtils extends BaseConvertUtil<Tenant, TenantTO>{
         if ( in==null ) return null;
         Tenant out = new Tenant();
         out.setDescription( in.getDescription() );
-        out.setId(in.getId());
+        out.setId(in.getTenantId());
         out.setName( in.getName());
         out.setCreatedDttm( in.getUpdateDttm() );
         out.setUpdateDttm( in.getUpdateDttm() );
         out.setVersion( in.getVersion() );
+        out.setEmail(in.getEmail());
+        out.setAddress(in.getAddress());
+        out.setCountry(in.getCountry());
+        out.setState(in.getState());
+        out.setProfile(in.getProfile());
+        out.setZipCode(in.getZipCode());
         return out;
     }
 
@@ -30,11 +36,17 @@ public class TenantUtils extends BaseConvertUtil<Tenant, TenantTO>{
         if ( in==null ) return null;
         TenantTO out = new TenantTO();
         out.setDescription( in.getDescription() );
-        out.setId(in.getId());
+        out.setTenantId(in.getId());
         out.setName( in.getName());
         out.setCreatedDttm( in.getUpdateDttm() );
         out.setUpdateDttm( in.getUpdateDttm() );
         out.setVersion( in.getVersion() );
+        out.setEmail(in.getEmail());
+        out.setAddress(in.getAddress());
+        out.setCountry(in.getCountry());
+        out.setState(in.getState());
+        out.setProfile(in.getProfile());
+        out.setZipCode(in.getZipCode());
         return out;
 
     }

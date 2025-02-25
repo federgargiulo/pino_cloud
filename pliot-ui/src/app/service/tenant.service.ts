@@ -19,7 +19,14 @@ export interface Tenant { // Anche questa deve essere esportata
   name: string,
   description: string,
   updateDttm: string,
-  createdDttm: string
+  createdDttm: string,
+  email: string,
+  profile: string,
+  country: string,
+  state: string,
+  zipCode: string,
+  address: string
+
 }
 
 export interface TenantDetail { // Anche questa deve essere esportata
@@ -28,6 +35,12 @@ export interface TenantDetail { // Anche questa deve essere esportata
   description: string;
   createdDttm: string;
   updateDttm: string;
+  email: string;
+    profile: string;
+    country: string;
+    state: string;
+    zipCode: string;
+    address: string;
 }
 
 @Injectable({
