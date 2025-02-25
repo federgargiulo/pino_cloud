@@ -46,21 +46,21 @@ export class SearchTenantComponent {
     }
 
     // **Eliminare un Tenant**
-       deleteTenant(id: string): void {
-         if (!confirm("Sei sicuro di voler eliminare questo Tenant?")) {
-           return;
-         }
+       deleteTenant(id: string, i:number): void {
+                if (!confirm("Sei sicuro di voler eliminare questo Tenant?")) {
+                  return;
+                }
 
-         this.tenantServices.deleteTenantById(id).subscribe({
-           next: () => {
-             console.log(`Tenant con ID ${id} eliminato con successo!`);
+                this.tenantServices.deleteTenantById(id).subscribe({
+                  next: () => {
+                    console.log(`Tenant con ID ${id} eliminato con successo!`);
 
-             this.tenantList = this.tenantList.filter((e: Tenant) => e.tenantId !== id);
-             console.log(`this.tenantList`, this.tenantList);
-           },
-           error: (err) => {
-             console.error("Errore durante l'eliminazione:", err);
-           }
-         });
-       }
+                   this.tenantList.splice(i,1);
+                    console.log(`this.tenantList`, this.tenantList);
+                  },
+                  error: (err) => {
+                    console.error("Errore durante l'eliminazione:", err);
+                  }
+                });
+              }
 }
