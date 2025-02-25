@@ -51,7 +51,7 @@ export class SearchEquipmentComponent implements OnInit  {
 
 
   // **Eliminare un Equipment**
-   deleteEquipment(id: string): void {
+   deleteEquipment(id: string,  i:number): void {
      if (!confirm("Sei sicuro di voler eliminare questo Equipment?")) {
        return;
      }
@@ -60,7 +60,7 @@ export class SearchEquipmentComponent implements OnInit  {
        next: () => {
          console.log(`Equipment con ID ${id} eliminato con successo!`);
 
-         this.equipmentList = this.equipmentList.filter((e: Equipment) => e.equipmentId !== id);
+         this.equipmentList.splice(i,1);
          console.log(`this.equipmentList`, this.equipmentList);
        },
        error: (err) => {
