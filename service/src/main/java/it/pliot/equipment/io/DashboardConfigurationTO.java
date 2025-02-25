@@ -73,7 +73,6 @@ public class DashboardConfigurationTO implements Serializable {
 
     private String configuration;
 
-
     public String getId() {
         return id;
     }

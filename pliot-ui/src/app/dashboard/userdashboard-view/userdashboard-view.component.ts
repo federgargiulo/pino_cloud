@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EquipmentServices } from '../../service/equipment.service';
+import { UserDashboardService } from '../../service/user-dashboard.service';
 import { Router } from '@angular/router';
 import { OnInit ,ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -12,12 +13,14 @@ import { NgForm } from '@angular/forms';
 })
 
 export class UserdashboardViewComponent implements OnInit {
-
-  dashboardForm: DashboardForm = new DashboardForm();
-    @ViewChild("dashboardForm")
-    DashboardForm!: NgForm;
-
-   constructor(private router: Router, private equipmentServices: EquipmentServices ) { }
+ 
+  @ViewChild("dashboardForm")
+  DashboardForm!: NgForm;
+  
+  isSubmitted: boolean = false;
+  constructor(private router: Router, 
+              private equipmentServices: EquipmentServices,
+              private userDashboardService: UserDashboardService ) { }
 
    equipment: any[] = [];
    isLoading: boolean = true;
@@ -38,15 +41,38 @@ export class UserdashboardViewComponent implements OnInit {
       )
     }
   
-    addDashboardForm(isValid: any): void{
+    addDashboard(isValid: any): void{
+      this.isSubmitted = true;
+      if (isValid) {
+        console.info( " addEquipmentForm " + this.DashboardForm.name )
+        this.userDashboardService.addUserDashboard( 
+               { 
+                name:  this.DashboardForm.name,
+                              
+                } ).subscribe(async data => {
+          if (data != null && data.body != null) {
+            if (data != null && data.body != null) {
+              var resultData = data.body;
+              if (resultData != null && resultData.isSuccess) {
+                
+                setTimeout(() => {
+                  this.router.navigate(['/']);
+                }, 500);
+              }
+            }
+          }
+        },
+          async error => {
+            
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 500);
+          });
+      }
+
       
     }
 
 }
 
-
-export class DashboardForm {
-  equipmentId: string="";
-  name: string="";
-  description: string="";
-}
+ 

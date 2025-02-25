@@ -9,6 +9,7 @@ import it.pliot.equipment.repository.MeasureRepository;
 import it.pliot.equipment.security.UserContext;
 import it.pliot.equipment.service.business.DashboardConfigurationService;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
+import it.pliot.equipment.service.dbms.util.DashboardConfigurationUtils;
 import it.pliot.equipment.service.dbms.util.MeasureUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class DashboardConfigurationServiceImpl
 
     @Override
     public BaseConvertUtil getConverter() {
-        return MeasureUtils.instance();
+        return DashboardConfigurationUtils.instance();
     }
 
 

@@ -1,1 +1,39 @@
 <p>userdashboard-list works!</p>
+
+
+<div class="table-container">
+    <table>
+        <thead>
+          <tr class="center-align">
+            <th>Id</th>
+            <th>Name</th>
+         
+            <th colspan="2">Actions</th>
+          </tr>
+        </thead>
+    <tbody>
+        <tr *ngFor="let d of dashBoardsList; let i = index"  class="center-align">
+          <td>{{d.id}}</td>
+          <td>{{d.name}}</td>
+        
+          <!--<td>
+            <a  routerLink="/detail-xxx/{{equipment.equipmentId}}" class="btn">Detail</a>
+          </td> -->
+          <td>
+            <a [routerLink]="['/detail-equipment', d.id]" class="button">Detail</a>
+          </td>
+          <td>
+    open
+          </td>
+    
+          <td>
+           <!-- <a href="#" href="['/ViewEmployee/', equipment.equipmentId]" class="btn"><i class='fas fa-eye view'></i></a>
+            <a href="#" href="['/EditEmployee/', equipment.equipmentId]" class="btn"><i class="fa fa-edit edit"></i></a> -->
+           </td>
+        </tr>
+        <tr>
+          <td *ngIf="dashBoardsList.length == 0" colspan="6">No Dashboards Found</td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
