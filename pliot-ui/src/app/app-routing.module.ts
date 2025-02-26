@@ -11,6 +11,7 @@ import { UserdashboardListComponent } from './dashboard/userdashboard-list/userd
 import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userdashboard-view.component';
 import { SearchTenantComponent } from './feature/tenant/search-tenant/search-tenant.component';
 import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.component';
+import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-tenant.component';
 
 const routes: Routes = [
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'dash-measure', component: DashMeasureComponent, title: 'View Dashboards' },
   { path: 'search-tenant', component: SearchTenantComponent, title: 'Search Tenant' },
   { path: 'add-tenant', component: AddTenantComponent, title: 'Add Tenant' },
+  { path: 'detail-tenant/:id', component: DetailTenantComponent, title: 'Detail Tenant'},
 
 ];
 

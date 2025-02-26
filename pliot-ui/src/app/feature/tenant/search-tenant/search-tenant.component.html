@@ -31,7 +31,8 @@
       <td>{{tenant.updateDttm}}</td>
 
       <td>
-        <!--      <a [routerLink]="['/detail-tenant', tenant.id]" class="button">Detail</a> -->
+        <!--<button (click)="detailTenant(tenant.id, i)"> Detail</button> -->
+        <button [routerLink]="['/detail-tenant', tenant.id]">Details</button>
       </td>
       <td>
 

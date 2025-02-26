@@ -22,7 +22,9 @@
         <a  routerLink="/detail-xxx/{{equipment.equipmentId}}" class="btn">Detail</a>
       </td> -->
       <td>
-        <a [routerLink]="['/detail-equipment', equipment.id]" class="button">Detail</a>
+      <!--  <a [routerLink]="['/detail-equipment', equipment.id]" class="button">Detail</a> -->
+        <button [routerLink]="['/detail-equipment', equipment.id]">Details</button>
+
       </td>
       <td>
 
