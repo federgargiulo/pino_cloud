@@ -24,7 +24,7 @@ export class UserdashboardViewComponent implements OnInit {
 
    equipment: any[] = [];
    isLoading: boolean = true;
-   selectedEquipment : string ="";
+   signalId : string ="";
 
    ngOnInit(): void { 
       this.equipmentServices.getAllEquipment4CurrentTenant().subscribe(
@@ -43,12 +43,14 @@ export class UserdashboardViewComponent implements OnInit {
   
     addDashboard(isValid: any): void{
       this.isSubmitted = true;
+      
       if (isValid) {
-        console.info( " addEquipmentForm " + this.DashboardForm.name )
+        console.info( " addEquipmentForm " + this.DashboardForm.name );
+        var conf  = "[  signalId: " + this.signalId + " ] ";
         this.userDashboardService.addUserDashboard( 
-               { 
-                name:  this.DashboardForm.name,
-                              
+                { 
+                descr:  this.DashboardForm.name,
+                configuration: conf ,            
                 } ).subscribe(async data => {
           if (data != null && data.body != null) {
             if (data != null && data.body != null) {

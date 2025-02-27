@@ -27,7 +27,7 @@
                     
                     <!-- Select con Bootstrap -->
                         <div *ngIf="!isLoading">
-                            <select class="form-select" [(ngModel)]="selectedEquipment">
+                            <select class="form-select" [(ngModel)]="signalId">
                                 <option value="" disabled selected>Seleziona un'opzione</option>
                                 <option *ngFor="let option of equipment" [value]="option.equipmentId">
                                 {{ option.name }}

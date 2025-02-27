@@ -33,8 +33,9 @@ public class DashboardConfigurationController {
     }
 
     @PostMapping("/userdashboards")
-    public DashboardConfigurationTO userdashboards( DashboardConfigurationTO toAdd ){
+    public DashboardConfigurationTO userdashboards(@RequestBody DashboardConfigurationTO toAdd ){
         toAdd.setUserId( UserContext.currentUser().getUserId() );
+        log.info( " Created new Dashboard " + toAdd );
         return dashboardConfServices.save( toAdd );
     }
 }

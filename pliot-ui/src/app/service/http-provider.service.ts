@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { HttpHeaders, HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, provideHttpClient, HttpParams } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy , Location } from '@angular/common';
  
  
@@ -40,20 +40,25 @@ export class HttpProviderService {
   
   // Get call method
   // Param 1 : url
-  get(url: string): Observable<any> {
-    
-    const httpOptions = {
+  get(url: string , paramsObj?: { [key: string]: string } ): Observable<any> {
+
+    let httpParams = new HttpParams();
+    httpParams.append("1","1");
+    if ( paramsObj ){    
+      Object.keys(paramsObj).forEach((key) => {
+        httpParams = httpParams.append(key, paramsObj[key]);
+      });
+    }
+    const headers = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Cache-Control' : 'no-cache',
         'Pragma' : 'no-cache'
       }),
-      observe: "response" as 'body'
+      observe: "response" as 'body',
+      params: httpParams
     };
-    return this.httpClient.get(
-      this.BASE_URL + url,
-      httpOptions
-    )
+    return this.httpClient.get( this.BASE_URL + url,   headers   )
     .pipe(
         map((response: any) => this.ReturnResponseData(response)),
         catchError(this.handleError)

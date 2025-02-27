@@ -20,6 +20,8 @@ import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userd
 import { SearchTenantComponent } from './feature/tenant/search-tenant/search-tenant.component';
 import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.component';
 import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-tenant.component';
+import { DatePipe } from '@angular/common';
+
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-ten
     SearchTenantComponent,
     AddTenantComponent,
     DetailTenantComponent,
+ 
 
 
 
@@ -50,7 +53,7 @@ import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-ten
 
   ],
   providers: [
-    provideClientHydration(withEventReplay()), provideHttpClient()
+    provideClientHydration(withEventReplay()), provideHttpClient() ,DatePipe
 
   ],
   bootstrap: [AppComponent]
