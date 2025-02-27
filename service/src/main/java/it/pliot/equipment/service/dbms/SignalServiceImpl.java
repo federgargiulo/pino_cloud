@@ -2,6 +2,7 @@ package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.io.SignalTO;
 import it.pliot.equipment.model.Signal;
+import it.pliot.equipment.repository.PliotJpaRepository;
 import it.pliot.equipment.repository.SignalRepository;
 import it.pliot.equipment.service.business.SignalServices;
 import it.pliot.equipment.service.business.errors.ServiceExceptions;
@@ -18,13 +19,13 @@ import java.util.UUID;
 
 @Component
 @Transactional
-public class SignalServiceImpl extends BaseServiceImpl<SignalTO,String> implements SignalServices {
+public class SignalServiceImpl extends BaseServiceImpl<SignalTO, Signal, String> implements SignalServices {
 
     @Autowired
     private SignalRepository repo;
 
     @Override
-    public JpaRepository getRepo() {
+    public PliotJpaRepository<Signal, String> getRepo() {
         return repo;
     }
 

@@ -3,11 +3,11 @@ package it.pliot.equipment.service.dbms.util;
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.model.Equipment;
 
-public class EquipmentUtls extends BaseConvertUtil<Equipment, EquipmentTO>{
+public class EquipmentUtils extends BaseConvertUtil<Equipment, EquipmentTO>{
 
-    private static EquipmentUtls INSTANCE = new EquipmentUtls();
+    private static EquipmentUtils INSTANCE = new EquipmentUtils();
 
-    public static EquipmentUtls instance(){
+    public static EquipmentUtils instance(){
         return INSTANCE;
       }
 

@@ -6,6 +6,7 @@ import it.pliot.equipment.model.DashboardConfiguration;
 import it.pliot.equipment.model.Signal;
 import it.pliot.equipment.repository.DashboardConfigurationRepository;
 import it.pliot.equipment.repository.MeasureRepository;
+import it.pliot.equipment.repository.PliotJpaRepository;
 import it.pliot.equipment.security.UserContext;
 import it.pliot.equipment.service.business.DashboardConfigurationService;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
@@ -22,7 +23,7 @@ import java.util.List;
 @Component
 @Transactional
 public class DashboardConfigurationServiceImpl
-        extends BaseServiceImpl<DashboardConfigurationTO,String>
+        extends BaseServiceImpl<DashboardConfigurationTO, DashboardConfiguration , String>
             implements DashboardConfigurationService {
 
 
@@ -30,7 +31,7 @@ public class DashboardConfigurationServiceImpl
     private DashboardConfigurationRepository repo;
 
     @Override
-    public JpaRepository getRepo() {
+    public PliotJpaRepository<DashboardConfiguration, String> getRepo() {
         return repo;
     }
 

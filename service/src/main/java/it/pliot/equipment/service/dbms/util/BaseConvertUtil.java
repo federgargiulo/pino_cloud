@@ -1,5 +1,8 @@
 package it.pliot.equipment.service.dbms.util;
 
+import it.pliot.equipment.io.PagedResultTO;
+import org.springframework.data.domain.Page;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,5 +32,17 @@ public abstract class BaseConvertUtil<K,IO> {
         return ldaya;
     }
 
+    public PagedResultTO<IO> convertPage(Page<K> page ){
+        PagedResultTO<IO> rsto = new PagedResultTO<IO>();
+        page.forEach( x -> {
+            IO e = data2io( x );
+            rsto.addItem( e );
+        });
+        if ( page.hasNext() )
+            rsto.setNextPage( String.valueOf( page.getNumber() + 1 ) );
+        if (! page.isFirst() )
+            rsto.setPrevPage( String.valueOf( page.getNumber() - 1 ));
 
+        return rsto;
+    }
 }
