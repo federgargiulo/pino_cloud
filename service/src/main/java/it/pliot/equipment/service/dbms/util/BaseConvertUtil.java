@@ -34,7 +34,7 @@ public abstract class BaseConvertUtil<K,IO> {
 
     public PagedResultTO<IO> convertPage(Page<K> page ){
         PagedResultTO<IO> rsto = new PagedResultTO<IO>();
-        page.forEach( x -> {
+        page.get().forEach(x -> {
             IO e = data2io( x );
             rsto.addItem( e );
         });

@@ -6,6 +6,7 @@ import it.pliot.equipment.repository.PliotJpaRepository;
 import it.pliot.equipment.service.business.BaseServiceInterface;
 import it.pliot.equipment.service.business.errors.ServiceExceptions;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
+@Transactional
 public abstract class BaseServiceImpl<T,E,K> implements BaseServiceInterface<T,K> {
 
     enum DBOPERATION { CREATE , UPDATE }
