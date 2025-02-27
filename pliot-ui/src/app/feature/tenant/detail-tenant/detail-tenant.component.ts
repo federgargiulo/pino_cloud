@@ -68,6 +68,7 @@ export class DetailTenantComponent implements OnInit {
 
   // **Aggiornare Nome e Stato**
     updateTenant(): void {
+    console.error("tenantId:", this.tenantId);
       if (!this.tenantId) {
         console.error("Errore: ID tenant mancante!");
         return;

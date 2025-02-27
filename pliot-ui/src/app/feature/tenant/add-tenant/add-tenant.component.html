@@ -1,7 +1,7 @@
 <h2>Tenant Detail</h2>
 
 
-<form [formGroup]="tenantForm" (ngSubmit)="onSubmit()">
+<form #equipmentForm="ngForm" (ngSubmit)="onSubmit()">
   <!-- ID (non modificabile) -->
   <tr><td>
   <div class="form-group">

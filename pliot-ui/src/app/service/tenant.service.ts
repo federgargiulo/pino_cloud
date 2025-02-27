@@ -70,7 +70,7 @@ export interface TenantDetail { // Anche questa deve essere esportata
   }
 
   public updateTenant( idobject:any ,model: any): Observable<any> {
-    return this.webApiService.put( httpLink.saveTenant + '/' + idobject , model );
+    return this.webApiService.patch( httpLink.saveTenant + '/' + idobject , model );
   }
 
   public getTenantById(id: string): Observable<any> {
