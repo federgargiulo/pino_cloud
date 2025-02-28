@@ -84,4 +84,5 @@ public abstract class BaseServiceImpl<T,E,K> implements BaseServiceInterface<T,K
 
     }
 
+
 }

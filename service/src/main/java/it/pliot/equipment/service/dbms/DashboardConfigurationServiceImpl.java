@@ -19,6 +19,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -50,4 +51,14 @@ public class DashboardConfigurationServiceImpl
         return getConverter().converListData2IO( configurations );
     }
 
+    public DashboardConfigurationTO update( DashboardConfigurationTO io ){
+        Optional<DashboardConfiguration> op = getRepo().findById( io.getId() );
+        if (op.isEmpty())
+            throw  new RuntimeException( " not found entity DashboardConfiguration " + io.getId() );
+        DashboardConfiguration entity = op.get();
+        entity.setTitle( io.getTitle() );
+        entity.setDescr( io.getDescr() );
+        entity.setConfiguration( io.getConfiguration() );
+        return (DashboardConfigurationTO) getConverter().data2io( ( DashboardConfiguration ) getRepo().save( entity ) );
+    }
 }

@@ -19,6 +19,8 @@ public class DashboardConfigurationUtils extends BaseConvertUtil<DashboardConfig
         if ( in == null )return null;
         DashboardConfiguration configuration = new DashboardConfiguration();
         configuration.setConfiguration( in.getConfiguration() );
+        configuration.setDescr( in.getDescr() );
+        configuration.setTitle( in.getTitle() );
         configuration.setUserId( in.getUserId() );
         configuration.setId( in.getId() );
         return configuration;
@@ -29,6 +31,8 @@ public class DashboardConfigurationUtils extends BaseConvertUtil<DashboardConfig
         if ( in == null )return null;
         DashboardConfigurationTO configuration = new DashboardConfigurationTO();
         configuration.setConfiguration( in.getConfiguration() );
+        configuration.setDescr( in.getDescr() );
+        configuration.setTitle( in.getTitle() );
         configuration.setUserId( in.getUserId() );
         configuration.setId( in.getId() );
         return configuration;

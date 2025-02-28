@@ -3,7 +3,7 @@ import { EquipmentServices } from '../../service/equipment.service';
 import { UserDashboardService } from '../../service/user-dashboard.service';
 import { Router,  ActivatedRoute  } from '@angular/router';
 import { OnInit ,ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-userdashboard-view',
@@ -13,33 +13,45 @@ import { NgForm } from '@angular/forms';
 })
 
 export class UserdashboardViewComponent implements OnInit {
-
-  @ViewChild("dashboardForm")
-  DashboardForm!: NgForm;
+  
+  dashBoardForm : FormGroup;
+  successMessage: string = '';
 
   isSubmitted: boolean = false;
   constructor(private router: Router,
               private route: ActivatedRoute,
+              private fb: FormBuilder,
               private equipmentServices: EquipmentServices,
-              private userDashboardService: UserDashboardService ) { }
+              private userDashboardService: UserDashboardService ) { 
+                
+                this.dashBoardForm = this.fb.group({
+                  id : [''],
+                  title: ['', Validators.required], // Aggiunto title
+                  descr: ['', Validators.required],
+                  configuration: ['']   // Aggiunto desc
+                });
 
-   equipment: any[] = [];
-   isLoading: boolean = true;
-   signalId : string ="";
+  }
+  isPersisted = false;
+  equipment: any[] = [];
+  isLoading: boolean = true;
+  signalId : string ="";
 
-   ngOnInit(): void {
+   ngOnInit()  {
 
        this.route.paramMap.subscribe(params => {
-            var dashId = params.get('id') || ''; // Assicura che non sia null
-            console.log("Dashboard ID ricevuto:",  dashId );
-            alert( dashId );
-            alert( " dashid " + dashId );
-            this.userDashboardService.getUserDashboardById( dashId ).subscribe(
+            var dashId = params.get('id') || '';
+            // Assicura che non sia null
+            console.log("Dashboard ID ... ricevuto:",  dashId );
+            
+            if ( dashId ! ){
+              this.isPersisted = true;
+              this.userDashboardService.getUserDashboardById( dashId ).subscribe(
                 {
 
                   next: (data) => {
-                    alert( data );
-
+                    this.setFormValues( data.body );
+                    this.isPersisted = true;
                   },
                   error: (err) => {
                     console.error('Errore nel caricamento del dettaglio della dashboard', err);
@@ -47,8 +59,10 @@ export class UserdashboardViewComponent implements OnInit {
                   }
                 }
               )
+            }
+           
 
-            })
+          })
 
       this.equipmentServices.getAllEquipment4CurrentTenant().subscribe(
         {
@@ -64,28 +78,29 @@ export class UserdashboardViewComponent implements OnInit {
       )
     }
 
-    addDashboard(isValid: any): void{
-      this.isSubmitted = true;
+    setFormValues( resultData : any ){
+      this.dashBoardForm.setValue( { id : resultData.id ,
+        title: resultData.title, // Aggiunto title
+        descr: resultData.title,
+        configuration: resultData.configuration } ) ;
+    }
 
-      if (isValid) {
-        console.info( " addEquipmentForm " + this.DashboardForm.name );
+    onSubmit() {
+    
+      if (this.dashBoardForm.valid) {
+        console.info( " addEquipmentForm " + this.dashBoardForm );
         var conf  = "[  signalId: " + this.signalId + " ] ";
-        this.userDashboardService.addUserDashboard(
-                {
-                descr:  this.DashboardForm.name,
-                configuration: conf ,
-                } ).subscribe(async data => {
-          if (data != null && data.body != null) {
-            if (data != null && data.body != null) {
-              var resultData = data.body;
-              if (resultData != null && resultData.isSuccess) {
-
-                setTimeout(() => {
-                  this.router.navigate(['/']);
-                }, 500);
-              }
+        this.userDashboardService.addUserDashboard( this.dashBoardForm.value ).subscribe(async data => {
+              if (data != null && data.body != null) {
+                var resultData = data.body;
+                this.setFormValues( resultData );
+                this.isPersisted = true;
+                if (resultData != null && resultData.isSuccess) {
+                  this.successMessage = 'Dashboard creata con successo!';
+                
+                }
+            
             }
-          }
         },
           async error => {
 

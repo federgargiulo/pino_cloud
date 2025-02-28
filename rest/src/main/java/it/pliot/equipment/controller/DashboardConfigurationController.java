@@ -8,6 +8,7 @@ import it.pliot.equipment.service.business.DashboardConfigurationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +35,24 @@ public class DashboardConfigurationController {
 
     @PostMapping("/userdashboards")
     public DashboardConfigurationTO userdashboards(@RequestBody DashboardConfigurationTO toAdd ){
+        toAdd.setId( null );
         toAdd.setUserId( UserContext.currentUser().getUserId() );
         log.info( " Created new Dashboard " + toAdd );
         return dashboardConfServices.save( toAdd );
+    }
+
+    @PutMapping("/userdashboards/{id}")
+    public DashboardConfigurationTO updateDashboard(@PathVariable("id") String id ,
+                                                    @RequestBody DashboardConfigurationTO toAdd ){
+        toAdd.setId( id );
+        toAdd.setUserId( UserContext.currentUser().getUserId() );
+        log.info( " Update Dashboard " + toAdd );
+        return dashboardConfServices.update( toAdd );
+    }
+
+    @DeleteMapping("/userdashboards/{id}")
+    public void deleteById(@PathVariable("id") String id ){
+        log.info( " Id to delete " + id);
+        dashboardConfServices.delete( id );
     }
 }

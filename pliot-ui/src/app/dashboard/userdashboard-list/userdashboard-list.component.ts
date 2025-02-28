@@ -36,5 +36,23 @@ export class UserdashboardListComponent implements OnInit {
       });
    }
 
+   deleteDasboard( identifier:String, event: Event ){
+      event.preventDefault(); 
+      alert( "delete " + identifier );
+      this.userDashboardService.deleteUserDashboard( identifier ).subscribe(
+        {
+          next: (data) => {
+          
+            this.dashBoardsList = this.dashBoardsList.filter( item => item.id !==  identifier );
+          },
+          error: (err) => {
+            console.error('Errore nel caricamento dei dati', err);
+            this.isLoading = false;
+          }
+        });
+        return false;
+
+   }
+
 
 }

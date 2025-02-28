@@ -43,4 +43,9 @@ export interface UserDashboardDetail { // Anche questa deve essere esportata
     return this.webApiService.get(httpLink.baseDashboard );
   }
 
+  public deleteUserDashboard(model: any): Observable<any> {
+    console.info( "Service is calling " + httpLink.baseDashboard + " With data " + model )
+    return this.webApiService.delete( httpLink.baseDashboard+"/"+ model );
+  }
+
 }
