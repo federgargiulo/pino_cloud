@@ -85,32 +85,56 @@ export class UserdashboardViewComponent implements OnInit {
         configuration: resultData.configuration } ) ;
     }
 
+    manageSuccessOnSaveDashboard( data:any ){
+      if (data != null && data.body != null) {
+        var resultData = data.body;
+        this.setFormValues( resultData );
+        this.isPersisted = true;
+        if (resultData != null && resultData.isSuccess) {
+          this.successMessage = 'Dashboard creata con successo!';
+        
+        }
+    
+      }
+    }
+
+    manageErrorOnSaveDashboard( error:any ){
+      setTimeout(() => {
+        this.router.navigate(['/']);
+      }, 500);
+    }
+    manageSave( ){
+        this.userDashboardService.addUserDashboard( this.dashBoardForm.value ).subscribe(async data => {
+        this.manageSuccessOnSaveDashboard( data )
+      },
+        async error => {
+          this.manageErrorOnSaveDashboard( error )  
+      });
+    }
+    manageUpdate(){
+      alert( this.dashBoardForm.value.configuration )
+      this.userDashboardService.updateUserDashboard( this.dashBoardForm.value ).subscribe(async data => {
+        this.manageSuccessOnSaveDashboard( data )
+      },
+        async error => {
+          this.manageErrorOnSaveDashboard( error )  
+      });
+    }
+   
+
     onSubmit() {
     
       if (this.dashBoardForm.valid) {
-        console.info( " addEquipmentForm " + this.dashBoardForm );
-        var conf  = "[  signalId: " + this.signalId + " ] ";
-        this.userDashboardService.addUserDashboard( this.dashBoardForm.value ).subscribe(async data => {
-              if (data != null && data.body != null) {
-                var resultData = data.body;
-                this.setFormValues( resultData );
-                this.isPersisted = true;
-                if (resultData != null && resultData.isSuccess) {
-                  this.successMessage = 'Dashboard creata con successo!';
-                
-                }
-            
-            }
-        },
-          async error => {
-
-            setTimeout(() => {
-              this.router.navigate(['/']);
-            }, 500);
-          });
+        if ( this.dashBoardForm.value.id ! ) 
+         this.manageSave();
+        else
+          this.manageUpdate();
       }
+    }
 
-
+    updateJson(json: string) {
+      
+      this.dashBoardForm.controls['configuration'].setValue(json);
     }
 
 }

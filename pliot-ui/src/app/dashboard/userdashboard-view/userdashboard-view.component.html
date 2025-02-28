@@ -17,16 +17,15 @@
         </div>
     </div>
     <input type="hidden" formControlName="id">
-
+    <input type="hidden" formControlName="configuration">
+     
     
-    <div *ngIf="this.isPersisted">
-         <h3>Gestione nuova struttura</h3>
-            <p>ID oggetto salvato: {{ dashBoardForm.controls['id'].value }}</p>
+    <div *ngIf="this.isPersisted"> 
+            <app-dashconf-manager [initialSignals]="dashBoardForm.controls['configuration'].value" (jsonChanged)="updateJson($event)"></app-dashconf-manager>
     </div>
 
     <button type="submit" [disabled]="dashBoardForm.invalid">Salva</button>
 
     <p *ngIf="successMessage">{{ successMessage }}</p>
   </form>
-
- 
+   

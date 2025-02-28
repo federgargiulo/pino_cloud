@@ -21,6 +21,7 @@ import { SearchTenantComponent } from './feature/tenant/search-tenant/search-ten
 import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.component';
 import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-tenant.component';
 import { DatePipe } from '@angular/common';
+import { DashconfManagerComponent } from './dashboard/common/dashconf-manager/dashconf-manager.component';
 
 
 
@@ -39,6 +40,7 @@ import { DatePipe } from '@angular/common';
     SearchTenantComponent,
     AddTenantComponent,
     DetailTenantComponent,
+    DashconfManagerComponent,
  
 
 
