@@ -6,10 +6,11 @@ import java.util.Date;
 
 public class SignalTO implements Serializable {
 
-    public static SignalTO newEmptyInstance(String equipmentId , String name ){
+    public static SignalTO newEmptyInstance(String equipmentId , String signalId, String name ){
         SignalTO io = new SignalTO();
         io.setEquipmentId( equipmentId );
         io.setName( name );
+        io.setSignalId( signalId );
         return io;
     }
 

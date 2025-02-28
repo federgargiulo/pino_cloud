@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'search-equipment', component: SearchEquipmentComponent, title: 'Search Equipment' },
   { path: 'detail-equipment/:id', component: DetailEquipmentComponent, title: 'Detail Equipment'},
   { path: 'userdashboard-list', component: UserdashboardListComponent, title: 'Dashboards List'},
-  { path: 'userdashboard-detail/:id', component: UserdashboardListComponent, title: ' Dashboards Detail' , data: { renderMode: 'ssr' } },
+  { path: 'userdashboard-detail/:id', component: UserdashboardViewComponent, title: ' Dashboards Detail' , data: { renderMode: 'ssr' } },
   { path: 'userdashboard-new', component: UserdashboardViewComponent, title: 'new Dashboards'},
   { path: 'dash-measure/:id', component: DashMeasureComponent, title: 'View Dashboards', data: { renderMode: 'ssr' } },
   { path: 'search-tenant', component: SearchTenantComponent, title: 'Search Tenant' },

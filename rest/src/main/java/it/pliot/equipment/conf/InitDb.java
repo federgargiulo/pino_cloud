@@ -44,18 +44,24 @@ public class InitDb {
 
         EquipmentTO eq = equipmentService.create( EquipmentTO.newEquipment( "Pump" , Const.DEV_TENANT_ID ) );
         log.info("Preloading  EquipmentIO" + eq );
-        SignalTO s1 = SignalTO.newEmptyInstance( eq.getEquipmentId() , Const.DEV_TENANT_ID);
-        s1 = signalServices.create( s1 );
-        log.info("Preloading  Sensor" + s1 );
+        createSignal( eq , "test" , "PRESSIONE_INTERNA" );
+        createSignal( eq , "test2" , "PRESSIONE_ESTERNA" );
 
-        EquipmentTO eq2 =equipmentService.create( EquipmentTO.newEquipment( "Inverter" , Const.DEV_TENANT_ID ) );
-        SignalTO s2 = SignalTO.newEmptyInstance( eq2.getEquipmentId() , "PRESSIONE_INTERNA");
-        s1 = signalServices.create( s2 );
-        log.info("Preloading  Sensor" + s1 );
 
+        EquipmentTO eq2 = equipmentService.create( EquipmentTO.newEquipment( "Inverter" , Const.DEV_TENANT_ID ) );
+        createSignal( eq2 , "test3" , "TEMPERATURE" );
+        createSignal( eq2 , "test4" , "VOLTAGGIO" );
 
         log.info("Preloading " +  eq2 );
 
     }
+    private void createSignal( EquipmentTO eq2 , String signalId , String sigalDescr  ){
+
+        SignalTO s = SignalTO.newEmptyInstance( eq2.getEquipmentId() , signalId, sigalDescr );
+        s = signalServices.create( SignalTO.newEmptyInstance( eq2.getEquipmentId() , signalId, sigalDescr) );
+        log.info("Preloading  Sensor" + s );
+    }
+
+
 
 }

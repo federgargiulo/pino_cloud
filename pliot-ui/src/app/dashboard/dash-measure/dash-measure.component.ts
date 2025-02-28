@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {Chart , registerables } from 'chart.js'
 import { UserDashboardService } from '../../service/user-dashboard.service';
 import { MeasureService } from '../../service/measure.service';
- 
+
 
 Chart.register( ... registerables )
 @Component({
@@ -14,27 +14,27 @@ Chart.register( ... registerables )
 })
 export class DashMeasureComponent implements OnInit {
 
-  constructor( private route: ActivatedRoute , 
+  constructor( private route: ActivatedRoute ,
      private userDashboardService: UserDashboardService ,
      private measureService : MeasureService ) {
-      
-      }  
-  
 
-  
+      }
+
+
+
 
   public config: any = {
     type: 'bar',
     data: {
       labels: ['12:00', '12:05', '12:10' , '12:15' ],
       datasets: [
-        { 
-        label: 'Temp [C]', 
+        {
+        label: 'Temp [C]',
         data: [ '20' , '23' , '21' , '23'],
         backgroundColor: 'blue'
        },
-       { 
-        label: 'Press [pascal]', 
+       {
+        label: 'Press [pascal]',
         data: [ '200' , '209' , '190' , '200'],
         backgroundColor: 'red'
       }
@@ -58,8 +58,8 @@ export class DashMeasureComponent implements OnInit {
     data: {
       labels: [] as string[],  // Inizializziamo l'array dei label
       datasets: [
-        { 
-          label: 'Temp [C]', 
+        {
+          label: 'Temp [C]',
           data: [] as number[],
           backgroundColor: 'blue'
         }
@@ -68,22 +68,22 @@ export class DashMeasureComponent implements OnInit {
   };
 
 
-  ngOnInit(): void { 
-    
+  ngOnInit(): void {
+
     this.route.paramMap.subscribe(params => {
       this.dashId = params.get('id') || ''; // Assicura che non sia null
       console.log("Equipment ID ricevuto:", this.dashId );
       alert( " dashid " + this.dashId );
       this.userDashboardService.getUserDashboardById( this.dashId ).subscribe(
           {
-            
+
             next: (data) => {
-             
+
               this.loadChartInfo( data.body );
             },
             error: (err) => {
               console.error('Errore nel caricamento del dettaglio della dashboard', err);
-              
+
             }
           }
         )
@@ -91,7 +91,7 @@ export class DashMeasureComponent implements OnInit {
       })
 
 
-    
+
    }
 
    loadChartInfo( data:any ):void{
@@ -99,27 +99,28 @@ export class DashMeasureComponent implements OnInit {
         {
           next: (data) => {
              data.body.results.forEach( ( x: any ) => {
-              
+
              this.dashConfiguration.data.labels.push( x.mesure_dttm );
              this.dashConfiguration.data.datasets[0].data.push( x.val );
-             
-              
+
+
             });
+            this.dashConfiguration.type='';
             this.chart =  new Chart( 'Monitor' , this.dashConfiguration );
-            
-            
+
+
           },
           error: (err) => {
             console.error('Errore nel caricamento del dettaglio della dashboard', err);
-            
+
           }
         }
       )
 
     }
 
-      
 
-   
+
+
 
 }
