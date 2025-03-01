@@ -20,35 +20,7 @@ export class DashMeasureComponent implements OnInit {
 
       }
 
-
-
-
-  public config: any = {
-    type: 'bar',
-    data: {
-      labels: ['12:00', '12:05', '12:10' , '12:15' ],
-      datasets: [
-        {
-        label: 'Temp [C]',
-        data: [ '20' , '23' , '21' , '23'],
-        backgroundColor: 'blue'
-       },
-       {
-        label: 'Press [pascal]',
-        data: [ '200' , '209' , '190' , '200'],
-        backgroundColor: 'red'
-      }
-      ]
-    }
-  ,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    },
-  };
+  
   chart: any;
 
   dashId ='';
@@ -67,20 +39,18 @@ export class DashMeasureComponent implements OnInit {
     }
   };
 
-
+  
   ngOnInit(): void {
 
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe( params => {
       this.dashId = params.get('id') || ''; // Assicura che non sia null
-      console.log("Equipment ID ricevuto:", this.dashId );
-      alert( " dashid " + this.dashId );
-      
-      this.userDashboardService.getUserDashboardById( this.dashId ).subscribe(
-          {
-
-            next: (data) => {
-
-              this.loadChartInfo( data.body );
+      console.log(" Dashboard ID ricevuto:", this.dashId );
+      alert( " Dashboard " + this.dashId );
+      if ( this.dashId !){
+        this.userDashboardService.getUserDashboardById( this.dashId ).subscribe( 
+           { 
+              next: (data) => {
+              this.loadChartsInfo( data.body );
             },
             error: (err) => {
               console.error('Errore nel caricamento del dettaglio della dashboard', err);
@@ -89,16 +59,82 @@ export class DashMeasureComponent implements OnInit {
           }
         )
 
+      }
+
       })
 
 
 
    }
 
-   loadChartInfo( data:any ):void{
-     
 
-      this.measureService.findMeasures( "test" ).subscribe(
+
+   getNewConfiguration( tp: string , ll : string ): any  {
+    return {
+      type: tp ,
+      data: {
+        labels: [] as string[],  // Inizializziamo l'array dei label
+        datasets: [
+          {
+            label: ll,
+            data: [] as number[],
+            backgroundColor: 'blue'
+          }
+        ]
+      }
+    }
+  }
+   
+  loadChartsInfo( data:any  ){
+    var d = JSON.parse( data.configuration );
+     
+    d.signals.forEach( ( x :any , index : any)  => {
+      var newconf = this.getNewConfiguration(x.chartType ,  x.label );
+     
+      this.measureService.findMeasures( x.signalId ).subscribe(  {
+          next: (data) => {          
+              data.body.results.forEach( ( x: any ) => {
+                newconf.data.labels.push( x.mesure_dttm );
+                newconf.data.datasets[0].data.push( x.val );
+              } );
+              this.setDataAndChart( index , newconf );
+             
+          },
+          error: (err) => {
+            console.error('Errore nel caricamento del dettaglio della dashboard', err);
+          }
+      } );
+  
+    } );
+  }
+  
+
+  chartData: any[] = []; // Array che conterrà i dati dei grafici
+  charts: Chart[] = []; //
+
+  setDataAndChart( i : any , confdati:any ){
+    
+    this.chartData[i] = confdati;
+    setTimeout(() => this.renderChart(i), 100); 
+  }
+  renderChart(index: number) {
+    const canvasId = `chart-${index}`;
+    const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
+
+    if (!canvas) {
+      console.error(`Canvas con id ${canvasId} non trovato.`);
+      return;
+    }
+
+    if (this.charts[index]) {
+      this.charts[index].destroy(); // Elimina il vecchio grafico se esiste già
+    }
+
+    this.charts[index] = new Chart(canvas, this.chartData[index]);
+  }
+
+  loadChartInfo( data:any ):void{
+     this.measureService.findMeasures( "test" ).subscribe(
         {
           next: (data) => {
              data.body.results.forEach( ( x: any ) => {

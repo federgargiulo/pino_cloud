@@ -1,6 +1,4 @@
 <p>dash-measure works!</p>
-
-<div class="chart-container">
-
-    <canvas id ='Monitor' > {{ chart }}</canvas>
-</div>
+<div *ngFor="let chart of chartData; let i = index">
+    <canvas [id]="'chart-' + i"></canvas>
+  </div>

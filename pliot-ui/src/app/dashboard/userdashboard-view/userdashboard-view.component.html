@@ -1,5 +1,6 @@
-
-
+<div *ngIf="this.isPersisted"> 
+    <a [routerLink]="['/dash-measure', dashBoardForm.controls['id'].value]" class="button">View</a>
+</div>
 <form [formGroup]="dashBoardForm" (ngSubmit)="onSubmit()">
     <div>
         <label for="title">Titolo:</label>

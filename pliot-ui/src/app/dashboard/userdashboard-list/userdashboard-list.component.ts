@@ -38,7 +38,6 @@ export class UserdashboardListComponent implements OnInit {
 
    deleteDasboard( identifier:String, event: Event ){
       event.preventDefault(); 
-      alert( "delete " + identifier );
       this.userDashboardService.deleteUserDashboard( identifier ).subscribe(
         {
           next: (data) => {
