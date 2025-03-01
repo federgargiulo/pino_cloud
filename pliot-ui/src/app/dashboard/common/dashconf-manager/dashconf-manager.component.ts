@@ -21,10 +21,10 @@ export class DashconfManagerComponent implements OnChanges  {
       signals: this.fb.array([]) // Array di segnali
     });
 
-    this.signalForm.valueChanges.subscribe(() => {
+    /*this.signalForm.valueChanges.subscribe(() => {
       this.emitJson();
     });
-   
+   */
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -47,7 +47,8 @@ export class DashconfManagerComponent implements OnChanges  {
     signalsArray.forEach((signal: any) => {
       this.signals.push(this.fb.group({
         signalId: [signal.signalId, Validators.required],
-        tipo: [signal.tipo, Validators.required]
+        chartType : [signal.chartType, Validators.required],
+        label : [signal.label]
       }));
     });
 
@@ -70,17 +71,23 @@ export class DashconfManagerComponent implements OnChanges  {
   addSignal() {
     const signalGroup = this.fb.group({
       signalId: [null, Validators.required], // ID del segnale
-      tipo: ['', Validators.required]        // Tipo di segnale
+      chartType: ['', Validators.required] ,// Tipo di grafico
+      label : ['']      
     });
 
     this.signals.push(signalGroup);
+   
   }
 
   // Rimuove un segnale dalla lista
   removeSignal(index: number) {
     this.signals.removeAt(index);
+   
   }
 
+  conferma(){
+    this.emitJson();
+  }
   // Mostra il JSON risultante
   submit() {
     console.log('JSON Generato:', JSON.stringify(this.signalForm.value, null, 2));

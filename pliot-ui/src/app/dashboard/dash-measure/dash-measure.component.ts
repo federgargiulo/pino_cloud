@@ -74,6 +74,7 @@ export class DashMeasureComponent implements OnInit {
       this.dashId = params.get('id') || ''; // Assicura che non sia null
       console.log("Equipment ID ricevuto:", this.dashId );
       alert( " dashid " + this.dashId );
+      
       this.userDashboardService.getUserDashboardById( this.dashId ).subscribe(
           {
 
@@ -95,6 +96,8 @@ export class DashMeasureComponent implements OnInit {
    }
 
    loadChartInfo( data:any ):void{
+     
+
       this.measureService.findMeasures( "test" ).subscribe(
         {
           next: (data) => {

@@ -126,9 +126,10 @@ export class UserdashboardViewComponent implements OnInit {
     
       if (this.dashBoardForm.valid) {
         if ( this.dashBoardForm.value.id ! ) 
-         this.manageSave();
-        else
           this.manageUpdate();
+        else
+          this.manageSave();
+          
       }
     }
 

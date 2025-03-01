@@ -79,7 +79,7 @@ export class HttpProviderService {
     };
     return this.httpClient.post(
       this.BASE_URL + url,
-      model,
+      JSON.stringify(model),
       httpOptions)
       .pipe(
         map((response: any) => this.ReturnResponseData(response)),
@@ -97,7 +97,7 @@ export class HttpProviderService {
     };
     return this.httpClient.put(
       this.BASE_URL + url,
-      model,
+      JSON.stringify(model),
       httpOptions)
       .pipe(
         map((response: any) => this.ReturnResponseData(response)),
