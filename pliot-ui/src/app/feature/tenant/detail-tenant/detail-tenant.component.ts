@@ -34,7 +34,7 @@ export class DetailTenantComponent implements OnInit {
        this.loadTenantDetail(this.tenantId);
      });
         this.tenantForm = this.formBuilder.group({
-          tenantId: [''],
+          tenantId: [{ value: '', disabled: true }], // Campo non modificabile
           name:  [''],
           description:  [''],
           updateDttm: [{ value: '', disabled: true }], // Campo non modificabile
