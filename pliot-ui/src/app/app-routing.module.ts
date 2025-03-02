@@ -19,14 +19,14 @@ const routes: Routes = [
   { path: 'help-angular', component: HelpAngularComponent, title: 'Help Angular' },
   { path: 'add-equipment', component: AddEquipmentComponent, title: 'Add Equipment' },
   { path: 'search-equipment', component: SearchEquipmentComponent, title: 'Search Equipment' },
-  { path: 'detail-equipment/:id', component: DetailEquipmentComponent, title: 'Detail Equipment'},
+  { path: 'detail-equipment/:id', component: DetailEquipmentComponent, title: 'Detail Equipment' ,  data: { renderMode: 'ssr' }},
   { path: 'userdashboard-list', component: UserdashboardListComponent, title: 'Dashboards List'},
   { path: 'userdashboard-detail/:id', component: UserdashboardViewComponent, title: ' Dashboards Detail' , data: { renderMode: 'ssr' } },
   { path: 'userdashboard-new', component: UserdashboardViewComponent, title: 'new Dashboards'},
   { path: 'dash-measure/:id', component: DashMeasureComponent, title: 'View Dashboards', data: { renderMode: 'ssr' } },
   { path: 'search-tenant', component: SearchTenantComponent, title: 'Search Tenant' },
   { path: 'add-tenant', component: AddTenantComponent, title: 'Add Tenant' },
-  { path: 'detail-tenant/:id', component: DetailTenantComponent, title: 'Detail Tenant'},
+  { path: 'detail-tenant/:id', component: DetailTenantComponent, title: 'Detail Tenant' , data: { renderMode: 'ssr' } },
 
 ];
 

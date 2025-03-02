@@ -42,7 +42,7 @@ public class MeasureTO implements Serializable {
 
     private String val;
 
-    private Date mesure_dttm;
+    private Date measureDttm;
 
     public String getId() {
         return id;
@@ -68,12 +68,12 @@ public class MeasureTO implements Serializable {
         this.val = val;
     }
 
-    public Date getMesure_dttm() {
-        return mesure_dttm;
+    public Date getMeasureDttm() {
+        return measureDttm;
     }
 
-    public void setMesure_dttm(Date mesure_dttm) {
-        this.mesure_dttm = mesure_dttm;
+    public void setMeasureDttm(Date measureDttm) {
+        this.measureDttm = measureDttm;
     }
 
 

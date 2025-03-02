@@ -1,11 +1,9 @@
 package it.pliot.equipment.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -25,6 +23,28 @@ public class Measure  implements Serializable {
     public void setSrcId(String srcId) {
         this.srcId = srcId;
     }
+
+    @Column(nullable = false)
+    private Integer yearVal;
+
+    @Column(nullable = false)
+    private Integer monthVal;
+
+    @Column(nullable = false)
+    private Integer dayVal;
+
+    @Column(nullable = false)
+    private Integer hourVal;
+
+    @Column(nullable = false)
+    private Integer minuteVal;
+
+    @Column(nullable = false)
+    private Integer secRound10Val;
+
+    @Column(nullable = false)
+    private Integer secRound30Val;
+
 
     private String tenantId;
 
@@ -62,11 +82,10 @@ public class Measure  implements Serializable {
         return Objects.hashCode(id);
     }
 
-    private String signalId;
 
     private String val;
 
-    private Date mesure_dttm;
+    private Date measureDttm;
 
     public String getId() {
         return id;
@@ -76,13 +95,6 @@ public class Measure  implements Serializable {
         this.id = id;
     }
 
-    public String getSignalId() {
-        return signalId;
-    }
-
-    public void setSignalId(String signalId) {
-        this.signalId = signalId;
-    }
 
     public String getVal() {
         return val;
@@ -92,15 +104,85 @@ public class Measure  implements Serializable {
         this.val = val;
     }
 
-    public Date getMesure_dttm() {
-        return mesure_dttm;
+    public Date getMeasureDttm() {
+        return measureDttm;
     }
 
-    public void setMesure_dttm(Date mesure_dttm) {
-        this.mesure_dttm = mesure_dttm;
+    public void setMeasureDttm(Date measureDttm) {
+        this.measureDttm = measureDttm;
     }
 
 
+    public Integer getYearVal() {
+        return yearVal;
+    }
 
+    public void setYearVal(Integer yearVal) {
+        this.yearVal = yearVal;
+    }
 
+    public Integer getMonthVal() {
+        return monthVal;
+    }
+
+    public void setMonthVal(Integer monthVal) {
+        this.monthVal = monthVal;
+    }
+
+    public Integer getDayVal() {
+        return dayVal;
+    }
+
+    public void setDayVal(Integer dayVal) {
+        this.dayVal = dayVal;
+    }
+
+    public Integer getHourVal() {
+        return hourVal;
+    }
+
+    public void setHourVal(Integer hourVal) {
+        this.hourVal = hourVal;
+    }
+
+    public Integer getMinuteVal() {
+        return minuteVal;
+    }
+
+    public void setMinuteVal(Integer minuteVal) {
+        this.minuteVal = minuteVal;
+    }
+
+    public Integer getSecRound10Val() {
+        return secRound10Val;
+    }
+
+    public void setSecRound10Val(Integer secRound10Val) {
+        this.secRound10Val = secRound10Val;
+    }
+
+    public Integer getSecRound30Val() {
+        return secRound30Val;
+    }
+
+    public void setSecRound30Val(Integer secRound30Val) {
+        this.secRound30Val = secRound30Val;
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void computeDerivedFields() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(measureDttm);
+        this.yearVal = cal.get(Calendar.YEAR);
+        this.monthVal = cal.get(Calendar.MONTH) + 1; // Months are 0-based in Calendar
+        this.dayVal = cal.get(Calendar.DAY_OF_MONTH);
+        this.hourVal = cal.get(Calendar.HOUR_OF_DAY);
+        this.minuteVal = cal.get(Calendar.MINUTE);
+        // Round seconds up to 00 or 30
+        int sec = cal.get(Calendar.SECOND);
+        this.secRound10Val = ((sec) / 10) * 10;
+        this.secRound30Val = ((sec) / 30) * 30;
+
+    }
 }
