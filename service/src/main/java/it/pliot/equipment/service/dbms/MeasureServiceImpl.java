@@ -48,8 +48,12 @@ public class MeasureServiceImpl extends BaseServiceImpl<MeasureTO, Measure, Stri
                 .where( MeasureSpecifications.isYoungerThan( from ) )  // Prezzo > valore (AND)
                 .and( MeasureSpecifications.isMeasureOfSignal( idSignal ) );
 
-
-        return findPaged( spec , nextPage );
+        try {
+            return findPaged(spec, nextPage);
+        }catch ( Exception e ){
+            e.getStackTrace();
+            throw  new RuntimeException( " errore in lettura ");
+        }
     }
 
 

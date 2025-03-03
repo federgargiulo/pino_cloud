@@ -12,7 +12,7 @@ public class MeasureSpecifications {
 
     public static Specification<Measure> isYoungerThan( Date instant) {
         return ( Root<Measure> root, CriteriaQuery<?> query, CriteriaBuilder cb) ->
-                cb.greaterThan(root.get( "mesure_dttm"), instant );
+                cb.greaterThan(root.get( "measureDttm"), instant );
     }
 
     public static Specification<Measure> isMeasureOfSignal( String signal) {
