@@ -20,7 +20,7 @@ export class DashMeasureComponent implements OnInit {
 
       }
 
-  
+
   chart: any;
 
   dashId ='';
@@ -39,7 +39,7 @@ export class DashMeasureComponent implements OnInit {
     }
   };
 
-  
+
   ngOnInit(): void {
 
     this.route.paramMap.subscribe( params => {
@@ -47,8 +47,8 @@ export class DashMeasureComponent implements OnInit {
       console.log(" Dashboard ID ricevuto:", this.dashId );
       alert( " Dashboard " + this.dashId );
       if ( this.dashId !){
-        this.userDashboardService.getUserDashboardById( this.dashId ).subscribe( 
-           { 
+        this.userDashboardService.getUserDashboardById( this.dashId ).subscribe(
+           {
               next: (data) => {
               this.loadChartsInfo( data.body );
             },
@@ -84,38 +84,40 @@ export class DashMeasureComponent implements OnInit {
       }
     }
   }
-   
+
   loadChartsInfo( data:any  ){
     var d = JSON.parse( data.configuration );
-     
+
     d.signals.forEach( ( x :any , index : any)  => {
       var newconf = this.getNewConfiguration(x.chartType ,  x.label );
-     
+
       this.measureService.findMeasures( x.signalId ).subscribe(  {
-          next: (data) => {          
+          next: (data) => {
+
               data.body.results.forEach( ( x: any ) => {
-                newconf.data.labels.push( x.mesure_dttm );
+                newconf.data.labels.push( x.measureDttm );
                 newconf.data.datasets[0].data.push( x.val );
               } );
               this.setDataAndChart( index , newconf );
-             
+
           },
           error: (err) => {
             console.error('Errore nel caricamento del dettaglio della dashboard', err);
           }
       } );
-  
+
     } );
   }
-  
+
 
   chartData: any[] = []; // Array che conterrà i dati dei grafici
   charts: Chart[] = []; //
 
   setDataAndChart( i : any , confdati:any ){
-    
+
     this.chartData[i] = confdati;
-    setTimeout(() => this.renderChart(i), 100); 
+
+    setTimeout(() => this.renderChart(i), 100);
   }
   renderChart(index: number) {
     const canvasId = `chart-${index}`;
