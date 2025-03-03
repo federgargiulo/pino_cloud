@@ -16,6 +16,16 @@ public class Measure  implements Serializable {
 
     private String srcId;
 
+    public String getSignalId() {
+        return signalId;
+    }
+
+    public void setSignalId(String signalId) {
+        this.signalId = signalId;
+    }
+
+    private String signalId;
+
     public String getSrcId() {
         return srcId;
     }

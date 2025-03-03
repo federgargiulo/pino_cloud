@@ -15,6 +15,7 @@ public class SignalTO implements Serializable {
     }
 
 
+
     private String signalId;
 
     private String equipmentId;
