@@ -141,7 +141,7 @@ export class DashMeasureComponent implements OnInit {
           next: (data) => {
              data.body.results.forEach( ( x: any ) => {
 
-             this.dashConfiguration.data.labels.push( x.mesure_dttm );
+             this.dashConfiguration.data.labels.push( x.measureDttm );
              this.dashConfiguration.data.datasets[0].data.push( x.val );
 
 
