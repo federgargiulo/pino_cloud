@@ -1,42 +1,65 @@
 <h2>Equipment Detail</h2>
 
 <form [formGroup]="equipmentForm" (ngSubmit)="updateEquipment()">
-  <!-- ID (non modificabile) -->
-  <div class="form-group">
-    <label>ID:</label>
-    <input type="text" class="form-control" formControlName="equipmentId" >
-  </div>
-
-  <!-- Nome -->
-  <div class="form-group">
-    <label>Name:</label>
-    <input type="text" class="form-control" formControlName="name">
-  </div>
-
-  <!-- Tenant -->
-  <div class="form-group">
-    <label>Tenant:</label>
-    <input type="text" class="form-control" formControlName="tenant">
-  </div>
-
-  <!-- Stato -->
-  <div class="form-group">
-    <label>Status:</label>
-    <input type="text" class="form-control" formControlName="status">
-  </div>
-
-  <!-- Data di Creazione (non modificabile) -->
-  <div class="form-group">
-    <label>Date Create:</label>
-    <input type="text" class="form-control" formControlName="createdDttm" >
-  </div>
-
-  <!-- Data di Creazione (non modificabile) -->
-  <div class="form-group">
-    <label>Date Update:</label>
-    <input type="text" class="form-control" formControlName="updateDttm" >
-  </div>
-
-  <!-- Pulsante per Salvare -->
-  <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
+  <table>
+    <tr>
+      <td colspan="2">
+        <!-- ID (non modificabile) -->
+        <div class="form-group">
+          <label>ID:</label>
+          <input type="text" class="form-control" formControlName="equipmentId" >
+        </div>
+      </td>
+     </tr>
+    <tr>
+      <td>
+      <!-- Nome -->
+      <div class="form-group">
+        <label>Name:</label>
+        <input type="text" class="form-control" formControlName="name">
+      </div>
+      </td>
+      <td>
+        <!-- Tenant -->
+        <div class="form-group">
+          <label>Tenant:</label>
+          <input type="text" class="form-control" formControlName="tenant">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <!-- Stato -->
+        <div class="form-group">
+          <label>Status:</label>
+          <input type="text" class="form-control" formControlName="status">
+        </div>
+      </td>
+      <td>
+        <!-- Data di Creazione (non modificabile) -->
+        <div class="form-group">
+          <label>Date Create:</label>
+          <input type="text" class="form-control" formControlName="createdDttm" >
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <!-- Data di Creazione (non modificabile) -->
+        <div class="form-group">
+          <label>Date Update:</label>
+          <input type="text" class="form-control" formControlName="updateDttm" >
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <!-- Pulsante per Salvare -->
+        <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
+      </td>
+      <!--td>
+        <button type="button" class="btn btn-secondary mt-3" (click)="toggleSignalForm()">Add Signal</button>
+      </td -->
+    </tr>
+  </table>
 </form>
