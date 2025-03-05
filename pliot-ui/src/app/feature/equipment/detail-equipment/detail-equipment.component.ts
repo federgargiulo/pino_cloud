@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Equipment, EquipmentDetail, EquipmentServices} from '../../../service/equipment.service';
 import { ActivatedRoute } from '@angular/router';
-
+import {  SignalServices} from '../../../service/signal.service';
 
 @Component({
   selector: 'app-detail-equipment',
@@ -23,8 +23,8 @@ export class DetailEquipmentComponent implements OnInit {
   constructor(
      private route: ActivatedRoute,
       private formBuilder: FormBuilder, // Usato per costruire il form
-     private equipmentService: EquipmentServices // Iniettiamo il servizio
-      //private signalService: SignalService
+     private equipmentService: EquipmentServices, // Iniettiamo il servizio
+     private signalService: SignalServices
    ) {}
 
 
@@ -77,16 +77,32 @@ export class DetailEquipmentComponent implements OnInit {
 
 
 
-   saveSignal() {
-      const newSignal = this.signalForm.value;
-      console.info( " newSignal id " + newSignal.signalId )
-      //this.signalService.saveSignal(newSignal).subscribe(response => {
-        //this.showSignalForm = false;
-       // this.loadSignals();
-      //});
+  saveSignal() {
+      const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+      console.log('Saving Signal for equipmentId:', equipmentId);
+      if (this.signalForm.valid) {
+        const newSignal = this.signalForm.value;
+
+        this.signalService.saveSignal(equipmentId, newSignal).subscribe(response => {
+          console.log('Signal saved successfully:', response);
+          this.showSignalForm = false;
+          this.loadSignals(); // Ricarica la lista dei segnali
+        }, error => {
+          console.error('Error saving signal:', error);
+        });
+      } else {
+        console.log("Invalid form submission.");
+      }
     }
 
+  loadSignals() {
 
+    const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+    this.signalService.getSignalsByEquipmentId(equipmentId).subscribe(data => {
+      this.signals = data.body;
+      console.log("loadSignals. Dati salvati:", this.signals);
+    });
+  }
 
 
    // Metodo per caricare i dettagli dell'attrezzatura

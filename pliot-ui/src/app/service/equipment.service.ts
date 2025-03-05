@@ -71,4 +71,5 @@ export interface EquipmentDetail { // Anche questa deve essere esportata
       return this.webApiService.get(httpLink.getEquipmentById + '/' + id);
     }
 
+
 }
