@@ -20,6 +20,7 @@ export interface Equipment { // Anche questa deve essere esportata
   status: string,
   name: string,
   version: string,
+  tenant: string,
   updateDttm: string,
   createdDttm: string
 }

@@ -41,7 +41,8 @@ import { DashconfManagerComponent } from './dashboard/common/dashconf-manager/da
     AddTenantComponent,
     DetailTenantComponent,
     DashconfManagerComponent,
- 
+
+
 
 
 

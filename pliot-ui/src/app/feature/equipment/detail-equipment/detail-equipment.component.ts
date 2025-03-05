@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { EquipmentDetail, EquipmentServices} from '../../../service/equipment.service';
+import { Equipment, EquipmentDetail, EquipmentServices} from '../../../service/equipment.service';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -11,15 +11,20 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './detail-equipment.component.css'
 })
 export class DetailEquipmentComponent implements OnInit {
-  equipmentId!: string; // ID della risorsa
+   equipmentId!: string; // ID della risorsa
    equipmentForm!: FormGroup; // Form reattivo
-  equipmentDetail: any; // Dati dell'attrezzatura ricevuti dal backend
+   equipment!: Equipment;
+   equipmentDetail: any; // Dati dell'attrezzatura ricevuti dal backend
    loading = false;
+   signalForm!: FormGroup; // Aggiunto '!' per indicare che sarà inizializzato nel costruttore
+   showSignalForm = false;
+   signals: any[] = [];
 
   constructor(
      private route: ActivatedRoute,
       private formBuilder: FormBuilder, // Usato per costruire il form
      private equipmentService: EquipmentServices // Iniettiamo il servizio
+      //private signalService: SignalService
    ) {}
 
 
@@ -42,7 +47,46 @@ export class DetailEquipmentComponent implements OnInit {
            updateDttm: [{ value: '', disabled: true }], // Campo non modificabile
            createdDttm: [{ value: '', disabled: true }] // Campo non modificabile
          });
+
+         this.signalForm = this.formBuilder.group({
+               id: [''],
+               equipmentId: [''],
+               unitOfMeasurement: [''],
+               name: [''],
+               minVal: [''],
+               maxVal: [''],
+               downRedLimit: [''],
+               downYellowLimit: [''],
+               upRedLimit: [''],
+               upYellowLimit: [''],
+               createdDttm: [''],
+               updateDttm: ['']
+             });
    }
+
+ toggleSignalForm() {
+    console.info( " toggleSignalForm ")
+    this.showSignalForm = !this.showSignalForm;
+    console.info( " this.showSignalForm:"+this.showSignalForm)
+    if (this.showSignalForm) {
+      this.signalForm.patchValue({
+        equipmentId: this.equipmentForm.get('equipmentId')?.value
+      });
+    }
+  }
+
+
+
+   saveSignal() {
+      const newSignal = this.signalForm.value;
+      console.info( " newSignal id " + newSignal.signalId )
+      //this.signalService.saveSignal(newSignal).subscribe(response => {
+        //this.showSignalForm = false;
+       // this.loadSignals();
+      //});
+    }
+
+
 
 
    // Metodo per caricare i dettagli dell'attrezzatura
@@ -79,5 +123,7 @@ export class DetailEquipmentComponent implements OnInit {
         }
       });
     }
+
+
   }
 

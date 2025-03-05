@@ -57,9 +57,63 @@
         <!-- Pulsante per Salvare -->
         <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
       </td>
-      <!--td>
-        <button type="button" class="btn btn-secondary mt-3" (click)="toggleSignalForm()">Add Signal</button>
-      </td -->
+      <td>
+        <button type="button" class="btn btn-primary mt-3" (click)="toggleSignalForm()">Add Signal</button>
+      </td>
     </tr>
   </table>
 </form>
+
+<!-- FORM SIGNAL -->
+<div *ngIf="showSignalForm">
+  <h2>Add Signal</h2>
+  <form [formGroup]="signalForm" (ngSubmit)="saveSignal()">
+    <table>
+      <tr><td colspan="2"><label>ID:</label><input type="text" class="form-control" formControlName="id"></td></tr>
+      <tr><td colspan="2"><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td></tr>
+      <tr><td><label>Unit of Measurement:</label><input type="text" class="form-control" formControlName="unitOfMeasurement"></td>
+          <td><label>Name:</label><input type="text" class="form-control" formControlName="name"></td>
+      </tr>
+      <tr><td><label>Min Value:</label><input type="number" class="form-control" formControlName="minVal"></td>
+          <td><label>Max Value:</label><input type="number" class="form-control" formControlName="maxVal"></td>
+      </tr>
+      <tr><td><label>Down Red Limit:</label><input type="number" class="form-control" formControlName="downRedLimit"></td>
+          <td><label>Down Yellow Limit:</label><input type="number" class="form-control" formControlName="downYellowLimit"></td>
+      </tr>
+      <tr><td><label>Up Red Limit:</label><input type="number" class="form-control" formControlName="upRedLimit"></td>
+           <td><label>Up Yellow Limit:</label><input type="number" class="form-control" formControlName="upYellowLimit"></td>
+      </tr>
+     <!-- <tr><td><label>Created Date:</label><input type="text" class="form-control" formControlName="createdDttm" readonly></td></tr>
+      <tr><td><label>Updated Date:</label><input type="text" class="form-control" formControlName="updateDttm" readonly></td></tr>-->
+      <tr><td><button type="submit" class="btn btn-primary mt-3">Save Signal</button></td></tr>
+    </table>
+  </form>
+</div>
+
+
+<!-- LISTA SIGNALS -->
+<div *ngIf="signals.length > 0">
+  <h3>Signals List</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Min</th>
+      <th>Max</th>
+      <th>Created</th>
+      <th>Updated</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let signal of signals">
+      <td>{{ signal.id }}</td>
+      <td>{{ signal.name }}</td>
+      <td>{{ signal.minVal }}</td>
+      <td>{{ signal.maxVal }}</td>
+      <td>{{ signal.createdDttm }}</td>
+      <td>{{ signal.updateDttm }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
