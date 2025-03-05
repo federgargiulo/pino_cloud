@@ -20,6 +20,7 @@ export class DetailEquipmentComponent implements OnInit {
    showSignalForm = false;
    signals: any[] = [];
 
+
   constructor(
      private route: ActivatedRoute,
       private formBuilder: FormBuilder, // Usato per costruire il form
@@ -49,7 +50,7 @@ export class DetailEquipmentComponent implements OnInit {
          });
 
          this.signalForm = this.formBuilder.group({
-               id: [''],
+               signalId: [''],
                equipmentId: [''],
                unitOfMeasurement: [''],
                name: [''],
@@ -77,12 +78,12 @@ export class DetailEquipmentComponent implements OnInit {
 
 
 
-  saveSignal() {
+  addSignal() {
       const equipmentId = this.equipmentForm.get('equipmentId')?.value;
-      console.log('Saving Signal for equipmentId:', equipmentId);
+      const signalId = this.signalForm.get('signalId')?.value;
+      console.log('Saving Signal for signalId:', signalId);
       if (this.signalForm.valid) {
         const newSignal = this.signalForm.value;
-
         this.signalService.saveSignal(equipmentId, newSignal).subscribe(response => {
           console.log('Signal saved successfully:', response);
           this.showSignalForm = false;
@@ -140,6 +141,25 @@ export class DetailEquipmentComponent implements OnInit {
       });
     }
 
+
+      // **Eliminare un Signal**
+       deleteSignal(equipmentId: string, idSignal: string, i:number): void {
+                if (!confirm("Sei sicuro di voler eliminare questo Signal?")) {
+                  return;
+                }
+
+                this.signalService.deleteSignalById(equipmentId, idSignal).subscribe({
+                  next: () => {
+                    console.log(`Signal con ID ${idSignal} eliminato con successo da equipment con id  ${equipmentId} !`);
+
+                   this.signals.splice(i,1);
+                    console.log(`this.signals`, this.signals);
+                  },
+                  error: (err) => {
+                    console.error("Errore durante l'eliminazione:", err);
+                  }
+                });
+              }
 
   }
 

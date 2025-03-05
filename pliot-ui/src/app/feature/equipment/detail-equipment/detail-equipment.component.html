@@ -52,13 +52,17 @@
         </div>
       </td>
     </tr>
+    <tr><td colspan="3"></td></tr>
     <tr>
       <td>
         <!-- Pulsante per Salvare -->
-        <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
+        <button type="submit" class="btn btn-primary mt-3">Save Equipment</button>
       </td>
       <td>
         <button type="button" class="btn btn-primary mt-3" (click)="toggleSignalForm()">Add Signal</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary mt-3" (click)="loadSignals()">View Signals</button>
       </td>
     </tr>
   </table>
@@ -67,9 +71,9 @@
 <!-- FORM SIGNAL -->
 <div *ngIf="showSignalForm">
   <h2>Add Signal</h2>
-  <form [formGroup]="signalForm" (ngSubmit)="saveSignal()">
+  <form [formGroup]="signalForm" (ngSubmit)="addSignal()">
     <table>
-      <tr><td colspan="2"><label>ID:</label><input type="text" class="form-control" formControlName="id"></td></tr>
+      <tr><td colspan="2"><label>ID:</label><input type="text" class="form-control" formControlName="signalId"></td></tr>
       <tr><td colspan="2"><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td></tr>
       <tr><td><label>Unit of Measurement:</label><input type="text" class="form-control" formControlName="unitOfMeasurement"></td>
           <td><label>Name:</label><input type="text" class="form-control" formControlName="name"></td>
@@ -92,27 +96,45 @@
 
 
 <!-- LISTA SIGNALS -->
-<div *ngIf="signals.length > 0">
-  <h3>Signals List</h3>
+<div *ngIf="signals.length > 0" class="table-container">
+  <h2>Signals List</h2>
   <table class="table">
     <thead>
-    <tr>
+    <tr class="center-align">
       <th>ID</th>
       <th>Name</th>
+      <th>UnitOfMeasure</th>
       <th>Min</th>
       <th>Max</th>
+      <th>DownRedLimit</th>
+      <th>UpRedLimit</th>
+      <th>DownYellowLimit</th>
+      <th>UpYellowLimit</th>
       <th>Created</th>
       <th>Updated</th>
+      <th>Modify</th>
+      <th>Delete</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let signal of signals">
-      <td>{{ signal.id }}</td>
+    <tr *ngFor="let signal of signals; let i = index"  class="center-align">
+      <td>{{ signal.signalId }}</td>
       <td>{{ signal.name }}</td>
+      <td>{{ signal.unitOfMeasure }}</td>
       <td>{{ signal.minVal }}</td>
       <td>{{ signal.maxVal }}</td>
+      <td>{{ signal.downRedLimit }}</td>
+      <td>{{ signal.upRedLimit }}</td>
+      <td>{{ signal.downYellowLimit }}</td>
+      <td>{{ signal.upYellowLimit }}</td>
       <td>{{ signal.createdDttm }}</td>
       <td>{{ signal.updateDttm }}</td>
+      <td>nbsp;</td>
+    <!--  <td class="action-buttons">
+        <button class="btn-edit" (click)="editSignal(signal)">Edit</button>
+
+      </td> -->
+      <td> <button class="btn btn-primary mt-3"  (click)="deleteSignal(signal.equipmentId, signal.id, i)">❌ Delete</button></td>
     </tr>
     </tbody>
   </table>

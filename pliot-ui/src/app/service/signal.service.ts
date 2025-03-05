@@ -30,9 +30,9 @@ var httpLink = {
   }
 
 
-  public deleteSignalById(id: string): Observable<any> {
-     console.info( "Service is calling" + httpLink.deleteSignalById + " With id: " + id )
-     return this.webApiService.delete(httpLink.deleteSignalById + '/' + id);
+  public deleteSignalById(equipmentId: string, signalId: string): Observable<any> {
+     console.info( "Service is calling" + httpLink.deleteSignalById + " With equipmentId: " + equipmentId +  'signalId:' + signalId )
+     return this.webApiService.delete(httpLink.deleteSignalById + '/' + equipmentId + '/signals'+ '/' + signalId);
   }
 
   public getSignalDetailById(model: any): Observable<any> {
