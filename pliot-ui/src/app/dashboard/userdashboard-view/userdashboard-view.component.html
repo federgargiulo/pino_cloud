@@ -26,7 +26,7 @@
       <tr>
         <td><div><button type="submit" class="btn btn-primary mt-3"  [disabled]="dashBoardForm.invalid">Salva</button></div></td>
         <td><div *ngIf="this.isPersisted">
-          <button class="btn btn-primary mt-3" [routerLink]="['/dash-measure', dashBoardForm.controls['id'].value]" class="btn btn-primary">View</button>
+          <button class="btn btn-primary mt-3" [routerLink]="['/dash-measure', dashBoardForm.controls['id'].value]">View</button>
         </div></td>
       </tr>
     </table>

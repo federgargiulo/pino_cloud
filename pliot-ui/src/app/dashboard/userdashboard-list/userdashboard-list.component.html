@@ -5,7 +5,7 @@
             <th>titolo</th>
             <th>Descrizione</th>
             <th>Configurazione</th>
-         
+
             <th colspan="3">Actions</th>
           </tr>
         </thead>
@@ -13,15 +13,16 @@
         <tr *ngFor="let d of dashBoardsList; let i = index"  class="center-align">
           <td>{{d.title}}</td>
           <td>{{d.descr}}</td>
-          <td>{{d.configuration}}</td>       
+          <td>{{d.configuration}}</td>
           <td>
-            <a [routerLink]="['/userdashboard-detail', d.id]" class="button">Modify</a>
+            <button class="btn btn-primary mt-3" [routerLink]="['/userdashboard-detail', d.id]">Modify</button>
+
           </td>
           <td>
-              <a href="#" (click)="deleteDasboard(d.id , $event )"  class="button">Delete</a>
+              <button  (click)="deleteDasboard(d.id , $event )"  class="btn btn-primary mt-3">Delete</button>
           </td>
          <td>
-            <a [routerLink]="['/dash-measure', d.id]" class="button">View</a>
+             <button class="btn btn-primary mt-3" [routerLink]="['/dash-measure', d.id]">View</button>
           </td>
         </tr>
         <tr>
