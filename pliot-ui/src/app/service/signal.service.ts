@@ -45,8 +45,8 @@ var httpLink = {
     return this.webApiService.post( httpLink.saveSignal + '/' + idobject  + '/signals', model  );
   }
 
-  public updateSignal( idobject:any ,model: any): Observable<any> {
-    return this.webApiService.patch( httpLink.saveSignal + '/' + idobject + '/signals' , model );
+  public updateSignal( equipmentId: string, signalId: string , model: any): Observable<any> {
+    return this.webApiService.patch( httpLink.saveSignal + '/' + equipmentId + '/signals'+ '/' + signalId, model);
   }
 
   public getSignalById(id: string): Observable<any> {

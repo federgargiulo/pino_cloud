@@ -70,10 +70,13 @@
 
 <!-- FORM SIGNAL -->
 <div *ngIf="showSignalForm">
-  <h2>Add Signal</h2>
-  <form [formGroup]="signalForm" (ngSubmit)="addSignal()">
+  <h2 *ngIf="isEditingSignal">Update Signal</h2>
+  <h2 *ngIf="!isEditingSignal">Add Signal</h2>
+
+
+  <form [formGroup]="signalForm" (ngSubmit)="saveSignal()">
     <table>
-      <tr><td colspan="2"><label>ID:</label><input type="text" class="form-control" formControlName="signalId"></td></tr>
+      <tr><td colspan="2"><label>ID:</label><input type="text" class="form-control" formControlName="signalId" [disabled]="isEditingSignal"></td></tr>
       <tr><td colspan="2"><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td></tr>
       <tr><td><label>Unit of Measurement:</label><input type="text" class="form-control" formControlName="unitOfMeasurement"></td>
           <td><label>Name:</label><input type="text" class="form-control" formControlName="name"></td>
@@ -89,7 +92,7 @@
       </tr>
      <!-- <tr><td><label>Created Date:</label><input type="text" class="form-control" formControlName="createdDttm" readonly></td></tr>
       <tr><td><label>Updated Date:</label><input type="text" class="form-control" formControlName="updateDttm" readonly></td></tr>-->
-      <tr><td><button type="submit" class="btn btn-primary mt-3">Save Signal</button></td></tr>
+      <tr><td colspan="2" ><button type="submit" class="btn btn-primary mt-3">{{ isEditingSignal ? 'Update Signal' : 'Save Signal' }}</button></td></tr>
     </table>
   </form>
 </div>
@@ -129,7 +132,7 @@
       <td>{{ signal.upYellowLimit }}</td>
       <td>{{ signal.createdDttm }}</td>
       <td>{{ signal.updateDttm }}</td>
-      <td>nbsp;</td>
+      <td><button class="btn btn-primary mt-3" (click)="editSignal(signal)">✏ Edit</button></td>
     <!--  <td class="action-buttons">
         <button class="btn-edit" (click)="editSignal(signal)">Edit</button>
 

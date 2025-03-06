@@ -20,7 +20,7 @@ export class DetailEquipmentComponent implements OnInit {
    signalForm!: FormGroup; // Aggiunto '!' per indicare che sarà inizializzato nel costruttore
    showSignalForm = false;
    signals: any[] = [];
-   isEditingSignal = false;
+   isEditingSignal = false; // Differenzia tra aggiunta e modifica
    selectedSignalId: string | null = null; // ID del Signal in modifica
 
    constructor(
@@ -49,33 +49,39 @@ export class DetailEquipmentComponent implements OnInit {
         createdDttm: [{ value: '', disabled: true }] // Campo non modificabile
       });
 
-      this.signalForm = this.formBuilder.group({
-               signalId: [''],
-               equipmentId: [''],
-               unitOfMeasurement: [''],
-               name: [''],
-               minVal: [''],
-               maxVal: [''],
-               downRedLimit: [''],
-               downYellowLimit: [''],
-               upRedLimit: [''],
-               upYellowLimit: [''],
-               createdDttm: [''],
-               updateDttm: ['']
+      // Inizializza il form del Signal
+      this.initSignalForm();
+
+   }
+
+
+   // Metodo per inizializzare il form dei Signal
+   private initSignalForm(): void {
+       this.signalForm = this.formBuilder.group({
+         signalId: [{ value: '', disabled: false }],
+         equipmentId: [''],
+         unitOfMeasurement: [''],
+         name: [''],
+         minVal: [''],
+         maxVal: [''],
+         downRedLimit: [''],
+         downYellowLimit: [''],
+         upRedLimit: [''],
+         upYellowLimit: [''],
+         createdDttm: [''],
+         updateDttm: ['']
        });
    }
 
- toggleSignalForm() {
-    console.info( " toggleSignalForm ")
-    this.showSignalForm = !this.showSignalForm;
-    console.info( " this.showSignalForm:"+this.showSignalForm)
-    if (this.showSignalForm) {
-      this.signalForm.patchValue({
-        equipmentId: this.equipmentForm.get('equipmentId')?.value
-      });
-    }
-  }
 
+  // Resetta il form e mostra il form di aggiunta Signal
+  toggleSignalForm() {
+    this.showSignalForm = true;
+    this.isEditingSignal = false;
+    this.selectedSignalId = null;
+    this.signalForm.reset();
+    this.signalForm.patchValue({ equipmentId: this.equipmentForm.get('equipmentId')?.value });
+  }
 
 
    // Metodo per caricare i dettagli dell'attrezzatura
@@ -116,25 +122,36 @@ export class DetailEquipmentComponent implements OnInit {
 
 
 
-  addSignal() {
-      const equipmentId = this.equipmentForm.get('equipmentId')?.value;
-      const signalId = this.signalForm.get('signalId')?.value;
-      console.log('Saving Signal for signalId:', signalId);
 
-      if (this.signalForm.valid) {
-        const newSignal = this.signalForm.value;
-        this.signalService.saveSignal(equipmentId, newSignal).subscribe(response => {
-          console.log('Signal saved successfully:', response);
-          this.showSignalForm = false;
-          this.loadSignals(); // Ricarica la lista dei segnali
-          this.signalForm.reset();
-        }, error => {
-          console.error('Error saving signal:', error);
-        });
-      } else {
-        console.log("Invalid form submission.");
+
+
+      // **Salva o aggiorna un Signal**
+      saveSignal() {
+        const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+
+        if (this.signalForm.valid) {
+          const signalData = this.signalForm.value;
+
+          if (this.isEditingSignal) {
+            // **Modalità Update**
+            this.signalService.updateSignal(equipmentId, signalData.signalId, signalData).subscribe(response => {
+              console.log('✅ Signal aggiornato:', response);
+              this.loadSignals();
+              this.resetSignalForm(); // Nasconde il form dopo l'update
+            }, error => console.error('❌ Errore aggiornamento Signal:', error));
+          } else {
+            // **Modalità Add**
+            this.signalService.saveSignal(equipmentId, signalData).subscribe(response => {
+              console.log('✅ Signal aggiunto:', response);
+              this.loadSignals();
+              this.resetSignalForm(); // Nasconde il form dopo l'inserimento
+            }, error => console.error('❌ Errore aggiunta Signal:', error));
+          }
+        }
       }
-    }
+
+
+
 
   loadSignals() {
 
@@ -145,6 +162,22 @@ export class DetailEquipmentComponent implements OnInit {
     });
   }
 
+  // **Modifica un Signal esistente**
+   editSignal(signal: any) {
+      this.isEditingSignal = true;
+      this.showSignalForm = true;
+      this.selectedSignalId = signal.signalId;
+      this.signalForm.patchValue(signal);
+    }
+
+
+   // **Resetta il form e torna in modalità aggiunta**
+   resetSignalForm() {
+       this.signalForm.reset();
+       this.showSignalForm = false; // Nasconde il form
+       this.isEditingSignal = false;
+       this.selectedSignalId = null;
+     }
 
    // **Eliminare un Signal**
    deleteSignal(equipmentId: string, idSignal: string, i:number): void {

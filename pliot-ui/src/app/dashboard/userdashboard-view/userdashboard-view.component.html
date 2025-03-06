@@ -1,6 +1,4 @@
-<div *ngIf="this.isPersisted"> 
-    <a [routerLink]="['/dash-measure', dashBoardForm.controls['id'].value]" class="button">View</a>
-</div>
+
 <form [formGroup]="dashBoardForm" (ngSubmit)="onSubmit()">
     <div>
         <label for="title">Titolo:</label>
@@ -9,7 +7,7 @@
           Il titolo è obbligatorio.
         </div>
     </div>
-    
+
     <div>
         <label for="descr">Descrizione:</label>
         <input id="descr" formControlName="descr">
@@ -19,14 +17,18 @@
     </div>
     <input type="hidden" formControlName="id">
     <input type="hidden" formControlName="configuration">
-     
-    
-    <div *ngIf="this.isPersisted"> 
+
+
+    <div *ngIf="this.isPersisted">
             <app-dashconf-manager [initialSignals]="dashBoardForm.controls['configuration'].value" (jsonChanged)="updateJson($event)"></app-dashconf-manager>
     </div>
-
-    <button type="submit" [disabled]="dashBoardForm.invalid">Salva</button>
-
+    <table>
+      <tr>
+        <td><div><button type="submit" class="btn btn-primary mt-3"  [disabled]="dashBoardForm.invalid">Salva</button></div></td>
+        <td><div *ngIf="this.isPersisted">
+          <button class="btn btn-primary mt-3" [routerLink]="['/dash-measure', dashBoardForm.controls['id'].value]" class="btn btn-primary">View</button>
+        </div></td>
+      </tr>
+    </table>
     <p *ngIf="successMessage">{{ successMessage }}</p>
   </form>
-   

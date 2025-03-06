@@ -1,8 +1,8 @@
 <div class="container-xl">
-    <div class="table-responsive">
-      <div class="table-wrapper">
-        <div class="table-title">
-        
+  <div class="table-container"> <!-- Usa la stessa classe dei Signal -->
+    <div class="table-wrapper">
+      <div class="table-title">
+
         <form #equipmentForm="ngForm">
           <div class="table-content">
             <div class="form-group p-10 row">
@@ -11,7 +11,7 @@
               </div>
               <div class="col-sm-9">
                 <input type="text" class="form-control" id="name" required maxlength="255"
-                  [(ngModel)]="addEquipmentForm.name" name="name" #name="ngModel">
+                       [(ngModel)]="addEquipmentForm.name" name="name" #name="ngModel">
                 <div *ngIf="name.errors && isSubmitted" class="alert alert-danger validationError">
                   <div [hidden]="!name.errors?.['required']">
                     Name is required
@@ -19,11 +19,10 @@
                 </div>
               </div>
             </div>
-            
           </div>
-         
+
           <div class="table-footer">
-            <button class="btn btn-success" (click)="addEquipment(EquipmentForm.form.valid)">Submit</button>
+            <button class="btn btn-primary mt-3"  (click)="addEquipment(EquipmentForm.form.valid)">Submit</button>
           </div>
         </form>
       </div>
