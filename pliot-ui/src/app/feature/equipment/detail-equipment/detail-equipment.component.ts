@@ -11,6 +11,7 @@ import {  SignalServices} from '../../../service/signal.service';
   styleUrl: './detail-equipment.component.css'
 })
 export class DetailEquipmentComponent implements OnInit {
+
    equipmentId!: string; // ID della risorsa
    equipmentForm!: FormGroup; // Form reattivo
    equipment!: Equipment;
@@ -19,37 +20,36 @@ export class DetailEquipmentComponent implements OnInit {
    signalForm!: FormGroup; // Aggiunto '!' per indicare che sarà inizializzato nel costruttore
    showSignalForm = false;
    signals: any[] = [];
+   isEditingSignal = false;
+   selectedSignalId: string | null = null; // ID del Signal in modifica
 
-
-  constructor(
+   constructor(
      private route: ActivatedRoute,
-      private formBuilder: FormBuilder, // Usato per costruire il form
+     private formBuilder: FormBuilder, // Usato per costruire il form
      private equipmentService: EquipmentServices, // Iniettiamo il servizio
      private signalService: SignalServices
    ) {}
 
 
- ngOnInit(): void {
-     this.route.paramMap.subscribe(params => {
-       this.equipmentId = params.get('id') || ''; // Assicura che non sia null
-       console.log("Equipment ID ricevuto:", this.equipmentId);
+   ngOnInit(): void {
+      this.route.paramMap.subscribe(params => {
+        this.equipmentId = params.get('id') || ''; // Assicura che non sia null
+        console.log("Equipment ID ricevuto:", this.equipmentId);
+        // Chiamata al backend per ottenere i dettagli
+        this.loadEquipmentDetail(this.equipmentId);
+      });
 
-       // Chiamata al backend per ottenere i dettagli
-       this.loadEquipmentDetail(this.equipmentId);
-     });
+      // Inizializza il form vuoto
+      this.equipmentForm = this.formBuilder.group({
+        equipmentId: [{ value: '', disabled: true }], // Campo non modificabile
+        name: [''],
+        tenant: [{ value: '', disabled: true }], // Campo non modificabile
+        status: [''],
+        updateDttm: [{ value: '', disabled: true }], // Campo non modificabile
+        createdDttm: [{ value: '', disabled: true }] // Campo non modificabile
+      });
 
-
-     // Inizializza il form vuoto
-         this.equipmentForm = this.formBuilder.group({
-           equipmentId: [{ value: '', disabled: true }], // Campo non modificabile
-           name: [''],
-           tenant: [{ value: '', disabled: true }], // Campo non modificabile
-           status: [''],
-           updateDttm: [{ value: '', disabled: true }], // Campo non modificabile
-           createdDttm: [{ value: '', disabled: true }] // Campo non modificabile
-         });
-
-         this.signalForm = this.formBuilder.group({
+      this.signalForm = this.formBuilder.group({
                signalId: [''],
                equipmentId: [''],
                unitOfMeasurement: [''],
@@ -62,7 +62,7 @@ export class DetailEquipmentComponent implements OnInit {
                upYellowLimit: [''],
                createdDttm: [''],
                updateDttm: ['']
-             });
+       });
    }
 
  toggleSignalForm() {
@@ -76,34 +76,6 @@ export class DetailEquipmentComponent implements OnInit {
     }
   }
 
-
-
-  addSignal() {
-      const equipmentId = this.equipmentForm.get('equipmentId')?.value;
-      const signalId = this.signalForm.get('signalId')?.value;
-      console.log('Saving Signal for signalId:', signalId);
-      if (this.signalForm.valid) {
-        const newSignal = this.signalForm.value;
-        this.signalService.saveSignal(equipmentId, newSignal).subscribe(response => {
-          console.log('Signal saved successfully:', response);
-          this.showSignalForm = false;
-          this.loadSignals(); // Ricarica la lista dei segnali
-        }, error => {
-          console.error('Error saving signal:', error);
-        });
-      } else {
-        console.log("Invalid form submission.");
-      }
-    }
-
-  loadSignals() {
-
-    const equipmentId = this.equipmentForm.get('equipmentId')?.value;
-    this.signalService.getSignalsByEquipmentId(equipmentId).subscribe(data => {
-      this.signals = data.body;
-      console.log("loadSignals. Dati salvati:", this.signals);
-    });
-  }
 
 
    // Metodo per caricare i dettagli dell'attrezzatura
@@ -142,24 +114,58 @@ export class DetailEquipmentComponent implements OnInit {
     }
 
 
-      // **Eliminare un Signal**
-       deleteSignal(equipmentId: string, idSignal: string, i:number): void {
-                if (!confirm("Sei sicuro di voler eliminare questo Signal?")) {
-                  return;
-                }
 
-                this.signalService.deleteSignalById(equipmentId, idSignal).subscribe({
-                  next: () => {
-                    console.log(`Signal con ID ${idSignal} eliminato con successo da equipment con id  ${equipmentId} !`);
 
-                   this.signals.splice(i,1);
-                    console.log(`this.signals`, this.signals);
-                  },
-                  error: (err) => {
-                    console.error("Errore durante l'eliminazione:", err);
-                  }
-                });
-              }
+  addSignal() {
+      const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+      const signalId = this.signalForm.get('signalId')?.value;
+      console.log('Saving Signal for signalId:', signalId);
 
+      if (this.signalForm.valid) {
+        const newSignal = this.signalForm.value;
+        this.signalService.saveSignal(equipmentId, newSignal).subscribe(response => {
+          console.log('Signal saved successfully:', response);
+          this.showSignalForm = false;
+          this.loadSignals(); // Ricarica la lista dei segnali
+          this.signalForm.reset();
+        }, error => {
+          console.error('Error saving signal:', error);
+        });
+      } else {
+        console.log("Invalid form submission.");
+      }
+    }
+
+  loadSignals() {
+
+    const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+    this.signalService.getSignalsByEquipmentId(equipmentId).subscribe(data => {
+      this.signals = data.body;
+      console.log("loadSignals. Dati salvati:", this.signals);
+    });
   }
+
+
+   // **Eliminare un Signal**
+   deleteSignal(equipmentId: string, idSignal: string, i:number): void {
+      if (!confirm("Sei sicuro di voler eliminare questo Signal?")) {
+        return;
+      }
+
+      this.signalService.deleteSignalById(equipmentId, idSignal).subscribe({
+        next: () => {
+          console.log(`Signal con ID ${idSignal} eliminato con successo da equipment con id  ${equipmentId} !`);
+
+         this.signals.splice(i,1);
+          console.log(`this.signals`, this.signals);
+        },
+        error: (err) => {
+          console.error("Errore durante l'eliminazione:", err);
+        }
+      });
+    }
+
+
+
+ }
 
