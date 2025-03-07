@@ -7,11 +7,40 @@ import java.util.List;
 
 public class UserTO extends BaseEntity {
 
+    private String idpId;
 
-    private String userId;
+    public String getIdpId() {
+        return idpId;
+    }
+
+    public void setIdpId(String idpId) {
+        this.idpId = idpId;
+    }
+
+    private String username;
+
     private String type;
 
-    private String name;
+    private String firstName;
+
+    private String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
 
     private String email;
 
@@ -23,13 +52,6 @@ public class UserTO extends BaseEntity {
         this.type = type;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return email;
@@ -87,12 +109,12 @@ public class UserTO extends BaseEntity {
         this.roles = roles;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     private Integer age;

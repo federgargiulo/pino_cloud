@@ -11,6 +11,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UserController {
+
     @Autowired
     private UserServices userServices;
 
@@ -28,7 +29,7 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<UserTO> createUser(@RequestBody UserTO userTO) {
         try {
-            UserTO t = userServices.create( userTO);
+            UserTO t = userServices.create( userTO );
             return new ResponseEntity<>(t, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -43,7 +44,7 @@ public class UserController {
     @PatchMapping("/users/{id}")
     public ResponseEntity<UserTO> updateEquipment(@PathVariable("id") String id , @RequestBody UserTO userTO ) {
         try {
-            userTO.setUserId( id );
+            userTO.setUsername( id );
             userTO = userServices.save( userTO );
             return new ResponseEntity<>(userTO, HttpStatus.OK );
         } catch (Exception e) {

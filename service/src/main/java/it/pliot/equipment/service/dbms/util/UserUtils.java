@@ -17,13 +17,14 @@ public class UserUtils extends BaseConvertUtil<User, UserTO>{
     public User io2data(UserTO in) {
         if ( in == null ) return null;
         User out = new User();
-        out.setId(in.getUserId());
+        out.setId(in.getUsername());
         out.setAddress( in.getAddress() );
         out.setAge( in.getAge());
-        out.setName( in.getName() );
+        out.setFirstName(  in.getFirstName() );
+        out.setLastName( in.getLastName() );
         out.setEmail( in.getEmail() );
         out.setGender( in.getGender() );
-        out.setPassword( in.getPassword() );
+        out.setIdpId( in.getIdpId() );
         out.setPhone( in.getPhone() );
         out.setRoles( RoleUtils.instance().converListIO2data( in.getRoles() ));
         out.setCreatedDttm( in.getCreatedDttm() );
@@ -36,13 +37,14 @@ public class UserUtils extends BaseConvertUtil<User, UserTO>{
     public UserTO data2io(User in) {
         if ( in == null ) return null;
         UserTO out = new UserTO();
-        out.setUserId(in.getId());
+        out.setUsername(in.getId());
         out.setAddress( in.getAddress() );
         out.setAge( in.getAge());
-        out.setName( in.getName() );
+        out.setFirstName( in.getFirstName() );
+        out.setLastName( in.getLastName() );
         out.setEmail( in.getEmail() );
         out.setGender( in.getGender() );
-        out.setPassword( in.getPassword() );
+        out.setIdpId( in.getIdpId() );
         out.setPhone( in.getPhone() );
         out.setRoles( RoleUtils.instance().converListData2IO(  in.getRoles() ));
         out.setCreatedDttm( in.getCreatedDttm() );

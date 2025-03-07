@@ -14,7 +14,6 @@ public class SystemConfiguration  extends BaseEntity  {
 
     private String value;
 
-    private boolean isEncripted;
 
     public String getKey() {
         return key;
@@ -40,11 +39,5 @@ public class SystemConfiguration  extends BaseEntity  {
         this.value = value;
     }
 
-    public boolean isEncripted() {
-        return isEncripted;
-    }
 
-    public void setEncripted(boolean encripted) {
-        isEncripted = encripted;
-    }
 }
