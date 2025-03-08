@@ -8,11 +8,11 @@ import jakarta.persistence.Id;
 public class SystemConfigurationTO extends BaseEntity {
 
 
-    private String key;
+    private String configurationKey;
 
     private String description;
 
-    private String value;
+    private String configurationValue;
 
     private boolean isEncripted;
 
@@ -26,12 +26,12 @@ public class SystemConfigurationTO extends BaseEntity {
         this.version = version;
     }
 
-    public String getKey() {
-        return key;
+    public String getConfigurationKey() {
+        return configurationKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setConfigurationKey(String configurationKey) {
+        this.configurationKey = configurationKey;
     }
 
     public String getDescription() {
@@ -42,12 +42,12 @@ public class SystemConfigurationTO extends BaseEntity {
         this.description = description;
     }
 
-    public String getValue() {
-        return value;
+    public String getConfigurationValue() {
+        return configurationValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setConfigurationValue(String configurationValue) {
+        this.configurationValue = configurationValue;
     }
 
     public boolean isEncripted() {

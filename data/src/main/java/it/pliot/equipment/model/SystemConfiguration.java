@@ -8,19 +8,19 @@ import jakarta.persistence.Id;
 public class SystemConfiguration  extends BaseEntity  {
 
     @Id
-    private String key;
+    private String configurationKey;
 
     private String description;
 
-    private String value;
+    private String configurationValue;
 
 
-    public String getKey() {
-        return key;
+    public String getConfigurationKey() {
+        return configurationKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setConfigurationKey(String configurationKey) {
+        this.configurationKey = configurationKey;
     }
 
     public String getDescription() {
@@ -31,13 +31,11 @@ public class SystemConfiguration  extends BaseEntity  {
         this.description = description;
     }
 
-    public String getValue() {
-        return value;
+    public String getConfigurationValue() {
+        return configurationValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setConfigurationValue(String configurationValue) {
+        this.configurationValue = configurationValue;
     }
-
-
 }

@@ -20,8 +20,8 @@ public class SystemConfigurationUtilsUtils extends BaseConvertUtil<SystemConfigu
         if ( in == null ) return  null;
         SystemConfiguration out = new SystemConfiguration();
         out.setDescription( in.getDescription() );
-        out.setKey( in.getKey() );
-        out.setValue( in.getValue() );
+        out.setConfigurationKey( in.getConfigurationKey() );
+        out.setConfigurationValue( in.getConfigurationValue() );
         out.setVersion( in.getVersion() );
         return out;
     }
@@ -31,8 +31,8 @@ public class SystemConfigurationUtilsUtils extends BaseConvertUtil<SystemConfigu
         if ( in == null ) return  null;
         SystemConfigurationTO out = new SystemConfigurationTO();
         out.setDescription( in.getDescription() );
-        out.setKey( in.getKey() );
-        out.setValue( in.getValue() );
+        out.setConfigurationKey( in.getConfigurationKey() );
+        out.setConfigurationValue( in.getConfigurationValue() );
         out.setVersion( in.getVersion() );
         return out;
 
