@@ -2,11 +2,11 @@ package it.pliot.equipment.conf;
 
 import it.pliot.equipment.Const;
 import it.pliot.equipment.io.EquipmentTO;
-import it.pliot.equipment.io.RoleTO;
+import it.pliot.equipment.io.UserGrpTO;
 import it.pliot.equipment.io.SignalTO;
 import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.service.business.EquipmentServices;
-import it.pliot.equipment.service.business.RoleServices;
+import it.pliot.equipment.service.business.UserGrpServices;
 import it.pliot.equipment.service.business.SignalServices;
 import it.pliot.equipment.service.business.TenantServices;
 import jakarta.annotation.PostConstruct;
@@ -22,7 +22,7 @@ public class InitDb {
     private static final Logger log = LoggerFactory.getLogger(InitDb.class);
 
     @Autowired
-    private RoleServices roleService;
+    private UserGrpServices roleService;
     @Autowired
     private TenantServices tenanServices;
 
@@ -35,9 +35,9 @@ public class InitDb {
 
     @PostConstruct
     public void initDb( ) {
-        log.info("Preloading Role" + roleService.save( RoleTO.newroleio( "ADMIN" , "ADMINISTRATOR " ) ) );
-        log.info("Preloading Role" + roleService.save(  RoleTO.newroleio( "USER" , "USER " ) ));
-        log.info("Preloading Role" + roleService.save( RoleTO.newroleio( "TENAT_ADMIN" , "Tenant Administrator " ) ) );
+        log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ) );
+        log.info("Preloading Role" + roleService.save(  UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
+        log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );
         TenantTO t = tenanServices.save( TenantTO.newrtenant(Const.DEV_TENANT_ID , Const.DEV_TENANT_NAME , Const.DEV_TENANT_DESC, Const.DEV_EMAIL, Const.DEV_ADDRESS, Const.DEV_ZIPCODE, Const.DEV_COUNTRY,Const.DEV_PROFILE, Const.DEV_STATE ) );
 
         log.info("Preloading Tenant" +  t ) ;

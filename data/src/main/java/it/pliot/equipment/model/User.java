@@ -11,10 +11,19 @@ public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String userId;
 
     private String type;
 
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
+    private String tenant;
 
     private String email;
 
@@ -117,29 +126,29 @@ public class User extends BaseEntity {
         this.address = address;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public List<UserGrp> getUserGroups() {
+        return userGroups;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setUserGroups(List<UserGrp> userGroups) {
+        this.userGroups = userGroups;
     }
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
 
 
     @ManyToMany(fetch = FetchType.EAGER )
     @JoinTable(
-            name="users_roles",
-            joinColumns={@JoinColumn(name="Users", referencedColumnName="email")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="role")})
+            name="users_group",
+            joinColumns={@JoinColumn(name="Users", referencedColumnName="userId")},
+            inverseJoinColumns={@JoinColumn(name="grpName", referencedColumnName="grpName")})
 
-    private List<Role> roles = new ArrayList<>();
+    private List<UserGrp> userGroups = new ArrayList<>();
 }

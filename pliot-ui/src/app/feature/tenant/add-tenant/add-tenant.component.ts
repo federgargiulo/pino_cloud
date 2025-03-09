@@ -22,8 +22,7 @@ export class AddTenantComponent {
        tenantId: [''],
        name:  [''],
        description:  [''],
-       createdDttm: [new Date().toISOString()],
-       updateDttm: [new Date().toISOString()],
+       
        email: ['', [Validators.required, Validators.email]],
        profile: [''],
        country: [''],
@@ -37,6 +36,7 @@ export class AddTenantComponent {
 
   const newTenant: Tenant = this.tenantForm.value;
    console.info( " newTenant id " + newTenant.tenantId )
+   alert( newTenant.tenantId )
    this.tenantServices.saveTenant(newTenant).subscribe(() => {
       alert('Tenant creato con successo!');
       this.router.navigate(['/']); // 🔥 Torna alla home o alla lista dei Tenant

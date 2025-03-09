@@ -18,4 +18,14 @@ public interface Const {
     public static String DEV_ZIPCODE = "80100";
 
     public static String DEV_STATE = "Italy";
+
+    public static String ADMIN_ROLE = "pliot_admin";
+    public static String USER_RENANT_ROLE  = "pliot_user";
+    public static String TENANT_ADMIN_ROLE  = "pliot_tenat_admin";
+
+    public static String ADMIN_GRP = "pliot_admin";
+    public static String USER_TENANT_GRP = "pliot_user";
+    public static String TENANT_ADMIN_GRP  = "pliot_tenat_admin";
+
+
 }

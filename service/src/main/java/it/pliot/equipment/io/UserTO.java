@@ -21,6 +21,16 @@ public class UserTO extends BaseEntity {
 
     private String type;
 
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
+    private String tenant;
+
     private String firstName;
 
     private String lastName;
@@ -101,11 +111,11 @@ public class UserTO extends BaseEntity {
         this.password = password;
     }
 
-    public List<RoleTO> getRoles() {
+    public List<UserGrpTO> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleTO> roles) {
+    public void setRoles(List<UserGrpTO> roles) {
         this.roles = roles;
     }
 
@@ -129,7 +139,7 @@ public class UserTO extends BaseEntity {
 
     private String password;
 
-    private List<RoleTO> roles = new ArrayList<>();
+    private List<UserGrpTO> roles = new ArrayList<>();
 
 
 }
