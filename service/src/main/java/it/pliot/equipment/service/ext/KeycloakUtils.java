@@ -14,7 +14,7 @@ public class KeycloakUtils {
         UserRepresentation u = new UserRepresentation( );
         u.setFirstName( user.getFirstName() );
         u.setLastName( user.getLastName() );
-        u.setUsername( user.getUsername() );
+        u.setUsername( user.getUserId() );
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
         credential.setValue("password123");

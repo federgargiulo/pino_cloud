@@ -11,7 +11,17 @@ public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    private String user_pk;
+
     private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     private String type;
 
@@ -27,8 +37,6 @@ public class User extends BaseEntity {
 
     private String email;
 
-    private Integer age;
-
     private String phone;
 
 
@@ -38,13 +46,6 @@ public class User extends BaseEntity {
 
     private String idpId;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -70,8 +71,6 @@ public class User extends BaseEntity {
         this.idpId = idpId;
     }
 
-    private String username;
-
 
     private String firstName;
 
@@ -92,14 +91,6 @@ public class User extends BaseEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 
     public String getPhone() {
@@ -134,12 +125,12 @@ public class User extends BaseEntity {
         this.userGroups = userGroups;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUser_pk() {
+        return user_pk;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser_pk(String user_pk) {
+        this.user_pk = user_pk;
     }
 
 

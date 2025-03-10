@@ -90,7 +90,7 @@ public class KeycloakUserExtension {
 
             } else {
                 System.out.println( response.getEntity() );
-                throw new RuntimeException( " unable to create user ok keycloak: " + user.getUsername() );
+                throw new RuntimeException( " unable to create user ok keycloak: " + user.getUserId()  );
             }
         }finally {
             if ( response != null ){

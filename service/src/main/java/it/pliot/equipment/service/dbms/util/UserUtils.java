@@ -17,9 +17,9 @@ public class UserUtils extends BaseConvertUtil<User, UserTO>{
     public User io2data(UserTO in) {
         if ( in == null ) return null;
         User out = new User();
-        out.setUserId(in.getUsername());
+        out.setUser_pk(in.getUser_pk() );
         out.setAddress( in.getAddress() );
-        out.setAge( in.getAge());
+        out.setUserId( in.getUserId() );
         out.setFirstName(  in.getFirstName() );
         out.setLastName( in.getLastName() );
         out.setEmail( in.getEmail() );
@@ -38,9 +38,9 @@ public class UserUtils extends BaseConvertUtil<User, UserTO>{
     public UserTO data2io(User in) {
         if ( in == null ) return null;
         UserTO out = new UserTO();
-        out.setUsername(in.getUserId());
+        out.setUser_pk( in.getUser_pk());
         out.setAddress( in.getAddress() );
-        out.setAge( in.getAge());
+        out.setUserId( in.getUserId() );
         out.setFirstName( in.getFirstName() );
         out.setLastName( in.getLastName() );
         out.setEmail( in.getEmail() );

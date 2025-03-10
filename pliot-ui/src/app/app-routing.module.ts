@@ -12,6 +12,7 @@ import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userd
 import { SearchTenantComponent } from './feature/tenant/search-tenant/search-tenant.component';
 import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.component';
 import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-tenant.component';
+import { SearchUserComponent } from './feature/user/search-user/search-user.component';
 
 const routes: Routes = [
 
@@ -27,6 +28,8 @@ const routes: Routes = [
   { path: 'search-tenant', component: SearchTenantComponent, title: 'Search Tenant' },
   { path: 'add-tenant', component: AddTenantComponent, title: 'Add Tenant' },
   { path: 'detail-tenant/:id', component: DetailTenantComponent, title: 'Detail Tenant' , data: { renderMode: 'ssr' } },
+  { path: 'search-users', component: SearchUserComponent, title: 'Search Users' },
+
 
 ];
 
