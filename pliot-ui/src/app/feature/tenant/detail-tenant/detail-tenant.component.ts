@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TenantDetail, TenantServices} from '../../../service/tenant.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -18,6 +18,7 @@ export class DetailTenantComponent implements OnInit {
 
   constructor(
      private router: ActivatedRoute,
+     private route: Router,
      private formBuilder: FormBuilder, // Usato per costruire il form
      private tenantService: TenantServices // Iniettiamo il servizio
 
@@ -77,7 +78,7 @@ export class DetailTenantComponent implements OnInit {
       this.tenantService.updateTenant(this.tenantId, this.tenantForm.value).subscribe({
         next: () => {
           console.log("Aggiornato con successo!", this.tenantForm.value);
-
+          this.route.navigate(['/search-tenant']); // Naviga alla lista dopo il salvataggio
         },
         error: (err) => {
           console.error("Errore nell'aggiornamento:", err);
