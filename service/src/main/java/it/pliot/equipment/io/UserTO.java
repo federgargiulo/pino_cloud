@@ -6,10 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserTO extends BaseEntity {
+    private String user_pk;
 
     private String idpId;
+    private String userId;
 
-    public String getIdpId() {
+    public String getUser_pk() {
+        return user_pk;
+    }
+
+    public void setUser_pk(String user_pk) {
+        this.user_pk = user_pk;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+     public String getIdpId() {
         return idpId;
     }
 
@@ -17,9 +35,17 @@ public class UserTO extends BaseEntity {
         this.idpId = idpId;
     }
 
-    private String username;
-
     private String type;
+
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
+    private String tenant;
 
     private String firstName;
 
@@ -61,13 +87,7 @@ public class UserTO extends BaseEntity {
         this.email = email;
     }
 
-    public Integer getAge() {
-        return age;
-    }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
 
     public String getPhone() {
         return phone;
@@ -101,23 +121,14 @@ public class UserTO extends BaseEntity {
         this.password = password;
     }
 
-    public List<RoleTO> getRoles() {
+    public List<UserGrpTO> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleTO> roles) {
+    public void setRoles(List<UserGrpTO> roles) {
         this.roles = roles;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    private Integer age;
 
     private String phone;
 
@@ -129,7 +140,7 @@ public class UserTO extends BaseEntity {
 
     private String password;
 
-    private List<RoleTO> roles = new ArrayList<>();
+    private List<UserGrpTO> roles = new ArrayList<>();
 
 
 }

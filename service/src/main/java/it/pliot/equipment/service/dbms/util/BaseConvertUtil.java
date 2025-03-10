@@ -14,6 +14,10 @@ public abstract class BaseConvertUtil<K,IO> {
 
     public abstract  IO data2io( K in );
 
+    protected static String nullalize(String str) {
+        if ( str == null | str.length() == 0 ) return null;
+        return  str;
+    }
 
 
     public  List<IO> converListData2IO( List<K> ldata  ){

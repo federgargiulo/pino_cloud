@@ -28,8 +28,17 @@ public class TenantTO extends BaseEntity {
 
     private String address;
 
+    private String idpGrpId;
 
-    public static TenantTO newrtenant( String tenId , String name, String descr, String email, String address, String zipCode, String country,String profile, String state) {
+    public String getIdpGrpId() {
+        return idpGrpId;
+    }
+
+    public void setIdpGrpId(String idpGrpId) {
+        this.idpGrpId = idpGrpId;
+    }
+
+    public static TenantTO newrtenant(String tenId , String name, String descr, String email, String address, String zipCode, String country, String profile, String state) {
         TenantTO t = new TenantTO();
         t.setTenantId( tenId );
         t.setName( name );
