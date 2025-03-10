@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'detail-tenant/:id', component: DetailTenantComponent, title: 'Detail Tenant' , data: { renderMode: 'ssr' } },
   { path: 'search-users', component: SearchUserComponent, title: 'Search Users' },
   { path: 'add-users', component: DetailUserComponent, title: 'Add Users' },
+  { path: 'detail-user/:id', component: DetailUserComponent, title: 'Modifica Users' }
  
 
 ];

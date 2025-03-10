@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { TenantServices } from '../../../service/tenant.service';
 import { UserService } from '../../../service/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from 'express';
+import { ActivatedRoute } from '@angular/router';
+import { error } from 'console';
+ 
+
 
 @Component({
   selector: 'app-detail-user',
@@ -16,8 +21,9 @@ export class DetailUserComponent {
     
     selectedTenant: string = '';
   
-    constructor( private fb: FormBuilder, private tenantServices: TenantServices , 
-                  private userService : UserService ) {
+    constructor( private route: ActivatedRoute,
+                 private fb: FormBuilder, private tenantServices: TenantServices , 
+                 private userService : UserService ) {
       
       this.userForm = this.fb.group({
         user_pk: [''],
@@ -25,14 +31,13 @@ export class DetailUserComponent {
         firstName:  ['' , [Validators.required ] ],  
         lastName:  ['' , [Validators.required ] ],           
         email: ['', [Validators.required, Validators.email]],
-        tenantId:['' , [Validators.required]]
+        tenant:['' , [Validators.required]]
        
       });
     }
 
     onSubmit(){
-      alert( "on submit ");
-    
+      
         this.userService.createUser( this.userForm.value ).subscribe(async data => {
           this.manageSuccessOnSave( data )
         },
@@ -50,15 +55,49 @@ export class DetailUserComponent {
       
         this.isPersisted = true;
         if (resultData != null && resultData.isSuccess) {
-          this.successMessage = 'Dashboard creata con successo!';   
+          this.successMessage = 'User creata con successo!';   
         }
     
       }
+    }
+   
+    setFormValues( resultData :any ){
+       var x =  { 
+          user_pk : resultData.user_pk ,
+          userId : resultData.userId,
+          firstName: resultData.firstName, // Aggiunto title
+          lastName: resultData.lastName,
+          email: resultData.email,
+          tenant: resultData.tenant
+        }
+        this.userForm.setValue( x );
+      
     }
     
     ngOnInit(): void {
         console.log( "init Tenant" )
         this.getAllTenants();
+        this.route.paramMap.subscribe(params => {
+
+          var userId = params.get('id') || '';
+          if ( userId ! ){
+            alert( "load user " + userId );
+            this.userService.getUserById( userId ).subscribe({
+              next: (data) => {
+                alert( data.body.lastName  );
+                this.setFormValues( data.body );
+                this.isPersisted = true;
+              },
+              error: (err) => {
+                console.error('Errore nel caricamento del dettaglio della dashboard', err);
+
+              }
+            })
+
+          }
+            
+
+        })
   
       }
   

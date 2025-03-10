@@ -2,13 +2,13 @@
 
 <form [formGroup]= "userForm" (ngSubmit)="onSubmit()">
 
-
+    <input id="user_pk" type="hidden" formControlName="user_pk">
     <div>
         <label for="tenantId">Tenant:</label>
-         <select id="tenant" formControlName="tenantId" required>
+         <select id="tenant" formControlName="tenant" required>
             <option *ngFor="let tenant of tenantList" [value]="tenant.id">{{ tenant.name }}</option>
           </select>
-        <div *ngIf="userForm.controls['tenantId'].invalid && userForm.controls['tenantId'].touched">
+        <div *ngIf="userForm.controls['tenant'].invalid && userForm.controls['tenant'].touched">
          Il tenat è obbligatorio
         </div>
     </div>
