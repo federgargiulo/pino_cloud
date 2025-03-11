@@ -30,14 +30,16 @@ import { logInterceptor  } from './interceptors/log.interceptor';
 
 import { SearchUserComponent } from './feature/user/search-user/search-user.component';
 import { DetailUserComponent } from './feature/user/detail-user/detail-user.component';
+import { LocUtilsService } from './loc-utils.service';
 
 
+var loc = new LocUtilsService (); 
 
 export const  KEYCLOAK_PRIVIDER = () => provideKeycloak({
   config: {
-    url: 'http://localhost:8180',   // URL del server Keycloak
-    realm: 'pliot',                 // Nome del realm
-    clientId: 'edge_app',           // Client ID registrato su Keycloak
+    url: loc.getIDPUrl() ,   // URL del server Keycloak
+    realm: loc.getRealm()  ,                 // Nome del realm
+    clientId: loc.getClientId() ,           // Client ID registrato su Keycloak
   },
     initOptions: {
       onLoad: 'login-required',  // Oppure 'check-sso' se non vuoi forzare il login
