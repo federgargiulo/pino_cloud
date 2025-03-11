@@ -16,4 +16,6 @@ public class UserContext {
     public static User currentUser(){
         return DEVELOPMENET_USER;
     }
+
+    public static void setUser( User u ){}
 }
