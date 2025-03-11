@@ -64,7 +64,7 @@ export interface TenantDetail { // Anche questa deve essere esportata
     return this.webApiService.get(httpLink.getTenantDetailById + '/' + model);
   }
 
-  public saveTenant(model: any): Observable<any> {
+  public addTenant(model: any): Observable<any> {
     console.info( "Service is calling " + httpLink.saveTenant + " With data " + model )
     return this.webApiService.post( httpLink.saveTenant , model );
   }

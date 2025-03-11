@@ -1,12 +1,11 @@
 <form [formGroup]="signalForm">
-    <h3>Gestione Segnali</h3>
-  
+    <h4>Gestione Segnali</h4>
     <div formArrayName="signals">
       <div *ngFor="let signal of signals.controls; let i = index" [formGroupName]="i">
-        
+
         <label for="signalId">Signal ID:</label>
         <input type="string" formControlName="signalId">
-  
+
         <label for="tipo">Tipo:</label>
         <select formControlName="chartType">
           <option value="bar">Bar Chart</option>
@@ -19,10 +18,12 @@
         <button type="button" (click)="removeSignal(i)">❌ Rimuovi</button>
       </div>
     </div>
-  
-    <button type="button" (click)="addSignal()">➕ Aggiungi Segnale</button>
-    <button type="button" (click)="submit()">📤 Mostra JSON</button>
-    <button type="button" (click)="conferma()">Conferma Segnali</button>
+    <table>
+      <tr>
+        <td><button type="button" (click)="addSignal()">➕ Aggiungi Segnale</button></td>
+        <td><button type="button" (click)="submit()">📤 Mostra JSON</button></td>
+        <td><button type="button" (click)="conferma()">Conferma Segnali</button></td>
+      </tr>
+    </table>
   </form>
- 
-  
+

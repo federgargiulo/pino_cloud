@@ -2,6 +2,7 @@ package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.io.PagedResultTO;
 import it.pliot.equipment.model.AuditObject;
+import it.pliot.equipment.model.User;
 import it.pliot.equipment.repository.PliotJpaRepository;
 import it.pliot.equipment.service.business.BaseServiceInterface;
 import it.pliot.equipment.service.business.errors.ServiceExceptions;
@@ -84,5 +85,9 @@ public abstract class BaseServiceImpl<T,E,K> implements BaseServiceInterface<T,K
 
     }
 
+
+    protected List<T> findAllAsTo(Example<E> example){
+        return getConverter().converListData2IO( getRepo().findAll( example ) );
+    }
 
 }

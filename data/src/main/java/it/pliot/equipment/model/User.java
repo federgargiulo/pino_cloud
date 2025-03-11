@@ -11,25 +11,70 @@ public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String user_pk;
+
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     private String type;
 
-    private String name;
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
+    private String tenant;
 
     private String email;
-
-    private Integer age;
 
     private String phone;
 
 
     private String gender;
 
-
     private String address;
 
-    private String password;
+    private String idpId;
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getIdpId() {
+        return idpId;
+    }
+
+    public void setIdpId(String idpId) {
+        this.idpId = idpId;
+    }
+
+
+    private String firstName;
+
+    private String lastName;
 
     public String getType() {
         return type;
@@ -39,13 +84,6 @@ public class User extends BaseEntity {
         this.type = type;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return email;
@@ -53,14 +91,6 @@ public class User extends BaseEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 
     public String getPhone() {
@@ -87,37 +117,29 @@ public class User extends BaseEntity {
         this.address = address;
     }
 
-    public String getPassword() {
-        return password;
+    public List<UserGrp> getUserGroups() {
+        return userGroups;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserGroups(List<UserGrp> userGroups) {
+        this.userGroups = userGroups;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public String getUser_pk() {
+        return user_pk;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setUser_pk(String user_pk) {
+        this.user_pk = user_pk;
     }
 
 
 
     @ManyToMany(fetch = FetchType.EAGER )
     @JoinTable(
-            name="users_roles",
-            joinColumns={@JoinColumn(name="Users", referencedColumnName="email")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="role")})
+            name="users_group",
+            joinColumns={@JoinColumn(name="Users", referencedColumnName="userId")},
+            inverseJoinColumns={@JoinColumn(name="grpName", referencedColumnName="grpName")})
 
-    private List<Role> roles = new ArrayList<>();
+    private List<UserGrp> userGroups = new ArrayList<>();
 }

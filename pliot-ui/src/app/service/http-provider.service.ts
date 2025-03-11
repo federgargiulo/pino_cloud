@@ -21,6 +21,8 @@ export class HttpProviderService {
     console.log( "location Strateg " + locationStrateg.path() );
     console.log( "location getBaseHref " + locationStrateg.getBaseHref() );
 
+    
+
     var DEV:string = "localhost:4200";
     var LOCAL_HOST:string = "localhost:8080";
     let x : string = "";

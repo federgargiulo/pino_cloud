@@ -1,5 +1,7 @@
 package it.pliot.equipment.service.business;
 
+import org.springframework.data.domain.Example;
+
 import java.util.List;
 
 public interface BaseServiceInterface<T,K> {
@@ -18,5 +20,6 @@ public interface BaseServiceInterface<T,K> {
     public void delete(K d );
 
     public List<T> saveAll(List<T> iterable );
+
 
 }

@@ -2,6 +2,7 @@ package it.pliot.equipment.controller;
 
 import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.service.business.UserServices;
+import jakarta.ws.rs.QueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +12,15 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UserController {
+
     @Autowired
     private UserServices userServices;
 
     @GetMapping("/users")
-    public List<UserTO> all() {
-        return userServices.findAll();
+    public List<UserTO> search(@QueryParam( "tenant") String tenant ) {
+
+
+        return userServices.findUsersByTenant( tenant );
     }
 
     @GetMapping("/users/{id}")
@@ -28,7 +32,7 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<UserTO> createUser(@RequestBody UserTO userTO) {
         try {
-            UserTO t = userServices.create( userTO);
+            UserTO t = userServices.create( userTO );
             return new ResponseEntity<>(t, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -41,9 +45,9 @@ public class UserController {
     }
 
     @PatchMapping("/users/{id}")
-    public ResponseEntity<UserTO> updateEquipment(@PathVariable("id") String id , @RequestBody UserTO userTO ) {
+    public ResponseEntity<UserTO> updateUser(@PathVariable("id") String id , @RequestBody UserTO userTO ) {
         try {
-            userTO.setUserId( id );
+            userTO.setUser_pk(  id );
             userTO = userServices.save( userTO );
             return new ResponseEntity<>(userTO, HttpStatus.OK );
         } catch (Exception e) {

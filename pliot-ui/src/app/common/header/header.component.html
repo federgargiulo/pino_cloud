@@ -11,9 +11,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['help-angular']" >Help Angular</a>
-          </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,6 +36,16 @@
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Users
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item"[routerLink]="['add-users']">New User</a></li>
+              <li><a class="dropdown-item"[routerLink]="['search-users']">Search</a></li>
+             </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dashboard
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -46,10 +53,6 @@
               <li><a class="dropdown-item"[routerLink]="['userdashboard-new']">Add Dashboard</a></li>
 
             </ul>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li>
         </ul>
         <form class="d-flex">

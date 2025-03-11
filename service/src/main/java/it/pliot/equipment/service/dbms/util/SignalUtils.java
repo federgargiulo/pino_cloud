@@ -24,8 +24,7 @@ public class SignalUtils extends BaseConvertUtil<Signal, SignalTO>{
         data.setDownRedLimit( sio.getDownRedLimit() );
         data.setMaxVal( sio.getMaxVal() );
         data.setMinVal( sio.getMinVal() );
-        data.setDownRedLimit( sio.getDownRedLimit() );
-        data.setDownRedLimit( sio.getDownRedLimit() );
+        data.setDownYellowLimit( sio.getDownYellowLimit() );
         data.setUpRedLimit( sio.getUpRedLimit() );
         data.setUpYellowLimit( sio.getUpYellowLimit());
         return data;

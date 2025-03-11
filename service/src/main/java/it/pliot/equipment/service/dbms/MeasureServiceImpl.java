@@ -42,7 +42,6 @@ public class MeasureServiceImpl extends BaseServiceImpl<MeasureTO, Measure, Stri
 
     public PagedResultTO<MeasureTO> search(String idSignal, Date from, String page ,int pageSize ){
 
-        System.out.printf( "#" + page + "#" );
         Pageable nextPage  = PageRequest.of( Integer.valueOf( page ) ,  pageSize );
         Specification<Measure> spec = Specification
                 .where( MeasureSpecifications.isYoungerThan( from ) )  // Prezzo > valore (AND)

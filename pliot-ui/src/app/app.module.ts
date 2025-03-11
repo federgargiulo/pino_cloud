@@ -22,10 +22,15 @@ import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.compo
 import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-tenant.component';
 import { DatePipe } from '@angular/common';
 import { DashconfManagerComponent } from './dashboard/common/dashconf-manager/dashconf-manager.component';
+
 import { addBearer } from './interceptors/auth.interceptor';
 import { AutoRefreshTokenService, createInterceptorCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, IncludeBearerTokenCondition, includeBearerTokenInterceptor, provideKeycloak, UserActivityService, withAutoRefreshToken } from 'keycloak-angular';
 import { EnvironmentProviders }  from '@angular/core';
 import { logInterceptor  } from './interceptors/log.interceptor';
+
+import { SearchUserComponent } from './feature/user/search-user/search-user.component';
+import { DetailUserComponent } from './feature/user/detail-user/detail-user.component';
+
 
 
 export const  KEYCLOAK_PRIVIDER = () => provideKeycloak({
@@ -65,9 +70,8 @@ export const  KEYCLOAK_PRIVIDER = () => provideKeycloak({
     AddTenantComponent,
     DetailTenantComponent,
     DashconfManagerComponent,
- 
-
-
+    SearchUserComponent,
+    DetailUserComponent,
 
   ],
   imports: [

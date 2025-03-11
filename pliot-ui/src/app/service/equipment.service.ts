@@ -20,6 +20,7 @@ export interface Equipment { // Anche questa deve essere esportata
   status: string,
   name: string,
   version: string,
+  tenant: string,
   updateDttm: string,
   createdDttm: string
 }
@@ -69,5 +70,6 @@ export interface EquipmentDetail { // Anche questa deve essere esportata
       console.info( "Service is calling getEquipmentById" + httpLink.getEquipmentById + " With id: " + id )
       return this.webApiService.get(httpLink.getEquipmentById + '/' + id);
     }
+
 
 }

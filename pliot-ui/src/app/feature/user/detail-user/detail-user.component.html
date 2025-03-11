@@ -1,0 +1,55 @@
+ 
+
+<form [formGroup]= "userForm" (ngSubmit)="onSubmit()">
+
+    <input id="user_pk" type="hidden" formControlName="user_pk">
+    <div>
+        <label for="tenantId">Tenant:</label>
+         <select id="tenant" formControlName="tenant" required>
+            <option *ngFor="let tenant of tenantList" [value]="tenant.id">{{ tenant.name }}</option>
+          </select>
+        <div *ngIf="userForm.controls['tenant'].invalid && userForm.controls['tenant'].touched">
+         Il tenat è obbligatorio
+        </div>
+    </div>
+
+    <label for="tenant">Seleziona Tenant:</label>
+    
+
+    <div>
+        <label for="userId">userId:</label>
+        <input id="userId" formControlName="userId">
+        <div *ngIf="userForm.controls['userId'].invalid && userForm.controls['userId'].touched">
+         User id obbligatorio
+        </div>
+    </div>
+    <div>
+        <label for="firstName">Nome:</label>
+        <input id="firstName" formControlName="firstName">
+        <div *ngIf="userForm.controls['firstName'].invalid && userForm.controls['firstName'].touched">
+            Nome è obbligatorio
+        </div>
+    </div>
+
+    <div>
+        <label for="lastName">Cognome:</label>
+        <input id="lastName" formControlName="lastName">
+        <div *ngIf="userForm.controls['lastName'].invalid && userForm.controls['lastName'].touched">
+            Il Cognome è obbligatorio
+        </div>
+    </div>
+    <div>
+        <label for="email">E mail:</label>
+        <input id="email" formControlName="email">
+        <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+            Il Cognome è obbligatorio
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <button type="submit" class="btn btn-primary mt-3"  [disabled]="userForm.invalid">Salva</button>
+        </div>
+        
+    </div>
+</form>

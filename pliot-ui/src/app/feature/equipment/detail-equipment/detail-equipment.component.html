@@ -1,42 +1,144 @@
 <h2>Equipment Detail</h2>
 
 <form [formGroup]="equipmentForm" (ngSubmit)="updateEquipment()">
-  <!-- ID (non modificabile) -->
-  <div class="form-group">
-    <label>ID:</label>
-    <input type="text" class="form-control" formControlName="equipmentId" >
-  </div>
-
-  <!-- Nome -->
-  <div class="form-group">
-    <label>Name:</label>
-    <input type="text" class="form-control" formControlName="name">
-  </div>
-
-  <!-- Tenant -->
-  <div class="form-group">
-    <label>Tenant:</label>
-    <input type="text" class="form-control" formControlName="tenant">
-  </div>
-
-  <!-- Stato -->
-  <div class="form-group">
-    <label>Status:</label>
-    <input type="text" class="form-control" formControlName="status">
-  </div>
-
-  <!-- Data di Creazione (non modificabile) -->
-  <div class="form-group">
-    <label>Date Create:</label>
-    <input type="text" class="form-control" formControlName="createdDttm" >
-  </div>
-
-  <!-- Data di Creazione (non modificabile) -->
-  <div class="form-group">
-    <label>Date Update:</label>
-    <input type="text" class="form-control" formControlName="updateDttm" >
-  </div>
-
-  <!-- Pulsante per Salvare -->
-  <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
+  <table>
+    <tr>
+      <td colspan="2">
+        <!-- ID (non modificabile) -->
+        <div class="form-group">
+          <label>ID:</label>
+          <input type="text" class="form-control" formControlName="equipmentId" >
+        </div>
+      </td>
+     </tr>
+    <tr>
+      <td>
+      <!-- Nome -->
+      <div class="form-group">
+        <label>Name:</label>
+        <input type="text" class="form-control" formControlName="name">
+      </div>
+      </td>
+      <td>
+        <!-- Tenant -->
+        <div class="form-group">
+          <label>Tenant:</label>
+          <input type="text" class="form-control" formControlName="tenant">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <!-- Stato -->
+        <div class="form-group">
+          <label>Status:</label>
+          <input type="text" class="form-control" formControlName="status">
+        </div>
+      </td>
+      <td>
+        <!-- Data di Creazione (non modificabile) -->
+        <div class="form-group">
+          <label>Date Create:</label>
+          <input type="text" class="form-control" formControlName="createdDttm" >
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <!-- Data di Creazione (non modificabile) -->
+        <div class="form-group">
+          <label>Date Update:</label>
+          <input type="text" class="form-control" formControlName="updateDttm" >
+        </div>
+      </td>
+    </tr>
+    <tr><td colspan="3"></td></tr>
+    <tr>
+      <td>
+        <!-- Pulsante per Salvare -->
+        <button type="submit" class="btn btn-primary mt-3">Save Equipment</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary mt-3" (click)="toggleSignalForm()">Add Signal</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary mt-3" (click)="loadSignals()">View Signals</button>
+      </td>
+    </tr>
+  </table>
 </form>
+
+<!-- FORM SIGNAL -->
+<div *ngIf="showSignalForm">
+  <h2 *ngIf="isEditingSignal">Update Signal</h2>
+  <h2 *ngIf="!isEditingSignal">Add Signal</h2>
+
+
+  <form [formGroup]="signalForm" (ngSubmit)="saveSignal()">
+    <table>
+      <tr><td colspan="2"><input type="hidden" class="form-control" formControlName="signalId"></td></tr>
+      <tr><td colspan="2"><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td></tr>
+      <tr><td><label>Unit of Measurement:</label><input type="text" class="form-control" formControlName="unitOfMeasurement"></td>
+          <td><label>Name:</label><input type="text" class="form-control" formControlName="name"></td>
+      </tr>
+      <tr><td><label>Min Value:</label><input type="number" class="form-control" formControlName="minVal"></td>
+          <td><label>Max Value:</label><input type="number" class="form-control" formControlName="maxVal"></td>
+      </tr>
+      <tr><td><label>Down Red Limit:</label><input type="number" class="form-control" formControlName="downRedLimit"></td>
+          <td><label>Down Yellow Limit:</label><input type="number" class="form-control" formControlName="downYellowLimit"></td>
+      </tr>
+      <tr><td><label>Up Red Limit:</label><input type="number" class="form-control" formControlName="upRedLimit"></td>
+           <td><label>Up Yellow Limit:</label><input type="number" class="form-control" formControlName="upYellowLimit"></td>
+      </tr>
+     <!-- <tr><td><label>Created Date:</label><input type="text" class="form-control" formControlName="createdDttm" readonly></td></tr>
+      <tr><td><label>Updated Date:</label><input type="text" class="form-control" formControlName="updateDttm" readonly></td></tr>-->
+      <tr><td colspan="2" ><button type="submit" class="btn btn-primary mt-3">{{ isEditingSignal ? 'Update Signal' : 'Save Signal' }}</button></td></tr>
+    </table>
+  </form>
+</div>
+
+
+<!-- LISTA SIGNALS -->
+<div *ngIf="signals.length > 0" class="table-container">
+  <h2>Signals List</h2>
+  <table class="table">
+    <thead>
+    <tr class="center-align">
+      <th>ID</th>
+      <th>Name</th>
+      <th>UnitOfMeasure</th>
+      <th>Min</th>
+      <th>Max</th>
+      <th>DownRedLimit</th>
+      <th>UpRedLimit</th>
+      <th>DownYellowLimit</th>
+      <th>UpYellowLimit</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th>Modify</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let signal of signals; let i = index"  class="center-align">
+      <td>{{ signal.signalId }}</td>
+      <td>{{ signal.name }}</td>
+      <td>{{ signal.unitOfMeasurement }}</td>
+      <td>{{ signal.minVal }}</td>
+      <td>{{ signal.maxVal }}</td>
+      <td>{{ signal.downRedLimit }}</td>
+      <td>{{ signal.upRedLimit }}</td>
+      <td>{{ signal.downYellowLimit }}</td>
+      <td>{{ signal.upYellowLimit }}</td>
+      <td>{{ signal.createdDttm }}</td>
+      <td>{{ signal.updateDttm }}</td>
+      <td><button class="btn btn-primary mt-3" (click)="editSignal(signal)">✏ Edit</button></td>
+    <!--  <td class="action-buttons">
+        <button class="btn-edit" (click)="editSignal(signal)">Edit</button>
+
+      </td> -->
+      <td> <button class="btn btn-primary mt-3"  (click)="deleteSignal(signal.equipmentId, signal.signalId, i)">❌ Delete</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
