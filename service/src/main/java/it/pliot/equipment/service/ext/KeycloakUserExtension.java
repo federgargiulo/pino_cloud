@@ -75,13 +75,12 @@ public class KeycloakUserExtension {
 
 
 
-    public UserTO createUser(UserTO user){
+    public UserTO createUser(UserTO user , String ... groupId ){
         Response response = null;
         Keycloak keycloak = null;
         try {
             keycloak = openKeycloak();
-
-            response =   keycloak.realm( realmManaged ).users().create(KeycloakUtils.initUser(user));
+            response =   keycloak.realm( realmManaged ).users().create( KeycloakUtils.initUser(user ,   groupId ) );
             if (response.getStatus() == 201) {
                 String location = response.getHeaderString("Location");
                 String userId = location.substring(location.lastIndexOf("/") + 1);
