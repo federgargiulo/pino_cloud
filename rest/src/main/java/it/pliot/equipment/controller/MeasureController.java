@@ -1,5 +1,6 @@
 package it.pliot.equipment.controller;
 
+import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.io.PagedResultTO;
 import it.pliot.equipment.io.MeasureTO;
 import it.pliot.equipment.service.business.MeasureServices;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@ApiPrefixController
 public class MeasureController {
 
     private static final Logger log = LoggerFactory.getLogger(MeasureController.class);

@@ -11,6 +11,8 @@ import { LocationStrategy, PathLocationStrategy , Location } from '@angular/comm
 export class HttpProviderService {
 
   BASE_URL:string = "";
+  RELATIVE_URL:string = "/api";
+  
   constructor(private httpClient: HttpClient ,
             locationStrateg : LocationStrategy ,
             location: Location ) {
@@ -60,7 +62,7 @@ export class HttpProviderService {
       observe: "response" as 'body',
       params: httpParams
     };
-    return this.httpClient.get( this.BASE_URL + url,   headers   )
+    return this.httpClient.get( this.BASE_URL + this.RELATIVE_URL + url,   headers   )
     .pipe(
         map((response: any) => this.ReturnResponseData(response)),
         catchError(this.handleError)
@@ -80,7 +82,7 @@ export class HttpProviderService {
       observe: "response" as 'body'
     };
     return this.httpClient.post(
-      this.BASE_URL + url,
+      this.BASE_URL + this.RELATIVE_URL + url,
       JSON.stringify(model),
       httpOptions)
       .pipe(
@@ -98,7 +100,7 @@ export class HttpProviderService {
       observe: "response" as 'body'
     };
     return this.httpClient.put(
-      this.BASE_URL + url,
+      this.BASE_URL + this.RELATIVE_URL + url,
       JSON.stringify(model),
       httpOptions)
       .pipe(
@@ -116,7 +118,7 @@ export class HttpProviderService {
       observe: "response" as 'body'
     };
     return this.httpClient.delete(
-      this.BASE_URL + url,
+      this.BASE_URL + this.RELATIVE_URL + url,
       httpOptions)
       .pipe(
         map((response: any) => this.ReturnResponseData(response)),
@@ -143,7 +145,7 @@ export class HttpProviderService {
           observe: "response" as 'body'
         };
         return this.httpClient.patch(
-          this.BASE_URL + url,
+          this.BASE_URL + this.RELATIVE_URL +  url,
           model,
           httpOptions)
           .pipe(

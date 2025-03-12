@@ -6,7 +6,7 @@ import Keycloak from 'keycloak-js';
  
 
 export function addBearer(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  alert( "test ");
+  console.log( "add bearer ");
   const keycloak = inject(Keycloak);
   const token = keycloak.token;
       if (token) {
@@ -14,9 +14,8 @@ export function addBearer(req: HttpRequest<unknown>, next: HttpHandlerFn): Obser
           setHeaders: { Authorization: `Bearer ${token}` }
         });
         return next(authReq);
-      }
-      return next(req);
-    
+      }else
+        return next(req);
 }
 
 

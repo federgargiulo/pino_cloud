@@ -7,6 +7,7 @@ pliot:
     user: "admin"
     password: "password"
     clientId: "admin-cli"
+  base_path: "api"
 
 
 springdoc:
@@ -15,6 +16,9 @@ springdoc:
 
 #jms:
  #  jndi-name: "java:/MyConnectionFactory"
+
+
+
 spring:
   activemq:
     broker-url: "tcp://localhost:9876"
@@ -30,8 +34,9 @@ spring:
     user: admin
     password: secret
 
-
 #
+#   jwk-set-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/certs
+#          issuer-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}
 # https://hawt.io/docs/get-started.html
 #
 
@@ -71,6 +76,12 @@ spring:
 #    properties:
 #      hibernate:
 #        dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8180/realms/pliot/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8180/realms/pliot
 
 management:
   endpoints:

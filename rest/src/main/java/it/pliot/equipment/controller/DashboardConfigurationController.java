@@ -1,6 +1,7 @@
 package it.pliot.equipment.controller;
 
 
+import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.conf.InitDb;
 import it.pliot.equipment.io.DashboardConfigurationTO;
 import it.pliot.equipment.security.UserContext;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@ApiPrefixController
 public class DashboardConfigurationController {
 
     private static final Logger log = LoggerFactory.getLogger(DashboardConfigurationController.class);

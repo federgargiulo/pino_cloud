@@ -1,5 +1,6 @@
 package it.pliot.equipment.controller;
 
+import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.controller.io.InitializeSignalTO;
 import it.pliot.equipment.io.SignalTO;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@ApiPrefixController
 public class InizializeController {
 
     private static final Logger log = LoggerFactory.getLogger(InizializeController.class);

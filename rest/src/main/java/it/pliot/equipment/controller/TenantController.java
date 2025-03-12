@@ -1,6 +1,7 @@
 package it.pliot.equipment.controller;
 
 
+import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.security.UserContext;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@ApiPrefixController
 public class TenantController {
 
     @Autowired

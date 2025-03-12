@@ -1,5 +1,6 @@
 package it.pliot.equipment.controller;
 
+import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.io.DashboardConfigurationTO;
 import it.pliot.equipment.io.MeasureTO;
 import it.pliot.equipment.io.SystemConfigurationTO;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@ApiPrefixController
 public class SystemConfigurationController {
 
 

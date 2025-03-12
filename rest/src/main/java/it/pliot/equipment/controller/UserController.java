@@ -1,5 +1,6 @@
 package it.pliot.equipment.controller;
 
+import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.service.business.UserServices;
 import jakarta.ws.rs.QueryParam;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@ApiPrefixController
 public class UserController {
 
     @Autowired
