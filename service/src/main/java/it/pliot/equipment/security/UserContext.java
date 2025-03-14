@@ -1,8 +1,13 @@
 package it.pliot.equipment.security;
 
+import it.pliot.equipment.Const;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class UserContext {
 
@@ -25,12 +30,36 @@ public class UserContext {
               u.setFirstName( jwt.getClaim("given_name") );
               u.setLastName( jwt.getClaim("family_name") );
               u.setEmail( jwt.getClaim("email") );
-              Object  o = jwt.getClaim( "groups");
+              u.setTenantId(  exractTenantId( jwt.getClaim( "groups") ) );
               return u;
           }
           return null;
 
     }
 
-    public static void setUser( JwtUser u ){}
+    private static String exractTenantId(Object groups) {
+        if ( groups instanceof Collection ){
+            Iterator<String> i = ( ( Collection ) groups ).iterator();
+            while ( i.hasNext() ){
+                String x = extractTenantName( i.next() );
+                if ( x != null && x.length() > 0 )
+                    return x;
+            }
+        }
+        return null;
+    }
+    private static int START_INDEX = Const.GROUP_PREFIX.length() + 1;
+
+    private static String extractTenantName( String x ){
+        if ( x == null ) return null;
+        int i = x.indexOf( Const.GROUP_PREFIX );
+        if ( i < 0 )
+            return null;
+        int endIndex = x.length();
+        if ( START_INDEX >= endIndex  )
+            return  null;
+
+        return x.substring( START_INDEX , endIndex );
+    }
+
 }

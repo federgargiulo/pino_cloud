@@ -30,5 +30,5 @@ public interface Const {
 
     public static String DEFAULT_PASSWORD = "pliot_def_password";
 
-    public static String GROUP_PREFIX = "pliot_tenant_";
+    public static String GROUP_PREFIX = "pliot_grptenant_";
 }
