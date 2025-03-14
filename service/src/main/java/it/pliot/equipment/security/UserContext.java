@@ -25,6 +25,7 @@ public class UserContext {
               u.setFirstName( jwt.getClaim("given_name") );
               u.setLastName( jwt.getClaim("family_name") );
               u.setEmail( jwt.getClaim("email") );
+              Object  o = jwt.getClaim( "groups");
               return u;
           }
           return null;

@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/")
@@ -30,6 +31,7 @@ public class TenantController {
 
     @GetMapping("/tenants")
     public List<TenantTO> all() {
+        Object o = UserContext.currentUser();
         return tenantServices.findAll();
     }
 
@@ -38,6 +40,7 @@ public class TenantController {
     @PostMapping("/tenants")
     public ResponseEntity<TenantTO> createTenant(@RequestBody TenantTO tenant) {
         try {
+
             TenantTO t = tenantServices.create( tenant);
             return new ResponseEntity<>(t, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -48,6 +51,7 @@ public class TenantController {
 
     @GetMapping("/tenants/{id}")
     public TenantTO getTenantById(@PathVariable("id") String id) {
+
         return tenantServices.findById(id);
 
     }

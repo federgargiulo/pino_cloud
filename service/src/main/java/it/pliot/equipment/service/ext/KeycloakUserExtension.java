@@ -130,7 +130,6 @@ public class KeycloakUserExtension {
                 return x;
 
             } else {
-                System.out.println( response.getEntity() );
                 throw new RuntimeException( " unable to create user ok keycloak: " + x.getTenantId() );
             }
         }finally {

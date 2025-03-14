@@ -37,7 +37,7 @@ public class KeycloakUtils {
     }
     public static GroupRepresentation initGrp(String grpName) {
         GroupRepresentation g = new GroupRepresentation();
-        g.setName( grpName );
+        g.setName( Const.GROUP_PREFIX + grpName );
         return g;
     }
 }
