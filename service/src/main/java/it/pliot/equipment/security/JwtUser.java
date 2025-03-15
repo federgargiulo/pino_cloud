@@ -39,6 +39,15 @@ public class JwtUser implements Serializable {
 
     private String email;
 
+    private String idpId;
+
+    public String getIdpId() {
+        return idpId;
+    }
+
+    public void setIdpId(String idpId) {
+        this.idpId = idpId;
+    }
 
     private List<String> roles;
 

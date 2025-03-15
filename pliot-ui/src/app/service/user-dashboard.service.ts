@@ -30,6 +30,7 @@ export interface UserDashboardDetail { // Anche questa deve essere esportata
 
  public getUserDashboardById(model: any): Observable<any> {
     console.info( "Service is calling " + httpLink.baseDashboard + " With data " + model )
+    alert( httpLink.baseDashboard + '/' + model );
     return this.webApiService.get(httpLink.baseDashboard + '/' + model);
   }
 

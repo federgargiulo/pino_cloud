@@ -25,15 +25,18 @@ public class UserContext {
     public static JwtUser currentUser(){
           JwtUser u = new JwtUser();
           Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-          if (authentication.getPrincipal() instanceof Jwt jwt) {
-              u.setUserId( jwt.getClaim("preferred_username") );
-              u.setFirstName( jwt.getClaim("given_name") );
-              u.setLastName( jwt.getClaim("family_name") );
-              u.setEmail( jwt.getClaim("email") );
-              u.setTenantId(  exractTenantId( jwt.getClaim( "groups") ) );
-              return u;
+          if ( authentication != null ) {
+              if (authentication.getPrincipal() instanceof Jwt jwt) {
+                  u.setIdpId( jwt.getClaim( "sub") );
+                  u.setUserId(jwt.getClaim("preferred_username"));
+                  u.setFirstName(jwt.getClaim("given_name"));
+                  u.setLastName(jwt.getClaim("family_name"));
+                  u.setEmail(jwt.getClaim("email"));
+                  u.setTenantId(exractTenantId(jwt.getClaim("groups")));
+                  return u;
+              }
           }
-          return null;
+          return u;
 
     }
 

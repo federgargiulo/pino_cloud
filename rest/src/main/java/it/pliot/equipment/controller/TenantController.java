@@ -32,7 +32,8 @@ public class TenantController {
     @GetMapping("/tenants")
     public List<TenantTO> all() {
         Object o = UserContext.currentUser();
-        return tenantServices.findAll();
+        List<TenantTO> tenants = tenantServices.findAll();
+        return tenants;
     }
 
 

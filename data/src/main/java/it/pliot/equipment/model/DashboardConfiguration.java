@@ -15,11 +15,31 @@ public class DashboardConfiguration extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    private String userId;
+    private String userIdpId;
 
     private String descr;
 
     private String title;
+
+    private String tenant;
+
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
+    public Boolean getShared() {
+        return isShared;
+    }
+
+    public void setShared(Boolean shared) {
+        isShared = shared;
+    }
+
+    private Boolean isShared;
 
     public String getDescr() {
         return descr;
@@ -60,12 +80,12 @@ public class DashboardConfiguration extends BaseEntity {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserIdpId() {
+        return userIdpId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserIdpId(String userIdpId) {
+        this.userIdpId = userIdpId;
     }
 
     public String getConfiguration() {

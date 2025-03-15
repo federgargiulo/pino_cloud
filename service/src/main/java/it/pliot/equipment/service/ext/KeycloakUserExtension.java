@@ -83,8 +83,8 @@ public class KeycloakUserExtension {
             response =   keycloak.realm( realmManaged ).users().create( KeycloakUtils.initUser(user ,   groupId ) );
             if (response.getStatus() == 201) {
                 String location = response.getHeaderString("Location");
-                String userId = location.substring(location.lastIndexOf("/") + 1);
-                user.setIdpId( userId  );
+                String id = location.substring(location.lastIndexOf("/") + 1);
+                user.setIdpId( id  );
                 return user;
 
             } else {

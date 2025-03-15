@@ -19,7 +19,6 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
     public User io2data(UserTO in) {
         if (in == null) return null;
         User out = new User();
-        out.setUser_pk( nullalize( in.getUser_pk() ) );
         out.setAddress(in.getAddress());
         out.setUserId(in.getUserId());
         out.setFirstName(in.getFirstName());
@@ -40,7 +39,6 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
     public UserTO data2io(User in) {
         if (in == null) return null;
         UserTO out = new UserTO();
-        out.setUser_pk(nullalize(in.getUser_pk()));
         out.setAddress(in.getAddress());
         out.setUserId(in.getUserId());
         out.setFirstName(in.getFirstName());

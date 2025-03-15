@@ -14,6 +14,16 @@ public class SystemConfiguration  extends BaseEntity  {
 
     private String configurationValue;
 
+    public String getTenant() {
+        return tenant;
+    }
+
+    @Override
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
+    private String tenant;
 
     public String getConfigurationKey() {
         return configurationKey;

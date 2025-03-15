@@ -2,8 +2,10 @@ package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.io.PagedResultTO;
 import it.pliot.equipment.model.AuditObject;
+import it.pliot.equipment.model.BaseEntity;
 import it.pliot.equipment.model.User;
 import it.pliot.equipment.repository.PliotJpaRepository;
+import it.pliot.equipment.security.UserContext;
 import it.pliot.equipment.service.business.BaseServiceInterface;
 import it.pliot.equipment.service.business.errors.ServiceExceptions;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
@@ -16,6 +18,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 @Transactional
 public abstract class BaseServiceImpl<T,E,K> implements BaseServiceInterface<T,K> {
@@ -35,10 +38,14 @@ public abstract class BaseServiceImpl<T,E,K> implements BaseServiceInterface<T,K
         return saveorupdate( io , DBOPERATION.CREATE );
     }
     public T update( T io ){
+
         return saveorupdate( io , DBOPERATION.UPDATE );
     }
-    public void delete( K d ) { getRepo().deleteById( d );}
-    public List<T> findAll(){ return getRepo().findAll(); }
+    public void delete( K d ) {
+        getRepo().deleteById( d );}
+    public List<T> findAll(){
+        return getConverter().converListData2IO( getRepo().findAll() );
+    }
     public T findByKey( K key) { return ( T ) getRepo().findById( key ); }
 
     private T saveorupdate(T io , DBOPERATION op  ){
@@ -50,9 +57,11 @@ public abstract class BaseServiceImpl<T,E,K> implements BaseServiceInterface<T,K
             Date now  = new Date();
             if (DBOPERATION.CREATE == op) {
                 ((AuditObject) o).setCreatedDttm( now );
+
             }
             ((AuditObject) o).setUpdateDttm( now );
         }
+
         Object savedObject =  getRepo().save( o );
         return ( T ) getConverter().data2io( savedObject );
     }

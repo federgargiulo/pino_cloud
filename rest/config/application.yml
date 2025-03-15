@@ -44,17 +44,22 @@ spring:
     enabled: true
 
   datasource:
-    url: jdbc:h2:file:./equipment
-    username: sa
+    url: jdbc:postgresql://localhost:5432/pliot
+    username: postgres
     password: password
-    driverClassName: org.h2.Driver
+#H2
+#    url: jdbc:h2:file:./equipment
+#    username: sa
+#    password: password
+#    driverClassName: org.h2.Driver
   jpa:
-    dialect: org.hibernate.dialect.H2Dialect
+#    dialect: org.hibernate.dialect.H2Dialect
+    dialect: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
         format_sql=true:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
   h2:
     console:

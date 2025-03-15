@@ -5,7 +5,9 @@ import it.pliot.equipment.model.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-public class SystemConfigurationTO extends BaseEntity {
+import java.util.Date;
+
+public class SystemConfigurationTO extends BaseTO {
 
 
     private String configurationKey;
@@ -57,4 +59,15 @@ public class SystemConfigurationTO extends BaseEntity {
     public void setEncripted(boolean encripted) {
         isEncripted = encripted;
     }
-}
+
+    private Date createdDttm;
+
+    public Date getCreatedDttm() {
+        return createdDttm;
+    }
+
+    public void setCreatedDttm(Date createdDttm) {
+        this.createdDttm = createdDttm;
+    }
+
+   }

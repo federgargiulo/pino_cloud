@@ -1,7 +1,7 @@
 <form (ngSubmit)="search()" class="search-form">
     <label for="tenant">Seleziona Tenant:</label>
     <select id="tenant" [(ngModel)]="selectedTenant" name="tenant" required>
-      <option *ngFor="let tenant of tenantList" [value]="tenant.id">{{ tenant.name }}</option>
+      <option *ngFor="let tenant of tenantList" [value]="tenant.tenantId">{{ tenant.name }}</option>
     </select>
   
     <button type="submit">Cerca</button>

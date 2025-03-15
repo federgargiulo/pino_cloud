@@ -20,6 +20,8 @@ public class Tenant extends BaseEntity {
         return idpGrpId;
     }
 
+    public void setTenant(String s){}
+
     public void setIdpGrpId(String idpGrpId) {
         this.idpGrpId = idpGrpId;
     }

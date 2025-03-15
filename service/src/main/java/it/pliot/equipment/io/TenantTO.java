@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 
-public class TenantTO extends BaseEntity {
+public class TenantTO  {
     private String tenantId;
 
     private String name;
@@ -89,22 +89,28 @@ public class TenantTO extends BaseEntity {
         this.tenantId = tenantId;
     }
 
-    @Override
+    private Long version;
+
     public Date getUpdateDttm() {
         return updateDttm;
     }
 
-    @Override
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
     public void setUpdateDttm(Date updateDttm) {
         this.updateDttm = updateDttm;
     }
 
-    @Override
     public Date getCreatedDttm() {
         return createdDttm;
     }
 
-    @Override
     public void setCreatedDttm(Date createdDttm) {
         this.createdDttm = createdDttm;
     }

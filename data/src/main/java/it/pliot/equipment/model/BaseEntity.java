@@ -7,7 +7,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
-public class BaseEntity implements Serializable,AuditObject {
+public abstract class BaseEntity implements Serializable,AuditObject {
 
     private Date createdDttm;
 
@@ -27,6 +27,7 @@ public class BaseEntity implements Serializable,AuditObject {
         this.updateDttm = updateDttm;
     }
 
+    public abstract void setTenant( String tenant );
 
     private Date updateDttm;
     @Version

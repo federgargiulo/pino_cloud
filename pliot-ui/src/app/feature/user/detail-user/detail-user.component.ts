@@ -26,7 +26,7 @@ export class DetailUserComponent {
                  private userService : UserService ) {
       
       this.userForm = this.fb.group({
-        user_pk: [''],
+        idpId: [''],
         userId:  ['' ,  [Validators.required ] ],
         firstName:  ['' , [Validators.required ] ],  
         lastName:  ['' , [Validators.required ] ],           
@@ -63,7 +63,7 @@ export class DetailUserComponent {
    
     setFormValues( resultData :any ){
        var x =  { 
-          user_pk : resultData.user_pk ,
+          idpId : resultData.idpId ,
           userId : resultData.userId,
           firstName: resultData.firstName, // Aggiunto title
           lastName: resultData.lastName,

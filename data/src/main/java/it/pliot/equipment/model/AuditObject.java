@@ -7,4 +7,5 @@ public interface AuditObject {
     public void setCreatedDttm(Date createdDttm);
     public Date getUpdateDttm();
     public void setUpdateDttm(Date updateDttm);
+    public abstract void setTenant( String tenant );
 }

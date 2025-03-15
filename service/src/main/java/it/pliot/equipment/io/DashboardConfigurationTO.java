@@ -1,28 +1,42 @@
 package it.pliot.equipment.io;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 
 
-public class DashboardConfigurationTO implements Serializable {
-
+public class DashboardConfigurationTO extends BaseTO implements Serializable {
 
     private String id;
 
-    private String userId;
+    private String userIdpId;
 
     private String descr;
 
     private String title;
 
     private Date createdDttm;
+
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
+    public Boolean getShared() {
+        return isShared;
+    }
+
+    public void setShared(Boolean shared) {
+        isShared = shared;
+    }
+
+    private String tenant;
+
+    private Boolean isShared;
 
     public Date getCreatedDttm() {
         return createdDttm;
@@ -81,12 +95,12 @@ public class DashboardConfigurationTO implements Serializable {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserIdpId() {
+        return userIdpId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserIdpId(String userIdpId) {
+        this.userIdpId = userIdpId;
     }
 
     public String getConfiguration() {

@@ -28,7 +28,7 @@ public interface Const {
     public static String TENANT_ADMIN_GRP  = "pliot_tenat_admin";
 
 
-    public static String DEFAULT_PASSWORD = "pliot_def_password";
+    public static String DEFAULT_PASSWORD = "password";
 
     public static String GROUP_PREFIX = "pliot_grptenant_";
 }

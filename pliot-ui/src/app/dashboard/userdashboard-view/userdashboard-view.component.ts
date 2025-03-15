@@ -28,7 +28,8 @@ export class UserdashboardViewComponent implements OnInit {
                   id : [''],
                   title: ['', Validators.required], // Aggiunto title
                   descr: ['', Validators.required],
-                  configuration: ['']   // Aggiunto desc
+                  configuration: [''], 
+                  shared: ['false']  // Aggiunto desc
                 });
 
   }
@@ -41,15 +42,14 @@ export class UserdashboardViewComponent implements OnInit {
 
        this.route.paramMap.subscribe(params => {
             var dashId = params.get('id') || '';
-            // Assicura che non sia null
-            console.log("Dashboard ID ... ricevuto:",  dashId );
-            
+           
             if ( dashId ! ){
               this.isPersisted = true;
               this.userDashboardService.getUserDashboardById( dashId ).subscribe(
                 {
 
                   next: (data) => {
+                    
                     this.setFormValues( data.body );
                     this.isPersisted = true;
                   },
@@ -79,10 +79,13 @@ export class UserdashboardViewComponent implements OnInit {
     }
 
     setFormValues( resultData : any ){
+      
       this.dashBoardForm.setValue( { id : resultData.id ,
         title: resultData.title, // Aggiunto title
-        descr: resultData.title,
-        configuration: resultData.configuration } ) ;
+        descr: resultData.descr,
+        shared: resultData.shared,
+        configuration: resultData.configuration,
+       } ) ;
     }
 
     manageSuccessOnSaveDashboard( data:any ){

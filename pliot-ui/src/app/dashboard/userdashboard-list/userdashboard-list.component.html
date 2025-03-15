@@ -1,5 +1,6 @@
 <div class="table-container">
-    <table>
+ 
+  <table>
         <thead>
           <tr class="center-align">
             <th>titolo</th>
@@ -15,11 +16,11 @@
           <td>{{d.descr}}</td>
           <td>{{d.configuration}}</td>
           <td>
-            <button class="btn btn-primary mt-3" [routerLink]="['/userdashboard-detail', d.id]">✏ Edit</button>
+            <button class="btn btn-primary mt-3" *ngIf="d.userIdpId === currentUserId"  [routerLink]="['/userdashboard-detail', d.id]">✏ Edit</button>
 
           </td>
           <td>
-              <button  (click)="deleteDasboard(d.id , $event )"  class="btn btn-primary mt-3">Delete</button>
+              <button  (click)="deleteDasboard(d.id , $event )" *ngIf="d.userIdpId === currentUserId"  class="btn btn-primary mt-3">Delete</button>
           </td>
          <td>
              <button class="btn btn-primary mt-3" [routerLink]="['/dash-measure', d.id]">View</button>

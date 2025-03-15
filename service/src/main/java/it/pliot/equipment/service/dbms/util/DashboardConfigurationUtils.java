@@ -21,8 +21,10 @@ public class DashboardConfigurationUtils extends BaseConvertUtil<DashboardConfig
         configuration.setConfiguration( in.getConfiguration() );
         configuration.setDescr( in.getDescr() );
         configuration.setTitle( in.getTitle() );
-        configuration.setUserId( in.getUserId() );
+        configuration.setUserIdpId( in.getUserIdpId() );
         configuration.setId( in.getId() );
+        configuration.setShared( in.getShared() );
+        configuration.setTenant( in.getTenant() );
         return configuration;
     }
 
@@ -33,8 +35,10 @@ public class DashboardConfigurationUtils extends BaseConvertUtil<DashboardConfig
         configuration.setConfiguration( in.getConfiguration() );
         configuration.setDescr( in.getDescr() );
         configuration.setTitle( in.getTitle() );
-        configuration.setUserId( in.getUserId() );
+        configuration.setUserIdpId( in.getUserIdpId() );
         configuration.setId( in.getId() );
+        configuration.setShared( in.getShared() );
+        configuration.setTenant( in.getTenant() );
         return configuration;
     }
 }

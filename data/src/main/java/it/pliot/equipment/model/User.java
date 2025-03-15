@@ -10,8 +10,8 @@ import java.util.List;
 public class User extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String user_pk;
+    private String idpId;
+
 
     private String userId;
 
@@ -43,9 +43,6 @@ public class User extends BaseEntity {
     private String gender;
 
     private String address;
-
-    private String idpId;
-
 
     public String getFirstName() {
         return firstName;
@@ -125,20 +122,11 @@ public class User extends BaseEntity {
         this.userGroups = userGroups;
     }
 
-    public String getUser_pk() {
-        return user_pk;
-    }
-
-    public void setUser_pk(String user_pk) {
-        this.user_pk = user_pk;
-    }
-
-
 
     @ManyToMany(fetch = FetchType.EAGER )
     @JoinTable(
             name="users_group",
-            joinColumns={@JoinColumn(name="Users", referencedColumnName="userId")},
+            joinColumns={@JoinColumn(name="Users", referencedColumnName="idpId")},
             inverseJoinColumns={@JoinColumn(name="grpName", referencedColumnName="grpName")})
 
     private List<UserGrp> userGroups = new ArrayList<>();
