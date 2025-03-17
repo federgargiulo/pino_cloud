@@ -17,7 +17,8 @@ import java.util.List;
 
 @Component
 @Transactional
-public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment ,String> implements EquipmentServices {
+public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment ,String>
+        implements EquipmentServices {
 
     @Autowired
     private EquipmentRepository repo;
@@ -31,11 +32,18 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
     public BaseConvertUtil getConverter() {
         return EquipmentUtils.instance();
     }
+
     public List<EquipmentTO> findByTenant(String tenantId ){
+      return findByTenantAndName( tenantId , null );
+    }
+
+    public List<EquipmentTO> findByTenantAndName( String tenantId , String name){
         Equipment probe = new Equipment();
         probe.setTenant( tenantId );
+        probe.setName( name );
         Example<Equipment> example = Example.of(probe);
         List<Equipment> equipments = getRepo().findAll(example);
         return getConverter().converListData2IO( equipments );
     }
+
 }

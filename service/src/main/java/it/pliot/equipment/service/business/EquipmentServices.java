@@ -9,4 +9,6 @@ import java.util.List;
 public interface EquipmentServices extends BaseServiceInterface<EquipmentTO,String> {
 
     public List<EquipmentTO> findByTenant( String tenantId );
+
+    public List<EquipmentTO> findByTenantAndName( String tenantId , String name);
 }
