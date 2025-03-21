@@ -23,6 +23,12 @@ export class DetailEquipmentComponent implements OnInit {
    isEditingSignal = false; // Differenzia tra aggiunta e modifica
    selectedSignalId: string | null = null; // ID del Signal in modifica
 
+pullerForm!: FormGroup;
+showPullerForm = false;
+isEditingPuller = false;
+selectedPullerId: string | null = null;
+pullers: any[] = []; // Lista dei pullers
+
    constructor(
      private route: ActivatedRoute,
      private formBuilder: FormBuilder, // Usato per costruire il form
@@ -51,6 +57,8 @@ export class DetailEquipmentComponent implements OnInit {
 
       // Inizializza il form del Signal
       this.initSignalForm();
+       // ✅ Inizializza il form del Puller (mancava questa linea)
+        this.initPullerForm();
 
    }
 
@@ -73,6 +81,21 @@ export class DetailEquipmentComponent implements OnInit {
        });
    }
 
+   private initPullerForm(): void {
+     this.pullerForm = this.formBuilder.group({
+       pullerId: [{ value: '', disabled: false }],
+       equipmentId: [{ value: '', disabled: true }],
+       tenant: [{ value: '', disabled: true }],
+       url: [''],
+       apiKey: [''],
+       intervalInSec: [''],
+       nextExecutions: [''],
+       lastStart: [''],
+       lastEnd: [''],
+       lastExecutionReport: ['']
+     });
+   }
+
 
   // Resetta il form e mostra il form di aggiunta Signal
   toggleSignalForm() {
@@ -80,7 +103,10 @@ export class DetailEquipmentComponent implements OnInit {
     this.isEditingSignal = false;
     this.selectedSignalId = null;
     this.signalForm.reset();
-    this.signalForm.patchValue({ equipmentId: this.equipmentForm.get('equipmentId')?.value });
+    this.signalForm.patchValue({
+      equipmentId: this.equipmentForm.get('equipmentId')?.value,
+      tenant: this.equipmentForm.get('tenant')?.value
+     });
   }
 
 
@@ -102,14 +128,15 @@ export class DetailEquipmentComponent implements OnInit {
 
   // **Aggiornare Nome e Stato**
     updateEquipment(): void {
+      console.log("updateEquipment:", this.equipmentForm.getRawValue());
       if (!this.equipmentId) {
         console.error("Errore: ID equipment mancante!");
         return;
       }
 
-      this.equipmentService.updateEquipment(this.equipmentId, this.equipmentForm.value).subscribe({
+      this.equipmentService.updateEquipment(this.equipmentId, this.equipmentForm.getRawValue()).subscribe({
         next: () => {
-          console.log("Aggiornato con successo!", this.equipmentForm.value);
+          console.log("Aggiornato con successo!", this.equipmentForm.getRawValue);
 
         },
         error: (err) => {
@@ -198,6 +225,60 @@ export class DetailEquipmentComponent implements OnInit {
       });
     }
 
+    togglePullerForm() {
+      this.showPullerForm = true;
+      this.isEditingPuller = false;
+      this.selectedPullerId = null;
+      this.pullerForm.reset();
+
+      const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+      const tenant = this.equipmentForm.get('tenant')?.value;
+
+      // Imposta i valori, anche su campi disabilitati
+      this.pullerForm.get('tenant')?.enable({ emitEvent: false });
+      this.pullerForm.get('equipmentId')?.enable({ emitEvent: false });
+
+      this.pullerForm.patchValue({ equipmentId, tenant });
+
+      this.pullerForm.get('tenant')?.disable({ emitEvent: false });
+      this.pullerForm.get('equipmentId')?.disable({ emitEvent: false });
+    }
+
+
+    savePuller() {
+      const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+
+      if (this.pullerForm.valid) {
+        const pullerData = this.pullerForm.value;
+
+        this.equipmentService.createEquipmentPuller(equipmentId, pullerData).subscribe({
+          next: (response) => {
+            console.log('✅ Puller aggiunto:', response);
+            this.loadPullers();
+            this.resetPullerForm();
+          },
+          error: (err) => {
+            console.error('❌ Errore aggiunta Puller:', err);
+          }
+        });
+      }
+    }
+
+
+    loadPullers() {
+      const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+      this.equipmentService.getPullersByEquipmentId(equipmentId).subscribe(data => {
+        this.pullers = data.body;
+        console.log("loadPullers. Dati salvati:", this.pullers);
+      });
+    }
+
+    resetPullerForm() {
+      this.pullerForm.reset();
+      this.showPullerForm = false;
+      this.isEditingPuller = false;
+      this.selectedPullerId = null;
+    }
 
 
  }

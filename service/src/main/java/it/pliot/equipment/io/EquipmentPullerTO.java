@@ -13,6 +13,20 @@ public class EquipmentPullerTO {
 
     private String tenant;
 
+    private String url;
+
+    private String apiKey;
+
+    private Integer intervalInSec;
+
+    private Date nextExecutions;
+
+    private Date lastStart;
+
+    private Date lastEnd;
+
+    private String lastExecutionReport;
+
     public String getUrl() {
         return url;
     }
@@ -29,9 +43,7 @@ public class EquipmentPullerTO {
         this.apiKey = apiKey;
     }
 
-    private String url;
 
-    private String apiKey;
 
 
     @Override
@@ -120,14 +132,5 @@ public class EquipmentPullerTO {
         this.lastExecutionReport = lastExecutionReport;
     }
 
-    private Integer intervalInSec;
-
-    private Date nextExecutions;
-
-    private Date lastStart;
-
-    private Date lastEnd;
-
-    private String lastExecutionReport;
 
 }

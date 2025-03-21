@@ -12,7 +12,9 @@ var httpLink = {
   saveEquipment:  version +  "/equipments",
   getEquipmentById: version +  "/equipments",
   getEquipmentDetail: version +  "/equipments",
-  getEquipmentForCurrentTenant: version + "/tenants/curr/equipments"
+  getEquipmentForCurrentTenant: version + "/tenants/curr/equipments",
+  createEquipmentPuller: version +  "/equipments",
+  getPullersByEquipmentId: version +  "/equipments"
 }
 
 export interface Equipment { // Anche questa deve essere esportata
@@ -63,7 +65,7 @@ export interface EquipmentDetail { // Anche questa deve essere esportata
   }
 
   public updateEquipment( idobject:any ,model: any): Observable<any> {
-    return this.webApiService.put( httpLink.saveEquipment + '/' + idobject , model );
+    return this.webApiService.patch( httpLink.saveEquipment + '/' + idobject , model );
   }
 
   public getEquipmentById(id: string): Observable<any> {
@@ -72,4 +74,15 @@ export interface EquipmentDetail { // Anche questa deve essere esportata
     }
 
 
+  public createEquipmentPuller(idobject:any, model: any): Observable<any> {
+      console.info( "Service createEquipmentPuller is calling " + httpLink.createEquipmentPuller + " With data " + model )
+      return this.webApiService.post( httpLink.createEquipmentPuller + '/' + idobject  + '/pullers', model  );
+    }
+
+
+
+  public getPullersByEquipmentId(id: string): Observable<any> {
+    console.info( "Service is calling getPullersByEquipmentId" + httpLink.getPullersByEquipmentId + " With id: " + id )
+    return this.webApiService.get(httpLink.getPullersByEquipmentId + '/' + id + '/pullers');
+  }
 }

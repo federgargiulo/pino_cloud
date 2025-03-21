@@ -65,6 +65,9 @@
         <button type="button" class="btn btn-primary mt-3" (click)="loadSignals()">View Signals</button>
       </td>
     </tr>
+    <tr><td>
+      <button type="button" class="btn btn-primary mt-3" (click)="togglePullerForm()">Add Config</button>
+    </td></tr>
   </table>
 </form>
 
@@ -141,4 +144,26 @@
     </tr>
     </tbody>
   </table>
+</div>
+
+<!-- FORM PULLER -->
+<div *ngIf="showPullerForm">
+  <h2 *ngIf="isEditingPuller">Modifica Puller</h2>
+  <h2 *ngIf="!isEditingPuller">Aggiungi Puller</h2>
+
+  <form [formGroup]="pullerForm" (ngSubmit)="savePuller()">
+    <table>
+      <tr><td><input type="hidden" formControlName="pullerId"></td></tr>
+      <tr><td><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td>
+           <td><label>Tenant:</label><input type="text" class="form-control" formControlName="tenant" readonly></td></tr>
+      <tr><td><label>URL:</label><input type="text" class="form-control" formControlName="url"></td>
+          <td><label>apiKey:</label><input type="text" class="form-control" formControlName="apiKey"></td></tr>
+      <tr><td><label>Interval In Sec:</label><input type="text" class="form-control" formControlName="intervalInSec" ></td>
+      <td><label>Next Executions:</label><input type="text" class="form-control" formControlName="nextExecutions" ></td></tr>
+      <tr><td><label>Last Start:</label><input type="text" class="form-control" formControlName="lastStart" ></td>
+        <td><label>Last End:</label><input type="text" class="form-control" formControlName="lastEnd" ></td></tr>
+      <tr><td><label>Last Execution Report:</label><input type="text" class="form-control" formControlName="lastExecutionReport" ></td></tr>
+      <tr><td colspan="2"><button type="submit" class="btn btn-primary mt-3">{{ isEditingPuller ? 'Aggiorna Puller' : 'Salva Puller' }}</button></td></tr>
+    </table>
+  </form>
 </div>

@@ -5,6 +5,7 @@
       <tr class="center-align">
         <th>Id</th>
         <th>Name</th>
+        <th>Tenant</th>
         <th>Status</th>
         <th>Created</th>
         <th>Last Update</th>
@@ -13,8 +14,9 @@
     </thead>
 <tbody>
     <tr *ngFor="let equipment of equipmentList; let i = index"  class="center-align">
-      <td>{{equipment.id}}</td>
+      <td>{{equipment.equipmentId}}</td>
       <td>{{equipment.name}}</td>
+      <td>{{equipment.tenant}}</td>
       <td>{{equipment.status}}</td>
       <td>{{equipment.createdDttm}}</td>
       <td>{{equipment.updateDttm}}</td>
@@ -23,12 +25,12 @@
       </td> -->
       <td>
       <!--  <a [routerLink]="['/detail-equipment', equipment.id]" class="button">Detail</a> -->
-        <button [routerLink]="['/detail-equipment', equipment.id]">✏ Edit</button>
+        <button [routerLink]="['/detail-equipment', equipment.equipmentId]">✏ Edit</button>
 
       </td>
       <td>
 
-        <button (click)="deleteEquipment(equipment.id, i)">❌ Delete</button>
+        <button (click)="deleteEquipment(equipment.equipmentId, i)">❌ Delete</button>
       </td>
 
       <td>
