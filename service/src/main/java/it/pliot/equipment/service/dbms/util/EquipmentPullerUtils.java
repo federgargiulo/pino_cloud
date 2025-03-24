@@ -49,7 +49,7 @@ public class EquipmentPullerUtils extends BaseConvertUtil<EquipmentPuller, Equip
         pullerTo.setPullerId( puller.getPullerId() );
         pullerTo.setApiKey( puller.getApiKey());
         pullerTo.setUrl( puller.getUrl() );
-        pullerTo.setTenant( pullerTo.getTenant() );
+        pullerTo.setTenant( puller.getTenant() );
         return  pullerTo;
     }
 }

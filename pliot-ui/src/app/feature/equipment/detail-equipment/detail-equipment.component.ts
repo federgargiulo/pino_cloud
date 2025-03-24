@@ -25,6 +25,7 @@ export class DetailEquipmentComponent implements OnInit {
 
 pullerForm!: FormGroup;
 showPullerForm = false;
+showPullers = false;
 isEditingPuller = false;
 selectedPullerId: string | null = null;
 pullers: any[] = []; // Lista dei pullers
@@ -83,7 +84,7 @@ pullers: any[] = []; // Lista dei pullers
 
    private initPullerForm(): void {
      this.pullerForm = this.formBuilder.group({
-       pullerId: [{ value: '', disabled: false }],
+       pullerId: [{ value: '', disabled: true }],
        equipmentId: [{ value: '', disabled: true }],
        tenant: [{ value: '', disabled: true }],
        url: [''],
@@ -246,40 +247,103 @@ pullers: any[] = []; // Lista dei pullers
 
 
     savePuller() {
-      const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+      const equipmentId = this.equipmentForm.get('equipmentId')?.getRawValue();
 
       if (this.pullerForm.valid) {
-        const pullerData = this.pullerForm.value;
+        const pullerData = this.pullerForm.getRawValue();
+        console.log('pullerData:', pullerData);
 
-        this.equipmentService.createEquipmentPuller(equipmentId, pullerData).subscribe({
-          next: (response) => {
-            console.log('✅ Puller aggiunto:', response);
-            this.loadPullers();
-            this.resetPullerForm();
-          },
-          error: (err) => {
-            console.error('❌ Errore aggiunta Puller:', err);
-          }
-        });
+        if (this.isEditingPuller) {
+          // ✅ UPDATE
+          this.equipmentService.updatePuller(equipmentId, this.selectedPullerId!, pullerData).subscribe({
+            next: (response) => {
+              console.log('✅ Puller aggiornato:', response);
+              this.loadPullers();
+              this.resetPullerForm();
+            },
+            error: (err) => {
+              console.error('❌ Errore aggiornamento Puller:', err);
+            }
+          });
+        } else {
+          // ✅ CREATE
+          this.equipmentService.createEquipmentPuller(equipmentId, pullerData).subscribe({
+            next: (response) => {
+              console.log('✅ Puller aggiunto:', response);
+              this.loadPullers();
+              this.resetPullerForm();
+            },
+            error: (err) => {
+              console.error('❌ Errore aggiunta Puller:', err);
+            }
+          });
+        }
       }
     }
 
 
+
+resetPullerForm() {
+  this.pullerForm.reset();                     // Reset completo dei campi
+  this.showPullerForm = false;                 // Nasconde il form
+  this.isEditingPuller = false;                // Torna in modalità "aggiunta"
+  this.selectedPullerId = null;                // Nessun puller selezionato
+
+  // Disabilita nuovamente i campi equipmentId e tenant
+  this.pullerForm.get('equipmentId')?.disable({ emitEvent: false });
+  this.pullerForm.get('tenant')?.disable({ emitEvent: false });
+}
+
+
     loadPullers() {
       const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+      const tenant = this.equipmentForm.get('tenant')?.value;
       this.equipmentService.getPullersByEquipmentId(equipmentId).subscribe(data => {
         this.pullers = data.body;
         console.log("loadPullers. Dati salvati:", this.pullers);
+        this.showPullerForm = false; // Nasconde eventualmente il form
+        this.showPullers = true;     // Mostra la lista (se usi *ngIf)
       });
     }
 
-    resetPullerForm() {
-      this.pullerForm.reset();
-      this.showPullerForm = false;
-      this.isEditingPuller = false;
-      this.selectedPullerId = null;
-    }
 
+
+
+editPuller(puller: any) {
+  this.isEditingPuller = true;
+  this.showPullerForm = true;
+  this.selectedPullerId = puller.pullerId;
+
+  this.pullerForm.get('tenant')?.enable({ emitEvent: false });
+  this.pullerForm.get('equipmentId')?.enable({ emitEvent: false });
+
+  this.pullerForm.patchValue(puller);
+
+  this.pullerForm.get('tenant')?.disable({ emitEvent: false });
+  this.pullerForm.get('equipmentId')?.disable({ emitEvent: false });
+}
+
+deletePullerById(pullerId: string, index: number) {
+  if (!confirm("Sei sicuro di voler eliminare questo Puller?")) {
+    return;
+  }
+
+  const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+
+  this.equipmentService.deletePullerById(equipmentId, pullerId).subscribe({
+    next: () => {
+      console.log(`✅ Puller con ID ${pullerId} eliminato.`);
+      this.pullers.splice(index, 1);
+    },
+    error: (err) => {
+      console.error("❌ Errore durante l'eliminazione del puller:", err);
+    }
+  });
+}
+
+togglePullerList() {
+  this.showPullers = !this.showPullers;
+}
 
  }
 

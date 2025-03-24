@@ -67,7 +67,14 @@
     </tr>
     <tr><td>
       <button type="button" class="btn btn-primary mt-3" (click)="togglePullerForm()">Add Config</button>
-    </td></tr>
+    </td>
+      <td>
+        <button type="button" class="btn btn-primary mt-3" (click)="loadPullers()">View Config</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary mt-3" (click)="togglePullerList()">Toggle Config</button>
+      </td>
+    </tr>
   </table>
 </form>
 
@@ -148,13 +155,13 @@
 
 <!-- FORM PULLER -->
 <div *ngIf="showPullerForm">
-  <h2 *ngIf="isEditingPuller">Modifica Puller</h2>
-  <h2 *ngIf="!isEditingPuller">Aggiungi Puller</h2>
+  <h2 *ngIf="isEditingPuller">Modify Config</h2>
+  <h2 *ngIf="!isEditingPuller">Add Config</h2>
 
   <form [formGroup]="pullerForm" (ngSubmit)="savePuller()">
     <table>
-      <tr><td><input type="hidden" formControlName="pullerId"></td></tr>
-      <tr><td><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td>
+      <tr><td><label>Puller ID:</label><input type="text" class="form-control" formControlName="pullerId" readonly></td>
+      <td><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td>
            <td><label>Tenant:</label><input type="text" class="form-control" formControlName="tenant" readonly></td></tr>
       <tr><td><label>URL:</label><input type="text" class="form-control" formControlName="url"></td>
           <td><label>apiKey:</label><input type="text" class="form-control" formControlName="apiKey"></td></tr>
@@ -163,7 +170,47 @@
       <tr><td><label>Last Start:</label><input type="text" class="form-control" formControlName="lastStart" ></td>
         <td><label>Last End:</label><input type="text" class="form-control" formControlName="lastEnd" ></td></tr>
       <tr><td><label>Last Execution Report:</label><input type="text" class="form-control" formControlName="lastExecutionReport" ></td></tr>
-      <tr><td colspan="2"><button type="submit" class="btn btn-primary mt-3">{{ isEditingPuller ? 'Aggiorna Puller' : 'Salva Puller' }}</button></td></tr>
+      <tr><td colspan="2"><button type="submit" class="btn btn-primary mt-3">{{ isEditingPuller ? 'Save Config' : 'Add Config' }}</button></td></tr>
     </table>
   </form>
+</div>
+<!-- LISTA PULLERS -->
+<div *ngIf="pullers.length > 0 && showPullers && !showPullerForm" class="table-container">
+  <h2>Configurations List</h2>
+  <table class="table">
+    <thead>
+    <tr class="center-align">
+      <th>Puller ID</th>
+      <th>Equipment ID</th>
+      <th>Tenant</th>
+      <th>URL</th>
+      <th>API Key</th>
+      <th>Interval (sec)</th>
+      <th>Next Executions</th>
+      <th>Last Start</th>
+      <th>Last End</th>
+      <th>Execution Report</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let puller of pullers ; let i = index" class="center-align">
+      <td>{{ puller.pullerId }}</td>
+      <td>{{ puller.idEquipment }}</td>
+      <td>{{ puller.tenant }}</td>
+      <td>{{ puller.url }}</td>
+      <td>{{ puller.apiKey }}</td>
+      <td>{{ puller.intervalInSec }}</td>
+      <td>{{ puller.nextExecutions }}</td>
+      <td>{{ puller.lastStart }}</td>
+      <td>{{ puller.lastEnd }}</td>
+      <td>{{ puller.lastExecutionReport }}</td>
+      <td>
+        <button class="btn btn-primary mt-3" (click)="editPuller(puller)">✏ Edit</button>
+      </td>
+      <td>
+        <button class="btn btn-primary mt-3"  (click)="deletePullerById(puller.pullerId, i)">❌ Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>

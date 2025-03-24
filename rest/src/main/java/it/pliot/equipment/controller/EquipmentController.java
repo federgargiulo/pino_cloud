@@ -152,23 +152,24 @@ public class EquipmentController {
         return equipmentPullerServices.findById( id );
     }
 
-    @DeleteMapping("/equipments/{id}/pullers/{idPuller}")
-    public ResponseEntity<Void> deleteEquipmentPullerById(@PathVariable("idPuller") String idPuller  ) {
+    @DeleteMapping("/equipments/{equipmentId}/pullers/{idPuller}")
+    public ResponseEntity<Void> deletePullerById(@PathVariable("equipmentId") String equipmentId, @PathVariable("idPuller") String idPuller  ) {
         equipmentPullerServices.delete( idPuller );
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/equipments/{id}/pullers")
-    public EquipmentPullerTO createEquipmentPuller(@PathVariable("id") String id , @RequestBody EquipmentPullerTO equipmentPullerTO ) {
-        equipmentPullerTO.setPullerId( id );
+    @PostMapping("/equipments/{equipmentId}/pullers")
+    public EquipmentPullerTO createEquipmentPuller(@PathVariable("equipmentId") String equipmentId , @RequestBody EquipmentPullerTO equipmentPullerTO ) {
+        equipmentPullerTO.setIdEquipment(equipmentId);
         return equipmentPullerServices.create( equipmentPullerTO );
 
     }
 
-    @PatchMapping("/equipments/{id}/pullers/{idPuller}")
-    public ResponseEntity<EquipmentPullerTO> updateSignal(@PathVariable("idPuller") String idPuller , @RequestBody EquipmentPullerTO equipmentPullerTO) {
+    @PatchMapping("/equipments/{equipmentId}/pullers/{pullerId}")
+    public ResponseEntity<EquipmentPullerTO> updatePuller(@PathVariable("equipmentId") String equipmentId , @PathVariable("pullerId") String pullerId , @RequestBody EquipmentPullerTO equipmentPullerTO) {
         try {
-            equipmentPullerTO.setPullerId( idPuller );
+            equipmentPullerTO.setIdEquipment(equipmentId);
+            equipmentPullerTO.setPullerId( pullerId );
             equipmentPullerTO = equipmentPullerServices.save( equipmentPullerTO );
             return new ResponseEntity<>(equipmentPullerTO, HttpStatus.OK );
         } catch (Exception e) {
