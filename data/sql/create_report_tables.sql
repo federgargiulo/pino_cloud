@@ -9,56 +9,57 @@ CREATE TABLE IF NOT EXISTS procedure_execution_log (
     message TEXT
 );
 
-CREATE TABLE IF NOT EXISTS report_10_min (
+CREATE TABLE IF NOT EXISTS  report_10_min (
     id SERIAL PRIMARY KEY,
     tenant_id VARCHAR(255) NOT NULL,
     equipment_id VARCHAR(255) NOT NULL,
     signal_id VARCHAR(255) NOT NULL,
-    data_rif TIMESTAMP NOT NULL, -- Timestamp aggregato
-    decimo_minuto INT NOT NULL, -- Decimo minuto di riferimento
-    ora INT NOT NULL, -- Ora di riferimento
-    giorno DATE NOT NULL, -- Giorno di riferimento
-    mean_v NUMERIC, -- Media valore
-    min_v NUMERIC, -- Valore minimo
-    max_v NUMERIC, -- Valore massimo
-    countOfMeasure INT -- Numero misurazioni
+    reference_timestamp TIMESTAMP NOT NULL, -- Aggregated timestamp
+    tenth_minute INT NOT NULL, -- Reference tenth minute
+    hour INT NOT NULL, -- Reference hour
+    day DATE NOT NULL, -- Reference day
+    mean_v NUMERIC, -- Mean value
+    min_v NUMERIC, -- Minimum value
+    max_v NUMERIC, -- Maximum value
+    count_of_measure INT -- Number of measurements
 );
 
-CREATE TABLE IF NOT EXISTS report_30_min  (
-    id SERIAL PRIMARY KEY,
-    tenant_id VARCHAR(255) NOT NULL,
-    equipment_id VARCHAR(255) NOT NULL,
-    signal_id VARCHAR(255) NOT NULL,
-    data_rif TIMESTAMP NOT NULL, -- Timestamp aggregato
-    decimo_minuto INT NOT NULL, -- Decimo minuto di riferimento
-    ora INT NOT NULL, -- Ora di riferimento
-    giorno DATE NOT NULL, -- Giorno di riferimento
-    mean_v NUMERIC, -- Media valore
-    min_v NUMERIC, -- Valore minimo
-    max_v NUMERIC, -- Valore massimo
-    countOfMeasure INT -- Numero misurazioni
-);
 
-CREATE TABLE IF NOT EXISTS  report_1_hour  (
-    id SERIAL PRIMARY KEY,
-    tenant_id VARCHAR(255) NOT NULL,
-    equipment_id VARCHAR(255) NOT NULL,
-    signal_id VARCHAR(255) NOT NULL,
-    data_rif TIMESTAMP NOT NULL, -- Timestamp aggregato
-    decimo_minuto INT NOT NULL, -- Decimo minuto di riferimento
-    ora INT NOT NULL, -- Ora di riferimento
-    giorno DATE NOT NULL, -- Giorno di riferimento
-    mean_v NUMERIC, -- Media valore
-    min_v NUMERIC, -- Valore minimo
-    max_v NUMERIC, -- Valore massimo
-    countOfMeasure INT -- Numero misurazioni
-);
 
-CREATE TABLE cron_lock (
-    task_name VARCHAR(255) PRIMARY KEY,
-    locked BOOLEAN NOT NULL,
-    last_run TIMESTAMP
-);
+CREATE OR REPLACE PROCEDURE manage_procedure_log(
+    IN p_procedure_name VARCHAR(255),
+    IN p_status VARCHAR(50),
+    IN p_message TEXT,
+    IN p_end BOOLEAN DEFAULT FALSE, -- Se TRUE, aggiorna il log esistente
+    INOUT p_log_id INT DEFAULT NULL -- Restituisce l'ID del log
+)
+LANGUAGE plpgsql AS $$
+DECLARE
+    v_start_time TIMESTAMP := NOW();
+BEGIN
+    -- Avvia una transazione autonoma per isolare il logging
+    BEGIN
+        IF NOT p_end THEN
+            -- Inserisce un nuovo record all'inizio della procedura e restituisce l'ID
+            INSERT INTO procedure_execution_log (procedure_name, start_time, status, message)
+            VALUES (p_procedure_name, v_start_time, p_status, p_message)
+            RETURNING id INTO p_log_id;
+        ELSE
+            -- Aggiorna il record esistente con end_time, status finale e messaggio
+            UPDATE procedure_execution_log
+            SET end_time = NOW(), status = p_status, message = p_message
+            WHERE id = p_log_id;
+        END IF;
 
+        -- Commit immediato per garantire isolamento
+        COMMIT;
+    EXCEPTION
+        WHEN OTHERS THEN
+            -- In caso di errore nel logging, rollback senza bloccare la procedura principale
+            ROLLBACK;
+            p_log_id := NULL; -- Reset dell'ID in caso di errore
+    END;
+END;
+$$;
 
 

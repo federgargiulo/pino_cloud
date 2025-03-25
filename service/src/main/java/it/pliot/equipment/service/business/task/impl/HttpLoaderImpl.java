@@ -56,7 +56,7 @@ public class HttpLoaderImpl {
                 MeasureTO m = new MeasureTO();
                 m.setSignalId( signal.getSignalId() );
                 m.setEquipmentId( eqPuller.getIdEquipment() );
-                m.setTenantId( m.getTenantId() );
+                m.setTenantId( eqPuller.getTenant() );
                 m.setMeasureDttm( new Date());
                 m.setVal( x.getValue() );
                 measureSignals.create( m );
