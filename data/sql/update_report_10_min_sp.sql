@@ -13,7 +13,7 @@ BEGIN
 
 
         -- Eliminazione vecchi record dal report
-        DELETE FROM report_10_min WHERE reference_timestamp >= NOW() - INTERVAL '30 days';
+        DELETE FROM report_10_min WHERE reference_timestamp <= NOW() - INTERVAL '30 days';
 
         -- Inserimento dati aggregati
         INSERT INTO report_10_min (tenant_id, equipment_id, signal_id, reference_timestamp,
@@ -29,7 +29,7 @@ BEGIN
             month_val,
             day_val,
             hour_val,
-            (minute_val / 10) * 10 AS minute_round,
+            (minute_val % 10) * 10 AS minute_round,
             AVG(val::NUMERIC),
             MIN(val::NUMERIC),
             MAX(val::NUMERIC),
@@ -42,7 +42,11 @@ BEGIN
         GROUP BY tenant_id, equipment_id, signal_id, reference_timestamp, year_val, month_val, hour_val, day_val, minute_round;
 
         -- Eliminazione dei dati più vecchi
-        DELETE FROM measure WHERE measure_dttm < NOW() - INTERVAL '1 hour' * interval_hours;
+        DELETE FROM measure WHERE  date_trunc('minute', measure_dttm) -
+                                        (EXTRACT(minute FROM measure_dttm)::int % 10) * INTERVAL '1 minute'
+                                        < date_trunc('minute', NOW() - INTERVAL '1 hour' * interval_hours) -
+                                        (EXTRACT(minute FROM NOW())::int % 10) * INTERVAL '1 minute';
+
 		GET DIAGNOSTICS row_count = ROW_COUNT;
 
         UPDATE procedure_execution_log
