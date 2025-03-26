@@ -4,14 +4,25 @@ import it.pliot.equipment.Const;
 import it.pliot.equipment.io.*;
 import it.pliot.equipment.service.business.*;
 import jakarta.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
+
 
 @Component
 public class InitDb {
@@ -32,9 +43,37 @@ public class InitDb {
     @Autowired
     private EquipmentPullerServices equipmentPullerService;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+
+
+    private void executeSqlScripts() {
+        log.info( "Executing db script ");
+        try {
+            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+            Resource[] resources = resolver.getResources("classpath:sql/init/*.sql");
+
+            for (Resource resource : resources) {
+
+                log.info( "Executing : {} " , resource.getFilename());
+                String sql = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))
+                        .lines()
+                        .collect(Collectors.joining("\n"));
+                jdbcTemplate.execute(sql);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error( " Error on script execution ");
+        }
+    }
+
 
     @PostConstruct
     public void initDb( ) {
+
+        executeSqlScripts();
         log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ) );
         log.info("Preloading Role" + roleService.save(  UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
         log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );

@@ -19,7 +19,7 @@ public class ReportCreation {
     @Autowired
     CallSPService spService;
 
-    private static final String update_report_10_min = "update_report_10_min";
+    private static final String update_report_data_first_stg = "update_report_data_first_stg";
     private static final String update_report_30_min = "update_report_20_min";
     private static final String update_report_1_h    = "update_report_1_hour";
 
@@ -34,9 +34,9 @@ public class ReportCreation {
     public void executeHoseKeeping() {
         log.info( " Aggregate 10 minutes " + this );
         try {
-            spService.runStoreProcedureOnce( update_report_10_min , timeout_10_min );
+            spService.runStoreProcedureOnce(update_report_data_first_stg, timeout_10_min );
         }catch ( Exception e ){
-            log.error( " error when call sp {} " , update_report_10_min );
+            log.error( " error when call sp {} " , update_report_data_first_stg);
             log.error( e.getMessage() );
 
         }

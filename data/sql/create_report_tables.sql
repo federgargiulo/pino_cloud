@@ -9,18 +9,20 @@ CREATE TABLE IF NOT EXISTS procedure_execution_log (
     message TEXT
 );
 
-CREATE TABLE IF NOT EXISTS  report_10_min (
+CREATE TABLE IF NOT EXISTS  report_data_first_stg (
     id SERIAL PRIMARY KEY,
     tenant_id VARCHAR(255) NOT NULL,
     equipment_id VARCHAR(255) NOT NULL,
     signal_id VARCHAR(255) NOT NULL,
     reference_timestamp TIMESTAMP NOT NULL, -- Aggregated timestamp
-    tenth_minute INT NOT NULL, -- Reference tenth minute
-    hour INT NOT NULL, -- Reference hour
-    day DATE NOT NULL, -- Reference day
-    mean_v NUMERIC, -- Mean value
-    min_v NUMERIC, -- Minimum value
-    max_v NUMERIC, -- Maximum value
+    year_val INT NOT NULL,
+    month_val INT NOT NULL,
+    day_val DATE NOT NULL, -- Reference day
+    hour_val INT NOT NULL, -- Reference hour
+    minute_val INT NOT NULL, -- Reference tenth minute
+    mean_val NUMERIC, -- Mean value
+    min_val NUMERIC, -- Minimum value
+    max_val NUMERIC, -- Maximum value
     count_of_measure INT -- Number of measurements
 );
 
