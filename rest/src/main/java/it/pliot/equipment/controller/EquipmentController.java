@@ -2,9 +2,11 @@ package it.pliot.equipment.controller;
 
 import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.conf.InitDb;
+import it.pliot.equipment.io.EquipmentPullerTO;
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.io.SignalTO;
 import it.pliot.equipment.security.UserContext;
+import it.pliot.equipment.service.business.EquipmentPullerServices;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.SignalServices;
 import org.slf4j.Logger;
@@ -28,6 +30,9 @@ public class EquipmentController {
     @Autowired
     private SignalServices signalServices;
 
+
+    @Autowired
+    private EquipmentPullerServices equipmentPullerServices;
 
 
 
@@ -136,5 +141,39 @@ public class EquipmentController {
         }
     }
 
+    @GetMapping("/equipments/{equipmentId}/pullers")
+    public ResponseEntity<List<EquipmentPullerTO>> getEquipmentPullers(@PathVariable ("equipmentId") String equipmentId) {
+        List<EquipmentPullerTO> signals = equipmentPullerServices.puller4Equipment(equipmentId);
+        return ResponseEntity.ok(signals);
+    }
 
+    @GetMapping("/equipments/{id}/pullers/{idPuller}")
+    public EquipmentPullerTO getEquipmentPullerById(@PathVariable("idPuller") String id) {
+        return equipmentPullerServices.findById( id );
+    }
+
+    @DeleteMapping("/equipments/{equipmentId}/pullers/{idPuller}")
+    public ResponseEntity<Void> deletePullerById(@PathVariable("equipmentId") String equipmentId, @PathVariable("idPuller") String idPuller  ) {
+        equipmentPullerServices.delete( idPuller );
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/equipments/{equipmentId}/pullers")
+    public EquipmentPullerTO createEquipmentPuller(@PathVariable("equipmentId") String equipmentId , @RequestBody EquipmentPullerTO equipmentPullerTO ) {
+        equipmentPullerTO.setIdEquipment(equipmentId);
+        return equipmentPullerServices.create( equipmentPullerTO );
+
+    }
+
+    @PatchMapping("/equipments/{equipmentId}/pullers/{pullerId}")
+    public ResponseEntity<EquipmentPullerTO> updatePuller(@PathVariable("equipmentId") String equipmentId , @PathVariable("pullerId") String pullerId , @RequestBody EquipmentPullerTO equipmentPullerTO) {
+        try {
+            equipmentPullerTO.setIdEquipment(equipmentId);
+            equipmentPullerTO.setPullerId( pullerId );
+            equipmentPullerTO = equipmentPullerServices.save( equipmentPullerTO );
+            return new ResponseEntity<>(equipmentPullerTO, HttpStatus.OK );
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

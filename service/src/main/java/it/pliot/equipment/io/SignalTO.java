@@ -3,17 +3,34 @@ package it.pliot.equipment.io;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 public class SignalTO implements Serializable {
 
-    public static SignalTO newEmptyInstance(String equipmentId , String signalId, String name ){
+    public static SignalTO newEmptyInstance(String equipmentId , String signalId, String name , String tenant ){
         SignalTO io = new SignalTO();
         io.setEquipmentId( equipmentId );
         io.setName( name );
+
         io.setSignalId( signalId );
+        io.setTenant( tenant );
+
         return io;
     }
 
+   public static SignalTO newEmptyInstance(String equipmentId , String name , String tenant){
+       return newEmptyInstance( equipmentId ,  UUID.randomUUID().toString() , name  , tenant );
+    }
+
+    public String getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
+    }
+
+    private String tenant;
 
 
     private String signalId;

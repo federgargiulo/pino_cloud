@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let tenant of tenantList; let i = index" class="center-align">
-      <td>{{tenant.id}}</td>
+      <td>{{tenant.tenantId}}</td>
       <td>{{tenant.name}}</td>
       <td>{{tenant.description}}</td>
       <td>{{tenant.profile}}</td>
@@ -32,11 +32,11 @@
 
       <td>
         <!--<button (click)="detailTenant(tenant.id, i)"> Detail</button> -->
-        <button [routerLink]="['/detail-tenant', tenant.id]">✏ Edit</button>
+        <button [routerLink]="['/detail-tenant', tenant.tenantId]">✏ Edit</button>
       </td>
       <td>
 
-        <button (click)="deleteTenant(tenant.id, i)">❌ Elimina</button>
+        <button (click)="deleteTenant(tenant.tenantId, i)">❌ Elimina</button>
       </td>
 
       <td>
