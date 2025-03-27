@@ -46,7 +46,7 @@ public class HttpLoaderImpl {
             MeasureServices measureSignals =
                     ( MeasureServices ) context.getBean( MeasureServices.class );
 
-            List<SignalTO> signals  = signalService.getSignalsByEquipmentId( eqPuller.getIdEquipment() ) ;
+            List<SignalTO> signals  = signalService.getSignalsByEquipmentId( eqPuller.getEquipmentId() ) ;
             List<KeyValueDTO> values  = response.getValues();
             buff.append( "received signals " );
             buff.append( values.size() );
@@ -55,7 +55,7 @@ public class HttpLoaderImpl {
                 SignalTO signal = findOrRegister( eqPuller, signals , x  , signalService );
                 MeasureTO m = new MeasureTO();
                 m.setSignalId( signal.getSignalId() );
-                m.setEquipmentId( eqPuller.getIdEquipment() );
+                m.setEquipmentId( eqPuller.getEquipmentId() );
                 m.setTenantId( eqPuller.getTenant() );
                 m.setMeasureDttm( new Date());
                 m.setVal( x.getValue() );
@@ -88,7 +88,7 @@ public class HttpLoaderImpl {
     }
 
     private SignalTO createSignal(EquipmentPullerTO eqPuller , KeyValueDTO x, SignalServices signalServices) {
-        SignalTO s = SignalTO.newEmptyInstance( eqPuller.getIdEquipment() , x.getName(), eqPuller.getTenant() );
+        SignalTO s = SignalTO.newEmptyInstance( eqPuller.getEquipmentId() , x.getName(), eqPuller.getTenant() );
         s = signalServices.create( s );
         return s;
     }
@@ -105,7 +105,7 @@ public class HttpLoaderImpl {
 
             // Effettua la chiamata GET con le intestazioni
         ResponseEntity<ResponseDTO> response = restTemplate.exchange(
-                    eqPuller.getUrl() + "/" + eqPuller.getIdEquipment() , HttpMethod.GET, entity, ResponseDTO.class
+                    eqPuller.getUrl() + "/" + eqPuller.getEquipmentId() , HttpMethod.GET, entity, ResponseDTO.class
             );
 
         ResponseDTO o = response.getBody();

@@ -69,6 +69,7 @@ pullers: any[] = []; // Lista dei pullers
        this.signalForm = this.formBuilder.group({
          signalId: [{ value: '', disabled: false }],
          equipmentId: [''],
+         tenant: [{ value: '', disabled: true }],
          unitOfMeasurement: [''],
          name: [''],
          minVal: [''],
@@ -106,7 +107,7 @@ pullers: any[] = []; // Lista dei pullers
     this.signalForm.reset();
     this.signalForm.patchValue({
       equipmentId: this.equipmentForm.get('equipmentId')?.value,
-      tenant: this.equipmentForm.get('tenant')?.value
+        tenant: this.equipmentForm.get('tenant')?.value
      });
   }
 
@@ -158,7 +159,7 @@ pullers: any[] = []; // Lista dei pullers
         const equipmentId = this.equipmentForm.get('equipmentId')?.value;
 
         if (this.signalForm.valid) {
-          const signalData = this.signalForm.value;
+          const signalData = this.signalForm.getRawValue();
 
           if (this.isEditingSignal) {
             // **Modalità Update**

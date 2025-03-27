@@ -16,7 +16,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @ApiPrefixController
@@ -160,15 +166,27 @@ public class EquipmentController {
 
     @PostMapping("/equipments/{equipmentId}/pullers")
     public EquipmentPullerTO createEquipmentPuller(@PathVariable("equipmentId") String equipmentId , @RequestBody EquipmentPullerTO equipmentPullerTO ) {
-        equipmentPullerTO.setIdEquipment(equipmentId);
+        equipmentPullerTO.setEquipmentId(equipmentId);
+        Date nextEsecution=addSecondsToNow(equipmentPullerTO.getIntervalInSec());
+        equipmentPullerTO.setLastEnd(nextEsecution);
+        equipmentPullerTO.setNextExecutions(nextEsecution);
         return equipmentPullerServices.create( equipmentPullerTO );
 
+    }
+
+    private Date addSecondsToNow(Integer seconds) {
+        if (seconds == null) {
+            throw new IllegalArgumentException("Il parametro deve essere un numero intero valido.");
+        }
+        Instant now = Instant.now();
+        Instant futureInstant = now.plus(seconds, ChronoUnit.SECONDS);
+        return Date.from(futureInstant);
     }
 
     @PatchMapping("/equipments/{equipmentId}/pullers/{pullerId}")
     public ResponseEntity<EquipmentPullerTO> updatePuller(@PathVariable("equipmentId") String equipmentId , @PathVariable("pullerId") String pullerId , @RequestBody EquipmentPullerTO equipmentPullerTO) {
         try {
-            equipmentPullerTO.setIdEquipment(equipmentId);
+            equipmentPullerTO.setEquipmentId(equipmentId);
             equipmentPullerTO.setPullerId( pullerId );
             equipmentPullerTO = equipmentPullerServices.save( equipmentPullerTO );
             return new ResponseEntity<>(equipmentPullerTO, HttpStatus.OK );

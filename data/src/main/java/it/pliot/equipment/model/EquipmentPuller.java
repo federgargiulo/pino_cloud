@@ -15,7 +15,7 @@ public class EquipmentPuller {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String pullerId;
 
-    private String idEquipment;
+    private String equipmentId;
 
     private String tenant;
 
@@ -73,12 +73,12 @@ public class EquipmentPuller {
         this.pullerId = pullerId;
     }
 
-    public String getIdEquipment() {
-        return idEquipment;
+    public String getEquipmentId() {
+        return equipmentId;
     }
 
-    public void setIdEquipment(String idEquipment) {
-        this.idEquipment = idEquipment;
+    public void setIdEquipment(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     public String getTenant() {

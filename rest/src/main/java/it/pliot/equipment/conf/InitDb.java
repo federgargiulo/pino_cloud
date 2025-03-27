@@ -108,7 +108,7 @@ public class InitDb {
 
         Date now = new Date();
         EquipmentPullerTO puller = new EquipmentPullerTO();
-        puller.setIdEquipment(eq.getEquipmentId());
+        puller.setEquipmentId(eq.getEquipmentId());
         puller.setUrl("http://localhost:8000/data");
         puller.setApiKey("123456700");
         puller.setIntervalInSec( 20 );

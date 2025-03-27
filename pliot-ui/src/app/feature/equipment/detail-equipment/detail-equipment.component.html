@@ -88,6 +88,8 @@
     <table>
       <tr><td colspan="2"><input type="hidden" class="form-control" formControlName="signalId"></td></tr>
       <tr><td colspan="2"><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td></tr>
+      <tr> <td colspan="2"><label>Tenant:</label><input type="text" class="form-control" formControlName="tenant" readonly></td>
+      </tr>
       <tr><td><label>Unit of Measurement:</label><input type="text" class="form-control" formControlName="unitOfMeasurement"></td>
           <td><label>Name:</label><input type="text" class="form-control" formControlName="name"></td>
       </tr>
@@ -160,8 +162,8 @@
 
   <form [formGroup]="pullerForm" (ngSubmit)="savePuller()">
     <table>
-      <tr><td><label>Puller ID:</label><input type="text" class="form-control" formControlName="pullerId" readonly></td>
-      <td><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td>
+      <tr><td><label>Puller ID:</label><input type="text" class="form-control" formControlName="pullerId" readonly></td></tr>
+      <tr><td><label>Equipment ID:</label><input type="text" class="form-control" formControlName="equipmentId" readonly></td>
            <td><label>Tenant:</label><input type="text" class="form-control" formControlName="tenant" readonly></td></tr>
       <tr><td><label>URL:</label><input type="text" class="form-control" formControlName="url"></td>
           <td><label>apiKey:</label><input type="text" class="form-control" formControlName="apiKey"></td></tr>
@@ -195,7 +197,7 @@
     <tbody>
     <tr *ngFor="let puller of pullers ; let i = index" class="center-align">
       <td>{{ puller.pullerId }}</td>
-      <td>{{ puller.idEquipment }}</td>
+      <td>{{ puller.equipmentId }}</td>
       <td>{{ puller.tenant }}</td>
       <td>{{ puller.url }}</td>
       <td>{{ puller.apiKey }}</td>
