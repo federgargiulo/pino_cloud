@@ -1,15 +1,13 @@
 pliot:
   mode: SERVER
   keycloak:
-    url: "http://localhost:8180"
+    url: "https://pinocloud.duckdns.org:8081"
     realmName: "master"
-    realmManaged: "pliot"
+    realmManaged: "pliot_dev"
     user: "admin"
-    password: "password"
+    password: "4%VtlGbS)54\"}.l0A,rW:VAs*-0$/=+3zXYpT*-C<.4isbV6$2"
     clientId: "admin-cli"
   base_path: "api"
-  load_data: "false"
-
 
 logging:
   file:
@@ -50,8 +48,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/pliot
-    username: postgres
-    password: password
+    username: pliot
+    password: pliot
 #H2
 #    url: jdbc:h2:file:./equipment
 #    username: sa
@@ -69,6 +67,7 @@ spring:
   h2:
     console:
       enabled: true
+
 
 #
 # Postgres
@@ -90,8 +89,16 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8180/realms/pliot/protocol/openid-connect/certs
-          issuer-uri: http://localhost:8180/realms/pliot
+          jwk-set-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/certs
+          issuer-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}
+
+server:
+  port: 8080
+  ssl:
+    enabled: true
+    certificate: ./config/fullchain.pem
+    certificate-private-key: ./config/privkey.pem
+
 
 management:
   endpoints:

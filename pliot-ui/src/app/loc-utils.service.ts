@@ -14,9 +14,9 @@ export class LocUtilsService {
   DEV:string          = "localhost:4200";
   LOCAL_HOST:string   = "http://localhost:8080";
   LOCAL_IDP_URL:string   = "http://localhost:8180";
-  
+  REMOTE_IDP_URL:string   = "https://pinocloud.duckdns.org:8081";
   BASE_URL: string        = '';
-  IDP_URL: string         = this.LOCAL_IDP_URL;
+  IDP_URL: string         = this.REMOTE_IDP_URL;
   SERVICE_URL : string    = this.LOCAL_HOST;
  
   constructor() {
@@ -45,6 +45,6 @@ export class LocUtilsService {
     return this.CLIENT_ID;
  }
   getRealm(){
-    return 'pliot';
+    return 'pliot_dev';
   }
 }

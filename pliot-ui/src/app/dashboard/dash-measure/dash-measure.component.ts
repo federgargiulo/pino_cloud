@@ -45,8 +45,7 @@ export class DashMeasureComponent implements OnInit {
     this.route.paramMap.subscribe( params => {
       this.dashId = params.get('id') || ''; // Assicura che non sia null
       console.log(" Dashboard ID ricevuto:", this.dashId );
-      alert( " Dashboard " + this.dashId );
-      if ( this.dashId !){
+       if ( this.dashId !){
         this.userDashboardService.getUserDashboardById( this.dashId ).subscribe(
            {
               next: (data) => {

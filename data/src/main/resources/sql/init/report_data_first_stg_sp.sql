@@ -6,8 +6,8 @@ DECLARE
     log_id INT;
 	interval_hours INTEGER :=1;
 BEGIN
-     INSERT INTO procedure_execution_log (procedure_name, start_time, status, message)
-        VALUES ('update_report_data_first_stg', start_time, 'IN_PROGRESS', 'Started processing')
+     INSERT INTO procedure_execution_log (id , procedure_name, start_time, status, message)
+        VALUES (nextval('procedure_execution_log_seq') , 'update_report_data_first_stg', start_time, 'IN_PROGRESS', 'Started processing')
         RETURNING id INTO log_id;
 
 

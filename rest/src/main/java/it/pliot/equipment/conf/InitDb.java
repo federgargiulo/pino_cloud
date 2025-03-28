@@ -1,6 +1,7 @@
 package it.pliot.equipment.conf;
 
 import it.pliot.equipment.Const;
+import it.pliot.equipment.GlobalConfig;
 import it.pliot.equipment.io.*;
 import it.pliot.equipment.service.business.*;
 import jakarta.annotation.PostConstruct;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -45,7 +47,8 @@ public class InitDb {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+    @Autowired
+    private GlobalConfig config;
 
 
     private void executeSqlScripts() {
@@ -74,6 +77,10 @@ public class InitDb {
     public void initDb( ) {
 
         executeSqlScripts();
+
+        if ( ! config.isLoadEnabled() )
+            return;
+
         log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ) );
         log.info("Preloading Role" + roleService.save(  UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
         log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );
@@ -81,7 +88,6 @@ public class InitDb {
 
         log.info("Preloading Tenant" +  t ) ;
         EquipmentTO eq = EquipmentTO.newEquipment( "Pump" , Const.DEV_TENANT_ID );
-
         createEquipmentAndRelations( eq );
 
         EquipmentTO eq2 = equipmentService.create( EquipmentTO.newEquipment( "Inverter" , Const.DEV_TENANT_ID ) );
