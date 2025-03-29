@@ -4,6 +4,7 @@ pliot:
     url: "http://localhost:8180"
     realmName: "master"
     realmManaged: "pliot"
+    webClientId: "edge_app"
     user: "admin"
     password: "password"
     clientId: "admin-cli"

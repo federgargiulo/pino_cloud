@@ -4,6 +4,7 @@ pliot:
     url: "https://pinocloud.duckdns.org:8081"
     realmName: "master"
     realmManaged: "pliot_dev"
+    webClientId: "edge_app"
     user: "admin"
     password: "4%VtlGbS)54\"}.l0A,rW:VAs*-0$/=+3zXYpT*-C<.4isbV6$2"
     clientId: "admin-cli"
