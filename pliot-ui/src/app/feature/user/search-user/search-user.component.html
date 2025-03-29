@@ -3,16 +3,16 @@
     <select id="tenant" [(ngModel)]="selectedTenant" name="tenant" required>
       <option *ngFor="let tenant of tenantList" [value]="tenant.tenantId">{{ tenant.name }}</option>
     </select>
-  
+
     <button type="submit">Cerca</button>
   </form>
-  
+
   <div class="table-container">
     <table>
       <thead>
       <tr class="center-align">
         <th>user id</th>
-      
+
         <th>Nome </th>
         <th>Cognome</th>
         <th>email</th>
@@ -22,20 +22,20 @@
       <tbody>
       <tr *ngFor="let user of usersList; let i = index" class="center-align">
         <td>{{user.userId}}</td>
-    
+
         <td>{{user.firstName}}</td>
         <td>{{user.lastName}}</td>
         <td>{{user.email}}</td>
-    
+
         <td>
           <!--<button (click)="detailTenant(tenant.id, i)"> Detail</button> -->
-          <button [routerLink]="['/detail-user', user.user_pk ]">✏ Edit</button>
+          <button [routerLink]="['/detail-user', user.userId ]">✏ Edit</button>
         </td>
         <td>
-  
-          <button (click)="deleteUser( user.user_pk , i )">❌ Elimina</button>
+
+          <button (click)="deleteUser( user.userId , i )">❌ Elimina</button>
         </td>
-  
+
         <td>
         </td>
       </tr>
@@ -45,4 +45,3 @@
       </tbody>
     </table>
   </div>
-  

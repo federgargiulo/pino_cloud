@@ -1,4 +1,4 @@
- 
+
 
 <form [formGroup]= "userForm" (ngSubmit)="onSubmit()">
 
@@ -14,7 +14,7 @@
     </div>
 
     <label for="tenant">Seleziona Tenant:</label>
-    
+
 
     <div>
         <label for="userId">userId:</label>
@@ -46,10 +46,29 @@
         </div>
     </div>
 
+  <div *ngIf="!isPersisted">
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password">
+    <div *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched">
+      La password è obbligatoria
+    </div>
+  </div>
+
+  <div *ngIf="!isPersisted">
+    <label for="confirmPassword">Conferma Password:</label>
+    <input id="confirmPassword" type="password" formControlName="confirmPassword">
+    <div *ngIf="userForm.controls['confirmPassword'].invalid && userForm.controls['confirmPassword'].touched">
+      La conferma della password è obbligatoria
+    </div>
+    <div *ngIf="userForm.hasError('passwordMismatch') && userForm.controls['confirmPassword'].touched">
+      Le password non coincidono
+    </div>
+  </div>
+
     <div>
         <div>
             <button type="submit" class="btn btn-primary mt-3"  [disabled]="userForm.invalid">Salva</button>
         </div>
-        
     </div>
+
 </form>

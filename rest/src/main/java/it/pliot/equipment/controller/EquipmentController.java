@@ -155,7 +155,8 @@ public class EquipmentController {
 
     @GetMapping("/equipments/{id}/pullers/{idPuller}")
     public EquipmentPullerTO getEquipmentPullerById(@PathVariable("idPuller") String id) {
-        return equipmentPullerServices.findById( id );
+        EquipmentPullerTO puller = equipmentPullerServices.findById( id );
+        return puller;
     }
 
     @DeleteMapping("/equipments/{equipmentId}/pullers/{idPuller}")

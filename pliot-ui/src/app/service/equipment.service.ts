@@ -52,7 +52,7 @@ export interface EquipmentDetail { // Anche questa deve essere esportata
   }
 
   public deleteEquipmentById(id: string): Observable<any> {
-     console.info( "Service is calling" + httpLink.getEquipmentById + " With id: " + id )
+     console.info( "Service is calling" + httpLink.deleteEquipmentById + " With id: " + id )
      return this.webApiService.delete(httpLink.deleteEquipmentById + '/' + id);
   }
 

@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'console';
- 
+
 
 
 @Component({
@@ -18,31 +18,42 @@ export class DetailUserComponent {
 
     userForm: FormGroup;
     tenantList: any = [];
-    
+
     selectedTenant: string = '';
-  
+
     constructor( private route: ActivatedRoute,
-                 private fb: FormBuilder, private tenantServices: TenantServices , 
+                 private fb: FormBuilder, private tenantServices: TenantServices ,
                  private userService : UserService ) {
-      
-      this.userForm = this.fb.group({
-        idpId: [''],
-        userId:  ['' ,  [Validators.required ] ],
-        firstName:  ['' , [Validators.required ] ],  
-        lastName:  ['' , [Validators.required ] ],           
-        email: ['', [Validators.required, Validators.email]],
-        tenant:['' , [Validators.required]]
-       
-      });
+
+     this.userForm = this.fb.group({
+       idpId: [''],
+       userId: ['', [Validators.required]],
+       firstName: ['', [Validators.required]],
+       lastName: ['', [Validators.required]],
+       email: ['', [Validators.required, Validators.email]],
+       tenant: ['', [Validators.required]],
+       password: ['', [Validators.required]],
+       confirmPassword: ['', [Validators.required]]
+     }, {
+       validators: this.passwordMatchValidator // <-- aggiungi questa linea
+     });
     }
 
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+}
     onSubmit(){
-      
+        const formValue = this.userForm.value;
+        const userPayload = { ...formValue };
+        delete userPayload.confirmPassword;
+
         this.userService.createUser( this.userForm.value ).subscribe(async data => {
           this.manageSuccessOnSave( data )
         },
         async error => {
-          this.manageSuccessOnSave( error )  
+          this.manageSuccessOnSave( error )
         });
     }
 
@@ -52,17 +63,17 @@ export class DetailUserComponent {
     manageSuccessOnSave( data:any ){
       if (data != null && data.body != null) {
         var resultData = data.body;
-      
+
         this.isPersisted = true;
         if (resultData != null && resultData.isSuccess) {
-          this.successMessage = 'User creata con successo!';   
+          this.successMessage = 'User creata con successo!';
         }
-    
+
       }
     }
-   
+
     setFormValues( resultData :any ){
-       var x =  { 
+       var x =  {
           idpId : resultData.idpId ,
           userId : resultData.userId,
           firstName: resultData.firstName, // Aggiunto title
@@ -71,9 +82,9 @@ export class DetailUserComponent {
           tenant: resultData.tenant
         }
         this.userForm.setValue( x );
-      
+
     }
-    
+
     ngOnInit(): void {
         console.log( "init Tenant" )
         this.getAllTenants();
@@ -95,19 +106,19 @@ export class DetailUserComponent {
             })
 
           }
-            
+
 
         })
-  
+
       }
-  
+
       async getAllTenants() {
           console.log( "get all tenant" )
           this.tenantServices.getAllTenants().subscribe((data : any) => {
            console.log("Dati ricevuti dal server:", data)
             if (data != null && data.body != null) {
               var resultData = data.body;
-  
+
               if (resultData) {
                 this.tenantList = resultData;
               }

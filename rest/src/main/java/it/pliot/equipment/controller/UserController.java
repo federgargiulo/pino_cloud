@@ -25,10 +25,10 @@ public class UserController {
         return userServices.findUsersByTenant( tenant );
     }
 
-    @GetMapping("/users/{id}")
-    public UserTO getUserById(@PathVariable("id") String id) {
-        return userServices.findById(id);
-
+    @GetMapping("/users/{userId}")
+    public UserTO getUserById(@PathVariable("userId") String userId) {
+        UserTO user = userServices.findById(userId);
+        return user;
     }
 
     @PostMapping("/users")

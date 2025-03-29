@@ -24,7 +24,7 @@ public class KeycloakUtils {
         u.setEnabled( true );
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
-        credential.setValue(Const.DEFAULT_PASSWORD);
+        credential.setValue(user.getPassword());
         credential.setTemporary(false);
         u.setCredentials(Collections.singletonList(credential));
         return u;

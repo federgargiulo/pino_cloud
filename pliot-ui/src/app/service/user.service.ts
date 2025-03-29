@@ -7,6 +7,7 @@ var version="";
 
 var httpLink = {
   baseDashboard:  version + "/users",
+   getUserById: version +  "/users",
 }
 
 @Injectable({
@@ -25,50 +26,50 @@ export class UserService {
       return this.webApiService.get(httpLink.baseDashboard + '?tenant=' + tenant );
     }
 
-  
+
   public createUser(usr: any): Observable<any> {
       console.info( "Service is calling " + httpLink.baseDashboard + " With data " + usr )
       return this.webApiService.post(httpLink.baseDashboard , usr );
   }
 
-  
+
   public updateUser(usr: any): Observable<any> {
     console.info( "Service is calling " + httpLink.baseDashboard + " With data " + usr )
     return this.webApiService.put(httpLink.baseDashboard + '/' + usr.id , usr );
   }
 
-  public getUserById(id: any): Observable<any> {
-    console.info( "Service is calling " + httpLink.baseDashboard + " With data " + id )
-    return this.webApiService.get(httpLink.baseDashboard + '/' + id );
+  public getUserById(userId: any): Observable<any> {
+    console.info( "Service is calling getUserById " + httpLink.getUserById + " With data " + userId )
+    return this.webApiService.get(httpLink.getUserById + '/' + userId );
   }
-   
+
   getUsername(): string | null {
-    
+
     const keycloak = inject(Keycloak);
     const token = keycloak.token;
 
     return keycloak.tokenParsed?.['preferred_username'] || null;
   }
-  
+
   getGetJWTAttribute( x: string ):string {
     return this.keycloak.tokenParsed?.[ x ] || null;
   }
 
-  getCurrentUserName(): string | null { 
+  getCurrentUserName(): string | null {
     return this.getGetJWTAttribute( 'preferred_username' );
   }
 
-  getCurrentLastName(): string | null { 
+  getCurrentLastName(): string | null {
     return this.getGetJWTAttribute( 'family_name' );
   }
-  getCurrentFirstName(): string | null { 
+  getCurrentFirstName(): string | null {
     return this.getGetJWTAttribute( 'given_name' );
   }
-  getCurrentUserId(): string | null { 
+  getCurrentUserId(): string | null {
     return this.getGetJWTAttribute( 'sub' );
   }
-  getCurrentUserEDmail(): string | null { 
+  getCurrentUserEDmail(): string | null {
     return this.getGetJWTAttribute( 'email' );
   }
- 
+
 }

@@ -32,7 +32,7 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
         out.setCreatedDttm(in.getCreatedDttm());
         out.setUpdateDttm(in.getCreatedDttm());
         out.setType(in.getType());
-        return out;
+       return out;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
         out.setCreatedDttm(in.getCreatedDttm());
         out.setUpdateDttm(in.getCreatedDttm());
         out.setType(in.getType());
-        return out;
+       return out;
 
     }
 
