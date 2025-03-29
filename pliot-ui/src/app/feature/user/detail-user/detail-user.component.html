@@ -38,7 +38,37 @@
             Il Cognome è obbligatorio
         </div>
     </div>
-    <div>
+  <div>
+    <label for="address">Indirizzo:</label>
+    <input id="address" formControlName="address">
+  </div>
+
+  <div>
+    <label for="phone">Telefono:</label>
+    <input id="phone" formControlName="phone">
+  </div>
+
+  <div>
+    <label for="gender">Genere:</label>
+    <select id="gender" formControlName="gender">
+      <option value="">-- Seleziona --</option>
+      <option value="M">Maschio</option>
+      <option value="F">Femmina</option>
+      <option value="O">Altro</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="type">Tipo Utente:</label>
+    <select id="type" formControlName="type">
+      <option value="">-- Seleziona --</option>
+      <option value="ADMIN">Admin</option>
+      <option value="USER">User</option>
+      <option value="GUEST">Guest</option>
+    </select>
+  </div>
+
+  <div>
         <label for="email">E mail:</label>
         <input id="email" formControlName="email">
         <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">

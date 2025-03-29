@@ -33,7 +33,11 @@ export class DetailUserComponent {
        email: ['', [Validators.required, Validators.email]],
        tenant: ['', [Validators.required]],
        password: ['', [Validators.required]],
-       confirmPassword: ['', [Validators.required]]
+       confirmPassword: ['', [Validators.required]],
+       address: [''],
+         phone: [''],
+         gender: [''],
+         type: ['']
      }, {
        validators: this.passwordMatchValidator // <-- aggiungi questa linea
      });
@@ -79,7 +83,11 @@ export class DetailUserComponent {
           firstName: resultData.firstName, // Aggiunto title
           lastName: resultData.lastName,
           email: resultData.email,
-          tenant: resultData.tenant
+          tenant: resultData.tenant,
+          address: resultData.address || '',
+           phone: resultData.phone || '',
+           gender: resultData.gender || '',
+            type: resultData.type || ''
         }
         this.userForm.setValue( x );
 
