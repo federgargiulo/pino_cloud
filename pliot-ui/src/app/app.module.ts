@@ -25,15 +25,15 @@ import { DashconfManagerComponent } from './dashboard/common/dashconf-manager/da
 
 import { addBearer } from './interceptors/auth.interceptor';
 import { AutoRefreshTokenService, createInterceptorCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, IncludeBearerTokenCondition, includeBearerTokenInterceptor, provideKeycloak, UserActivityService, withAutoRefreshToken } from 'keycloak-angular';
-import { EnvironmentProviders }  from '@angular/core';
+
 import { logInterceptor  } from './interceptors/log.interceptor';
 
 import { SearchUserComponent } from './feature/user/search-user/search-user.component';
 import { DetailUserComponent } from './feature/user/detail-user/detail-user.component';
-import { LocUtilsService } from './loc-utils.service';
+import { ConfigurationService } from './service/config.service.';
 
 
-var loc = new LocUtilsService (); 
+var loc = new ConfigurationService (); 
 
 export const  KEYCLOAK_PRIVIDER = () => provideKeycloak({
   config: {

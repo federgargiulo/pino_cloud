@@ -3,13 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class LocUtilsService {
-
-
-  DEV_CLIENT_ID = 'edge_app_dev';
-  WEB_CLIENT_ID = 'edge_app';
-
-  CLIENT_ID = this.DEV_CLIENT_ID;
+export class ConfigurationService {
 
   DEV:string          = "localhost:4200";
   LOCAL_HOST:string   = "http://localhost:8080";
@@ -17,19 +11,14 @@ export class LocUtilsService {
  // REMOTE_IDP_URL:string   = "https://pinocloud.duckdns.org:8081";
   REMOTE_IDP_URL:string   = "http://localhost:8180";
   BASE_URL: string        = '';
-  IDP_URL: string         = this.REMOTE_IDP_URL;
-  REALM : string          = "pliot"
   SERVICE_URL : string    = this.LOCAL_HOST;
 
+  config : any;
   constructor() {
     const configElement = document.getElementById('appConfig');
     if (configElement) {
       try {
-        var config = JSON.parse(configElement.textContent || '{}');
-        this.IDP_URL = config.idpUrl;
-        this.REALM = config.realm;
-        this.CLIENT_ID = config.clientId;
-
+        this.config = JSON.parse(configElement.textContent || '{}');    
       } catch (error) {
         console.error('❌ Errore nel parsing della configurazione:', error);
       }
@@ -50,15 +39,19 @@ export class LocUtilsService {
     }
   }
 
-   getIDPUrl(){
-      return this.IDP_URL;
-   }
+  getIDPUrl(){
+     return this.config.idpUrl;
+  }
 
 
-   getClientId(){
-    return this.CLIENT_ID;
- }
+  getClientId(){
+    return this.config.clientId;
+  }
   getRealm(){
-    return this.REALM;
+    return this.config.realm;
+  }
+
+  getConfig(){
+    return this.config;
   }
 }
