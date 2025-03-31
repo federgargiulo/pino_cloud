@@ -47,7 +47,7 @@ public class UserGrpImpl extends BaseServiceImpl<UserGrpTO, UserGrp, String> imp
     private UserGrpTO extracted(UserGrpTO io) {
         try {
             Optional<String> grpId = keycloak.findGrpIdByName(io.getGrpName());
-            io.setIdpId(grpId.isPresent() ? grpId.get() : null);
+
         }catch ( Exception e ){
             log.error( " error to retrieve  a group ho keycloak ");
         }

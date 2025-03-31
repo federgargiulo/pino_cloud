@@ -27,7 +27,7 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
         out.setGender(in.getGender());
         out.setIdpId(in.getIdpId());
         out.setPhone(in.getPhone());
-        out.setUserGroups(UserGrpUtils.instance().converListIO2data(in.getRoles()));
+        out.setUserGroups(UserGrpUtils.instance().converListIO2data(in.getUsrGrp()));
         out.setTenant(in.getTenant());
         out.setCreatedDttm(in.getCreatedDttm());
         out.setUpdateDttm(in.getCreatedDttm());
@@ -48,7 +48,7 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
         out.setIdpId(in.getIdpId());
         out.setPhone(in.getPhone());
         out.setTenant(in.getTenant());
-        out.setRoles(UserGrpUtils.instance().converListData2IO(in.getUserGroups()));
+        out.setUsrGrp(UserGrpUtils.instance().converListData2IO(in.getUserGroups()));
         out.setCreatedDttm(in.getCreatedDttm());
         out.setUpdateDttm(in.getCreatedDttm());
         out.setType(in.getType());

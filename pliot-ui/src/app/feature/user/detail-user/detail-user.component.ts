@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'console';
+import { CommonService } from '../../../service/common.service';
 
 
 
@@ -18,12 +19,14 @@ export class DetailUserComponent {
 
     userForm: FormGroup;
     tenantList: any = [];
+    grpList: any = [];
 
     selectedTenant: string = '';
 
     constructor( private route: ActivatedRoute,
                  private fb: FormBuilder, private tenantServices: TenantServices ,
-                 private userService : UserService ) {
+                 private userService : UserService ,
+                 private commonServices: CommonService ) {
 
      this.userForm = this.fb.group({
        idpId: [''],
@@ -33,13 +36,11 @@ export class DetailUserComponent {
        email: ['', [Validators.required, Validators.email]],
        tenant: ['', [Validators.required]],
        password: ['', [Validators.required]],
-       confirmPassword: ['', [Validators.required]],
+      
        address: [''],
          phone: [''],
          gender: [''],
-         type: ['']
-     }, {
-       validators: this.passwordMatchValidator // <-- aggiungi questa linea
+         usrGrp:  [[]]
      });
     }
 
@@ -96,6 +97,7 @@ export class DetailUserComponent {
     ngOnInit(): void {
         console.log( "init Tenant" )
         this.getAllTenants();
+        this.laodAllGrp();
         this.route.paramMap.subscribe(params => {
 
           var userId = params.get('id') || '';
@@ -118,6 +120,16 @@ export class DetailUserComponent {
 
         })
 
+      }
+
+      async laodAllGrp(){
+        console.log( "get all tenant" )
+        this.commonServices.getAllGreoups().subscribe( (data: any )  => {
+          console.log("Dati ricevuti dal server:", data)
+          if (data != null && data.body != null) {
+              this.grpList = data.body;           
+          }
+        });
       }
 
       async getAllTenants() {

@@ -43,7 +43,6 @@ export class ConfigurationService {
      return this.config.idpUrl;
   }
 
-
   getClientId(){
     return this.config.clientId;
   }

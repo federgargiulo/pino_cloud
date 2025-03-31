@@ -64,13 +64,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
 
     private String userTenantGrpId;
 
-    public String getUserTenantGrpId() {
-        if ( userTenantGrpId == null ) {
-            UserGrpTO grpTo = userGrpServices.findById(Const.USER_TENANT_GRP);
-            userTenantGrpId = grpTo.getIdpId();
-        }
-        return userTenantGrpId;
-    }
+
 
     @Override
     public UserTO create(UserTO io) {

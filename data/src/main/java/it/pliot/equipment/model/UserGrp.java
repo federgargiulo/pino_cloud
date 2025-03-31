@@ -12,16 +12,6 @@ public class UserGrp {
 
     private String description;
 
-    private String idpGrp;
-
-    public String getIdpGrp() {
-        return idpGrp;
-    }
-
-    public void setIdpGrp(String idpGrp) {
-        this.idpGrp = idpGrp;
-    }
-
     public String getGrpName() {
         return grpName;
     }

@@ -11,15 +11,6 @@ public class UserGrpTO extends BaseTO {
         r.setDescription( description );
         return r;
     }
-    private String idpId;
-
-    public String getIdpId() {
-        return idpId;
-    }
-
-    public void setIdpId(String idpId) {
-        this.idpId = idpId;
-    }
 
     private String grpName;
 

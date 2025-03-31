@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,8 +19,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.List;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
@@ -32,7 +29,7 @@ public class InitDb {
     private static final Logger log = LoggerFactory.getLogger(InitDb.class);
 
     @Autowired
-    private UserGrpServices roleService;
+    private UserGrpServices usrGrp;
     @Autowired
     private TenantServices tenanServices;
 
@@ -78,12 +75,14 @@ public class InitDb {
 
         executeSqlScripts();
 
+
+        log.info("Preloading Role" + usrGrp.save( UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ) );
+        log.info("Preloading Role" + usrGrp.save(  UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
+        log.info("Preloading Role" + usrGrp.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );
+
         if ( ! config.isLoadEnabled() )
             return;
 
-        log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ) );
-        log.info("Preloading Role" + roleService.save(  UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
-        log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );
         TenantTO t = tenanServices.create( TenantTO.newrtenant(Const.DEV_TENANT_ID , Const.DEV_TENANT_NAME , Const.DEV_TENANT_DESC, Const.DEV_EMAIL, Const.DEV_ADDRESS, Const.DEV_ZIPCODE, Const.DEV_COUNTRY,Const.DEV_PROFILE, Const.DEV_STATE ) );
 
         log.info("Preloading Tenant" +  t ) ;
