@@ -2,6 +2,7 @@ package it.pliot.equipment.controller;
 
 import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.io.UserTO;
+import it.pliot.equipment.service.business.UserGrpServices;
 import it.pliot.equipment.service.business.UserServices;
 import jakarta.ws.rs.QueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class UserController {
 
     @Autowired
     private UserServices userServices;
+
+    @Autowired
+    private UserGrpServices userGrpServices;
 
     @GetMapping("/users")
     public List<UserTO> search(@QueryParam( "tenant") String tenant ) {
@@ -34,6 +38,7 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<UserTO> createUser(@RequestBody UserTO userTO) {
         try {
+
             UserTO t = userServices.create( userTO );
             return new ResponseEntity<>(t, HttpStatus.CREATED);
         } catch (Exception e) {

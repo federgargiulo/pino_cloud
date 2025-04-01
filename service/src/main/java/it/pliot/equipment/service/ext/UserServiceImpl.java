@@ -6,6 +6,7 @@ import it.pliot.equipment.Mode;
 import it.pliot.equipment.io.UserGrpTO;
 import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.model.User;
+import it.pliot.equipment.model.UserGrp;
 import it.pliot.equipment.repository.PliotJpaRepository;
 import it.pliot.equipment.repository.UserRepository;
 import it.pliot.equipment.security.JwtUser;
@@ -15,6 +16,7 @@ import it.pliot.equipment.service.business.UserGrpServices;
 import it.pliot.equipment.service.business.UserServices;
 import it.pliot.equipment.service.dbms.BaseServiceImpl;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
+import it.pliot.equipment.service.dbms.util.UserGrpUtils;
 import it.pliot.equipment.service.dbms.util.UserUtils;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -62,9 +64,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
     }
 
 
-    private String userTenantGrpId;
-
-
 
     @Override
     public UserTO create(UserTO io) {
@@ -72,6 +71,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
         String [] groupsid = new String[]{ Const.GROUP_PREFIX + io.getTenant() , Const.USER_TENANT_GRP };
         if (Mode.SERVER == config.getMode() )
            io = keycloak.createUser( io , groupsid );
+
         return super.create(io);
     }
 

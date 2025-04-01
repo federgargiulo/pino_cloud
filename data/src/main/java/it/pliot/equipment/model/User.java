@@ -125,7 +125,7 @@ public class User extends BaseEntity {
     }
 
 
-    @ManyToMany(fetch = FetchType.EAGER )
+    @ManyToMany(fetch = FetchType.EAGER  )
     @JoinTable(
             name="users_group",
             joinColumns={@JoinColumn(name="Users", referencedColumnName="idpId")},
