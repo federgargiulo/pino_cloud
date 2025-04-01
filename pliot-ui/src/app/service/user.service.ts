@@ -35,7 +35,7 @@ export class UserService {
 
   public updateUser(usr: any): Observable<any> {
     console.info( "Service is calling " + httpLink.baseDashboard + " With data " + usr )
-    return this.webApiService.put(httpLink.baseDashboard + '/' + usr.id , usr );
+    return this.webApiService.patch(httpLink.baseDashboard + '/' + usr.id , usr );
   }
 
   public getUserById(userId: any): Observable<any> {

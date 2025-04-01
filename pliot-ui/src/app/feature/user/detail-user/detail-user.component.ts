@@ -35,8 +35,7 @@ export class DetailUserComponent {
        lastName: ['', [Validators.required]],
        email: ['', [Validators.required, Validators.email]],
        tenant: ['', [Validators.required]],
-       password: ['', [Validators.required]],
-      
+       password: [''],
        address: [''],
          phone: [''],
          gender: [''],
@@ -44,23 +43,41 @@ export class DetailUserComponent {
      });
     }
 
-  passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password')?.value;
-    const confirmPassword = form.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordMismatch: true };
-}
-    onSubmit(){
-        const formValue = this.userForm.value;
-        const userPayload = { ...formValue };
-        delete userPayload.confirmPassword;
 
-        this.userService.createUser( this.userForm.value ).subscribe(async data => {
-          this.manageSuccessOnSave( data )
-        },
-        async error => {
-          this.manageSuccessOnSave( error )
+
+
+    onSubmit() {
+      if (this.userForm.invalid) return;
+
+      const formValue = this.userForm.value;
+      const userPayload = { ...formValue };
+      delete userPayload.confirmPassword;
+
+      if (this.isPersisted) {
+        // 🛠 MODIFICA
+        this.userService.updateUser(userPayload).subscribe({
+          next: (data) => {
+            this.manageSuccessOnSave(data);
+
+          },
+          error: (err) => {
+            this.manageSuccessOnSave(err);
+          }
         });
+      } else {
+        // ✅ CREAZIONE
+        this.userService.createUser(userPayload).subscribe({
+          next: (data) => {
+            this.manageSuccessOnSave(data);
+
+          },
+          error: (err) => {
+            this.manageSuccessOnSave(err);
+          }
+        });
+      }
     }
+
 
     isPersisted = false;
     successMessage: string = '';
@@ -77,60 +94,65 @@ export class DetailUserComponent {
       }
     }
 
-    setFormValues( resultData :any ){
-       var x =  {
-          idpId : resultData.idpId ,
-          userId : resultData.userId,
-          firstName: resultData.firstName, // Aggiunto title
-          lastName: resultData.lastName,
-          email: resultData.email,
-          tenant: resultData.tenant,
-          address: resultData.address || '',
-           phone: resultData.phone || '',
-           gender: resultData.gender || '',
-            type: resultData.type || ''
-        }
-        this.userForm.setValue( x );
+    setFormValues(resultData: any) {
+      console.log('Backend usrGrp:', resultData.usrGrp);
+      console.log('Loaded grpList:', this.grpList);
+      const selectedGroups = this.grpList.filter((grp: any) =>
+        resultData.usrGrp?.some((g: any) => g.grpName === grp.grpName)
+      );
+      console.log('selectedGroups:', selectedGroups);
+      const x = {
+        idpId: resultData.idpId,
+        userId: resultData.userId,
+        firstName: resultData.firstName,
+        lastName: resultData.lastName,
+        email: resultData.email,
+        tenant: resultData.tenant,
+        address: resultData.address || '',
+        phone: resultData.phone || '',
+        gender: resultData.gender || '',
+        usrGrp: selectedGroups
+      };
 
+      this.userForm.patchValue(x);
     }
 
-    ngOnInit(): void {
-        console.log( "init Tenant" )
-        this.getAllTenants();
-        this.laodAllGrp();
-        this.route.paramMap.subscribe(params => {
 
-          var userId = params.get('id') || '';
-          if ( userId ! ){
-            alert( "load user " + userId );
-            this.userService.getUserById( userId ).subscribe({
+
+    ngOnInit(): void {
+      this.getAllTenants();
+      this.laodAllGrp().then(() => {
+        this.route.paramMap.subscribe(params => {
+          const userId = params.get('id');
+          if (userId) {
+            this.userService.getUserById(userId).subscribe({
               next: (data) => {
-                alert( data.body.lastName  );
-                this.setFormValues( data.body );
+                this.setFormValues(data.body); // ✅ ora grpList è già valorizzata
                 this.isPersisted = true;
+                this.setPasswordValidators(false);
               },
               error: (err) => {
-                console.error('Errore nel caricamento del dettaglio della dashboard', err);
-
+                console.error('Errore nel caricamento del dettaglio utente:', err);
               }
-            })
-
-          }
-
-
-        })
-
-      }
-
-      async laodAllGrp(){
-        console.log( "get all tenant" )
-        this.commonServices.getAllGreoups().subscribe( (data: any )  => {
-          console.log("Dati ricevuti dal server:", data)
-          if (data != null && data.body != null) {
-              this.grpList = data.body;           
+            });
+          } else {
+            this.setPasswordValidators(true); // creazione
           }
         });
-      }
+      });
+    }
+
+    async laodAllGrp(): Promise<void> {
+      return new Promise((resolve) => {
+        this.commonServices.getAllGreoups().subscribe((data: any) => {
+          if (data && data.body) {
+            this.grpList = data.body;
+          }
+          resolve();
+        });
+      });
+    }
+
 
       async getAllTenants() {
           console.log( "get all tenant" )
@@ -155,4 +177,17 @@ export class DetailUserComponent {
             });
         }
 
+        setPasswordValidators(isRequired: boolean) {
+          const passwordControl = this.userForm.get('password');
+          if (isRequired) {
+            passwordControl?.setValidators([Validators.required]);
+          } else {
+            passwordControl?.clearValidators();
+          }
+          passwordControl?.updateValueAndValidity();
+        }
+
+        compareGroups = (o1: any, o2: any): boolean => {
+          return o1 && o2 && o1.grpName === o2.grpName;
+        };
 }
