@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    image: localhost:5000/pliot:latest
+    container_name: java_app
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/pliot
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_CONFIG_LOCATION=/config/application.yml
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${HOME}/docker-data/pliot/config/application.yml:/config/application.yml:ro
+      - ${HOME}/docker-data/pliot/logs:/app/logs
+
+  postgres:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: pliot
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ${HOME}/docker-data/pliot/postgres:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
