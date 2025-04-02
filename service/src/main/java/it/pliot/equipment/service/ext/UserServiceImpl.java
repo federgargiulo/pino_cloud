@@ -87,5 +87,20 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
         return findAllAsTo( ex );
     }
 
+    @Override
+    public UserTO save(UserTO io) {
+        if (Mode.SERVER == config.getMode()) {
+            // Recupera i gruppi a cui l'utente va associato
+            String[] groupIds = new String[] {
+                    Const.GROUP_PREFIX + io.getTenant(),
+                    Const.USER_TENANT_GRP
+            };
+            // Aggiorna lo user settando i nuovi gruppi su Keycloak
+            keycloak.updateUserGroups(io, groupIds);
+        }
+        // Aggiorna l'utente nel database
+        return super.save(io);
+    }
+
 
 }

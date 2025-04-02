@@ -40,4 +40,21 @@ public class KeycloakUtils {
         g.setName( Const.GROUP_PREFIX + grpName );
         return g;
     }
+
+    public static UserRepresentation updateUser(UserTO user , String ... groups){
+        UserRepresentation u = new UserRepresentation( );
+        u.setId(user.getIdpId());
+        u.setFirstName( user.getFirstName() );
+        u.setLastName( user.getLastName() );
+        u.setUsername( user.getUserId() );
+        u.setEmail( user.getEmail() );
+        u.setGroups( toList( groups ) );
+        u.setEnabled( true );
+        CredentialRepresentation credential = new CredentialRepresentation();
+        credential.setType(CredentialRepresentation.PASSWORD);
+        credential.setValue(user.getPassword());
+        credential.setTemporary(false);
+        u.setCredentials(Collections.singletonList(credential));
+        return u;
+    }
 }

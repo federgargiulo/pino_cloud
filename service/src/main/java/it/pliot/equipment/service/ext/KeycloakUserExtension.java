@@ -180,6 +180,38 @@ public class KeycloakUserExtension {
         }
     }
 
+    public void updateUserGroups(UserTO user, String... groupIds) {
+        Keycloak keycloak = null;
+        try {
+            keycloak = openKeycloak();
+            RealmResource realm = keycloak.realm(realmManaged);
+
+            // Recupera lo user
+            var userResource = realm.users().get(user.getIdpId());
+
+            // Rimuovi i gruppi attuali (opzionale)
+            List<GroupRepresentation> currentGroups = userResource.groups();
+            for (GroupRepresentation group : currentGroups) {
+                userResource.leaveGroup(group.getId());
+            }
+
+            // Aggiungi i nuovi gruppi
+            userResource.update(KeycloakUtils.updateUser(user ,   groupIds ));
+
+            log.info("Updated groups for user {}", user.getUserId());
+        } catch (Exception e) {
+            log.error("Failed to update groups for user " + user.getUserId(), e);
+            throw new RuntimeException("Unable to update user groups", e);
+        } finally {
+            if (keycloak != null) {
+                try {
+                    keycloak.close();
+                } catch (Exception e) {
+                    log.error(e.getMessage());
+                }
+            }
+        }
+    }
 
 
 }
