@@ -7,4 +7,4 @@ WORKDIR /app
 COPY lib/rest-0.0.1-SNAPSHOT.jar /app/lib/rest-0.0.1-SNAPSHOT.jar
 
 # Avvia direttamente il processo senza nohup e &
-CMD ["java", "-jar", "/app/lib/rest-0.0.1-SNAPSHOT.jar", "it.pliot.equipment.EquipmentApplication", "--spring.config.location=file:/config/application.yml"]
+CMD ["java", "-jar", "/app/lib/rest-0.0.1-SNAPSHOT.jar", "it.pliot.equipment.EquipmentApplication", "--spring.config.location=/app/config/application.yml"]

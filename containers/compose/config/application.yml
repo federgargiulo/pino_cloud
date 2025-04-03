@@ -4,7 +4,7 @@ pliot:
     url: "https://pinocloud.duckdns.org:8081"
     realmName: "master"
     realmManaged: "pliot_dev"
-    webClientId: "edge_app"
+    webClientId: "edge_app_dev"
     user: "admin"
     password: "4%VtlGbS)54\"}.l0A,rW:VAs*-0$/=+3zXYpT*-C<.4isbV6$2"
     clientId: "admin-cli"
@@ -48,7 +48,7 @@ spring:
     enabled: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/pliot
+    url: jdbc:postgresql://postgres:5432/pliot
     username: pliot
     password: pliot
 #H2
@@ -95,10 +95,7 @@ spring:
 
 server:
   port: 8080
-  ssl:
-    enabled: true
-    certificate: ./config/fullchain.pem
-    certificate-private-key: ./config/privkey.pem
+
 
 
 management:

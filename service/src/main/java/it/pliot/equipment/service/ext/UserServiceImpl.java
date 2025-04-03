@@ -29,6 +29,7 @@ import org.springframework.stereotype.Component;
 import javax.crypto.Cipher;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -91,31 +92,39 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
 
     @Override
     public UserTO save(UserTO io) {
+        UserUtils c = ( UserUtils )  getConverter();
         Optional<User> opUser = getRepo().findById(io.getIdpId());
         if(opUser.isEmpty())
              throw new RuntimeException("User not present:"+io.getIdpId());
         User user = opUser.get();
-        io.getUsrGrp()
 
+        Map<String,OperationType> grp2manage = identifyGroupToAddOrRemove( io.getUsrGrp() , user.getUserGroups() );
 
         if (Mode.SERVER == config.getMode()) {
             // Aggiorna lo user settando i nuovi gruppi su Keycloak
-            keycloak.updateUser(io);
+            keycloak.updateUser(io , grp2manage );
         }
+        user = c.cp2data( io, user );
+        user = getRepo().save( user );
         // Aggiorna l'utente nel database
-        return save(io);
+        return c.data2io( user );
     }
 
-    private HashMap<String, OperationType> checKGroupToAddOrRemove(List<UserGrpTO>  userGroupTos, List<UserGrp> user){
+    private HashMap<String, OperationType> identifyGroupToAddOrRemove(List<UserGrpTO>  userGroupTos, List<UserGrp> user){
 
-        HashMap<String, OperationType> mappa = new HashMap<String, OperationType>();
-       if(user.isEmpty()) {
-           userGroupTos.forEach(x->mappa.put(x.getGrpName(), OperationType.ADD));
-       }
+       HashMap<String, OperationType> mappa = new HashMap<String, OperationType>();
+
+        for(int i =0; i< userGroupTos.size(); i++){
+            UserGrpTO u = userGroupTos.get(i);
+            if ( ! isStored( user , u.getGrpName())){
+                mappa.put( u.getGrpName(), OperationType.ADD ) ;
+            }
+
+        }
        for(int i =0; i< user.size(); i++){
            UserGrp u = user.get(i);
            if (!isContained(userGroupTos, u.getGrpName())){
-               mappa.put(u.getGrpName(), OperationType.DELETE);
+               mappa.put( u.getGrpName(), OperationType.DELETE);
            }
 
        }
@@ -133,6 +142,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
         return false;
     }
 
-
+    private boolean isStored(List<UserGrp>  userGroup, String groupName){
+        if ( userGroup == null )
+            return false;
+        for(int i =0; i< userGroup.size(); i++){
+            UserGrp u = userGroup.get(i);
+            if(groupName.equals(u.getGrpName())) return true;
+        }
+        return false;
+    }
 
 }

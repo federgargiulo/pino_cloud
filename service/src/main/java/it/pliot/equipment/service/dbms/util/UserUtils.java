@@ -19,6 +19,12 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
     public User io2data(UserTO in) {
         if (in == null) return null;
         User out = new User();
+        return cp2data( in , out );
+    }
+
+    public User cp2data(UserTO in , User out  ) {
+        if (in == null) return null;
+
         out.setAddress(in.getAddress());
         out.setUserId(in.getUserId());
         out.setFirstName(in.getFirstName());
@@ -32,7 +38,7 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
         out.setCreatedDttm(in.getCreatedDttm());
         out.setUpdateDttm(in.getCreatedDttm());
         out.setType(in.getType());
-       return out;
+        return out;
     }
 
     @Override

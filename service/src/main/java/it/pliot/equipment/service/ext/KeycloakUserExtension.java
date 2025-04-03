@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -180,7 +181,7 @@ public class KeycloakUserExtension {
         }
     }
 
-    public void updateUser(UserTO user, String... groupIds) {
+    public void updateUser(UserTO user, Map<String,OperationType> groupIds) {
         Keycloak keycloak = null;
         try {
             keycloak = openKeycloak();
@@ -191,12 +192,19 @@ public class KeycloakUserExtension {
 
             // Rimuovi i gruppi attuali (opzionale)
             List<GroupRepresentation> currentGroups = userResource.groups();
-            for (GroupRepresentation group : currentGroups) {
-                userResource.leaveGroup(group.getId());
-            }
 
+            /*groupIds.forEach( ( k, v ) ->  {
+
+                if ( OperationType.ADD == v  )
+                    userResource.joinGroup( k );
+                if ( OperationType.DELETE == v  )
+                    userResource.leaveGroup( k );
+
+
+            });
+            */
             // Aggiungi i nuovi gruppi
-            userResource.update(KeycloakUtils.updateUser(user ,   groupIds ));
+            userResource.update(KeycloakUtils.updateUser(user  ));
 
             log.info("Updated groups for user {}", user.getUserId());
         } catch (Exception e) {
