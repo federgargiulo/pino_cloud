@@ -50,11 +50,6 @@ public class KeycloakUtils {
         u.setEmail( user.getEmail() );
         u.setGroups( toList( groups ) );
         u.setEnabled( true );
-        CredentialRepresentation credential = new CredentialRepresentation();
-        credential.setType(CredentialRepresentation.PASSWORD);
-        credential.setValue(user.getPassword());
-        credential.setTemporary(false);
-        u.setCredentials(Collections.singletonList(credential));
         return u;
     }
 }

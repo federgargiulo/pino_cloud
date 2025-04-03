@@ -180,7 +180,7 @@ public class KeycloakUserExtension {
         }
     }
 
-    public void updateUserGroups(UserTO user, String... groupIds) {
+    public void updateUser(UserTO user, String... groupIds) {
         Keycloak keycloak = null;
         try {
             keycloak = openKeycloak();
