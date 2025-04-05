@@ -1,13 +1,8 @@
 package it.pliot.equipment.conf;
 
 import it.pliot.equipment.GlobalConfig;
-import jakarta.servlet.ServletException;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
+import it.pliot.equipment.Mode;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +15,12 @@ public class PliotResourceHandler  extends ResourceHttpRequestHandler {
 
     GlobalConfig config;
 
+    private static final String IDP_URL_CONF_KEY = "idpUrl";
+    private static final String IDP_REALM_CONF_KEY = "realm";
+    private static final String IDP_CLIENT_ID_CONF_KEY = "clientId";
+    private static final String UI_MODE_CONF_KEY = "mode";
+
+
 
 
     public PliotResourceHandler( GlobalConfig config ){
@@ -27,14 +28,15 @@ public class PliotResourceHandler  extends ResourceHttpRequestHandler {
         String idpUrl = config.getConfValue( "pliot.keycloak.url" , "http://localhost:8180");
         String realm = config.getConfValue( "pliot.keycloak.realmManaged" , "pliot_default");
         String webClientId = config.getConfValue( "pliot.keycloak.webClientId" , "webClientId_default");
+        String mode = config.getConfValue( "pliot.mode" , Mode.SERVER.toString() );
         StringBuffer b = new StringBuffer();
-
 
         b.append( "     function getConfiguration() {\n ");
         b.append( "         return `{\n");
-        b.append( "                     \"idpUrl\": \"").append( idpUrl ).append( "\",\n");
-        b.append( "                     \"realm\":").append("\"").append( realm ).append( "\",\n");
-        b.append( "                     \"clientId\":").append("\"").append( webClientId ).append( "\"\n");
+        append( b , IDP_URL_CONF_KEY, idpUrl , false );
+        append( b , IDP_REALM_CONF_KEY, realm , false  );
+        append( b , IDP_CLIENT_ID_CONF_KEY, webClientId , false );
+        append( b , UI_MODE_CONF_KEY , mode , true );
         b.append( "                 }`;\n");
         b.append( "     }");
         resAsByte = b.toString().getBytes( StandardCharsets.UTF_8);
@@ -42,23 +44,28 @@ public class PliotResourceHandler  extends ResourceHttpRequestHandler {
     }
 
 
+    private void append( StringBuffer b , String key , String value, boolean islast ){
+        b.append( "                     \"").append(key).append("\": \"").append( value );
+        if ( islast )
+           b.append( "\"\n");
+        else
+          b.append( "\",\n");
+
+    }
 
 
-
-    private byte[] resAsByte;
+    private final byte[] resAsByte;
 
     public byte[] getBytes(){
         return  resAsByte;
     }
-    private String locatePath = "/websupport/location.js";
+    private static final String URI_PATH = "/websupport/location.js";
 
     @Override
     public void handleRequest(HttpServletRequest request , HttpServletResponse response ) throws IOException {
         String requestUri = request.getRequestURI();
-        if ( locatePath.equals( requestUri ) ){
-
+        if ( URI_PATH.equals( requestUri ) ){
             byte[] b = getBytes();
-
             response.setContentType("text/plain; charset=UTF-8");
             response.setHeader(HttpHeaders.CONTENT_LENGTH, String.valueOf( b.length));
             response.getOutputStream().write( b );

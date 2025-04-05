@@ -12,23 +12,24 @@
 <body>
   <script id="appConfig" type="application/json">
     {
-        "idpUrl": "http://localhost:8180",
+        "x": "http://localhost:8180",
         "realm": "pliot",
-        "clientId": "edge_app_dev"
+        "clientId": "edge_app_dev",
+        "mode" : "SERVER"
     }
 </script>
 
-<script> 
- 
+<script>
+
   try {
     var c = getConfiguration();
     if ( c )
        document.getElementById('appConfig').textContent = c;
   } catch (error) {
-    
+
   }
 </script>
-  
+
 
 
 

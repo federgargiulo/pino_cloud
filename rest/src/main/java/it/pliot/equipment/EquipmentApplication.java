@@ -14,7 +14,7 @@ public class EquipmentApplication {
 
     public static void test(String s ) {
         try {
-            System.out.println( " nel file ");
+
             File myObj = new File( s );
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
@@ -33,8 +33,10 @@ public class EquipmentApplication {
             for ( int i = 0 ; i< args.length ; i ++ ){
                 System.out.println(" value " + args[ i ] );
                 String [] ss = args[ i ].split( "=");
-                if ( ss != null && ss.length > 1 )
-                    test( ss[ 1 ] );
+                if ( "--spring.config.location".equals(  ss[ 0 ] ) ) {
+                    if (ss != null && ss.length > 1)
+                        test(ss[1]);
+                }
 
 
             }
