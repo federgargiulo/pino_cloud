@@ -1,6 +1,7 @@
 package it.pliot.equipment.controller;
 
 import it.pliot.equipment.conf.ApiPrefixController;
+import it.pliot.equipment.io.AggregateResultTO;
 import it.pliot.equipment.io.PagedResultTO;
 import it.pliot.equipment.io.MeasureTO;
 import it.pliot.equipment.service.business.MeasureServices;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -69,4 +71,19 @@ public class MeasureController {
         }
 
     }
+
+
+
+    @GetMapping("/aggregation")
+    public List<AggregateResultTO> getAggregation(
+                @RequestParam String level,
+                @RequestParam(required = false) String parent
+        ) {
+            ArrayList<AggregateResultTO> elenco =  new ArrayList<AggregateResultTO>();
+            elenco.add( new AggregateResultTO("DAY" , 1.0,1.0,1.0 ) );
+
+            return  elenco;
+           // return aggregationService.getAggregatedData(level, parent);
+        }
+
 }

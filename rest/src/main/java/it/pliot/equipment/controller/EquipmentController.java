@@ -42,10 +42,13 @@ public class EquipmentController {
 
 
 
-    @GetMapping("/equipments")
-    public List<EquipmentTO> all( ) {
 
-        return equipmentService.findAll();
+
+    @GetMapping("/equipments")
+    public List<EquipmentTO> getEquipmentsForTenant(@RequestParam(value = "tenantId", required = false) String tenantId) {
+        if ( tenantId == null || tenantId.length() == 0 )
+            return equipmentService.findAll();
+        return equipmentService.findByTenant(tenantId);
     }
 
 

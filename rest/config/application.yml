@@ -6,7 +6,7 @@ pliot:
     realmManaged: "pliot"
     webClientId: "edge_app"
     user: "admin"
-    password: "password"
+    password: "admin"
     clientId: "admin-cli"
   base_path: "api"
   load_data: "false"

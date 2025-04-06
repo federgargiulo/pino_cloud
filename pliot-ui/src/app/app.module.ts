@@ -31,6 +31,13 @@ import { logInterceptor  } from './interceptors/log.interceptor';
 import { SearchUserComponent } from './feature/user/search-user/search-user.component';
 import { DetailUserComponent } from './feature/user/detail-user/detail-user.component';
 import { ConfigurationService } from './service/config.service.';
+import { OlapModule } from './olap/olap.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 
 var loc = new ConfigurationService (); 
@@ -81,7 +88,14 @@ export const  KEYCLOAK_PRIVIDER = () => provideKeycloak({
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule, // Aggiunto per i form
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    OlapModule // Aggiunto per i form
   ],
   providers: [
     KEYCLOAK_PRIVIDER(),
