@@ -19,9 +19,16 @@ export class OlapService {
   constructor( private webApiService: HttpProviderService ) { }
 
 
-  getAggregation(level: string , parent?: string): Observable<any[]> {
-    let url = `/aggregation?level=${level}`;
-    if (parent) url += `&parent=${parent}`;
+  getAggregation( sigalId: string , dateRange:any , aggregation: string ): Observable<any[]> {
+    let url = `/aggregation?signalId=${sigalId}`;
+    if ( dateRange!= null ){
+     
+      if ( dateRange.start  )
+         url += "&startDate=" + dateRange.start;
+      if ( dateRange.end )  
+         url += "&endDate=" + dateRange.end;
+    }
+    if ( aggregation ) url += `&parent=${aggregation}`;
     return this.webApiService.get(url);
   }
 

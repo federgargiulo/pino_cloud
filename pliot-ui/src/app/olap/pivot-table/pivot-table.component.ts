@@ -63,7 +63,6 @@ export class PivotTableComponent implements OnInit {
     this.selectedTenantId = tenantId;
     const selected = this.tenantList.find( ( x:any )  => x.tenantId === tenantId);
     this.selectedTenantName = selected?.name || null;
-    alert( " value " + tenantId );
     if ( "select-id"!= tenantId ){
       await this.fetchData(() => this.equipmentService.getEquipmentsByTenant( tenantId ), 'equipmentList');
     
@@ -84,8 +83,12 @@ export class PivotTableComponent implements OnInit {
 
 
   async loadData(parent?: string) {
-    await this.fetchData(() =>  this.olapService.getAggregation( this.selectedAggregation , parent) , 'data');   
-   
+         
+    if ( this.selectedSignalId != null ){
+      var sigalId = this.selectedSignalId;
+      await this.fetchData(() =>  this.olapService.getAggregation( sigalId ,
+         this.dateRange , this.selectedAggregation ) , 'data');   
+    }
   }
 
   onSignalChange(  signalId: string ){
