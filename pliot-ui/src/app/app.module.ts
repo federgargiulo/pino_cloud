@@ -38,6 +38,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { ProfileComponent } from './feature/profile/profile.component';
 
 
 var loc = new ConfigurationService (); 
@@ -81,6 +82,7 @@ export const  KEYCLOAK_PRIVIDER = () => provideKeycloak({
     DashconfManagerComponent,
     SearchUserComponent,
     DetailUserComponent,
+    ProfileComponent,
 
   ],
   imports: [
