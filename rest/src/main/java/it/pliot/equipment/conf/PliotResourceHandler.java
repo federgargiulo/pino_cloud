@@ -2,6 +2,9 @@ package it.pliot.equipment.conf;
 
 import it.pliot.equipment.GlobalConfig;
 import it.pliot.equipment.Mode;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 

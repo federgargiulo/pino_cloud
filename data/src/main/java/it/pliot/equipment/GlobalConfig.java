@@ -15,20 +15,23 @@ public class GlobalConfig {
     @Value("${pliot.mode:EDGE} ")
     private String mode;
 
-    private Mode m = null;
+
+    @Autowired
+    private Environment environment;
+
+    private Mode ACTIVE_MODE = null;
+
 
     public Mode getMode(){
-        if ( m == null ) {
-            try {
-                m = Mode.valueOf(mode);
-            }catch ( Exception exc ){
-                log.warn( " pliot.mode conf {} is not a correct value " , mode );
-
+        if ( ACTIVE_MODE == null ) {
+            for (String profileName : environment.getActiveProfiles()) {
+                if( Mode.EDGE.name().equalsIgnoreCase( profileName ) )
+                        ACTIVE_MODE=Mode.EDGE;
             }
-            if ( m == null )
-                m = Mode.SERVER;
+            if ( ACTIVE_MODE == null )
+                ACTIVE_MODE = Mode.SERVER;
         }
-        return m;
+        return ACTIVE_MODE;
     }
 
     private Boolean loadEnabled = null;
