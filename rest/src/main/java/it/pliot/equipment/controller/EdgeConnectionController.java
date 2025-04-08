@@ -23,7 +23,6 @@ public class EdgeConnectionController {
 
     @PostMapping("/edge")
     public EdgeTO register(@RequestBody EdgeTO edge){
-        // detect tenant
 
         return edgeServices.registerEdge( edge );
 

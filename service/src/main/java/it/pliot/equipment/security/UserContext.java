@@ -32,7 +32,10 @@ public class UserContext {
                   u.setFirstName(jwt.getClaim("given_name"));
                   u.setLastName(jwt.getClaim("family_name"));
                   u.setEmail(jwt.getClaim("email"));
-                  u.setTenantId(exractTenantId(jwt.getClaim("groups")));
+                  if ( jwt.hasClaim( "client_id" ) )
+                      u.setTenantId( jwt.getClaim("tenant"));
+                  else
+                      u.setTenantId(exractTenantId(jwt.getClaim("groups")));
                   return u;
               }
           }

@@ -1,19 +1,16 @@
 package it.pliot.equipment.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
-import org.springframework.context.annotation.Profile;
+
 
 import java.util.Date;
 
 @Entity
-@Profile("!edge")
 public class Edge {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String tenant;
