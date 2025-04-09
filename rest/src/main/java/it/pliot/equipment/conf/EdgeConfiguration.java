@@ -1,14 +1,14 @@
 package it.pliot.equipment.conf;
 
 import it.pliot.equipment.io.EdgeTO;
-import it.pliot.equipment.service.business.EdgeServerServices;
+import it.pliot.equipment.service.edge.InizializeEdgeRespTO;
+import it.pliot.equipment.service.edge.PliotServerConnection;
 import it.pliot.equipment.service.business.EdgeServices;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -23,14 +23,15 @@ public class EdgeConfiguration {
     EdgeServices edgeService;
 
     @Autowired
-    EdgeServerServices edgeServerService;
+    PliotServerConnection edgeServerService;
 
     @Value("${pliot.edge.name}")
     private String edgeName;
 
 
-    private String edgeUrl= "http://localhost:9080/server";
 
+    @Value("${pliot.edge.edge-url}")
+    private String edgeUrl;
 
     @PostConstruct
     public void initEdge(){
@@ -43,7 +44,7 @@ public class EdgeConfiguration {
         to.setEdgeName( edgeName );
         to.setEdgeUrl( edgeUrl );
         to = edgeServerService.registerEdge( to );
-        edgeService.save( to );
+        log.info( " registered " + to );
 
 
 

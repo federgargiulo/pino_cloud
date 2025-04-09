@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 @Profile("!edge")
 public interface EdgeServices {
-    public EdgeTO registerEdge( EdgeTO edge );
 
     public List<EdgeTO> findAll();
 

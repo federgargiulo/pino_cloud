@@ -3,7 +3,7 @@ pliot:
     url: "http://localhost:8180"
     realmName: "master"
     realmManaged: "pliot"
-    webClientId: "edge_app"
+    webClientId: "edge_app_1"
     user: "admin"
     password: "admin"
     clientId: "admin-cli"
@@ -13,6 +13,7 @@ pliot:
     client-id: tenant_primo_e1
     client-secret: hcpoP2iXkdJRRz0aRzZ2vPxYv9ZNPWJM
     api-url: http://localhost:8080
+    edge-url: http://localhost:8080
   base_path: "api"
   load_data: "false"
 

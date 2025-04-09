@@ -1,13 +1,13 @@
 package it.pliot.equipment.service.edge;
 
 import it.pliot.equipment.io.EdgeTO;
-import it.pliot.equipment.security.JwtUser;
-import it.pliot.equipment.security.UserContext;
-import it.pliot.equipment.service.business.EdgeServerServices;
 
+import it.pliot.equipment.service.business.EdgeServices;
+import it.pliot.equipment.service.business.TenantServices;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpEntity;
@@ -25,7 +25,7 @@ import java.util.Map;
 @Component
 @Transactional
 @Profile("edge")
-public class ServerEdgeServiceImpl implements EdgeServerServices {
+public class ServerEdgeServiceImpl implements PliotServerConnection {
 
     private static final Logger log = LoggerFactory.getLogger(ServerEdgeServiceImpl.class);
 
@@ -43,7 +43,23 @@ public class ServerEdgeServiceImpl implements EdgeServerServices {
     @Value("${pliot.edge.api-url}")
     private String edgeApiUrl;
 
-    public EdgeTO registerEdge( EdgeTO requestBody ) {
+    @Autowired
+    TenantServices tenantService;
+
+    @Autowired
+    EdgeServices localEdgeService;
+
+
+    public EdgeTO registerEdge( EdgeTO requestBody ){
+        InizializeEdgeRespTO i = registerOnServer( requestBody );
+        EdgeTO to = localEdgeService.save( i.getEdge() );
+        log.info( " stored edge locally ");
+        tenantService.save( i.getTenant() );
+        log.info( " stored tenat locally ");
+        return to;
+    }
+
+    public InizializeEdgeRespTO registerOnServer( EdgeTO requestBody ) {
         String token = getAccessToken();
         requestBody.setClient( clientId );
 
@@ -51,15 +67,14 @@ public class ServerEdgeServiceImpl implements EdgeServerServices {
         headers.setBearerAuth(token);
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-
         HttpEntity<EdgeTO> request = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<EdgeTO> response = restTemplate.postForEntity(
+        ResponseEntity<InizializeEdgeRespTO> response = restTemplate.postForEntity(
                 edgeApiUrl + "/api/edge",
                 request,
-                EdgeTO.class
+                InizializeEdgeRespTO.class
         );
 
-        EdgeTO responseBody = response.getBody();
+        InizializeEdgeRespTO responseBody = response.getBody();
         log.info( "received response " + responseBody );
         return responseBody;
     }
