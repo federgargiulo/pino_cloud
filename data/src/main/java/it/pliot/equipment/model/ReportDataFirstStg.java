@@ -14,8 +14,7 @@ import java.util.Date;
 public class ReportDataFirstStg {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "report_data_first_stg_seq" )
-    private Long id;
+    private String id;
 
     @Column( name = "tenant_id" , nullable = false )
     private String tenantId;
@@ -29,8 +28,20 @@ public class ReportDataFirstStg {
     @Column( name = "reference_timestamp" , nullable = false )
     private Date referenceTimestamp;
 
+
+    @Column( name = "create_timestamp" , nullable = false )
+    private Date creationDttm;
+
     @Column( name = "year_val" , nullable = false )
     private Integer yearVal;
+
+    public Date getCreationDttm() {
+        return creationDttm;
+    }
+
+    public void setCreationDttm(Date creationDttm) {
+        this.creationDttm = creationDttm;
+    }
 
     @Column( name = "month_val" , nullable = false )
     private Integer monthVal;
@@ -56,12 +67,11 @@ public class ReportDataFirstStg {
     @Column( name = "count_of_measure" , nullable = false )
     private BigDecimal countOfMeasure;
 
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
