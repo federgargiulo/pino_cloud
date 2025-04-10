@@ -68,10 +68,10 @@ public class ReportDataFirstStg {
     private BigDecimal countOfMeasure;
 
 
-    @Column( name = "received_from_edge_timestamp" , nullable = false )
+    @Column( name = "received_from_edge_timestamp" , nullable = true )
     private Date receivedFromEdgeDttm;
 
-    @Column( name = "edge_id" , nullable = false )
+    @Column( name = "edge_id" , nullable = true )
     private String edgeId;
 
     public Date getReceivedFromEdgeDttm() {
