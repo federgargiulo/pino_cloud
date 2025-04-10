@@ -16,7 +16,6 @@ public interface EdgeServices {
     public EdgeTO save( EdgeTO edge );
     public EdgeTO findById( String id );
 
-    public Long pushEquipment(EquipmentTO equipments );
 
 
 }

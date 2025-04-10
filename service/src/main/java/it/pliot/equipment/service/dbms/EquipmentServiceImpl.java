@@ -13,6 +13,9 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -44,6 +47,14 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
         Example<Equipment> example = Example.of(probe);
         List<Equipment> equipments = getRepo().findAll(example);
         return getConverter().converListData2IO( equipments );
+    }
+
+    @Override
+    public Collection<Object> importFromEdge(List<EquipmentTO> equipments, String edgeId, Date d) {
+        EquipmentUtils u = ( EquipmentUtils) getConverter();
+        List<Equipment> edData = u.convertListIO2data( equipments , edgeId , d );
+        edData = getRepo().saveAllAndFlush( edData );
+        return Collections.singleton(u.converListData2IO(edData));
     }
 
 }

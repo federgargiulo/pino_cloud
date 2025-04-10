@@ -1,5 +1,6 @@
 package it.pliot.equipment.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -25,6 +26,29 @@ public class Signal extends BaseEntity {
     public String getTenant() {
         return tenant;
     }
+
+    public Date getReceivedFromEdgeDttm() {
+        return receivedFromEdgeDttm;
+    }
+
+    public void setReceivedFromEdgeDttm(Date receivedFromEdgeDttm) {
+        this.receivedFromEdgeDttm = receivedFromEdgeDttm;
+    }
+
+    public String getEdgeId() {
+        return edgeId;
+    }
+
+    public void setEdgeId(String edgeId) {
+        this.edgeId = edgeId;
+    }
+
+    @Column( name = "received_from_edge_timestamp" , nullable = false )
+    private Date receivedFromEdgeDttm;
+
+    @Column( name = "edge_id" , nullable = false )
+    private String edgeId;
+
 
     @Override
     public void setTenant(String tenant) {

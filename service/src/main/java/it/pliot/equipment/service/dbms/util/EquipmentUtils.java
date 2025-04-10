@@ -3,6 +3,10 @@ package it.pliot.equipment.service.dbms.util;
 import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.model.Equipment;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class EquipmentUtils extends BaseConvertUtil<Equipment, EquipmentTO>{
 
     private static EquipmentUtils INSTANCE = new EquipmentUtils();
@@ -38,5 +42,21 @@ public class EquipmentUtils extends BaseConvertUtil<Equipment, EquipmentTO>{
         if (null != equipment.getVersion() && !"".equals(equipment.getVersion()))
             io.setVersion( Long.toString( equipment.getVersion() ) );
         return  io;
+    }
+
+    public List<Equipment> convertListIO2data(List<EquipmentTO> equipments, String edgeId, Date d) {
+
+            ArrayList<Equipment> ldaya = new ArrayList<>();
+            if ( equipments == null )
+                return ldaya;
+            equipments.forEach(  o -> {
+                Equipment e = io2data(o);
+                e.setEdgeId( edgeId );
+                e.setReceivedFromEdgeDttm( d );
+                ldaya.add( e );
+            });
+            return ldaya;
+
+
     }
 }

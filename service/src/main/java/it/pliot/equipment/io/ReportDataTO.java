@@ -1,38 +1,28 @@
-package it.pliot.equipment.model;
+package it.pliot.equipment.io;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity( name = "report_data_first_stg" )
-@SequenceGenerator(
-        name = "report_data_first_stg_seq",
-        sequenceName = "report_data_first_stg_seq",
-        allocationSize = 1  // Imposta il passo a 1
-)
-public class ReportDataFirstStg {
 
-    @Id
+public class ReportDataTO {
+
     private String id;
 
-    @Column( name = "tenant_id" , nullable = false )
     private String tenantId;
 
-    @Column( name = "equipment_id" , nullable = false )
     private String equipmentId;
 
-    @Column( name = "signal_id" , nullable = false )
-    private String signalId;
+     private String signalId;
 
-    @Column( name = "reference_timestamp" , nullable = false )
-    private Date referenceTimestamp;
+     private Date referenceTimestamp;
 
-
-    @Column( name = "create_timestamp" , nullable = false )
     private Date creationDttm;
 
-    @Column( name = "year_val" , nullable = false )
     private Integer yearVal;
 
     public Date getCreationDttm() {
@@ -43,35 +33,25 @@ public class ReportDataFirstStg {
         this.creationDttm = creationDttm;
     }
 
-    @Column( name = "month_val" , nullable = false )
-    private Integer monthVal;
+     private Integer monthVal;
 
-    @Column( name = "day_val" , nullable = false )
-    private Integer dayVal;
+     private Integer dayVal;
 
-    @Column( name = "hour_val" , nullable = false )
-    private Integer hourVal;
+     private Integer hourVal;
 
-    @Column( name = "minute_val" , nullable = false )
     private Integer minuteVal;
 
-    @Column( name = "mean_val" , nullable = false )
     private BigDecimal meanVal;
 
-    @Column( name = "min_val" , nullable = false )
     private BigDecimal minVal;
 
-    @Column( name = "max_val" , nullable = false )
-    private BigDecimal maxVal;
+     private BigDecimal maxVal;
 
-    @Column( name = "count_of_measure" , nullable = false )
-    private BigDecimal countOfMeasure;
+      private BigDecimal countOfMeasure;
 
 
-    @Column( name = "received_from_edge_timestamp" , nullable = false )
     private Date receivedFromEdgeDttm;
 
-    @Column( name = "edge_id" , nullable = false )
     private String edgeId;
 
     public Date getReceivedFromEdgeDttm() {
