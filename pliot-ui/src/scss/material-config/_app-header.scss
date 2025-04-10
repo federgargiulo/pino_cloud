@@ -1,0 +1,106 @@
+@import '../base.scss';
+
+@mixin app-header() {
+
+  nav.app-header {
+    // padding: 24px;
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    height: 56px;
+    align-items: center;
+
+    .app-header {
+      &-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      &-right, &-center {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        button.mdc-button {
+          padding: 0 12px !important;
+          &:last-of-type {
+            margin-right: 12px;
+          }
+          &:first-of-type {
+            margin-left: 12px;
+          }
+          border-radius: 0;
+          height: 56px;
+          .material-symbols-outlined {
+            font-size: 18px;
+          }
+        }
+      }
+      &-left {
+        width: 229px;
+      }
+      &-center {
+        border-left: 1px solid #e0e0e0;
+        border-right: 1px solid #e0e0e0;
+        padding: 0 18px;
+      }
+    }
+
+    h1 {
+      font-weight: 500;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #2c68c0;
+    }
+
+    button.mdc-button {
+      min-width: auto;
+      padding: 0 24px !important;
+      border-radius: 0;
+      height: 56px;
+      .material-symbols-outlined {
+        font-size: 18px;
+      }
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      // margin-left: 105px;
+    }
+
+    mat-form-field.mat-mdc-form-field {
+      display: flex;
+      align-items: center;
+      .mat-mdc-text-field-wrapper {
+        background-color: transparent;
+        .mat-mdc-form-field-infix {
+          padding: 0;
+          min-height: 35px;
+
+          display: flex;
+          align-items: center;
+
+          gap: 12px;
+          .material-symbols-outlined {
+            font-size: 18px;
+            height: 18px;
+          }
+        }
+        .mdc-text-field--filled .mdc-line-ripple::before {
+          display: none;
+        }
+        .mdc-line-ripple.mdc-line-ripple--active::after {
+          display: none;
+        }
+        .mdc-line-ripple::before {
+          display: none;
+        }
+      }
+
+      .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+      }
+    }
+  }
+}
