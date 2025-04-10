@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Profile("!edge")
 public interface EdgeServices {
 
     public List<EdgeTO> findAll();
 
     public EdgeTO save( EdgeTO edge );
+    public EdgeTO findById( String id );
 
 }

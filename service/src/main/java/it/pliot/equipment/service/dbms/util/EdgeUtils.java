@@ -21,6 +21,7 @@ public class EdgeUtils extends BaseConvertUtil<Edge, EdgeTO>{
         out.setEdgeName( in.getEdgeName() );
         out.setRegistrationDttm( in.getRegistrationDttm() );
         out.setTenant( in.getTenant() );
+        out.setEdgeUrl( in.getEdgeUrl() );
         return out;
     }
 
@@ -32,6 +33,7 @@ public class EdgeUtils extends BaseConvertUtil<Edge, EdgeTO>{
         out.setEdgeName( in.getEdgeName() );
         out.setRegistrationDttm( in.getRegistrationDttm() );
         out.setTenant( in.getTenant() );
+        out.setEdgeUrl( in.getEdgeUrl() );
         return out;
     }
 }

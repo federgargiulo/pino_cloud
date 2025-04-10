@@ -49,18 +49,18 @@ export const  KEYCLOAK_PRIVIDER = () => provideKeycloak({
     realm: loc.getRealm()  ,                 // Nome del realm
     clientId: loc.getClientId() ,           // Client ID registrato su Keycloak
   },
-    initOptions: {
-      onLoad: 'login-required',  // Oppure 'check-sso' se non vuoi forzare il login
-        redirectUri: window.location.origin, // Assicura che sia corretto
-        silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
-        checkLoginIframe: false,
-    },
-    features: [
-      withAutoRefreshToken({
-        onInactivityTimeout: 'logout',
-        sessionTimeout: 60000
-      })
-    ],
+  initOptions: {
+    onLoad: 'login-required',  // Oppure 'check-sso' se non vuoi forzare il login
+    redirectUri: loc.getRedirectUri(), // Assicura che sia corretto
+    silentCheckSsoRedirectUri: loc.getSilentCheckSsoRedirectUri(), // usata se check-sso abilitato
+    checkLoginIframe: false,
+  },
+  features: [
+    withAutoRefreshToken({
+      onInactivityTimeout: 'logout',
+      sessionTimeout: 60000
+    })
+   ],
     providers: [AutoRefreshTokenService, UserActivityService]
   });
 

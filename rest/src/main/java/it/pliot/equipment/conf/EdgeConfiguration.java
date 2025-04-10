@@ -1,5 +1,6 @@
 package it.pliot.equipment.conf;
 
+import it.pliot.equipment.GlobalConfig;
 import it.pliot.equipment.io.EdgeTO;
 import it.pliot.equipment.service.edge.InizializeEdgeRespTO;
 import it.pliot.equipment.service.edge.PliotServerConnection;
@@ -23,18 +24,19 @@ public class EdgeConfiguration {
     EdgeServices edgeService;
 
     @Autowired
+    GlobalConfig config;
+
+    @Autowired
     PliotServerConnection edgeServerService;
 
-    @Value("${pliot.edge.name}")
-    private String edgeName;
-
-
-
-    @Value("${pliot.edge.edge-url}")
-    private String edgeUrl;
 
     @PostConstruct
     public void initEdge(){
+
+        String edgeName = config.getConfValue("pliot.edge.name" , "");
+        String edgeUrl = config.getConfValue("pliot.edge.edge-url" , "");
+
+
         log.info( " edge initial configuration ");
         List<EdgeTO> edges = edgeService.findAll();
         if ( edges.size() > 0 )
