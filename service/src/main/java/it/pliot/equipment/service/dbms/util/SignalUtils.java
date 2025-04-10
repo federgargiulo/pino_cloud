@@ -28,6 +28,7 @@ public class SignalUtils extends BaseConvertUtil<Signal, SignalTO>{
         data.setUpRedLimit( sio.getUpRedLimit() );
         data.setUpYellowLimit( sio.getUpYellowLimit());
         data.setTenant( sio.getTenant() );
+        data.setStatus( sio.getStatus() );
         return data;
     }
 
@@ -50,6 +51,7 @@ public class SignalUtils extends BaseConvertUtil<Signal, SignalTO>{
         io.setUpdateDttm( s.getUpdateDttm() );
         io.setVersion( String.valueOf( s.getVersion() ) );
         io.setTenant( s.getTenant() );
+        io.setStatus( s.getStatus() );
         return io;
     }
 }

@@ -54,6 +54,7 @@ public class UserController {
     @PatchMapping("/users/{id}")
     public ResponseEntity<UserTO> updateUser(@PathVariable("id") String id , @RequestBody UserTO userTO ) {
         try {
+            userTO.setIdpId(id);
            userTO = userServices.save( userTO );
             return new ResponseEntity<>(userTO, HttpStatus.OK );
         } catch (Exception e) {

@@ -101,8 +101,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
         Map<String,OperationType> grp2manage = identifyGroupToAddOrRemove( io.getUsrGrp() , user.getUserGroups() );
 
         if (Mode.SERVER == config.getMode()) {
+            //Se la lista di gruppi dello user proveniente dalla ui è vuota allora setto i gruppi letti dal db
+            if (io.getUsrGrp().size()==0){
+                io.setUsrGrp(c.convertListData2Io(user.getUserGroups()));
+            }
+
             // Aggiorna lo user settando i nuovi gruppi su Keycloak
-            keycloak.updateUser(io , grp2manage );
+            keycloak.updateUser(io ,grp2manage );
         }
         user = c.cp2data( io, user );
         user = getRepo().save( user );

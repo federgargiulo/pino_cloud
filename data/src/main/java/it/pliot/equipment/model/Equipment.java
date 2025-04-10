@@ -64,17 +64,6 @@ public class Equipment extends BaseEntity{
         return status;
     }
 
-    public List<Signal> getSignals() {
-        return signals;
-    }
-
-    public void setSignals(List<Signal> signals) {
-        this.signals = signals;
-    }
-
-    @OneToMany
-    private List<Signal> signals;
-
     public Equipment(){}
 
     public void setId(String id) {

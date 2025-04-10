@@ -22,6 +22,16 @@ public class Signal extends BaseEntity {
 
     private String downRedLimit;
 
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getTenant() {
         return tenant;
     }

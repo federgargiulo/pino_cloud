@@ -8,6 +8,7 @@ import { UserService } from '../../service/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  idpId: string | null = '';
   username: string | null = '';
   firstName: string | null = '';
   lastName: string | null = '';
@@ -22,5 +23,27 @@ export class ProfileComponent implements OnInit {
     this.lastName = this.userService.getCurrentLastName();
     this.email = this.userService.getCurrentUserEDmail();
     this.userId = this.userService.getCurrentUserId();
+    this.idpId = this.userService.getCurrentUserId();
+
   }
+  onSubmit(): void {
+      const updatedUser = {
+        username: this.username,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        idpId: this.idpId,
+        userId: this.userId
+      };
+
+      this.userService.updateUser(updatedUser).subscribe({
+        next: () => {
+          alert('Profilo aggiornato con successo!');
+        },
+        error: (err) => {
+          console.error('Errore durante l\'aggiornamento:', err);
+          alert('Errore durante l\'aggiornamento del profilo.');
+        }
+      });
+    }
 }

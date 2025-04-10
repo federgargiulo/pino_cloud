@@ -35,7 +35,7 @@ export class UserService {
 
   public updateUser(usr: any): Observable<any> {
     console.info( "Service is calling " + httpLink.baseDashboard + " With data " + usr )
-    return this.webApiService.patch(httpLink.baseDashboard + '/' + usr.id , usr );
+    return this.webApiService.patch(httpLink.baseDashboard + '/' + usr.idpId , usr );
   }
 
   public getUserById(userId: any): Observable<any> {
@@ -70,6 +70,10 @@ export class UserService {
   }
   getCurrentUserEDmail(): string | null {
     return this.getGetJWTAttribute( 'email' );
+  }
+
+  getCurrentUserGroups(): string[] {
+    return this.keycloak.tokenParsed?.['groups'] || [];
   }
 
 }
