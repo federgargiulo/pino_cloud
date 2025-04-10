@@ -67,6 +67,29 @@ public class ReportDataFirstStg {
     @Column( name = "count_of_measure" , nullable = false )
     private BigDecimal countOfMeasure;
 
+
+    @Column( name = "received_from_edge_timestamp" , nullable = true )
+    private Date receivedFromEdgeDttm;
+
+    @Column( name = "edge_id" , nullable = true )
+    private String edgeId;
+
+    public Date getReceivedFromEdgeDttm() {
+        return receivedFromEdgeDttm;
+    }
+
+    public void setReceivedFromEdgeDttm(Date receivedFromEdgeDttm) {
+        this.receivedFromEdgeDttm = receivedFromEdgeDttm;
+    }
+
+    public String getEdgeId() {
+        return edgeId;
+    }
+
+    public void setEdgeId(String edgeId) {
+        this.edgeId = edgeId;
+    }
+
     public String getId() {
         return id;
     }

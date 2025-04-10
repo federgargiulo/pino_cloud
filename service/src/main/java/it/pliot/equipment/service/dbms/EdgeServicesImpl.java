@@ -2,6 +2,7 @@ package it.pliot.equipment.service.dbms;
 
 import it.pliot.equipment.io.EdgeTO;
 
+import it.pliot.equipment.io.EquipmentTO;
 import it.pliot.equipment.model.Edge;
 
 import it.pliot.equipment.repository.EdgeRepository;
@@ -36,4 +37,6 @@ public class EdgeServicesImpl extends BaseServiceImpl<EdgeTO, Edge,String>
     public BaseConvertUtil getConverter() {
         return EdgeUtils.instance();
     }
+
+
 }

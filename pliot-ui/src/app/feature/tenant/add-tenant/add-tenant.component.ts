@@ -8,7 +8,7 @@ import { TenantServices, Tenant } from '../../../service/tenant.service';
   selector: 'app-add-tenant',
   standalone: false,
   templateUrl: './add-tenant.component.html',
-  styleUrl: './add-tenant.component.css'
+  styleUrl: './add-tenant.component.scss'
 })
 export class AddTenantComponent {
  tenantForm: FormGroup;

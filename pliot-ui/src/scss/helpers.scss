@@ -1,0 +1,363 @@
+$directions: ('top', 'right', 'bottom', 'left');
+@import 'base.scss';
+
+@each $direction in $directions {
+    @for $i from 1 through 10 {
+        .padding-#{$i}x {
+            padding: $u * $i;
+        }
+
+        .margin-#{$i}x {
+            margin: $u * $i;
+        }
+    }
+
+    @for $i from 1 through 10 {
+        .padding-#{$direction}-#{$i}x {
+            padding-#{$direction}: $u * $i;
+        }
+
+        .margin-#{$i}x {
+            margin-#{$direction}: $u * $i;
+        }
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+.d-inline {
+    display: inline;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-inline-flex {
+    display: inline-flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-column-reverse {
+    flex-direction: column-reverse;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.justify-content-start {
+   justify-content: start;
+}
+
+.justify-content-end {
+    justify-content: end;
+ }
+
+.justify-content-center {
+    justify-content: center;
+ }
+
+.justify-content-between {
+    justify-content: space-between;
+ }
+
+.justify-content-around {
+    justify-content: space-around;
+ }
+
+.align-items-start {
+   align-items: start;
+ }
+
+.align-items-end {
+    align-items: end;
+  }
+
+.align-items-center {
+    align-items: center;
+  }
+
+.align-items-baseline {
+    align-items: baseline;
+  }
+
+.align-items-stretch {
+    align-items: stretch;
+  }
+
+.align-self-start {
+    align-self: start;
+  }
+
+.align-self-end {
+    align-self: end;
+  }
+
+.align-self-center {
+    align-self: center;
+  }
+
+.align-self-baseline {
+    align-self: baseline;
+  }
+
+.align-self-stretch {
+    align-self: stretch;
+  }
+
+
+.flex-nowrap {
+    flex-wrap: nowrap;
+  }
+
+.flex-wrap {
+    flex-wrap: wrap;
+  }
+
+.flex-wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+
+.order-0 {
+    order: 0;
+}
+
+.order-1 {
+    order: 1;
+}
+
+.order-2 {
+    order: 2;
+}
+
+.order-3 {
+    order: 3;
+}
+
+.order-4 {
+    order: 4;
+}
+
+.order-5 {
+    order: 5;
+}
+
+.order-6 {
+    order: 6;
+}
+
+.order-7 {
+    order: 7;
+}
+
+.order-8 {
+    order: 8;
+}
+
+.order-9 {
+    order: 9;
+}
+
+.order-10 {
+    order: 10;
+}
+
+.order-11 {
+    order: 11;
+}
+
+.order-12 {
+    order: 12;
+}
+
+.align-content-start {
+    align-content: start;
+}
+
+.align-content-end {
+    align-content: end;
+}
+
+.align-content-center {
+    align-content: center;
+}
+
+.align-content-around {
+    align-content: space-around;
+}
+
+.align-content-stretch {
+    align-content: stretch;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+// :focus {
+//   outline: unset;
+//   border: none;
+//   box-shadow: none;
+// }
+
+app-corso-valutazione-multi-new {
+  .mat-cell {
+    position: relative;
+    &:has(:focus-visible)::before {
+      content: "";
+      outline: 3px solid #0000ff;
+      position: absolute;
+      width: 97%;
+      height: 92%;
+      z-index: 1;
+      border-radius: 3px;
+    }
+    &:has(.cdk-keyboard-focused)::before {
+      display: none;
+    }
+
+    app-multi-valid-toggle-button.cdk-keyboard-focused.cdk-focused {
+      position: relative;
+      &::before {
+        content: "";
+        border: 3px solid #0000ff;
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        z-index: 1;
+        border-radius: 50px;
+        left: 0;
+        box-shadow: 0 0 0 6px rgb(0 0 255 / 21%);
+      }
+    }
+  }
+}
+
+app-corso-valutazione-new,
+app-corso-valutazione-multi-new {
+  *:focus-visible {
+    outline: none !important;
+    border: none !important;
+    // &::before {
+    //   content: "";
+    //   border: 3px solid #0000ff;
+    //   // position: absolute;
+    //   // width: 100%;
+    //   // height: 100%;
+    //   // border-radius: 5px;
+    // }
+  }
+  .mat-table tr.mat-row {
+    &:focus-visible {
+      &::before {
+        content: "";
+        border: 3px solid #0000ff;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+      }
+      &:has(.grey-background) {
+        &::before {
+            width: calc( 100% - 70px );
+            left: 70px;
+        }
+      }
+    }
+
+    td.mat-cell button.mat-button-base {
+      position: relative;
+
+      &.cdk-keyboard-focused {
+        .mat-button-focus-overlay {
+          display: none;
+        }
+      }
+
+      &:focus-visible {
+        &::before {
+          content: "";
+          border: 3px solid #0000ff;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          top: 0;
+          left: 0;
+        }
+      }
+
+    }
+  }
+
+  .mat-radio-button:not(.mat-radio-disabled).cdk-keyboard-focused .mat-radio-persistent-ripple,
+  .mat-radio-button:not(.mat-radio-disabled).cdk-program-focused .mat-radio-persistent-ripple {
+    background-color: transparent;
+    border: 3px solid blue;
+    width: 1.7rem;
+    height: 1.7rem;
+    left: 0.4rem;
+    top: 0.4rem;
+    box-shadow: 0 0 0 6px rgba(0, 0, 255, 0.21);
+    opacity: 1;
+    // z-index: 1;
+  }
+
+  .mat-slide-toggle:not(.mat-disabled).cdk-keyboard-focused .mat-slide-toggle-persistent-ripple {
+    background-color: transparent;
+    border: 3px solid blue;
+    width: 65%;
+    height: 65%;
+    left: 7px;
+    top: 7px;
+    box-shadow: 0 0 0 6px rgb(0 0 255 / 21%);
+    opacity: 1;
+  }
+
+  button.mat-button-base.mat-flat-button {
+    position: relative;
+      &:not(:disabled).cdk-keyboard-focused {
+        .mat-button-ripple.mat-ripple {
+          background-color: transparent;
+          border: 3px solid blue;
+          width: 100%;
+          height: 100%;
+          // left: 7px;
+          // top: 7px;
+          box-shadow: 0 0 0 6px rgb(0 0 255 / 21%);
+          opacity: 1;
+        }
+        .mat-button-focus-overlay {
+          opacity: 0;
+        }
+      }
+  }
+
+}

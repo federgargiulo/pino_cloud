@@ -40,8 +40,8 @@ public class ServerEdgeServiceImpl implements PliotServerConnection {
     @Value("${pliot.edge.client-secret}")
     private String clientSecret;
 
-    @Value("${pliot.edge.api-url}")
-    private String edgeApiUrl;
+    @Value("${pliot.edge.server-url}" )
+    private String serverUrl;
 
     @Autowired
     TenantServices tenantService;
@@ -69,7 +69,7 @@ public class ServerEdgeServiceImpl implements PliotServerConnection {
 
         HttpEntity<EdgeTO> request = new HttpEntity<>(requestBody, headers);
         ResponseEntity<InizializeEdgeRespTO> response = restTemplate.postForEntity(
-                edgeApiUrl + "/api/edge",
+                serverUrl + "/api/edge",
                 request,
                 InizializeEdgeRespTO.class
         );

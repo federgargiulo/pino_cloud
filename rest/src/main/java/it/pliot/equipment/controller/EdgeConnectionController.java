@@ -2,13 +2,15 @@ package it.pliot.equipment.controller;
 
 
 import it.pliot.equipment.conf.ApiPrefixController;
+import it.pliot.equipment.controller.io.PushDataResultTO;
+import it.pliot.equipment.controller.io.PushDataTO;
+import it.pliot.equipment.service.business.*;
 import it.pliot.equipment.service.edge.InizializeEdgeRespTO;
 import it.pliot.equipment.io.EdgeTO;
 import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.security.JwtUser;
 import it.pliot.equipment.security.UserContext;
-import it.pliot.equipment.service.business.EdgeServices;
-import it.pliot.equipment.service.business.TenantServices;
+import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,35 @@ public class EdgeConnectionController {
         log.info( " load temamt info  " + t.getTenantId() );
         InizializeEdgeRespTO respo = new InizializeEdgeRespTO( edge , t );
         return respo;
+
+    }
+
+    @Autowired
+    EquipmentServices equipmentServices;
+
+    @Autowired
+    SignalServices signalServices;
+
+    @Autowired
+    ReportServices reportServices;
+
+
+    @PostMapping("/edge/{id}/pushdata")
+    public PushDataResultTO pushData( @RequestBody PushDataTO data ,@PathVariable("id") String id ){
+        PushDataResultTO result = new PushDataResultTO();
+        Date d = new Date();
+
+        log.info( " received data data " );
+        if ( data.getEquipments() != null ){
+            result.setTotEquipmentSaved( equipmentServices.importFromEdge( data.getEquipments() , id  , d ).stream().count() );
+        }
+        if ( data.getSignals() != null ) {
+            result.setTotSignalSaved( signalServices.importFromEdge( data.getSignals()  , id  , d ).stream().count() );
+        }
+        if ( data.getReportData() != null ){
+            result.setTotReportItemSaved( reportServices.importFromEdge( data.getReportData() , id  , d ).stream().count() );
+        }
+        return result;
 
     }
 

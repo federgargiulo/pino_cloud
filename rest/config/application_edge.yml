@@ -12,10 +12,11 @@ pliot:
     tokenuri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/token
     client-id: tenant_primo_e1
     client-secret: hcpoP2iXkdJRRz0aRzZ2vPxYv9ZNPWJM
-    api-url: http://localhost:8080
-    edge-url: http://localhost:8080
+    server-url: http://localhost:8080
+    edge-url: http://localhost:9080
   base_path: "api"
   load_data: "false"
+
 
 
 logging:
