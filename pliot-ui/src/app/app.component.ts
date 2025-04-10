@@ -5,11 +5,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: false,
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 
 
 export class AppComponent {
+  showTenantItems = false;
+  showEquipmentItems = false;
+  showUsersItems = false;
+  showDashboardItems = false;
   title = 'pliot-ui';
   constructor(private modalService: NgbModal) {
   }
