@@ -36,6 +36,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { ProfileComponent } from './feature/profile/profile.component';
 
 var loc = new ConfigurationService();
 
@@ -51,14 +52,20 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
     checkLoginIframe: false,
   },
+  initOptions: {
+    onLoad: 'login-required',  // Oppure 'check-sso' se non vuoi forzare il login
+    redirectUri: loc.getRedirectUri(), // Assicura che sia corretto
+    silentCheckSsoRedirectUri: loc.getSilentCheckSsoRedirectUri(), // usata se check-sso abilitato
+    checkLoginIframe: false,
+  },
   features: [
     withAutoRefreshToken({
       onInactivityTimeout: 'logout',
       sessionTimeout: 60000
     })
-  ],
-  providers: [AutoRefreshTokenService, UserActivityService]
-});
+   ],
+    providers: [AutoRefreshTokenService, UserActivityService]
+  });
 
 @NgModule({
   declarations: [
@@ -78,6 +85,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     DashconfManagerComponent,
     SearchUserComponent,
     DetailUserComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,19 +1,23 @@
 pliot:
-  mode: SERVER
   keycloak:
-    url: "https://pinocloud.duckdns.org:8081"
+    url: "http://localhost:8180"
     realmName: "master"
-    realmManaged: "pliot_dev"
-    webClientId: "edge_app"
+    realmManaged: "pliot"
+    webClientId: "edge_app_1"
     user: "admin"
-    password: "4%VtlGbS)54\"}.l0A,rW:VAs*-0$/=+3zXYpT*-C<.4isbV6$2"
+    password: "admin"
     clientId: "admin-cli"
   edge:
+    name: "edge_name"
     tokenuri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/token
     client-id: tenant_primo_e1
     client-secret: hcpoP2iXkdJRRz0aRzZ2vPxYv9ZNPWJM
-    api-url: http://localhost:8080
+    server-url: http://localhost:8080
+    edge-url: http://localhost:9080
   base_path: "api"
+  load_data: "false"
+
+
 
 logging:
   file:
@@ -53,7 +57,7 @@ spring:
     enabled: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/pliot
+    url: jdbc:postgresql://localhost:5432/edge
     username: pliot
     password: pliot
 #H2
@@ -73,7 +77,6 @@ spring:
   h2:
     console:
       enabled: true
-
 
 #
 # Postgres
@@ -98,13 +101,6 @@ spring:
           jwk-set-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/certs
           issuer-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}
 
-server:
-  port: 8080
-  ssl:
-    enabled: true
-    certificate: ./config/fullchain.pem
-    certificate-private-key: ./config/privkey.pem
-
 
 management:
   endpoints:
@@ -120,3 +116,6 @@ management:
 
 hawtio:
   authenticationEnabled: false
+
+server:
+  port: 9080

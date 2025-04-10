@@ -39,6 +39,8 @@ export class ConfigurationService {
     }
   }
 
+
+ 
   getIDPUrl(){
      return this.config.idpUrl;
   }
@@ -52,5 +54,17 @@ export class ConfigurationService {
 
   getConfig(){
     return this.config;
+  }
+
+  getRedirectUri(){  
+    if ( "EDGE" == this.config.mode ){
+      return this.config.edgeRedirect;
+    }
+    else
+      return  window.location.origin;
+  }
+  getSilentCheckSsoRedirectUri(){
+    
+      return   window.location.origin + '/assets/silent-check-sso.html';
   }
 }

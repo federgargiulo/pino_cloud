@@ -28,7 +28,7 @@ import java.util.Date;
 @ApiPrefixController
 public class EquipmentController {
 
-    private static final Logger log = LoggerFactory.getLogger(InitDb.class);
+    private static final Logger log = LoggerFactory.getLogger(EquipmentController.class);
 
     @Autowired
     private EquipmentServices equipmentService;
@@ -36,13 +36,8 @@ public class EquipmentController {
     @Autowired
     private SignalServices signalServices;
 
-
     @Autowired
     private EquipmentPullerServices equipmentPullerServices;
-
-
-
-
 
     @GetMapping("/equipments")
     public List<EquipmentTO> getEquipmentsForTenant(@RequestParam(value = "tenantId", required = false) String tenantId) {

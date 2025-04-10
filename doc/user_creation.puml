@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor "Tenant Administrator" as u
+
+actor "User" as u2
+
+box user device
+participant "Edge UI" as eui
+participant "Server UI" as sui
+
+end box
+
+box device
+participant "Sensor" as s
+participant edge as edge
+database Db as edb
+end box
+
+box server
+participant Keycloak as k
+participant server as ser
+database Db as sedb
+end box
+
+activate sui
+u -> sui : create User
+activate ser
+sui -> ser : create User
+ser -> k: registert User
+ser -> sedb: save user
+ser --> sui
+deactivate ser
+deactivate sui
+== login user ==
+
+ser -> sedb
+ser --> edge
+edge -> edb: storeTenantInfo
+
+
+u2 -> eui: login
+activate eui
+u2 -> k: user authentication
+k --> eui: access token
+eui -> edge: federateUser( access token)
+activate edge
+edge -> edb : save or update user
+deactivate edge
+
+@enduml

@@ -1,5 +1,4 @@
 pliot:
-  mode: SERVER
   keycloak:
     url: "http://localhost:8180"
     realmName: "master"
@@ -8,6 +7,11 @@ pliot:
     user: "admin"
     password: "admin"
     clientId: "admin-cli"
+  edge:
+    tokenuri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/token
+    client-id: my-client
+    client-secret: my-secret
+    api-url: http://localhost:8080
   base_path: "api"
   load_data: "false"
 
@@ -91,8 +95,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8180/realms/pliot/protocol/openid-connect/certs
-          issuer-uri: http://localhost:8180/realms/pliot
+          jwk-set-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/certs
+          issuer-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}
+
 
 management:
   endpoints:
