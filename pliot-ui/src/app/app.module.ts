@@ -46,12 +46,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     realm: loc.getRealm(),
     clientId: loc.getClientId(),
   },
-  initOptions: {
-    onLoad: 'login-required',
-    redirectUri: window.location.origin,
-    silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
-    checkLoginIframe: false,
-  },
+ 
   initOptions: {
     onLoad: 'login-required',  // Oppure 'check-sso' se non vuoi forzare il login
     redirectUri: loc.getRedirectUri(), // Assicura che sia corretto
