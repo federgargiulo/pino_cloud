@@ -4,7 +4,10 @@ import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.service.business.UserGrpServices;
 import it.pliot.equipment.service.business.UserServices;
+import it.pliot.equipment.service.ext.UserGrpImpl;
 import jakarta.ws.rs.QueryParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import java.util.List;
 @RestController
 @ApiPrefixController
 public class UserController {
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserServices userServices;
@@ -55,8 +59,8 @@ public class UserController {
     public ResponseEntity<UserTO> updateUser(@PathVariable("id") String id , @RequestBody UserTO userTO ) {
         try {
             userTO.setIdpId(id);
-           userTO = userServices.save( userTO );
-            return new ResponseEntity<>(userTO, HttpStatus.OK );
+            UserTO  userResult = userServices.save( userTO );
+            return new ResponseEntity<>(userResult, HttpStatus.OK );
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

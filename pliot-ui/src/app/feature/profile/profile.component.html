@@ -1,36 +1,38 @@
-<div class="card mt-4">
-  <div class="card-header">
-    Modifica Profilo Utente
-  </div>
-  <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
-      <input id="idpId" type="hidden" formControlName="idpId">
-      <div class="mb-3">
+<form (ngSubmit)="onSubmit()" #profileForm="ngForm" class="d-flex flex-column">
+  <h2>Profile</h2>
+  <div class="form-container">
+
+    <input type="hidden" name="idpId" [(ngModel)]="idpId">
+
+    <div class="d-flex flex-row gap-4">
+      <div class="form-group-item">
         <label for="username" class="form-label">Username</label>
         <input id="username" name="username" type="text" class="form-control" [(ngModel)]="username" required>
       </div>
-
-      <div class="mb-3">
-        <label for="firstName" class="form-label">Nome</label>
-        <input id="firstName" name="firstName" type="text" class="form-control" [(ngModel)]="firstName" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="lastName" class="form-label">Cognome</label>
-        <input id="lastName" name="lastName" type="text" class="form-control" [(ngModel)]="lastName" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input id="email" name="email" type="email" class="form-control" [(ngModel)]="email" required>
-      </div>
-
-      <div class="mb-3">
+      <div class="form-group-item">
         <label for="userId" class="form-label">User ID</label>
         <input id="userId" name="userId" type="text" class="form-control" [(ngModel)]="userId" readonly>
       </div>
+    </div>
 
-      <button type="submit" class="btn btn-primary">Salva modifiche</button>
-    </form>
+    <div class="d-flex flex-row gap-4">
+      <div class="form-group-item">
+        <label for="firstName" class="form-label">Nome</label>
+        <input id="firstName" name="firstName" type="text" class="form-control" [(ngModel)]="firstName" required>
+      </div>
+      <div class="form-group-item">
+        <label for="lastName" class="form-label">Cognome</label>
+        <input id="lastName" name="lastName" type="text" class="form-control" [(ngModel)]="lastName" required>
+      </div>
+    </div>
+
+    <div class="form-group-item">
+      <label for="email" class="form-label">Email</label>
+      <input id="email" name="email" type="email" class="form-control" [(ngModel)]="email" required>
+    </div>
   </div>
-</div>
+
+  <mat-toolbar>
+    <button type="submit" class="btn btn-primary mt-3">Salva modifiche</button>
+  </mat-toolbar>
+</form>

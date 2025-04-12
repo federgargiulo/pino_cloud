@@ -9,11 +9,13 @@ import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
 
 import org.keycloak.representations.idm.GroupRepresentation;
+import org.keycloak.representations.idm.UserRepresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -181,35 +183,43 @@ public class KeycloakUserExtension {
         }
     }
 
-    public void updateUser(UserTO user, Map<String,OperationType> groupIds) {
+    public void updateUser(UserTO user, Map<String, OperationType> groupNames) {
         Keycloak keycloak = null;
         try {
             keycloak = openKeycloak();
             RealmResource realm = keycloak.realm(realmManaged);
-
-            // Recupera lo user
             var userResource = realm.users().get(user.getIdpId());
 
-            // Rimuovi i gruppi attuali (opzionale)
-            List<GroupRepresentation> currentGroups = userResource.groups();
+            // 1. Aggiorna le informazioni base dello user (nome, email, ecc.)
+            try {
+                UserRepresentation u = KeycloakUtils.updateUser(user);
+                log.info("Calling userResource.update with: {}", u);
+                userResource.update(u);
+            } catch (Exception ex) {
+                log.error("Error during Keycloak user update", ex);
+                throw ex;
+            }
 
-            /*groupIds.forEach( ( k, v ) ->  {
+            // 2. Converte i nomi dei gruppi in ID reali
+            Map<String, OperationType> groupIds = convertGroupNamesToIds(realm, groupNames);
 
-                if ( OperationType.ADD == v  )
-                    userResource.joinGroup( k );
-                if ( OperationType.DELETE == v  )
-                    userResource.leaveGroup( k );
-
-
+            // 3. Applica le modifiche ai gruppi su Keycloak
+            groupIds.forEach((groupId, opType) -> {
+                if (opType == OperationType.ADD) {
+                    userResource.joinGroup(groupId);
+                    log.info("User {} joined group ID {}", user.getUserId(), groupId);
+                }
+                if (opType == OperationType.DELETE) {
+                    userResource.leaveGroup(groupId);
+                    log.info("User {} left group ID {}", user.getUserId(), groupId);
+                }
             });
-            */
-            // Aggiungi i nuovi gruppi
-            userResource.update(KeycloakUtils.updateUser(user  ));
 
-            log.info("Updated groups for user {}", user.getUserId());
+            log.info("Updated user {} and group memberships", user.getUserId());
+
         } catch (Exception e) {
-            log.error("Failed to update groups for user " + user.getUserId(), e);
-            throw new RuntimeException("Unable to update user groups", e);
+            log.error("Failed to update user {}", user.getUserId(), e);
+            throw new RuntimeException("Unable to update user", e);
         } finally {
             if (keycloak != null) {
                 try {
@@ -221,5 +231,23 @@ public class KeycloakUserExtension {
         }
     }
 
+
+    private Map<String, OperationType> convertGroupNamesToIds(RealmResource realm, Map<String, OperationType> groupNameMap) {
+        Map<String, OperationType> groupIdMap = new HashMap<>();
+
+        for (Map.Entry<String, OperationType> entry : groupNameMap.entrySet()) {
+            String groupName = entry.getKey();
+            OperationType op = entry.getValue();
+
+            Optional<GroupRepresentation> grpOpt = findGrpByName(realm, groupName);
+            if (grpOpt.isPresent()) {
+                groupIdMap.put(grpOpt.get().getId(), op);
+            } else {
+                log.warn("Group '{}' not found in Keycloak realm '{}'", groupName, realmManaged);
+            }
+        }
+
+        return groupIdMap;
+    }
 
 }
