@@ -80,7 +80,7 @@
       </button>
       @if (showUsersItems) {
       <button mat-button class="mat-drawer-button-item" [routerLink]="['add-users']"> New Users </button>
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-user']"> Search </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-users']"> Search </button>
       }
     </div>
     <!-- Dashboard -->
@@ -100,6 +100,22 @@
         Experimental Olap </button>
       }
     </div>
+
+    <div class="drawer-button-container" [class.opened]="showAccountItems">
+      <button mat-button class="mat-drawer-button" (click)="showAccountItems = !showAccountItems">
+        <span class="d-flex align-items-center">
+          <span class="material-symbols-outlined"> server_person </span>
+          <span class="px-1"> Account </span>
+        </span>
+        <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showAccountItems"> stat_minus_1 </span>
+        <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showAccountItems"> stat_1 </span>
+      </button>
+      @if (showAccountItems) {
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['profile']"> Profile </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]=""> Logout </button>
+      }
+    </div>
+
   </mat-drawer>
 
   <div class="example-sidenav-content">
