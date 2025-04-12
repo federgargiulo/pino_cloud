@@ -46,7 +46,8 @@ public class TenantServiceImpl extends BaseServiceImpl<TenantTO, Tenant , String
     @Override
     public TenantTO create(TenantTO io) {
         try {
-            io = keycloak.createTenantGRP( io );
+              keycloak.createTenantGRP( io );
+              super.create( io );
         } catch (Exception e) {
             log.error( " error when contact idp " + e.getMessage() );
         }

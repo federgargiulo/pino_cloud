@@ -13,18 +13,12 @@ public class Tenant extends BaseEntity {
     private String id;
     private String name;
     private String description;
-    private String idpGrpId;
+
     private Date createdDttm;
 
-    public String getIdpGrpId() {
-        return idpGrpId;
-    }
 
     public void setTenant(String s){}
 
-    public void setIdpGrpId(String idpGrpId) {
-        this.idpGrpId = idpGrpId;
-    }
 
     private Date updateDttm;
 
