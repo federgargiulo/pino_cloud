@@ -1,12 +1,15 @@
 package it.pliot.equipment.service.edge;
 
+import it.pliot.equipment.Const;
+import it.pliot.equipment.io.EquipmentTO;
+import it.pliot.equipment.io.PushDataResultTO;
+import it.pliot.equipment.io.PushDataTO;
 import it.pliot.equipment.io.SyncCheckpointsTO;
 import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.ReportServices;
 import it.pliot.equipment.service.business.SignalServices;
 import it.pliot.equipment.service.business.SyncCheckpointsServices;
-import it.pliot.equipment.service.dbms.CallSPService;
 import it.pliot.equipment.service.dbms.CronLockImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -27,9 +32,7 @@ public class PushDataTask {
     private static final Logger log = LoggerFactory.getLogger(PushDataTask.class);
 
     private Date STARTING_DTTM = null;
-    public PushDataTask(){
-        STARTING_DTTM = getXMinutesAgo( 355 * 24 * 60 );
-    }
+
     @Autowired
     CronLockImpl lockServices;
 
@@ -44,6 +47,10 @@ public class PushDataTask {
 
     @Autowired
     ReportServices reportServices;
+
+    @Autowired
+    PliotServerConnection pliotServerConnection;
+
 
     private static long MILLISEC_IN_A_MINUTE = 60 * 1000;
 
@@ -61,23 +68,23 @@ public class PushDataTask {
         return getXMinutesAgo( 10 );
     }
 
+    public PushDataTask(){
+        STARTING_DTTM = getXMinutesAgo( 355 * 24 * 60 );
+    }
+
+
     @Async
     @Scheduled(fixedRate = 10, timeUnit = TimeUnit.MINUTES)
     public void executeHoseKeeping() {
         log.info( " Aggregate 10 minutes " + this );
-        String equipmentKey = Equipment.class.getName();
-        Date to = getXMinutesAgo( 10 );
-        Date from = null;
         try {
-            if ( lockServices.acquireLock( equipmentKey , 5 ) ) {
-                SyncCheckpointsTO cp = syncCheckpointsServices.findById(equipmentKey);
-                if ( cp == null ){
-                    from = STARTING_DTTM;
-                }
-
+            if ( lockServices.acquireLock( Const.PUSH_VALUES_FROM_EDGE_TO_SERVER , 5 ) ) {
+                Object o = pliotServerConnection.pushData( );
+                log.info( "sent {} " , o.toString() );
             }
+
         }catch ( Exception e ){
-            lockServices.release( equipmentKey  );
+            lockServices.release( Const.PUSH_VALUES_FROM_EDGE_TO_SERVER   );
         }
 
     }

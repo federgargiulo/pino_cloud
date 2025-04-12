@@ -10,8 +10,14 @@ import it.pliot.equipment.service.business.SignalServices;
 import it.pliot.equipment.service.business.SyncCheckpointsServices;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
 import it.pliot.equipment.service.dbms.util.SyncCheckpointsUtils;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
+@Component
+@Transactional
 public class SyncCheckpointsServicesImpl extends BaseServiceImpl<SyncCheckpointsTO, SyncCheckpoints, String> implements SyncCheckpointsServices {
 
     @Autowired
@@ -26,4 +32,14 @@ public class SyncCheckpointsServicesImpl extends BaseServiceImpl<SyncCheckpoints
     public BaseConvertUtil getConverter() {
         return SyncCheckpointsUtils.instance();
     }
+
+    public boolean updateSynckpointsService(String s, Date checkPoint) {
+        SyncCheckpoints data = new SyncCheckpoints();
+        data.setId(s);
+        data.setLastTime(checkPoint);
+        getRepo().save(data);
+        return true;
+    }
 }
+
+

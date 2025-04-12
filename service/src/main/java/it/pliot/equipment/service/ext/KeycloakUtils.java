@@ -1,27 +1,28 @@
 package it.pliot.equipment.service.ext;
 
 import it.pliot.equipment.Const;
-import it.pliot.equipment.io.TenantTO;
+import it.pliot.equipment.io.UserGrpTO;
 import it.pliot.equipment.io.UserTO;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.GroupRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class KeycloakUtils {
 
+
     public static UserRepresentation initUser(UserTO user , String ... groups){
+
+
         UserRepresentation u = new UserRepresentation( );
         u.setFirstName( user.getFirstName() );
         u.setLastName( user.getLastName() );
         u.setUsername( user.getUserId() );
         u.setEmail( user.getEmail() );
-        u.setGroups( toList( groups ) );
+        u.setGroups( getGrpNames( user.getUsrGrp() ) );
         u.setEnabled( true );
+        u.setAttributes( getAttributes( user ) );
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
         credential.setValue(user.getPassword());
@@ -29,10 +30,21 @@ public class KeycloakUtils {
         u.setCredentials(Collections.singletonList(credential));
         return u;
     }
-    private static List<String> toList( String ... groups ){
+
+    private static Map<String, List<String>> getAttributes( UserTO u ) {
+        Map<String, List<String>> attributes = new HashMap<>();
+        ArrayList<String> t = new ArrayList<String>( );
+        t.add( u.getTenant() );
+        attributes.put( Const.TENANT_ID_USER_ATTRIBUTE , t );
+        return attributes;
+    }
+
+    private static List<String> getGrpNames(List<UserGrpTO> groups ){
+        ArrayList<String> g = new ArrayList<String>();
         if ( groups == null )
             return new ArrayList<String>();
-        return Arrays.stream(groups).toList();
+        groups.forEach( x -> g.add( x.getGrpName() ) );
+        return g;
 
     }
     public static GroupRepresentation initGrp(String grpName) {
@@ -41,14 +53,13 @@ public class KeycloakUtils {
         return g;
     }
 
-    public static UserRepresentation updateUser(UserTO user , String ... groups){
+    public static UserRepresentation getUpdateUser(UserTO user  ){
         UserRepresentation u = new UserRepresentation( );
         u.setId(user.getIdpId());
         u.setFirstName( user.getFirstName() );
         u.setLastName( user.getLastName() );
         u.setUsername( user.getUserId() );
         u.setEmail( user.getEmail() );
-        u.setGroups( toList( groups ) );
         u.setEnabled( true );
         return u;
     }

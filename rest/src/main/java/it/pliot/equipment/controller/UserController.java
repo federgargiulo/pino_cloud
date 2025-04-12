@@ -55,7 +55,7 @@ public class UserController {
     public ResponseEntity<UserTO> updateUser(@PathVariable("id") String id , @RequestBody UserTO userTO ) {
         try {
             userTO.setIdpId(id);
-           userTO = userServices.save( userTO );
+            userTO = userServices.save( userTO );
             return new ResponseEntity<>(userTO, HttpStatus.OK );
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

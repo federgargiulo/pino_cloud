@@ -1,9 +1,4 @@
-package it.pliot.equipment.controller.io;
-
-import it.pliot.equipment.io.EquipmentTO;
-import it.pliot.equipment.io.ReportDataTO;
-import it.pliot.equipment.io.SignalTO;
-import it.pliot.equipment.model.ReportDataFirstStg;
+package it.pliot.equipment.io;
 
 import java.io.Serializable;
 import java.util.List;

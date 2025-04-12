@@ -2,15 +2,14 @@ package it.pliot.equipment.controller;
 
 
 import it.pliot.equipment.conf.ApiPrefixController;
-import it.pliot.equipment.controller.io.PushDataResultTO;
-import it.pliot.equipment.controller.io.PushDataTO;
+import it.pliot.equipment.io.PushDataResultTO;
+import it.pliot.equipment.io.PushDataTO;
 import it.pliot.equipment.service.business.*;
 import it.pliot.equipment.service.edge.InizializeEdgeRespTO;
 import it.pliot.equipment.io.EdgeTO;
 import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.security.JwtUser;
 import it.pliot.equipment.security.UserContext;
-import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

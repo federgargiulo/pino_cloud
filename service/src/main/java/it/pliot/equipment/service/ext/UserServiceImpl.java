@@ -71,9 +71,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
     @Override
     public UserTO create(UserTO io) {
 
-        String [] groupsid = new String[]{ Const.GROUP_PREFIX + io.getTenant() , Const.USER_TENANT_GRP };
         if (Mode.SERVER == config.getMode() )
-           io = keycloak.createUser( io , groupsid );
+           io = keycloak.createUser( io  );
 
         return super.create(io);
     }

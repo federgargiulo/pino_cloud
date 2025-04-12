@@ -85,7 +85,7 @@ export class DetailUserComponent {
     manageSuccessOnSave( data:any ){
       if (data != null && data.body != null) {
         var resultData = data.body;
-
+        this.setFormValues( resultData );
         this.isPersisted = true;
         if (resultData != null && resultData.isSuccess) {
           this.successMessage = 'User creata con successo!';

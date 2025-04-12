@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -81,7 +82,7 @@ public class KeycloakUserExtension {
         Keycloak keycloak = null;
         try {
             keycloak = openKeycloak();
-            response =   keycloak.realm( realmManaged ).users().create( KeycloakUtils.initUser(user ,   groupId ) );
+            response =   keycloak.realm( realmManaged ).users().create( KeycloakUtils.initUser(user  ) );
             if (response.getStatus() == 201) {
                 String location = response.getHeaderString("Location");
                 String id = location.substring(location.lastIndexOf("/") + 1);
@@ -193,22 +194,27 @@ public class KeycloakUserExtension {
             // Rimuovi i gruppi attuali (opzionale)
             List<GroupRepresentation> currentGroups = userResource.groups();
 
-            /*groupIds.forEach( ( k, v ) ->  {
+            groupIds.forEach( ( k, v ) ->  {
 
-                if ( OperationType.ADD == v  )
-                    userResource.joinGroup( k );
-                if ( OperationType.DELETE == v  )
-                    userResource.leaveGroup( k );
-
+                if ( OperationType.ADD == v  ) {
+                    Optional<String> op = findGrpIdByName( k );
+                    if ( op.isPresent() )
+                        userResource.joinGroup( op.get() );
+                }
+                if ( OperationType.DELETE == v  ) {
+                    Optional<String> op = findGrpIdByName(k);
+                    if (op.isPresent())
+                        userResource.leaveGroup( op.get() );
+                }
 
             });
-            */
-            // Aggiungi i nuovi gruppi
-            userResource.update(KeycloakUtils.updateUser(user  ));
+            // Aggiunge i nuovi
+            userResource.update(KeycloakUtils.getUpdateUser(user ));
 
             log.info("Updated groups for user {}", user.getUserId());
         } catch (Exception e) {
-            log.error("Failed to update groups for user " + user.getUserId(), e);
+            e.printStackTrace();
+            log.error( "Failed to update groups for user " + user.getUserId() , e);
             throw new RuntimeException("Unable to update user groups", e);
         } finally {
             if (keycloak != null) {
@@ -221,5 +227,15 @@ public class KeycloakUserExtension {
         }
     }
 
+    private HashMap<String, String > mapGrpNameId = new HashMap<String,String>();
 
+    public Optional<String> getGroupIdByName( String x ){
+        String id = mapGrpNameId.get( x ) ;
+        if ( id != null )
+            return  Optional.of( id );;
+        Optional<String> op = findGrpIdByName( x );
+        if ( op.isPresent() )
+            mapGrpNameId.put( x , op.get() );
+        return op;
+    }
 }

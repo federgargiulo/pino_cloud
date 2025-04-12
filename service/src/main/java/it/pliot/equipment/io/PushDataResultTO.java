@@ -1,15 +1,26 @@
-package it.pliot.equipment.controller.io;
+package it.pliot.equipment.io;
 
 import java.io.Serializable;
 
+import static java.lang.Long.valueOf;
+
 public class PushDataResultTO  implements Serializable {
 
-    private Long totEquipmentSaved;
-    private Long totSignalSaved;
-    private Long totReportItemSaved;
+    private Long totEquipmentSaved  = valueOf( 0 );
+    private Long totSignalSaved     = valueOf( 0 );
+    private Long totReportItemSaved = valueOf( 0 );
 
     public Long getTotEquipmentSaved() {
         return totEquipmentSaved;
+    }
+
+    @Override
+    public String toString() {
+        return "PushDataResultTO{" +
+                "totEquipmentSaved=" + totEquipmentSaved +
+                ", totSignalSaved=" + totSignalSaved +
+                ", totReportItemSaved=" + totReportItemSaved +
+                '}';
     }
 
     public Long getTotSignalSaved() {

@@ -1,15 +1,23 @@
 package it.pliot.equipment.service.dbms;
 
+import it.pliot.equipment.io.EquipmentPullerTO;
 import it.pliot.equipment.io.EquipmentTO;
+import it.pliot.equipment.io.PagedResultTO;
 import it.pliot.equipment.model.Equipment;
+import it.pliot.equipment.model.EquipmentPuller;
 import it.pliot.equipment.repository.EquipmentRepository;
 import it.pliot.equipment.repository.PliotJpaRepository;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
 import it.pliot.equipment.service.dbms.util.EquipmentUtils;
+import it.pliot.equipment.utils.EquipmentPullerSpecifications;
+import it.pliot.equipment.utils.PushDataSpecifications;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -56,5 +64,17 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
         edData = getRepo().saveAllAndFlush( edData );
         return Collections.singleton(u.converListData2IO(edData));
     }
+    public List<EquipmentTO> findUpdatedEquipmentInTheInterval(Date from , Date to ){
+        Pageable nextPage  = PageRequest.of( Integer.valueOf( 0 ) ,  100 );
+        Specification<Equipment> spec = PushDataSpecifications.nextUpdatedEquipments( from , to );
+        try {
+            PagedResultTO<EquipmentTO> puller = findPaged(spec, nextPage);
+            return  puller.getResults() ;
+        }catch ( Exception e ){
+            e.getStackTrace();
+            throw  new RuntimeException( " errore in lettura " + e.getMessage() );
+        }
+    }
+
 
 }

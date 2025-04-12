@@ -1,9 +1,14 @@
 package it.pliot.equipment.service.edge;
 
-import it.pliot.equipment.io.EdgeTO;
+import it.pliot.equipment.io.*;
 
+import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.service.business.EdgeServices;
+import it.pliot.equipment.service.business.EquipmentServices;
+import it.pliot.equipment.service.business.SyncCheckpointsServices;
 import it.pliot.equipment.service.business.TenantServices;
+import it.pliot.equipment.service.edge.cmd.PushDataCmd;
+import it.pliot.equipment.service.edge.cmd.RegisterCmd;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +24,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -29,19 +36,28 @@ public class ServerEdgeServiceImpl implements PliotServerConnection {
 
     private static final Logger log = LoggerFactory.getLogger(ServerEdgeServiceImpl.class);
 
-    private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${pliot.edge.tokenuri}")
-    private String tokenUri;
+    private static long MILLISEC_IN_A_MINUTE = 60 * 1000;
 
-    @Value("${pliot.edge.client-id}")
-    private String clientId;
+    private static long YEAR_AGO_MILLISEC    = 355 * 24 * 60 * 60 * 1000;
 
-    @Value("${pliot.edge.client-secret}")
-    private String clientSecret;
+    private Date STARTING_DTTM = null;
+    public ServerEdgeServiceImpl(){
+        STARTING_DTTM = getXMinutesAgo( 355 * 24 * 60 );
+    }
+    private Date getXMinutesAgo( int x ) {
 
-    @Value("${pliot.edge.server-url}" )
-    private String serverUrl;
+        Date d = new Date();
+        return new Date( ( d.getTime() -  x * MILLISEC_IN_A_MINUTE ) );
+    }
+
+
+    private Date get10MinutesAgo(){
+        return getXMinutesAgo( 10 );
+    }
+
+    @Autowired
+    SyncCheckpointsServices syncCheckpointsServices;
 
     @Autowired
     TenantServices tenantService;
@@ -49,9 +65,18 @@ public class ServerEdgeServiceImpl implements PliotServerConnection {
     @Autowired
     EdgeServices localEdgeService;
 
+    @Autowired
+    PushDataCmd pushCmd;
+
+    @Autowired
+    RegisterCmd registerCmd;
+
+    @Autowired
+    EquipmentServices equipmentServices;
 
     public EdgeTO registerEdge( EdgeTO requestBody ){
-        InizializeEdgeRespTO i = registerOnServer( requestBody );
+        InizializeEdgeRespTO i = registerCmd.execute( requestBody );
+
         EdgeTO to = localEdgeService.save( i.getEdge() );
         log.info( " stored edge locally ");
         tenantService.save( i.getTenant() );
@@ -59,41 +84,39 @@ public class ServerEdgeServiceImpl implements PliotServerConnection {
         return to;
     }
 
-    public InizializeEdgeRespTO registerOnServer( EdgeTO requestBody ) {
-        String token = getAccessToken();
-        requestBody.setClient( clientId );
+    @Override
+    public PushDataResultTO pushData() {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(token);
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        PushDataResultTO result = null;
+        log.info(" Aggregate 10 minutes " + this);
+        String equipmentKey = Equipment.class.getName();
+        Date to = getXMinutesAgo(10);
+        Date from = null;
+        PushDataTO redData = new PushDataTO();
+        boolean hastosend = false;
 
-        HttpEntity<EdgeTO> request = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<InizializeEdgeRespTO> response = restTemplate.postForEntity(
-                serverUrl + "/api/edge",
-                request,
-                InizializeEdgeRespTO.class
-        );
+        SyncCheckpointsTO cp = syncCheckpointsServices.findById(equipmentKey);
+        if (cp == null) {
+            from = STARTING_DTTM;
+        }
+        List<EquipmentTO> equipments =
+                equipmentServices.findUpdatedEquipmentInTheInterval(from, to);
+        if (equipments != null && equipments.size() > 0) {
+            hastosend = true;
+            redData.setEquipments(equipments);
+        }
 
-        InizializeEdgeRespTO responseBody = response.getBody();
-        log.info( "received response " + responseBody );
-        return responseBody;
+        if (hastosend) {
+            result = pushCmd.push(redData);
+
+        }else {
+            result = new PushDataResultTO();
+        }
+        syncCheckpointsServices.updateSynckpointsService(equipmentKey, to);
+        return result;
+
     }
 
-    private String getAccessToken() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
-        form.add("grant_type", "client_credentials");
-        form.add("client_id", clientId);
-        form.add("client_secret", clientSecret);
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(form, headers);
-
-        ResponseEntity<Map> response = restTemplate.postForEntity(tokenUri, request, Map.class);
-
-        return (String) response.getBody().get("access_token");
-    }
 }
 
 

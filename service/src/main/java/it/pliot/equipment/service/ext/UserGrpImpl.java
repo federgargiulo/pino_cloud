@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 @Component
@@ -40,24 +41,16 @@ public class UserGrpImpl extends BaseServiceImpl<UserGrpTO, UserGrp, String> imp
 
     @Override
     public UserGrpTO create(UserGrpTO io) {
-        io = extracted(io);
+
         return super.create(io);
     }
 
-    private UserGrpTO extracted(UserGrpTO io) {
-        try {
-            Optional<String> grpId = keycloak.findGrpIdByName(io.getGrpName());
 
-        }catch ( Exception e ){
-            log.error( " error to retrieve  a group ho keycloak ");
-        }
-        return io;
-    }
 
     @Override
     public UserGrpTO save(UserGrpTO io) {
-
-        io = extracted(io);
-        return super.save(io);
+     return super.save(io);
     }
+
+
 }

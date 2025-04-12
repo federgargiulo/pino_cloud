@@ -1,5 +1,7 @@
 package it.pliot.equipment;
 
+import it.pliot.equipment.model.Equipment;
+
 public interface Const {
 
     public static String DEV_TENANT_ID = "dev_tenant";
@@ -31,4 +33,9 @@ public interface Const {
     public static String DEFAULT_PASSWORD = "password";
 
     public static String GROUP_PREFIX = "pliot_grptenant_";
+
+    public static String TENANT_ID_USER_ATTRIBUTE = "tenant";
+
+
+    public String PUSH_VALUES_FROM_EDGE_TO_SERVER = "PUSH_VALUES_FROM_EDGE_TO_SERVER";
 }

@@ -29,13 +29,18 @@ public class EdgeConfiguration {
     @Autowired
     PliotServerConnection edgeServerService;
 
+    @Value("${pliot.edge.client-id}")
+    private String clientId;
+
+    @Value("${pliot.edge.name}")
+    private String edgeName;
+
+    @Value("${pliot.edge.edge-url}")
+    private String edgeUrl;
+
 
     @PostConstruct
     public void initEdge(){
-
-        String edgeName = config.getConfValue("pliot.edge.name" , "");
-        String edgeUrl = config.getConfValue("pliot.edge.edge-url" , "");
-
 
         log.info( " edge initial configuration ");
         List<EdgeTO> edges = edgeService.findAll();
@@ -43,6 +48,7 @@ public class EdgeConfiguration {
             return;
 
         EdgeTO to = new EdgeTO();
+        to.setClient( clientId );
         to.setEdgeName( edgeName );
         to.setEdgeUrl( edgeUrl );
         to = edgeServerService.registerEdge( to );
