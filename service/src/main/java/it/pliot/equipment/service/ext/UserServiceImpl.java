@@ -104,7 +104,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
             if (io.getUsrGrp().size()==0){
                 io.setUsrGrp(c.convertListData2Io(user.getUserGroups()));
             }
-
             // Aggiorna lo user settando i nuovi gruppi su Keycloak
             keycloak.updateUser(io ,grp2manage );
         }
