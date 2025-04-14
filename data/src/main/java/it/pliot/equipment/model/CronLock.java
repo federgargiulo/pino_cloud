@@ -14,6 +14,16 @@ public class CronLock {
 
     private Boolean locked;
 
+    private String processId;
+
+    public String getProcessId() {
+        return processId;
+    }
+
+    public void setProcessId(String processId) {
+        this.processId = processId;
+    }
+
     public Boolean getLocked() {
         return locked;
     }
@@ -39,10 +49,7 @@ public class CronLock {
         this.task_name = task_name;
     }
 
-
-
-
-    public void setVersion(long version) {
+     public void setVersion(long version) {
         this.version = version;
     }
 

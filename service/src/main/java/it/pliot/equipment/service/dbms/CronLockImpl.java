@@ -23,15 +23,15 @@ public class CronLockImpl {
 
 
     @Transactional(Transactional.TxType.REQUIRES_NEW)
-    public boolean acquireLock( String x , int minuteTimeout ){
+    public boolean acquireLock( String x , int minuteTimeout , String processId ){
         Optional<CronLock> optional = repo.findById( x );
         if ( optional.isPresent() ){
-            return acquirePresent( optional.get() , minuteTimeout * 60 * 1000 );
+            return acquirePresent( optional.get() , minuteTimeout * 60 * 1000 , processId );
         }
-        return initAndAcquire( x );
+        return initAndAcquire( x , processId );
     }
 
-    private boolean acquirePresent(CronLock cronLock , long millisectimeout ) {
+    private boolean acquirePresent(CronLock cronLock , long millisectimeout , String processId  ) {
         if ( cronLock.getLocked() ) {
             Date now = new Date();
             long lastrun = cronLock.getLastRun().getTime();
@@ -40,11 +40,13 @@ public class CronLockImpl {
 
             log.warn( " Gost log {} reaquired " , cronLock.getTask_name() );
             cronLock.setLastRun( now );
+            cronLock.setProcessId( processId );
             return updateAndmanageOptimisticLock( cronLock );
         }
 
         cronLock.setLocked( Boolean.TRUE );
         cronLock.setLastRun( new Date() );
+        cronLock.setProcessId( processId );
         return updateAndmanageOptimisticLock( cronLock );
     }
 
@@ -59,22 +61,26 @@ public class CronLockImpl {
         }
     }
 
-    private boolean initAndAcquire(String x ) {
+    private boolean initAndAcquire(String x , String processId ) {
         CronLock l = new CronLock();
         l.setTask_name( x );
         l.setLocked( Boolean.TRUE );
         l.setLastRun( new Date() );
+        l.setProcessId( processId );
 
         return  updateAndmanageOptimisticLock( l );
     }
 
     @Transactional(Transactional.TxType.REQUIRES_NEW)
-    public void release(String spName) {
+    public void release(String spName , String processId ) {
         Optional<CronLock> optional = repo.findById( spName );
         if ( optional.isPresent() ) {
             CronLock lock = optional.get();
-            lock.setLocked( Boolean.FALSE );
-            repo.save( lock );
+            if ( processId.equals( lock.getProcessId() ) ) {
+                lock.setLocked(Boolean.FALSE);
+                lock.setProcessId( null );
+                repo.save(lock);
+            }
         }
     }
 }

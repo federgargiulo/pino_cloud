@@ -21,10 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 @Transactional
@@ -37,6 +34,25 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
     @Override
     public PliotJpaRepository<Equipment, String> getRepo() {
         return repo;
+    }
+
+    @Override
+    public EquipmentTO create(EquipmentTO io) {
+        if ( io.getEquipmentId() == null )
+            io.setEquipmentId(UUID.randomUUID().toString());
+        return super.create(io);
+    }
+
+    @Override
+    public EquipmentTO save(EquipmentTO io) {
+        if ( io.getEquipmentId() == null )
+            io.setEquipmentId(UUID.randomUUID().toString());
+        return super.save(io);
+    }
+
+    @Override
+    public EquipmentTO update(EquipmentTO io) {
+        return super.update(io);
     }
 
     @Override

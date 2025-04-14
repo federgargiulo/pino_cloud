@@ -1,11 +1,6 @@
 package it.pliot.equipment.service.edge;
 
 import it.pliot.equipment.Const;
-import it.pliot.equipment.io.EquipmentTO;
-import it.pliot.equipment.io.PushDataResultTO;
-import it.pliot.equipment.io.PushDataTO;
-import it.pliot.equipment.io.SyncCheckpointsTO;
-import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.ReportServices;
 import it.pliot.equipment.service.business.SignalServices;
@@ -17,12 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -74,17 +67,18 @@ public class PushDataTask {
 
 
     @Async
-    @Scheduled(fixedRate = 10, timeUnit = TimeUnit.MINUTES)
-    public void executeHoseKeeping() {
+    @Scheduled(fixedRate = 2, timeUnit = TimeUnit.MINUTES)
+    public void movedata() {
         log.info( " Aggregate 10 minutes " + this );
+        String processId = UUID.randomUUID().toString();
         try {
-            if ( lockServices.acquireLock( Const.PUSH_VALUES_FROM_EDGE_TO_SERVER , 5 ) ) {
+            if ( lockServices.acquireLock( Const.PUSH_VALUES_FROM_EDGE_TO_SERVER , 5 , processId ) ) {
                 Object o = pliotServerConnection.pushData( );
                 log.info( "sent {} " , o.toString() );
             }
 
-        }catch ( Exception e ){
-            lockServices.release( Const.PUSH_VALUES_FROM_EDGE_TO_SERVER   );
+        }finally {
+            lockServices.release(Const.PUSH_VALUES_FROM_EDGE_TO_SERVER , processId );
         }
 
     }

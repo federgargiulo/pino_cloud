@@ -11,7 +11,6 @@ import java.util.UUID;
 public class Equipment extends BaseEntity{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     public Equipment( String name ){

@@ -13,4 +13,6 @@ public interface SignalServices extends BaseServiceInterface<SignalTO, String>{
     public List<SignalTO> getSignalsByEquipmentId(String equipmentId);
 
     Collection<Object> importFromEdge(List<SignalTO> signals, String edegeId, Date d);
+
+    List<SignalTO> findUpdatedSignalsInTheInterval(Date from, Date to);
 }

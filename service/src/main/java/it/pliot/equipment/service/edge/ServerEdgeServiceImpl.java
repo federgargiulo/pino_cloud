@@ -3,10 +3,8 @@ package it.pliot.equipment.service.edge;
 import it.pliot.equipment.io.*;
 
 import it.pliot.equipment.model.Equipment;
-import it.pliot.equipment.service.business.EdgeServices;
-import it.pliot.equipment.service.business.EquipmentServices;
-import it.pliot.equipment.service.business.SyncCheckpointsServices;
-import it.pliot.equipment.service.business.TenantServices;
+import it.pliot.equipment.model.Signal;
+import it.pliot.equipment.service.business.*;
 import it.pliot.equipment.service.edge.cmd.PushDataCmd;
 import it.pliot.equipment.service.edge.cmd.RegisterCmd;
 import jakarta.transaction.Transactional;
@@ -74,6 +72,22 @@ public class ServerEdgeServiceImpl implements PliotServerConnection {
     @Autowired
     EquipmentServices equipmentServices;
 
+    @Autowired
+    SignalServices signalServices;
+
+    @Autowired
+    ReportServices reportServices;
+
+    private String edgeId = null;
+
+    private String getEdgeId(){
+        if ( edgeId == null ) {
+            List<EdgeTO> edges = localEdgeService.findAll();
+            edgeId = edges.get( 0 ).getId();
+        }
+        return edgeId;
+    }
+
     public EdgeTO registerEdge( EdgeTO requestBody ){
         InizializeEdgeRespTO i = registerCmd.execute( requestBody );
 
@@ -93,18 +107,34 @@ public class ServerEdgeServiceImpl implements PliotServerConnection {
         Date to = getXMinutesAgo(10);
         Date from = null;
         PushDataTO redData = new PushDataTO();
+        redData.setEdgeId( getEdgeId() );
         boolean hastosend = false;
 
         SyncCheckpointsTO cp = syncCheckpointsServices.findById(equipmentKey);
         if (cp == null) {
             from = STARTING_DTTM;
-        }
+        }else
+            from = cp.getLastTime();
         List<EquipmentTO> equipments =
                 equipmentServices.findUpdatedEquipmentInTheInterval(from, to);
         if (equipments != null && equipments.size() > 0) {
             hastosend = true;
             redData.setEquipments(equipments);
         }
+        List<SignalTO> signals =
+                signalServices.findUpdatedSignalsInTheInterval(from, to);
+        if ( signals != null && signals.size() > 0 ){
+            hastosend = true;
+            redData.setSignals( signals );
+        }
+
+        List<ReportDataTO> reportItems =
+                reportServices.findInsertedReport( from , to );
+        if ( reportItems != null && reportItems.size() > 0 ){
+            hastosend = true;
+            redData.setReportData( reportItems );
+        }
+
 
         if (hastosend) {
             result = pushCmd.push(redData);

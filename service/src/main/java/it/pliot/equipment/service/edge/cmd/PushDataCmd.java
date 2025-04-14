@@ -30,7 +30,7 @@ public class PushDataCmd extends BaseHttpCmd {
 
         HttpEntity<PushDataTO> request = new HttpEntity<>(requestBody, headers);
         ResponseEntity<PushDataResultTO> response = getRestTemplate().postForEntity(
-                getServerUrl() + "/api/edge",
+                getServerUrl() + "/api/edge/" + requestBody.getEdgeId() + "/pushdata",
                 request,
                 PushDataResultTO.class
         );

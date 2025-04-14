@@ -10,4 +10,6 @@ import java.util.List;
 public interface ReportServices extends BaseServiceInterface<ReportDataTO, String>{
 
     Collection<Object> importFromEdge(List<ReportDataTO> reportData, String edegeId, Date d);
+
+    List<ReportDataTO> findInsertedReport(Date from, Date to);
 }

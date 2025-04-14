@@ -5,6 +5,15 @@ import java.util.List;
 
 public class PushDataTO implements Serializable {
 
+    private String edgeId;
+
+    public String getEdgeId() {
+        return edgeId;
+    }
+
+    public void setEdgeId(String edgeId) {
+        this.edgeId = edgeId;
+    }
 
     private List<EquipmentTO> equipments;
     private List<SignalTO> signals;

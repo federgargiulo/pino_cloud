@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class CallSPService {
 
@@ -24,9 +26,10 @@ public class CallSPService {
     public void runStoreProcedureOnce( String spName , int timeoutMin   ) {
 
         String template = "CALL  %s()";
+        String processId = UUID.randomUUID().toString();
         String storedProcedureCall = String.format( template , spName );
         log.info( " call statement {}" , storedProcedureCall );
-        Boolean isLocked = lock.acquireLock( spName , timeoutMin );
+        Boolean isLocked = lock.acquireLock( spName , timeoutMin , processId );
 
         if (isLocked != null && ! isLocked) {
             return;
@@ -36,7 +39,7 @@ public class CallSPService {
         } catch (Exception e) {
            log.error( e.getMessage() );
         } finally {
-            lock.release( spName );
+            lock.release( spName , processId);
         }
     }
 

@@ -1,5 +1,7 @@
 package it.pliot.equipment.service.dbms;
 
+import it.pliot.equipment.io.EquipmentTO;
+import it.pliot.equipment.io.PagedResultTO;
 import it.pliot.equipment.io.SignalTO;
 import it.pliot.equipment.model.Equipment;
 import it.pliot.equipment.model.Signal;
@@ -10,9 +12,13 @@ import it.pliot.equipment.service.business.errors.ServiceExceptions;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
 import it.pliot.equipment.service.dbms.util.EquipmentUtils;
 import it.pliot.equipment.service.dbms.util.SignalUtils;
+import it.pliot.equipment.utils.PushDataSpecifications;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -62,4 +68,16 @@ public class SignalServiceImpl extends BaseServiceImpl<SignalTO, Signal, String>
         return Collections.singleton(u.converListData2IO(edData));
     }
 
+    @Override
+    public List<SignalTO> findUpdatedSignalsInTheInterval(Date from, Date to){
+        Pageable nextPage  = PageRequest.of( Integer.valueOf( 0 ) ,  100 );
+        Specification<Signal> spec = PushDataSpecifications.nextUpdatedSignals(  from , to );
+        try {
+            PagedResultTO<SignalTO> puller = findPaged(spec, nextPage);
+            return  puller.getResults() ;
+        }catch ( Exception e ){
+            e.getStackTrace();
+            throw  new RuntimeException( " errore in lettura " + e.getMessage() );
+        }
+    }
 }

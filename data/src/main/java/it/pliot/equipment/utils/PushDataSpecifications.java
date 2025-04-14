@@ -17,8 +17,8 @@ public class PushDataSpecifications {
     public static Specification<Equipment> nextUpdatedEquipments( Date from, Date to ) {
 
         return (Root<Equipment> root, CriteriaQuery<?> query, CriteriaBuilder cb) ->
-                cb.and( cb.lessThan( root.get( "updateDttm"), to ) ,
-                        cb.greaterThan( root.get( "updateDttm") , from  ) );
+                cb.and( cb.greaterThan( root.get( "updateDttm") , from  ) ,
+                        cb.lessThan( root.get( "updateDttm"), to ) );
     }
 
     public static Specification<Signal> nextUpdatedSignals(Date from, Date to ) {
