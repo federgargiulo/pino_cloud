@@ -1,6 +1,5 @@
 package it.pliot.equipment.service.ext;
 
-import it.pliot.equipment.Const;
 import it.pliot.equipment.GlobalConfig;
 import it.pliot.equipment.Mode;
 import it.pliot.equipment.io.UserGrpTO;
@@ -16,17 +15,14 @@ import it.pliot.equipment.service.business.UserGrpServices;
 import it.pliot.equipment.service.business.UserServices;
 import it.pliot.equipment.service.dbms.BaseServiceImpl;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
-import it.pliot.equipment.service.dbms.util.UserGrpUtils;
 import it.pliot.equipment.service.dbms.util.UserUtils;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.Cipher;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

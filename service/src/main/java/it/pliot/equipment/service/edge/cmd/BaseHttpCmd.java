@@ -1,5 +1,6 @@
 package it.pliot.equipment.service.edge.cmd;
 
+import it.pliot.equipment.GlobalConfig;
 import it.pliot.equipment.service.edge.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,11 +12,8 @@ public abstract  class BaseHttpCmd {
     @Autowired
     private TokenManager tmaneger;
 
-    @Value("${pliot.edge.client-id}")
-    private String clientId;
-
-    @Value("${pliot.edge.server-url}" )
-    private String serverUrl;
+    @Autowired
+    private GlobalConfig config;
 
     public TokenManager getTmaneger() {
         return tmaneger;
@@ -26,20 +24,15 @@ public abstract  class BaseHttpCmd {
     }
 
     public String getClientId() {
-        return clientId;
+        return config.getClientId();
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
+
 
     public String getServerUrl() {
-        return serverUrl;
+        return config.getServerUrl();
     }
 
-    public void setServerUrl(String serverUrl) {
-        this.serverUrl = serverUrl;
-    }
 
     public RestTemplate getRestTemplate() {
         return restTemplate;

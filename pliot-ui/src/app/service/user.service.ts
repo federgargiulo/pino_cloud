@@ -8,7 +8,7 @@ var version="";
 var httpLink = {
   baseDashboard:  version + "/users",
   getUserById: version +  "/users",
-  federate: version + "users/federateCurrentUser"
+  federate: version + "users/federate"
 }
 
 @Injectable({
@@ -28,9 +28,9 @@ export class UserService {
     }
     public federateCurrentUser(): Observable<any> {
       console.info( "Service is calling " + httpLink.federate )
-      return this.webApiService.get(httpLink.federate );
+      return this.webApiService.post(httpLink.federate , {} );
    }
-  
+
 
   public createUser(usr: any): Observable<any> {
       console.info( "Service is calling " + httpLink.baseDashboard + " With data " + usr )

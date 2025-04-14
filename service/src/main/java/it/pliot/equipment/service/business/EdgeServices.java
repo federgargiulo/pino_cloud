@@ -9,13 +9,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface EdgeServices {
+public interface EdgeServices extends BaseServiceInterface<EdgeTO,String> {
 
     public List<EdgeTO> findAll();
 
     public EdgeTO save( EdgeTO edge );
+
     public EdgeTO findById( String id );
 
+    public EdgeTO register( EdgeTO edge );
 
 
 }

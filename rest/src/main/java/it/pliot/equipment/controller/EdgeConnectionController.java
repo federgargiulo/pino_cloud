@@ -43,7 +43,7 @@ public class EdgeConnectionController {
         edge.setRegistrationDttm( new Date( ) );
         edge.setTenant( user.getTenantId() );
 
-        edge =  edgeServices.save( edge );
+        edge =  edgeServices.register( edge );
         log.info( " added new edge " + edge.getId() );
         TenantTO t = tenantServices.findById( edge.getTenant() );
         log.info( " load temamt info  " + t.getTenantId() );

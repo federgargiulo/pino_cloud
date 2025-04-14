@@ -13,6 +13,8 @@ pliot:
     client-id:
     client-secret:
     api-url:
+  server:
+    url: "http://localhost:8080"
   base_path:
 
 logging:

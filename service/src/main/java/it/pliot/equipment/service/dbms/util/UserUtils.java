@@ -4,6 +4,7 @@ import it.pliot.equipment.io.UserGrpTO;
 import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.model.User;
 import it.pliot.equipment.model.UserGrp;
+import it.pliot.equipment.security.JwtUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,4 +82,14 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
         return result;
     }
 
+    public UserTO jwt2to(JwtUser u) {
+        UserTO to = new UserTO();
+        to.setIdpId( u.getIdpId() );
+        to.setFirstName( u.getFirstName() );
+        to.setLastName( u.getLastName() );
+        to.setEmail( u.getEmail() );
+        to.setTenant( u.getTenantId() );
+        to.setUserId( u.getUserId() );
+        return to;
+    }
 }

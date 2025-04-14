@@ -9,12 +9,13 @@ import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.ClientResource;
 import org.keycloak.admin.client.resource.RealmResource;
 
+import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.representations.idm.ClientRepresentation;
 import org.keycloak.representations.idm.GroupRepresentation;
 import org.keycloak.representations.idm.ProtocolMapperRepresentation;
+import org.keycloak.representations.idm.UserRepresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -23,34 +24,11 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-public class KeycloakUserExtension {
+public class KeycloakUserExtension extends BaseKeycloakExtension{
 
     private static final Logger log = LoggerFactory.getLogger(KeycloakUserExtension.class);
 
 
-    private RealmResource realm;
-
-    @Value("${pliot.keycloak.url}")
-    private String url;
-
-    @Value("${pliot.keycloak.realmName}")
-    private String realmName;
-
-    @Value("${pliot.keycloak.realmManaged}")
-    private String realmManaged;
-
-
-    @Value("${pliot.keycloak.user}")
-    private String user;
-
-    @Value("${pliot.keycloak.password}")
-    private String password;
-
-    @Value("${pliot.keycloak.clientId}")
-    private String clientId;
-
-    @Value(("${pliot.server.url}"))
-    private String serverBaseUrl;
 
     @PostConstruct
     public void postConstruct(){
@@ -58,9 +36,9 @@ public class KeycloakUserExtension {
             postConstructImpl();
         }catch ( Exception e ){
             log.error(" Keycloak not enabled " );
-            log.error( " host {} " , url );
-            log.error( "realmName {} " , realmName );
-            log.error( "user {} " , user );
+            log.error( " host {} " , getUrl() );
+            log.error( "realmName {} " , getRealmName());
+            log.error( "user {} " , getUser() );
         }
     }
     private Keycloak keycloak = null;
@@ -68,15 +46,6 @@ public class KeycloakUserExtension {
     public void postConstructImpl() {
 
        // KeycloakGroupCmd.getInstance().createGroupIfNotExist( getRealm(), Const.DEV_TENANT_ID , Const.DEV_TENANT_NAME ) ;
-    }
-
-    private Keycloak openKeycloak() {
-        return Keycloak.getInstance(
-                url,
-                realmName,
-                user,
-                password,
-                clientId);
     }
 
 
@@ -88,15 +57,25 @@ public class KeycloakUserExtension {
         Keycloak keycloak = null;
         try {
             keycloak = openKeycloak();
-            response =   keycloak.realm( realmManaged ).users().create( KeycloakUtils.initUser(user  ) );
+            List<UserRepresentation> users = keycloak.realm( getRealmManaged() ).users().search(
+                    user.getUserId(),   // username (o parte di esso)
+                    null,            // firstName
+                    null,            // lastName
+                    null,            // email
+                    0,               // first result
+                    1                // max results
+            );
+            if ( users != null && users.size() > 0  ) {
+              throw new UserAlreadyPresentException( " User " + user.getUserId() + " is already present on the idp ");
+            }
+            response =   keycloak.realm( getRealmManaged() ).users().create( KeycloakUtils.initUser(user  ) );
             if (response.getStatus() == 201) {
                 String location = response.getHeaderString("Location");
                 String id = location.substring(location.lastIndexOf("/") + 1);
                 user.setIdpId( id  );
-                return user;
 
+                return user;
             } else {
-                System.out.println( response.getEntity() );
                 throw new RuntimeException( " unable to create user ok keycloak: " + user.getUserId()  );
             }
         }finally {
@@ -122,7 +101,7 @@ public class KeycloakUserExtension {
         Keycloak keycloak = null;
         try {
             keycloak = openKeycloak();
-            RealmResource realm = keycloak.realm( realmManaged );
+            RealmResource realm = keycloak.realm( getRealmManaged() );
             createWebEdgeClient(x, realm);
             createApplicationClient(x, realm);
 
@@ -185,47 +164,22 @@ public class KeycloakUserExtension {
     }
 
     private void createWebEdgeClient(TenantTO x, RealmResource realm) {
-        String webclientid = x.getTenantId() + "_web_edge";
+        String webclientid = getWebclientid(x);
         List<ClientRepresentation> elenco = realm.clients().findByClientId( webclientid );
         if ( elenco != null && elenco.size() == 0  )
-            realm.clients().create( KeycloakUtils.createEdgeWebClient( webclientid , serverBaseUrl + "/*") );
+            realm.clients().create( KeycloakUtils.createEdgeWebClient( webclientid , getServerBaseUrl() + "/*") );
     }
 
-    public Optional<GroupRepresentation> findGrpByName(RealmResource realm  , String grpName){
-        Response res = null;
-        try{
-            List<GroupRepresentation> groups = realm
-                    .groups()
-                    .groups( grpName , 0, 10);
-            return groups.isEmpty() ? Optional.empty() : Optional.of(groups.get(0));
-        }finally {
-            if ( res != null ){
-                try{ res.close(); } catch (Exception e) {}
-            }
-        }
+    private static String getWebclientid(TenantTO x) {
+        return x.getTenantId() + "_web_edge";
     }
 
-    public Optional<String> findGrpIdByName(  String grpName){
-        Keycloak keycloak = null;
-        try{
-            keycloak = openKeycloak();
-            RealmResource realm = keycloak.realm( realmManaged );
-
-            Optional<GroupRepresentation> groups = findGrpByName( realm , grpName );
-            return groups.isEmpty() ? Optional.empty() : Optional.of( groups.get().getId() );
-
-        }finally {
-            if ( keycloak != null ){
-                try{ keycloak.close(); } catch (Exception e) {}
-            }
-        }
-    }
 
     public void updateUser(UserTO user, Map<String,OperationType> groupIds) {
         Keycloak keycloak = null;
         try {
             keycloak = openKeycloak();
-            RealmResource realm = keycloak.realm(realmManaged);
+            RealmResource realm = keycloak.realm( getRealmManaged() );
 
             // Recupera lo user
             var userResource = realm.users().get(user.getIdpId());
@@ -266,15 +220,4 @@ public class KeycloakUserExtension {
         }
     }
 
-    private HashMap<String, String > mapGrpNameId = new HashMap<String,String>();
-
-    public Optional<String> getGroupIdByName( String x ){
-        String id = mapGrpNameId.get( x ) ;
-        if ( id != null )
-            return  Optional.of( id );;
-        Optional<String> op = findGrpIdByName( x );
-        if ( op.isPresent() )
-            mapGrpNameId.put( x , op.get() );
-        return op;
-    }
 }

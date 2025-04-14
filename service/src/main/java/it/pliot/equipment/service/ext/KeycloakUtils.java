@@ -3,10 +3,7 @@ package it.pliot.equipment.service.ext;
 import it.pliot.equipment.Const;
 import it.pliot.equipment.io.UserGrpTO;
 import it.pliot.equipment.io.UserTO;
-import org.keycloak.representations.idm.ClientRepresentation;
-import org.keycloak.representations.idm.CredentialRepresentation;
-import org.keycloak.representations.idm.GroupRepresentation;
-import org.keycloak.representations.idm.UserRepresentation;
+import org.keycloak.representations.idm.*;
 
 import java.util.*;
 
@@ -66,27 +63,45 @@ public class KeycloakUtils {
     }
 
 
-    public static ClientRepresentation createEdgeWebClient(String clientId , String redirect ) {
+    public static ClientRepresentation createEdgeWebClient(String clientId, String redirect) {
         ClientRepresentation client = new ClientRepresentation();
-        client.setClientId( clientId );
-        client.setName("Web client for tenant "   );
+        client.setClientId(clientId);
+        client.setName("Web client for tenant ");
         client.setEnabled(true);
-        client.setPublicClient(true); // importante per SPA
+        client.setPublicClient(true);
         client.setProtocol("openid-connect");
-        client.setRedirectUris(List.of(redirect)); // o l'URL della tua app
-        client.setWebOrigins(List.of("*")); // oppure lista esplicita come "http://localhost:4200"
-        client.setDirectAccessGrantsEnabled(true); // utile per login con username/password
-        client.setStandardFlowEnabled(true); // abilita authorization code flow (PKCE per SPA)
-        client.setImplicitFlowEnabled(false); // sconsigliato per le SPA moderne
-        client.setServiceAccountsEnabled(false); // non serve per app frontend
-        client.setRootUrl("http://localhost:4200"); // se serve
-        client.setAttributes(Map.of(
-                "pkce.code.challenge.method", "S256",  // PKCE per sicurezza
-                "post.logout.redirect.uris", "+",      // opzionale: supporta redirect dopo logout
-                "access.token.lifespan", "300"         // opzionale: token TTL personalizzato
-        ));
-        return client;
+        client.setRedirectUris(List.of(redirect));
+        client.setWebOrigins( List.of("http://localhost:8080") );
+        client.setDirectAccessGrantsEnabled(true);
+        client.setStandardFlowEnabled(true);
+        client.setImplicitFlowEnabled(false);
+        client.setServiceAccountsEnabled(false);
+        client.setRootUrl("http://localhost:4200");
 
+        client.setAttributes(Map.of(
+                "pkce.code.challenge.method", "S256",
+                "post.logout.redirect.uris", "+",
+                "access.token.lifespan", "300"
+        ));
+
+        // --- Aggiungi il protocol mapper per il tenant ---
+        ProtocolMapperRepresentation tenantMapper = new ProtocolMapperRepresentation();
+        tenantMapper.setName("tenant");
+        tenantMapper.setProtocol("openid-connect");
+        tenantMapper.setProtocolMapper("oidc-usermodel-attribute-mapper");
+
+        tenantMapper.setConfig(Map.of(
+                "user.attribute", "tenant",         // da quale user attribute leggere
+                "claim.name", "tenant",             // come si chiama nel token
+                "jsonType.label", "String",         // tipo
+                "id.token.claim", "true",           // mettilo nell’ID token
+                "access.token.claim", "true",       // mettilo anche nell’access token
+                "userinfo.token.claim", "true"      // (opzionale) anche in /userinfo
+        ));
+
+        client.setProtocolMappers(List.of(tenantMapper));
+
+        return client;
     }
 
 

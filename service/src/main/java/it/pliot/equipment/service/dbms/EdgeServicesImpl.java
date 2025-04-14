@@ -12,7 +12,10 @@ import it.pliot.equipment.service.business.EdgeServices;
 
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
 import it.pliot.equipment.service.dbms.util.EdgeUtils;
+import it.pliot.equipment.service.ext.KeycloakTenantExtension;
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
@@ -24,8 +27,16 @@ import org.springframework.stereotype.Component;
 @Transactional
 public class EdgeServicesImpl extends BaseServiceImpl<EdgeTO, Edge,String>
         implements EdgeServices {
+
+    private static final Logger log = LoggerFactory.getLogger(EdgeServicesImpl.class);
+
+
     @Autowired
     EdgeRepository edgeRepository;
+
+
+    @Autowired
+    KeycloakTenantExtension keycloak;
 
 
     @Override
@@ -38,5 +49,9 @@ public class EdgeServicesImpl extends BaseServiceImpl<EdgeTO, Edge,String>
         return EdgeUtils.instance();
     }
 
-
+    public EdgeTO register( EdgeTO edge ){
+        log.info(" align keycloak ");
+        keycloak.alignKeycloakOnEdgeRegistration( edge );
+        return save( edge );
+    }
 }

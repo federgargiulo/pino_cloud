@@ -3,21 +3,20 @@ pliot:
     url: "http://localhost:8180"
     realmName: "master"
     realmManaged: "pliot"
-    webClientId: "ten33_web_edge"
+    webClientId: "ten1_web_edge"
     user: "admin"
     password: "admin"
     clientId: "admin-cli"
+  server:
+    url: "http://localhost:8080"
   edge:
     name: "edge_name"
     tokenuri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/token
-    client-id: ten33_system_api
-    client-secret: 5iEkmhJv73by3ZbPARmgxVMYDrzy8Frs
-    server-url: http://localhost:8080
+    client-id: ten1_system_api
+    client-secret: VP0YHGPxuO0EVjE47OnyZeBYEUoUa8iv
     edge-url: http://localhost:9080
   base_path: "api"
   load_data: "false"
-
-
 
 logging:
   file:
