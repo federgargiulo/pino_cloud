@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Equipment, EquipmentDetail, EquipmentServices} from '../../../service/equipment.service';
 import { ActivatedRoute } from '@angular/router';
 import {  SignalServices} from '../../../service/signal.service';
+import { Observable, of } from 'rxjs';
 
+const isMockEnabled = true;
 @Component({
   selector: 'app-detail-equipment',
   standalone: false,
@@ -39,12 +41,7 @@ pullers: any[] = []; // Lista dei pullers
 
 
    ngOnInit(): void {
-      this.route.paramMap.subscribe(params => {
-        this.equipmentId = params.get('id') || ''; // Assicura che non sia null
-        console.log("Equipment ID ricevuto:", this.equipmentId);
-        // Chiamata al backend per ottenere i dettagli
-        this.loadEquipmentDetail(this.equipmentId);
-      });
+
 
       // Inizializza il form vuoto
       this.equipmentForm = this.formBuilder.group({
@@ -58,9 +55,14 @@ pullers: any[] = []; // Lista dei pullers
 
       // Inizializza il form del Signal
       this.initSignalForm();
-       // ✅ Inizializza il form del Puller (mancava questa linea)
-        this.initPullerForm();
-
+      // ✅ Inizializza il form del Puller (mancava questa linea)
+      this.initPullerForm();
+       this.route.paramMap.subscribe(params => {
+          this.equipmentId = params.get('id') || ''; // Assicura che non sia null
+          console.log("Equipment ID ricevuto:", this.equipmentId);
+          // Chiamata al backend per ottenere i dettagli
+          this.loadEquipmentDetail(this.equipmentId);
+        });
    }
 
 
@@ -185,6 +187,8 @@ pullers: any[] = []; // Lista dei pullers
   loadSignals() {
 
     const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+
+
     this.signalService.getSignalsByEquipmentId(equipmentId).subscribe(data => {
       this.signals = data.body;
       console.log("loadSignals. Dati salvati:", this.signals);

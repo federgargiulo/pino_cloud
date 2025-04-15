@@ -19,7 +19,7 @@ equipment.mv.db
 *.iws
 *.iml
 *.ipr
-
+*.log
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

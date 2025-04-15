@@ -6,7 +6,7 @@ import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'console';
 import { CommonService } from '../../../service/common.service';
-
+const isMockEnabled = true;
 
 
 @Component({
@@ -124,58 +124,101 @@ export class DetailUserComponent {
       this.laodAllGrp().then(() => {
         this.route.paramMap.subscribe(params => {
           const userId = params.get('id');
+
           if (userId) {
-            this.userService.getUserById(userId).subscribe({
-              next: (data) => {
-                this.setFormValues(data.body); // ✅ ora grpList è già valorizzata
-                this.isPersisted = true;
-                this.setPasswordValidators(false);
-              },
-              error: (err) => {
-                console.error('Errore nel caricamento del dettaglio utente:', err);
-              }
-            });
+            if (isMockEnabled) {
+              const mockUser = {
+                idpId: 'idp-mock',
+                userId: 'user123',
+                firstName: 'Mario',
+                lastName: 'Rossi',
+                email: 'mario@example.com',
+                tenant: 'tenant1',
+                address: 'Via Roma 1',
+                phone: '333444555',
+                gender: 'M',
+                usrGrp: [{ grpName: 'Admin' }]
+              };
+              this.setFormValues(mockUser);
+              this.isPersisted = true;
+              this.setPasswordValidators(false);
+            } else {
+              this.userService.getUserById(userId).subscribe({
+                next: (data) => {
+                  this.setFormValues(data.body);
+                  this.isPersisted = true;
+                  this.setPasswordValidators(false);
+                },
+                error: (err) => {
+                  console.error('Errore nel caricamento del dettaglio utente:', err);
+                }
+              });
+            }
           } else {
-            this.setPasswordValidators(true); // creazione
+            this.setPasswordValidators(true);
           }
         });
       });
     }
+
+
 
     async laodAllGrp(): Promise<void> {
       return new Promise((resolve) => {
-        this.commonServices.getAllGreoups().subscribe((data: any) => {
-          if (data && data.body) {
-            this.grpList = data.body;
-          }
+        if (isMockEnabled) {
+          this.grpList = [
+            { grpName: 'Admin' },
+            { grpName: 'User' },
+            { grpName: 'Manager' }
+          ];
           resolve();
-        });
+        } else {
+          this.commonServices.getAllGreoups().subscribe((data: any) => {
+            if (data?.body) {
+              this.grpList = data.body;
+            }
+            resolve();
+          });
+        }
       });
     }
 
 
-      async getAllTenants() {
-          console.log( "get all tenant" )
-          this.tenantServices.getAllTenants().subscribe((data : any) => {
-           console.log("Dati ricevuti dal server:", data)
-            if (data != null && data.body != null) {
-              var resultData = data.body;
+async getAllTenants() {
+  console.log("get all tenant");
+  if (isMockEnabled) {
+    this.tenantList = [
+      { tenantId: 'tenant1', name: 'Tenant Uno' },
+      { tenantId: 'tenant2', name: 'Tenant Due' }
+    ];
+    return;
+  }
 
-              if (resultData) {
-                this.tenantList = resultData;
-              }
-            }
-          },
-          (error : any)=> {
-              if (error) {
-                if (error.status == 404) {
-                  if(error.error && error.error.message){
-                    this.tenantList = [];
-                  }
-                }
-              }
-            });
+  console.log( "get all tenant" )
+  this.tenantServices.getAllTenants().subscribe((data : any) => {
+   console.log("Dati ricevuti dal server:", data)
+    if (data != null && data.body != null) {
+      var resultData = data.body;
+
+      if (resultData) {
+        this.tenantList = resultData;
+      }
+    }
+  },
+  (error : any)=> {
+      if (error) {
+        if (error.status == 404) {
+          if(error.error && error.error.message){
+            this.tenantList = [];
+          }
         }
+      }
+    });
+}
+
+
+
+
 
         setPasswordValidators(isRequired: boolean) {
           const passwordControl = this.userForm.get('password');
