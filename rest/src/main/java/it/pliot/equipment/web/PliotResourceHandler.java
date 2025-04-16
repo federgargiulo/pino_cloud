@@ -96,7 +96,7 @@ public class PliotResourceHandler  extends ResourceHttpRequestHandler {
             throw new RuntimeException( "Wrong configuration Edge list size must be 1 ");
         }
         EdgeTO edge = edges.get( 0 );
-        String x = config.getConfValue( "pliot.edge.server-url" , "http://localhost:8080" );
+        String x = config.getConfValue( "pliot.server.url" , "http://localhost:8080" );
 
         return x  + WebConf.SSO_PATH + "?" + WebConf.SSO_EDGE_ID_PAR_KEY + "=" + edge.getId();
 

@@ -22,6 +22,28 @@ public class GlobalConfig {
     private Mode ACTIVE_MODE = null;
 
 
+    @Value("${pliot.edge.client-id}")
+    private String clientId;
+
+    @Value("${pliot.server.url}" )
+    private String serverUrl;
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
     public Mode getMode(){
         if ( ACTIVE_MODE == null ) {
             for (String profileName : environment.getActiveProfiles()) {

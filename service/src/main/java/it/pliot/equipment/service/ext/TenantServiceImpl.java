@@ -26,7 +26,7 @@ public class TenantServiceImpl extends BaseServiceImpl<TenantTO, Tenant , String
     GlobalConfig config;
 
     @Autowired
-    KeycloakUserExtension keycloak;
+    KeycloakTenantExtension keycloak;
 
 
 
@@ -46,11 +46,13 @@ public class TenantServiceImpl extends BaseServiceImpl<TenantTO, Tenant , String
     @Override
     public TenantTO create(TenantTO io) {
         try {
-            io = keycloak.createTenantGRP( io );
+              keycloak.alignKeycloakOnNewTenat( io );
+              return super.create( io );
         } catch (Exception e) {
             log.error( " error when contact idp " + e.getMessage() );
+            throw new RuntimeException( " Impossibile create il tenat " , e);
         }
 
-        return super.create(io);
+
     }
 }

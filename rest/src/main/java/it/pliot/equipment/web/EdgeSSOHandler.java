@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 
 public class EdgeSSOHandler extends ResourceHttpRequestHandler {
@@ -24,6 +26,9 @@ public class EdgeSSOHandler extends ResourceHttpRequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request , HttpServletResponse response ) throws IOException {
         String edgeId = request.getParameter(WebConf.SSO_EDGE_ID_PAR_KEY );
+        String code = request.getParameter("code");
+        String state = request.getParameter("state");
+
         if ( ! ConvertUtils.isNullOrEmpty( edgeId) ){
             EdgeTO edge = edgeServices.findById( edgeId );
             if ( edge == null){
@@ -32,9 +37,19 @@ public class EdgeSSOHandler extends ResourceHttpRequestHandler {
             }
             String redirUrl = edge.getEdgeUrl();
 
+            // Aggiunge i parametri code e state se presenti
+            StringBuilder finalUrl = new StringBuilder(redirUrl);
+            if (code != null && state != null) {
+                finalUrl.append(redirUrl.contains("?") ? "&" : "?");
+                finalUrl.append("code=").append(URLEncoder.encode(code, StandardCharsets.UTF_8));
+                finalUrl.append("&state=").append(URLEncoder.encode(state, StandardCharsets.UTF_8));
+            }
+
             // Redirect 302
             response.setStatus(HttpServletResponse.SC_FOUND); // 302
-            response.setHeader("Location", redirUrl );
+            response.setHeader("Location", finalUrl.toString() );
+        }else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
 
 

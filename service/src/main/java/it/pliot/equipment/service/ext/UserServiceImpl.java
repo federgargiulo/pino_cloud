@@ -1,6 +1,5 @@
 package it.pliot.equipment.service.ext;
 
-import it.pliot.equipment.Const;
 import it.pliot.equipment.GlobalConfig;
 import it.pliot.equipment.Mode;
 import it.pliot.equipment.io.UserGrpTO;
@@ -16,17 +15,14 @@ import it.pliot.equipment.service.business.UserGrpServices;
 import it.pliot.equipment.service.business.UserServices;
 import it.pliot.equipment.service.dbms.BaseServiceImpl;
 import it.pliot.equipment.service.dbms.util.BaseConvertUtil;
-import it.pliot.equipment.service.dbms.util.UserGrpUtils;
 import it.pliot.equipment.service.dbms.util.UserUtils;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.Cipher;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,9 +67,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
     @Override
     public UserTO create(UserTO io) {
 
-        String [] groupsid = new String[]{ Const.GROUP_PREFIX + io.getTenant() , Const.USER_TENANT_GRP };
         if (Mode.SERVER == config.getMode() )
-           io = keycloak.createUser( io , groupsid );
+           io = keycloak.createUser( io  );
 
         return super.create(io);
     }
@@ -101,8 +96,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserTO,User,String> impleme
         Map<String,OperationType> grp2manage = identifyGroupToAddOrRemove( io.getUsrGrp() , user.getUserGroups() );
 
         if (Mode.SERVER == config.getMode()) {
+            //Se la lista di gruppi dello user proveniente dalla ui è vuota allora setto i gruppi letti dal db
+            if (io.getUsrGrp().size()==0){
+                io.setUsrGrp(c.convertListData2Io(user.getUserGroups()));
+            }
             // Aggiorna lo user settando i nuovi gruppi su Keycloak
-            keycloak.updateUser(io , grp2manage );
+            keycloak.updateUser(io ,grp2manage );
         }
         user = c.cp2data( io, user );
         user = getRepo().save( user );

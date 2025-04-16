@@ -1,0 +1,120 @@
+pliot:
+  mode: SERVER
+  keycloak:
+    url: "http://localhost:8180"
+    realmName: "master"
+    realmManaged: "pliot"
+    webClientId: "pl_server"
+    user: "admin"
+    password: "admin"
+    clientId: "admin-cli"
+  edge:
+    tokenuri:
+    client-id:
+    client-secret:
+    api-url:
+  server:
+    url: "http://localhost:8080"
+  base_path:
+
+logging:
+  file:
+    path: ./log
+
+springdoc:
+  swagger-ui:
+    path: "api-docs.html"
+
+#jms:
+ #  jndi-name: "java:/MyConnectionFactory"
+
+
+
+spring:
+  activemq:
+    broker-url: "tcp://localhost:9876"
+    user: "admin"
+    password: "secret"
+    pool:
+      enabled: true
+      max-connections: 10
+  artemis:
+    mode: native
+    host: localhost
+    port: 9876
+    user: admin
+    password: secret
+
+#
+#   jwk-set-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}/protocol/openid-connect/certs
+#          issuer-uri: ${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}
+# https://hawt.io/docs/get-started.html
+#
+
+  jmx:
+    enabled: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pliot
+    username: pliot
+    password: pliot
+#H2
+#    url: jdbc:h2:file:./equipment
+#    username: sa
+#    password: password
+#    driverClassName: org.h2.Driver
+  jpa:
+#    dialect: org.hibernate.dialect.H2Dialect
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql=true:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+
+#
+# Postgres
+#
+#spring:
+# datasource:
+#    url: jdbc:postgresql://localhost:25432/test
+#    username: postgres
+#    password: postgres
+#  jpa:
+#     hibernate: create
+#      # <create | create-drop | update | validate | none>
+
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/certs
+          issuer-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}
+
+server:
+  port: 8080
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hawtio,jolokia
+      base-path: "/actuator"
+      path-mapping:
+        hawtio: "hawtio/console"
+  management:
+    security:
+      enabled: false
+
+hawtio:
+  authenticationEnabled: false

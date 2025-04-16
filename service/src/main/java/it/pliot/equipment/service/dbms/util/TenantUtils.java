@@ -28,7 +28,7 @@ public class TenantUtils extends BaseConvertUtil<Tenant, TenantTO>{
         out.setState(in.getState());
         out.setProfile(in.getProfile());
         out.setZipCode(in.getZipCode());
-        out.setIdpGrpId( in.getIdpGrpId() );
+
         return out;
     }
 
@@ -48,7 +48,7 @@ public class TenantUtils extends BaseConvertUtil<Tenant, TenantTO>{
         out.setState(in.getState());
         out.setProfile(in.getProfile());
         out.setZipCode(in.getZipCode());
-        out.setIdpGrpId( in.getIdpGrpId() );
+
         return out;
 
     }

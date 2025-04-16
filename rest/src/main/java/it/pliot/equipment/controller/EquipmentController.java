@@ -98,8 +98,10 @@ public class EquipmentController {
 
     @DeleteMapping("/equipments/{id}")
     public ResponseEntity<Void> deleteEquipment(@PathVariable("id") String id  ) {
-            equipmentService.delete( id );
-            return ResponseEntity.noContent().build();
+       EquipmentTO equipmentTO = equipmentService.findById(id);
+       equipmentTO.setStatus("DELETED");
+       equipmentService.save( equipmentTO );
+       return ResponseEntity.noContent().build();
     }
 
 
@@ -130,7 +132,10 @@ public class EquipmentController {
 
     @DeleteMapping("/equipments/{id}/signals/{idSignal}")
     public ResponseEntity<Void> deleteSignalById(@PathVariable("idSignal") String idSignal  ) {
-        signalServices.delete( idSignal );
+
+        SignalTO signalTO = signalServices.findById(idSignal);
+        signalTO.setStatus("DELETED");
+        signalServices.save( signalTO );
         return ResponseEntity.noContent().build();
     }
 

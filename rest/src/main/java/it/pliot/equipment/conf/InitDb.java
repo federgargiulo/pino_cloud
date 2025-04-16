@@ -2,8 +2,10 @@ package it.pliot.equipment.conf;
 
 import it.pliot.equipment.Const;
 import it.pliot.equipment.GlobalConfig;
+import it.pliot.equipment.Mode;
 import it.pliot.equipment.io.*;
 import it.pliot.equipment.service.business.*;
+import it.pliot.equipment.service.ext.UserAlreadyPresentException;
 import jakarta.annotation.PostConstruct;
 
 import org.slf4j.Logger;
@@ -17,6 +19,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.nio.charset.StandardCharsets;
@@ -41,6 +46,9 @@ public class InitDb {
 
     @Autowired
     private EquipmentPullerServices equipmentPullerService;
+
+    @Autowired
+    private UserServices userServices;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -69,17 +77,40 @@ public class InitDb {
         }
     }
 
+    public UserTO getAdmin(){
+        UserTO u = new UserTO();
+        u.setUserId( Const.ADMIN_PLIOT_USERID );
+        u.setEmail( Const.ADMIN_PLIOT_MAIL );
+        u.setLastName( Const.ADMIN_PLIOT_LASTNAME );
+        u.setFirstName( Const.ADMIN_PLIOT_FIRSFNAME );
+        u.setPassword( Const.DEFAULT_PASSWORD );
+        u.setTenant( Const.ADMIN_PLIOT_TENANT );
+
+        return u;
+    }
+
+
 
     @PostConstruct
     public void initDb( ) {
 
         executeSqlScripts();
 
-
-        log.info("Preloading Role" + usrGrp.save( UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ) );
-        log.info("Preloading Role" + usrGrp.save(  UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
-        log.info("Preloading Role" + usrGrp.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );
-
+        UserGrpTO adminGrp = UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ;
+        log.info("Preloading Group" + usrGrp.save(  adminGrp  ) );
+        log.info("Preloading Group" + usrGrp.save( UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
+        log.info("Preloading Group" + usrGrp.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );
+        if ( Mode.SERVER.equals( config.getMode() ) ) {
+            UserTO admin = getAdmin();
+            ArrayList<UserGrpTO> grp = new ArrayList<UserGrpTO>();
+            grp.add(adminGrp);
+            admin.setUsrGrp(grp);
+            try {
+                userServices.create(admin);
+            } catch (UserAlreadyPresentException e) {
+                log.info(" user admin already created ");
+            }
+        }
         if ( ! config.isLoadEnabled() )
             return;
 

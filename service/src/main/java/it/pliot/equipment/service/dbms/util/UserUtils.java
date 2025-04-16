@@ -1,7 +1,13 @@
 package it.pliot.equipment.service.dbms.util;
 
+import it.pliot.equipment.io.UserGrpTO;
 import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.model.User;
+import it.pliot.equipment.model.UserGrp;
+import it.pliot.equipment.security.JwtUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserUtils extends BaseConvertUtil<User, UserTO> {
 
@@ -62,4 +68,28 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
 
     }
 
+    public List<UserGrpTO> convertListData2Io(List<UserGrp> userGrps) {
+        List<UserGrpTO> result = new ArrayList<>();
+
+        userGrps.forEach(group -> {
+            UserGrpTO to = new UserGrpTO();
+           to.setGrpName(group.getGrpName());
+            to.setDescription(group.getDescription());
+
+            result.add(to);
+        });
+
+        return result;
+    }
+
+    public UserTO jwt2to(JwtUser u) {
+        UserTO to = new UserTO();
+        to.setIdpId( u.getIdpId() );
+        to.setFirstName( u.getFirstName() );
+        to.setLastName( u.getLastName() );
+        to.setEmail( u.getEmail() );
+        to.setTenant( u.getTenantId() );
+        to.setUserId( u.getUserId() );
+        return to;
+    }
 }

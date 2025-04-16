@@ -2,8 +2,11 @@ package it.pliot.equipment.controller;
 
 import it.pliot.equipment.conf.ApiPrefixController;
 import it.pliot.equipment.io.UserTO;
+import it.pliot.equipment.security.JwtUser;
+import it.pliot.equipment.security.UserContext;
 import it.pliot.equipment.service.business.UserGrpServices;
 import it.pliot.equipment.service.business.UserServices;
+import it.pliot.equipment.service.dbms.util.UserUtils;
 import jakarta.ws.rs.QueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,8 +57,21 @@ public class UserController {
     @PatchMapping("/users/{id}")
     public ResponseEntity<UserTO> updateUser(@PathVariable("id") String id , @RequestBody UserTO userTO ) {
         try {
-           userTO = userServices.save( userTO );
+            userTO.setIdpId(id);
+            userTO = userServices.save( userTO );
             return new ResponseEntity<>(userTO, HttpStatus.OK );
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/users/federate")
+    public ResponseEntity<UserTO> federate(){
+        try {
+            JwtUser u = UserContext.currentUser();
+            UserTO uto = UserUtils.instance().jwt2to(u);
+            userServices.save(uto);
+            return new ResponseEntity<>( uto , HttpStatus.OK );
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

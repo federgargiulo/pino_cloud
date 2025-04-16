@@ -21,8 +21,8 @@
     <button mat-button>
       <span class="material-symbols-outlined"> settings </span>
     </button>
-    <button mat-button>
-      <span class="material-symbols-outlined"> person </span>
+    <button mat-button >
+      <span class="material-symbols-outlined" [routerLink]="['profile']"> person </span>
     </button>
   </div>
 </nav>
@@ -80,7 +80,7 @@
       </button>
       @if (showUsersItems) {
       <button mat-button class="mat-drawer-button-item" [routerLink]="['add-users']"> New Users </button>
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-user']"> Search </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-users']"> Search </button>
       }
     </div>
     <!-- Dashboard -->
