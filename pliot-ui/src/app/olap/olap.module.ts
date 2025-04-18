@@ -9,9 +9,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
- 
-
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [PivotTableComponent],
@@ -25,8 +24,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatTableModule,
+    MatCheckboxModule,
     ChartViewComponent
   ],
-  exports: [PivotTableComponent, ChartViewComponent], 
+  exports: [PivotTableComponent, ChartViewComponent],
 })
 export class OlapModule { }

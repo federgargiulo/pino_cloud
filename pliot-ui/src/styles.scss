@@ -1,4 +1,19 @@
-@import 'scss/index.scss';
+
+
+@use '@angular/material' as mat;
+@use './scss/material-config/theme-colors' as theme;
+
+@include mat.core();
+@import './scss/index';
+
+html {
+  @include mat.theme(
+    (
+      color: theme.$primary-palette,
+      density: 0,
+    )
+  );
+}
 
 /* You can add global styles to this file, and also import other style files */
 /* License: none (public domain) */
