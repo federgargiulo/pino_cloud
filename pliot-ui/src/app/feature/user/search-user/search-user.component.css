@@ -1,0 +1,39 @@
+:host, form, .form-container {
+    display: flex;
+    flex-grow: 1;
+    overflow: auto;
+    flex-direction: column;
+  }
+
+  .form-container {
+    margin: 35px;
+    gap: 24px;
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    .form-group-item {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: 1;
+      width: 100%;
+      gap: 4px;
+      input, textarea {
+        border-radius: 3px;
+        // background-color: #fafafa;
+      }
+    }
+  }
+
+  .mat-toolbar.mat-toolbar {
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24px 35px;
+    button {
+      margin-top: 0 !important;
+    }
+  }

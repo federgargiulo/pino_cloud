@@ -1,50 +1,51 @@
-<div class="table-container">
-  <table>
-    <thead>
-    <tr class="center-align">
-      <th>Id</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Profile</th>
-      <th>Address</th>
-      <th>Country</th>
-      <th>Zip Code</th>
-      <th>State</th>
-      <th>Email</th>
-      <th>Created</th>
-      <th>Last Update</th>
-      <th colspan="2">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let tenant of tenantList; let i = index" class="center-align">
-      <td>{{tenant.tenantId}}</td>
-      <td>{{tenant.name}}</td>
-      <td>{{tenant.description}}</td>
-      <td>{{tenant.profile}}</td>
-      <td>{{tenant.address}}</td>
-      <td>{{tenant.country}}</td>
-      <td>{{tenant.zipCode}}</td>
-      <td>{{tenant.state}}</td>
-      <td>{{tenant.email}}</td>
-      <td>{{tenant.createdDttm}}</td>
-      <td>{{tenant.updateDttm}}</td>
+<div class="form-container">
+  <h2>Tenant List</h2>
 
-      <td>
-        <!--<button (click)="detailTenant(tenant.id, i)"> Detail</button> -->
-        <button [routerLink]="['/detail-tenant', tenant.tenantId]">✏ Edit</button>
-      </td>
-      <td>
+  <div class="d-flex flex-column" style="overflow-x: auto;">
+    <table class="table">
+      <thead>
+      <tr class="center-align">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Profile</th>
+        <th>Address</th>
+        <th>Country</th>
+        <th>Zip Code</th>
+        <th>State</th>
+        <th>Email</th>
+        <th>Created</th>
+        <th>Last Update</th>
+        <th colspan="2">Actions</th>
+      </tr>
+      </thead>
 
-        <button (click)="deleteTenant(tenant.tenantId, i)">❌ Elimina</button>
-      </td>
+      <tbody>
+      <tr *ngFor="let tenant of tenantList; let i = index" class="center-align">
+        <td>{{tenant.tenantId}}</td>
+        <td>{{tenant.name}}</td>
+        <td>{{tenant.description}}</td>
+        <td>{{tenant.profile}}</td>
+        <td>{{tenant.address}}</td>
+        <td>{{tenant.country}}</td>
+        <td>{{tenant.zipCode}}</td>
+        <td>{{tenant.state}}</td>
+        <td>{{tenant.email}}</td>
+        <td>{{tenant.createdDttm}}</td>
+        <td>{{tenant.updateDttm}}</td>
 
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td *ngIf="tenantList.length == 0" colspan="6">No Tenant Found</td>
-    </tr>
-    </tbody>
-  </table>
+        <td>
+          <button class="btn btn-primary" [routerLink]="['/detail-tenant', tenant.tenantId]">✏ Edit</button>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="deleteTenant(tenant.tenantId, i)">❌ Elimina</button>
+        </td>
+      </tr>
+
+      <tr *ngIf="tenantList.length === 0">
+        <td colspan="13" class="text-center">No Tenant Found</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

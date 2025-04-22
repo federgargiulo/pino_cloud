@@ -1,47 +1,52 @@
-<form (ngSubmit)="search()" class="search-form">
-    <label for="tenant">Seleziona Tenant:</label>
-    <select id="tenant" [(ngModel)]="selectedTenant" name="tenant" required>
-      <option *ngFor="let tenant of tenantList" [value]="tenant.tenantId">{{ tenant.name }}</option>
-    </select>
+<form (ngSubmit)="search()" class="d-flex flex-column">
+  <div class="form-container">
+    <div class="d-flex flex-row gap-4">
+      <div class="form-group-item">
+        <label for="tenant" class="form-label">Seleziona Tenant</label>
+        <select id="tenant" class="form-control" [(ngModel)]="selectedTenant" name="tenant" required>
+          <option *ngFor="let tenant of tenantList" [value]="tenant.tenantId">{{ tenant.name }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
 
-    <button type="submit">Cerca</button>
-  </form>
+  <mat-toolbar>
+    <button type="submit" class="btn btn-primary">
+      Cerca
+    </button>
+  </mat-toolbar>
+</form>
 
-  <div class="table-container">
-    <table>
+<!-- Solo se ci sono utenti -->
+<div class="form-container" *ngIf="usersList.length > 0">
+  <h2>User List</h2>
+
+  <div class="d-flex flex-column" style="overflow-x: auto;">
+    <table class="table">
       <thead>
       <tr class="center-align">
-        <th>user id</th>
-
-        <th>Nome </th>
+        <th>User ID</th>
+        <th>Nome</th>
         <th>Cognome</th>
-        <th>email</th>
+        <th>Email</th>
         <th colspan="2">Actions</th>
       </tr>
       </thead>
+
       <tbody>
       <tr *ngFor="let user of usersList; let i = index" class="center-align">
         <td>{{user.userId}}</td>
-
         <td>{{user.firstName}}</td>
         <td>{{user.lastName}}</td>
         <td>{{user.email}}</td>
-
         <td>
-          <!--<button (click)="detailTenant(tenant.id, i)"> Detail</button> -->
-          <button [routerLink]="['/detail-user', user.idpId ]">✏ Edit</button>
+          <button class="btn btn-primary" [routerLink]="['/detail-user', user.idpId]">✏ Edit</button>
         </td>
         <td>
-
-          <button (click)="deleteUser( user.userId , i )">❌ Elimina</button>
+          <button class="btn btn-primary" (click)="deleteUser(user.userId, i)">❌ Elimina</button>
         </td>
-
-        <td>
-        </td>
-      </tr>
-      <tr>
-        <td *ngIf="tenantList.length == 0" colspan="6">No Tenant Found</td>
       </tr>
       </tbody>
     </table>
   </div>
+</div>

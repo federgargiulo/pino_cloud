@@ -1,7 +1,9 @@
+<div class="form-container">
+  <h2>Equipment List</h2>
 
-<div class="table-container">
-<table>
-    <thead>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
       <tr class="center-align">
         <th>Id</th>
         <th>Name</th>
@@ -11,36 +13,28 @@
         <th>Last Update</th>
         <th colspan="2">Actions</th>
       </tr>
-    </thead>
-<tbody>
-    <tr *ngFor="let equipment of equipmentList; let i = index"  class="center-align">
-      <td>{{equipment.equipmentId}}</td>
-      <td>{{equipment.name}}</td>
-      <td>{{equipment.tenant}}</td>
-      <td>{{equipment.status}}</td>
-      <td>{{equipment.createdDttm}}</td>
-      <td>{{equipment.updateDttm}}</td>
-      <!--<td>
-        <a  routerLink="/detail-xxx/{{equipment.equipmentId}}" class="btn">Detail</a>
-      </td> -->
-      <td>
-      <!--  <a [routerLink]="['/detail-equipment', equipment.id]" class="button">Detail</a> -->
-        <button [routerLink]="['/detail-equipment', equipment.equipmentId]">✏ Edit</button>
+      </thead>
 
-      </td>
-      <td>
+      <tbody>
+      <tr *ngFor="let equipment of equipmentList; let i = index" class="center-align">
+        <td>{{equipment.equipmentId}}</td>
+        <td>{{equipment.name}}</td>
+        <td>{{equipment.tenant}}</td>
+        <td>{{equipment.status}}</td>
+        <td>{{equipment.createdDttm}}</td>
+        <td>{{equipment.updateDttm}}</td>
+        <td>
+          <button class="btn btn-primary" [routerLink]="['/detail-equipment', equipment.equipmentId]">✏ Edit</button>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="deleteEquipment(equipment.equipmentId, i)">❌ Delete</button>
+        </td>
+      </tr>
 
-        <button (click)="deleteEquipment(equipment.equipmentId, i)">❌ Delete</button>
-      </td>
-
-      <td>
-       <!-- <a href="#" href="['/ViewEmployee/', equipment.equipmentId]" class="btn"><i class='fas fa-eye view'></i></a>
-        <a href="#" href="['/EditEmployee/', equipment.equipmentId]" class="btn"><i class="fa fa-edit edit"></i></a> -->
-       </td>
-    </tr>
-    <tr>
-      <td *ngIf="equipmentList.length == 0" colspan="6">No Equipment Found</td>
-    </tr>
-  </tbody>
-  </table>
+      <tr *ngIf="equipmentList.length === 0">
+        <td colspan="8" class="text-center">No Equipment Found</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
