@@ -55,7 +55,7 @@ export class PivotTableComponent implements OnInit {
 
   async getAllTenants(): Promise<void> {
     
-    await this.fetchData(() => this.tenantServices.getAllTenants(), 'tenantList');
+    await this.fetchData( () => this.tenantServices.getAllTenants() , 'tenantList' );
   }
 
 
@@ -64,7 +64,7 @@ export class PivotTableComponent implements OnInit {
     const selected = this.tenantList.find( ( x:any )  => x.tenantId === tenantId);
     this.selectedTenantName = selected?.name || null;
     if ( "select-id"!= tenantId ){
-      await this.fetchData(() => this.equipmentService.getEquipmentsByTenant( tenantId ), 'equipmentList');
+      await this.fetchData(() => this.equipmentService.getEquipmentsByTenant( tenantId ), 'equipmentList' );
     
     }
       
@@ -76,18 +76,15 @@ export class PivotTableComponent implements OnInit {
     this.selectedEquipmentName = selected?.name || null;
   
     if ( "select-id"!= equipmentId )
-      await this.fetchData(() => this.signalService.getSignalsByEquipmentId( equipmentId), 'signalList');
+      await this.fetchData( () => this.signalService.getSignalsByEquipmentId( equipmentId ) , 'signalList'   );
   }
-
-  
-
 
   async loadData(parent?: string) {
          
     if ( this.selectedSignalId != null ){
       var sigalId = this.selectedSignalId;
       await this.fetchData(() =>  this.olapService.getAggregation( sigalId ,
-         this.dateRange , this.selectedAggregation ) , 'data');   
+         this.dateRange , this.selectedAggregation ) , 'data'   );   
     }
   }
 
@@ -103,7 +100,7 @@ export class PivotTableComponent implements OnInit {
     this.loadData(row.id);
   }
 
-  async fetchData(serviceCall: () => Observable<any>, targetProperty: string): Promise<void> {
+  async fetchData(serviceCall: () => Observable<any>, targetProperty: string ): Promise<void> {
     console.log("Fetching data...");
     
     serviceCall().subscribe((data: any) => {
@@ -113,6 +110,7 @@ export class PivotTableComponent implements OnInit {
   
         if (resultData) {
           (this as any)[targetProperty] = resultData;
+          
         }
       }
     }, (error: any) => {
