@@ -101,6 +101,8 @@ public class InitDb {
         log.info("Preloading Group" + usrGrp.save( UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
         log.info("Preloading Group" + usrGrp.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );
         if ( Mode.SERVER.equals( config.getMode() ) ) {
+            log.info("Init admin user" );
+
             UserTO admin = getAdmin();
             ArrayList<UserGrpTO> grp = new ArrayList<UserGrpTO>();
             grp.add(adminGrp);

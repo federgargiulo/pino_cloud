@@ -1,0 +1,31 @@
+services:
+  app:
+    build: .
+    image: localhost:5000/pliot:latest
+    container_name: java_app
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config/application.yml:/app/config/application.yml:ro
+      - ./config/montoro.p12:/app/config/montoro.p12:ro
+      - ./logs:/app/logs
+    extra_hosts:
+      - "pinocloud.duckdns.org:13.60.67.118"
+
+  postgres:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: pliot
+      POSTGRES_USER: pliot
+      POSTGRES_PASSWORD: pliot
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
