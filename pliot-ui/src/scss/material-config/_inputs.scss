@@ -5,7 +5,7 @@
       // select
       &.mat-mdc-form-field-type-mat-select {
         &.mat-form-field-appearance-fill {
-          min-width: max-content;
+          min-width: 100%;
           .mat-mdc-text-field-wrapper {
             padding: 0;
             &.mdc-text-field {
@@ -28,6 +28,21 @@
                         transition: none;
                         top: 0;
                         transform: none;
+                      }
+                    }
+                    mat-select {
+                      &.mat-mdc-select {
+                        border: 1px solid lightblue;
+                        border-radius: 1px;
+                        .mat-mdc-select-trigger {
+                          width: 100%;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          .mat-mdc-select-arrow-wrapper {
+                            transform: none;
+                          }
+                        }
                       }
                     }
                   }

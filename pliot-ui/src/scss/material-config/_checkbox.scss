@@ -1,3 +1,121 @@
 @mixin checkbox() {
-  // empty
+  mat-checkbox {
+    &.mat-mdc-checkbox {
+      .mdc-form-field.mat-internal-form-field {
+        .mdc-checkbox {
+          flex: 0 0 16px;
+          width: 17px;
+          height: 17px;
+          .mdc-checkbox__background {
+            border: none;
+            &::before {
+              content: 'check_box_outline_blank';
+              font-family: 'Material Symbols Outlined' !important;
+              font-size: 24px;  /* Preferred icon size */
+              text-transform: none;
+              white-space: nowrap;
+              font-variation-settings:
+              'FILL' 0,
+              'wght' 300,
+              'GRAD' -25,
+              'opsz' 48
+            }
+            svg.mdc-checkbox__checkmark {
+              display: none;
+            }
+          }
+          &>.mdc-checkbox__ripple {
+            opacity: 0;
+            display: none;
+          }
+          &:hover {
+            .mdc-checkbox__background {
+              &::before {
+                content: 'check_box';
+                font-family: 'Material Symbols Outlined' !important;
+                font-size: 24px;  /* Preferred icon size */
+                text-transform: none;
+                white-space: nowrap;
+                font-variation-settings:
+                'FILL' 0,
+                'wght' 300,
+                'GRAD' -25,
+                'opsz' 48
+              }
+            }
+          }
+        }
+      }
+    }
+    &.mat-mdc-checkbox-checked {
+      &.mat-mdc-checkbox {
+        .mdc-form-field.mat-internal-form-field {
+          .mdc-checkbox {
+            .mdc-checkbox__background {
+              background-color: transparent;
+              &::before {
+                color: #1b5cb4;
+                content: 'check_box';
+                font-family: 'Material Symbols Outlined' !important;
+                font-size: 24px;  /* Preferred icon size */
+                text-transform: none;
+                white-space: nowrap;
+                font-variation-settings:
+                'FILL' 1,
+                'wght' 300,
+                'GRAD' -25,
+                'opsz' 48
+              }
+            }
+          }
+        }
+      }
+    }
+    &[ng-reflect-indeterminate="true"] {
+      &.mat-mdc-checkbox {
+        .mdc-form-field.mat-internal-form-field {
+          .mdc-checkbox {
+            .mdc-checkbox__background {
+              background-color: transparent;
+              .mdc-checkbox__mixedmark {
+                display: none;
+              }
+              &::before {
+                left: -4.25px;
+                position: absolute;
+                content: 'check_indeterminate_small';
+                font-family: 'Material Symbols Outlined' !important;
+                font-size: 24px;  /* Preferred icon size */
+                text-transform: none;
+                white-space: nowrap;
+                font-variation-settings:
+                'FILL' 1,
+                'wght' 300,
+                'GRAD' -25,
+                'opsz' 48
+              }
+              &::after {
+                position: absolute;
+                left: -4.25px;
+                content: 'check_box_outline_blank';
+                font-family: 'Material Symbols Outlined' !important;
+                font-size: 24px;  /* Preferred icon size */
+                text-transform: none;
+                white-space: nowrap;
+                font-variation-settings:
+                'FILL' 1,
+                'wght' 300,
+                'GRAD' -25,
+                'opsz' 48
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .mat-mdc-row.mdc-data-table__row:has(.mat-mdc-checkbox-checked) {
+    background-color: #1b5bb405;
+  }
 }

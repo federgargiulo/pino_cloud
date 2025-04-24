@@ -34,3 +34,17 @@ build/
 .vscode/
 /rest/target/
 package-lock.json
+package.json
+
+yarn.lock
+
+*.lock
+*.yaml
+
+*actions
+*logs
+*notifications
+*out*tools
+*.shellcheckrc
+*trunk
+.yarn-integrity
