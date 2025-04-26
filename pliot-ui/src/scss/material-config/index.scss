@@ -4,6 +4,7 @@
 @import 'checkbox';
 @import 'chip';
 @import 'dialogs';
+@import 'divider';
 @import 'footer';
 @import 'icons';
 @import 'inputs';
@@ -22,6 +23,7 @@
 @include checkbox();
 @include chip();
 @include dialogs();
+@include divider();
 @include footer();
 @include icons();
 @include inputs();
