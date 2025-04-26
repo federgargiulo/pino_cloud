@@ -1,24 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { TenantServices } from '../../../service/tenant.service';
 import { UserService } from '../../../service/user.service';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-search-user',
   standalone: false,
   templateUrl: './search-user.component.html',
-  styleUrl: './search-user.component.css'
+  styleUrl: './search-user.component.scss'
 })
-export class SearchUserComponent  implements OnInit {
+
+
+export class SearchUserComponent implements OnInit {
 
   tenantList: any = [];
-
   usersList: any = [];
-
 
   selectedTenant: string = '';
 
-  constructor(  private tenantServices: TenantServices , 
-                private userService : UserService ) {}
+  displayedColumns: string[] = ['select', 'userId', 'firstName', 'lastName', 'email', 'idpId'];
+  selection = new SelectionModel<any>(true, []);
+  dataSource = new MatTableDataSource<any>([]);
+
+  constructor(private tenantServices: TenantServices,
+              private userService: UserService) {}
+
 
   ngOnInit(): void {
       console.log( "init Tenant" )
@@ -77,9 +84,37 @@ export class SearchUserComponent  implements OnInit {
         alert( "delete user " + userid );
     }
 
-    
+
    resetPassword( userid: string , index : string ){
       alert( "reset password user " + userid );
   }
+
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+    this.selection.select(...this.dataSource.data);
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
+  }
+
+  removeSelectedRows() {
+    const selectedUsers = this.selection.selected;
+    console.log('Users selezionati da rimuovere:', selectedUsers);
+    // Qui puoi eventualmente implementare la logica di delete multiplo
+  }
+
 }
 

@@ -1,3 +1,62 @@
 @mixin inputs() {
-  // empty
+
+  mat-form-field {
+    &.mat-mdc-form-field {
+      // select
+      &.mat-mdc-form-field-type-mat-select {
+        &.mat-form-field-appearance-fill {
+          min-width: 100%;
+          .mat-mdc-text-field-wrapper {
+            padding: 0;
+            &.mdc-text-field {
+              &.mdc-text-field--filled {
+                background-color: transparent;
+                .mat-mdc-form-field-flex {
+                  .mat-mdc-form-field-infix {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    .mdc-floating-label {
+                      &.mat-mdc-floating-label {
+                        max-width: 100%;
+                        transition: none;
+                        transform: none;
+                        top: 0;
+                      }
+                      &.mat-mdc-floating-label--float-above {
+                        max-width: 100%;
+                        transition: none;
+                        top: 0;
+                        transform: none;
+                      }
+                    }
+                    mat-select {
+                      &.mat-mdc-select {
+                        border: 1px solid lightblue;
+                        border-radius: 1px;
+                        .mat-mdc-select-trigger {
+                          width: 100%;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          .mat-mdc-select-arrow-wrapper {
+                            transform: none;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                .mdc-line-ripple {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+
 }

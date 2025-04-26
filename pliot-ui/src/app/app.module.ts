@@ -37,6 +37,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { ProfileComponent } from './feature/profile/profile.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
 
 var loc = new ConfigurationService();
 
@@ -46,7 +49,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     realm: loc.getRealm(),
     clientId: loc.getClientId(),
   },
- 
+
   initOptions: {
     onLoad: 'login-required',  // Oppure 'check-sso' se non vuoi forzare il login
     redirectUri: loc.getRedirectUri(), // Assicura che sia corretto
@@ -97,6 +100,9 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     MatSidenavModule,
     MatIconModule,
     MatToolbarModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatDividerModule,
     OlapModule
   ],
   providers: [
