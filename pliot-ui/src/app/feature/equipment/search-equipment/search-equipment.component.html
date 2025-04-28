@@ -1,40 +1,68 @@
-<div class="form-container">
-  <h2>Equipment List</h2>
+<h2>Equipment List</h2>
 
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-      <tr class="center-align">
-        <th>Id</th>
-        <th>Name</th>
-        <th>Tenant</th>
-        <th>Status</th>
-        <th>Created</th>
-        <th>Last Update</th>
-        <th colspan="2">Actions</th>
-      </tr>
-      </thead>
 
-      <tbody>
-      <tr *ngFor="let equipment of equipmentList; let i = index" class="center-align">
-        <td>{{equipment.equipmentId}}</td>
-        <td>{{equipment.name}}</td>
-        <td>{{equipment.tenant}}</td>
-        <td>{{equipment.status}}</td>
-        <td>{{equipment.createdDttm}}</td>
-        <td>{{equipment.updateDttm}}</td>
-        <td>
-          <button class="btn btn-primary" [routerLink]="['/detail-equipment', equipment.equipmentId]">✏ Edit</button>
-        </td>
-        <td>
-          <button class="btn btn-primary" (click)="deleteEquipment(equipment.equipmentId, i)">❌ Delete</button>
-        </td>
-      </tr>
-
-      <tr *ngIf="equipmentList.length === 0">
-        <td colspan="8" class="text-center">No Equipment Found</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="actions-table-bar">
+  <button mat-button [disabled]="selection.selected.length !== 1" (click)="editSelectedEquipment()">
+    <span class="material-symbols-outlined">edit</span> Modifica
+  </button>
+  <button mat-button [disabled]="selection.selected.length === 0" (click)="deleteSelectedEquipment()">
+    <span class="material-symbols-outlined">delete</span> Elimina
+  </button>
 </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef class="w-70">
+      <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row" class="w-70">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+  <!-- Columns -->
+  <ng-container matColumnDef="equipmentId">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.equipmentId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tenant">
+    <th mat-header-cell *matHeaderCellDef> Tenant </th>
+    <td mat-cell *matCellDef="let element"> {{element.tenant}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdDttm">
+    <th mat-header-cell *matHeaderCellDef> Created </th>
+    <td mat-cell *matCellDef="let element"> {{element.createdDttm}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="updateDttm">
+    <th mat-header-cell *matHeaderCellDef> Last Update </th>
+    <td mat-cell *matCellDef="let element"> {{element.updateDttm}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+  </tr>
+
+</table>
