@@ -14,7 +14,7 @@
     <button mat-button type="submit">Search</button>
   </form>
 
-  <div class="app-header-right">
+  <div class="app-header-right" >
     <button mat-button>
       <span class="material-symbols-outlined"> notifications </span>
     </button>
@@ -39,7 +39,7 @@
       </button>
     </div>
     <!-- Tenant -->
-    <div class="drawer-button-container" [class.opened]="showTenantItems">
+    <div class="drawer-button-container" [class.opened]="showTenantItems" *ngIf="isPliotAdmin()">
       <button mat-button class="mat-drawer-button" (click)="showTenantItems = !showTenantItems">
         <span class="d-flex align-items-center">
           <span class="material-symbols-outlined"> server_person </span>

@@ -81,4 +81,15 @@ export class UserService {
     return this.keycloak.tokenParsed?.['groups'] || [];
   }
 
+  hasRole( role:string ): boolean{
+    return this.hasRoleImpl( this.keycloak.tokenParsed , role );
+  }
+  hasRoleImpl(token: any, role: string): boolean {
+    
+    if (!token || !token.realm_access || !Array.isArray(token.realm_access.roles)) {
+      return false;
+    }
+    return token.realm_access.roles.includes(role);
+  }
+  
 }
