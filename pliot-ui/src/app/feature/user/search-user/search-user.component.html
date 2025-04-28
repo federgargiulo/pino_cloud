@@ -1,22 +1,16 @@
 <h2>USERS SEARCH</h2>
 
 <mat-toolbar class="search-table-bar">
-  <!-- <form (ngSubmit)="search()" class="search-form">
-    <label for="tenant">Seleziona Tenant:</label>
-    <select id="tenant" [(ngModel)]="selectedTenant" name="tenant" required>
-      <option *ngFor="let tenant of tenantList" [value]="tenant.tenantId">{{ tenant.name }}</option>
-    </select>
-    <button type="submit">Cerca</button> -->
-  <form>
+  <form (ngSubmit)="search()">
     <mat-form-field class="w-300">
       <mat-label>Seleziona Tenant</mat-label>
-      <mat-select>
+      <mat-select [(ngModel)]="selectedTenant" name="tenant">
         @for (tenant of tenantList; track tenant) {
-        <mat-option [value]="tenant.tenantId">{{tenant.tenantName}}</mat-option>
+        <mat-option [value]="tenant.tenantId">{{tenant.name}}</mat-option>
         }
       </mat-select>
     </mat-form-field>
-    <button type="button" mat-flat-button>Cerca</button>
+    <button type="submit" mat-flat-button  > Cerca</button>
   </form>
 </mat-toolbar>
 

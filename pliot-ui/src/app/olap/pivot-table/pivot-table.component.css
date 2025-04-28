@@ -5,4 +5,12 @@
 
 }
  
- 
+.custom-date-range input{
+  background-color: white;
+  color: black;
+}
+
+.mat-calendar {
+  background-color: white;
+  color: black;
+}

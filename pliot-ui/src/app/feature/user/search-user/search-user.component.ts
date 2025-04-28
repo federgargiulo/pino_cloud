@@ -57,7 +57,7 @@ export class SearchUserComponent implements OnInit {
       }
 
       search(){
-
+        alert ( " search " +  this.selectedTenant );
         console.log( "get users by tenant" )
         this.userService.getUserdByTenant( this.selectedTenant ).subscribe((data : any) => {
          console.log("Dati ricevuti dal server:", data)
@@ -66,6 +66,8 @@ export class SearchUserComponent implements OnInit {
 
             if (resultData) {
               this.usersList = resultData;
+             
+              this.dataSource.data = resultData;
             }
           }
         },

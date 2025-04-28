@@ -43,14 +43,14 @@
       </div>
 
       <div class="form-group-item">
-        <mat-form-field appearance="fill"  class="combo-pivot">
+        <mat-form-field appearance="fill"  >
           <mat-label>Range Temporale</mat-label>
-          <mat-date-range-input [rangePicker]="picker" [(ngModel)]="dateRange" >
+          <mat-date-range-input class="custom-date-range" [rangePicker]="picker" [(ngModel)]="dateRange" >
             <input matStartDate [min]="minDate" [max]="maxDate" placeholder="Data Inizio">
             <input matEndDate [min]="minDate" [max]="maxDate" placeholder="Data Fine">
           </mat-date-range-input>
           <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
-          <mat-date-range-picker #picker ></mat-date-range-picker>
+          <mat-date-range-picker #picker class="custom-date-range"  ></mat-date-range-picker>
         </mat-form-field>
       </div>
       <div class="form-group-item">
