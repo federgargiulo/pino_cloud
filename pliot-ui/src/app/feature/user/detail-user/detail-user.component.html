@@ -9,7 +9,7 @@
       <div class="form-group-item">
         <label for="tenant" class="form-label">Tenant *</label>
         <select id="tenant" class="form-control" formControlName="tenant" required>
-          <option *ngFor="let tenant of tenantList" [value]="tenant.tenantId">{{ tenant.name }}</option>
+          <option *ngFor="let tenant of tenantList" [value]="tenant.tenantId">{{ tenant.tenantId }}</option>
         </select>
         <div *ngIf="userForm.controls['tenant'].invalid && userForm.controls['tenant'].touched" class="text-danger">
           Il tenant è obbligatorio

@@ -6,7 +6,7 @@
       <mat-label>Seleziona Tenant</mat-label>
       <mat-select [(ngModel)]="selectedTenant" name="tenant">
         @for (tenant of tenantList; track tenant) {
-        <mat-option [value]="tenant.tenantId">{{tenant.name}}</mat-option>
+        <mat-option [value]="tenant.tenantId">{{tenant.tenantId}}</mat-option>
         }
       </mat-select>
     </mat-form-field>
