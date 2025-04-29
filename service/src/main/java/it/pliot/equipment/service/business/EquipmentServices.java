@@ -17,4 +17,6 @@ public interface EquipmentServices extends BaseServiceInterface<EquipmentTO,Stri
     Collection<Object> importFromEdge(List<EquipmentTO> equipments, String edegeId, Date d);
 
     public List<EquipmentTO> findUpdatedEquipmentInTheInterval(Date from , Date to );
+
+    public List<EquipmentTO> findAllNotDeleted();
 }
