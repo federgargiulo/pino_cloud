@@ -1,70 +1,102 @@
-import { Component, Input, OnInit, Type ,  ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Tenant, TenantServices } from '../../../service/tenant.service';
-
+import { TenantServices } from '../../../service/tenant.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-search-tenant',
   standalone: false,
   templateUrl: './search-tenant.component.html',
-  styleUrl: './search-tenant.component.css'
+  styleUrls: ['./search-tenant.component.scss']
 })
-export class SearchTenantComponent {
+export class SearchTenantComponent implements OnInit {
 
- tenantList: any = [];
+  tenantList: any[] = [];
+  dataSource = new MatTableDataSource<any>([]);
+  selection = new SelectionModel<any>(true, []);
 
+  displayedColumns: string[] = [
+    'select', 'tenantId', 'name', 'description', 'profile', 'address',
+    'country', 'zipCode', 'state', 'email', 'createdDttm', 'updateDttm'
+  ];
 
-  constructor(  private tenantServices: TenantServices, private router: Router) {}
+  constructor(
+    private tenantServices: TenantServices,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    console.log( "init Tenant" )
     this.getAllTenants();
-
   }
 
-   async getAllTenants() {
-      console.log( "get all tenant" )
-      this.tenantServices.getAllTenants().subscribe((data : any) => {
-       console.log("Dati ricevuti dal server:", data)
-        if (data != null && data.body != null) {
-          var resultData = data.body;
-          //console.log("Dati ricevuti dal server:", resultData)
-          if (resultData) {
-            this.tenantList = resultData;
-          }
+  getAllTenants(): void {
+    this.tenantServices.getAllTenants().subscribe(
+      (data: any) => {
+        if (data?.body) {
+          this.tenantList = data.body;
+          this.dataSource.data = this.tenantList;
         }
       },
-      (error : any)=> {
-          if (error) {
-            if (error.status == 404) {
-              if(error.error && error.error.message){
-                this.tenantList = [];
-              }
-            }
-          }
-        });
+      (error: any) => {
+        if (error?.status === 404 && error.error?.message) {
+          this.tenantList = [];
+          this.dataSource.data = [];
+        }
+      }
+    );
+  }
+
+  editSelectedTenant() {
+    if (this.selection.selected.length !== 1) {
+      alert("Seleziona un solo tenant da modificare.");
+      return;
+    }
+    const tenant = this.selection.selected[0];
+    this.router.navigate(['/detail-tenant', tenant.tenantId]);
+  }
+
+  removeSelectedRows() {
+    const selectedTenants = this.selection.selected;
+    if (selectedTenants.length === 0) {
+      alert("Seleziona almeno un tenant da eliminare.");
+      return;
     }
 
-    // **Eliminare un Tenant**
-       deleteTenant(id: string, i:number): void {
-                if (!confirm("Sei sicuro di voler eliminare questo Tenant?")) {
-                  return;
-                }
+    if (!confirm("Sei sicuro di voler eliminare i tenant selezionati?")) return;
 
-                this.tenantServices.deleteTenantById(id).subscribe({
-                  next: () => {
-                    console.log(`Tenant con ID ${id} eliminato con successo!`);
+    selectedTenants.forEach((tenant) => {
+      this.tenantServices.deleteTenantById(tenant.tenantId).subscribe({
+        next: () => {
+          this.tenantList = this.tenantList.filter(t => t.tenantId !== tenant.tenantId);
+          this.dataSource.data = [...this.tenantList];
+          this.selection.clear();
+        },
+        error: (err) => {
+          console.error(`Errore durante l'eliminazione di ${tenant.tenantId}:`, err);
+        }
+      });
+    });
+  }
 
-                   this.tenantList.splice(i,1);
-                    console.log(`this.tenantList`, this.tenantList);
-                  },
-                  error: (err) => {
-                    console.error("Errore durante l'eliminazione:", err);
-                  }
-                });
-              }
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+    this.selection.select(...this.dataSource.data);
+  }
 
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
 
-
-
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
+  }
 }
