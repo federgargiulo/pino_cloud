@@ -8,7 +8,7 @@ import {  SignalServices} from '../../../service/signal.service';
   selector: 'app-detail-equipment',
   standalone: false,
   templateUrl: './detail-equipment.component.html',
-  styleUrl: './detail-equipment.component.css'
+  styleUrl: './detail-equipment.component.scss'
 })
 export class DetailEquipmentComponent implements OnInit {
 

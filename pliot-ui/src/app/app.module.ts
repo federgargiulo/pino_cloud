@@ -41,6 +41,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 
+
+import { MatCardModule } from '@angular/material/card';
+
+
+
 var loc = new ConfigurationService();
 
 export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
@@ -103,6 +108,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     MatTableModule,
     MatCheckboxModule,
     MatDividerModule,
+    MatCardModule,
     OlapModule
   ],
   providers: [
