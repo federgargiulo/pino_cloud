@@ -4,76 +4,79 @@
   <div class="form-container">
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="tenantId" class="form-label">ID</label>
-        <input id="tenantId" type="text" class="form-control" formControlName="tenantId" [disabled]="true">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="tenantId" [disabled]="true">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="name" class="form-label">Name</label>
-        <input id="name" type="text" class="form-control" formControlName="name">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
 
-      <div class="form-group-item">
-        <label for="email" class="form-label">Email</label>
-        <input id="email" type="email" class="form-control" formControlName="email">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email">
+        <mat-error *ngIf="tenantForm.controls['email'].invalid && tenantForm.controls['email'].touched">
+          Valid email is required
+        </mat-error>
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="description" class="form-label">Description</label>
-        <textarea id="description" class="form-control" formControlName="description"></textarea>
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
 
-      <div class="form-group-item">
-        <label for="profile" class="form-label">Profile</label>
-        <input id="profile" type="text" class="form-control" formControlName="profile">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Profile</mat-label>
+        <input matInput formControlName="profile">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="country" class="form-label">Country</label>
-        <input id="country" type="text" class="form-control" formControlName="country">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Country</mat-label>
+        <input matInput formControlName="country">
+      </mat-form-field>
 
-      <div class="form-group-item">
-        <label for="state" class="form-label">State</label>
-        <input id="state" type="text" class="form-control" formControlName="state">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>State</mat-label>
+        <input matInput formControlName="state">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="zipCode" class="form-label">Zip Code</label>
-        <input id="zipCode" type="text" class="form-control" formControlName="zipCode">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Zip Code</mat-label>
+        <input matInput formControlName="zipCode">
+      </mat-form-field>
 
-      <div class="form-group-item">
-        <label for="address" class="form-label">Address</label>
-        <input id="address" type="text" class="form-control" formControlName="address">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="createdDttm" class="form-label">Date Create</label>
-        <input id="createdDttm" type="text" class="form-control" formControlName="createdDttm" [disabled]="true">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Date Created</mat-label>
+        <input matInput formControlName="createdDttm" [disabled]="true">
+      </mat-form-field>
 
-      <div class="form-group-item">
-        <label for="updateDttm" class="form-label">Date Update</label>
-        <input id="updateDttm" type="text" class="form-control" formControlName="updateDttm" [disabled]="true">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Date Updated</mat-label>
+        <input matInput formControlName="updateDttm" [disabled]="true">
+      </mat-form-field>
     </div>
 
   </div>
 
-  <mat-toolbar>
-    <button type="submit" class="btn btn-primary" [disabled]="tenantForm.invalid">
+  <mat-toolbar class="actions-toolbar">
+    <button mat-flat-button color="primary" type="submit" [disabled]="tenantForm.invalid">
       Salva Modifiche
     </button>
   </mat-toolbar>

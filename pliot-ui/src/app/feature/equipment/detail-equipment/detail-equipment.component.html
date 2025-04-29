@@ -1,122 +1,122 @@
 <h2>Equipment Detail</h2>
 
 <form [formGroup]="equipmentForm" (ngSubmit)="updateEquipment()" class="d-flex flex-column">
+
   <div class="form-container">
-
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="equipmentId" class="form-label">ID</label>
-        <input type="text" id="equipmentId" class="form-control" formControlName="equipmentId" [readonly]="true">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Equipment ID</mat-label>
+        <input matInput formControlName="equipmentId" readonly>
+      </mat-form-field>
 
-      <div class="form-group-item">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" id="name" class="form-control" formControlName="name">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="tenant" class="form-label">Tenant</label>
-        <input type="text" id="tenant" class="form-control" formControlName="tenant" [readonly]="true">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Tenant</mat-label>
+        <input matInput formControlName="tenant" readonly>
+      </mat-form-field>
 
-      <div class="form-group-item">
-        <label for="status" class="form-label">Status</label>
-        <input type="text" id="status" class="form-control" formControlName="status">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Status</mat-label>
+        <input matInput formControlName="status">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="createdDttm" class="form-label">Date Created</label>
-        <input type="text" id="createdDttm" class="form-control" formControlName="createdDttm" [readonly]="true">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Created Date</mat-label>
+        <input matInput formControlName="createdDttm" readonly>
+      </mat-form-field>
 
-      <div class="form-group-item">
-        <label for="updateDttm" class="form-label">Date Updated</label>
-        <input type="text" id="updateDttm" class="form-control" formControlName="updateDttm" [readonly]="true">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Updated Date</mat-label>
+        <input matInput formControlName="updateDttm" readonly>
+      </mat-form-field>
     </div>
-
   </div>
 
-  <mat-toolbar class="actions-toolbar">
-    <button mat-flat-button color="primary" type="submit" [disabled]="equipmentForm.invalid">
-      Salva Equipment
-    </button>
+  <mat-toolbar class="actions-toolbar" color="transparent">
+    <button mat-flat-button color="primary" type="submit" [disabled]="equipmentForm.invalid">Salva Equipment</button>
     <button mat-flat-button color="primary" type="button" (click)="toggleSignalForm()">Aggiungi Signal</button>
     <button mat-flat-button color="primary" type="button" (click)="loadSignals()">Visualizza Signals</button>
     <button mat-flat-button color="primary" type="button" (click)="togglePullerForm()">Aggiungi Configurazione</button>
     <button mat-flat-button color="primary" type="button" (click)="loadPullers()">Visualizza Configurazioni</button>
     <button mat-flat-button color="accent" type="button" (click)="togglePullerList()">Mostra/Nascondi Config</button>
   </mat-toolbar>
+
 </form>
 
 <!-- FORM SIGNAL -->
 <div *ngIf="showSignalForm" class="form-container mt-3">
-  <h2 *ngIf="isEditingSignal">Update Signal</h2>
-  <h2 *ngIf="!isEditingSignal">Add Signal</h2>
+  <h2>{{ isEditingSignal ? 'Update Signal' : 'Add Signal' }}</h2>
 
   <form [formGroup]="signalForm" (ngSubmit)="saveSignal()" class="d-flex flex-column">
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label>Unit of Measurement</label>
-        <input type="text" class="form-control" formControlName="unitOfMeasurement">
-      </div>
-      <div class="form-group-item">
-        <label>Name</label>
-        <input type="text" class="form-control" formControlName="name">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Unit of Measurement</mat-label>
+        <input matInput formControlName="unitOfMeasurement">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label>Min Value</label>
-        <input type="number" class="form-control" formControlName="minVal">
-      </div>
-      <div class="form-group-item">
-        <label>Max Value</label>
-        <input type="number" class="form-control" formControlName="maxVal">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Min Value</mat-label>
+        <input matInput type="number" formControlName="minVal">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Max Value</mat-label>
+        <input matInput type="number" formControlName="maxVal">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label>Down Red Limit</label>
-        <input type="number" class="form-control" formControlName="downRedLimit">
-      </div>
-      <div class="form-group-item">
-        <label>Up Red Limit</label>
-        <input type="number" class="form-control" formControlName="upRedLimit">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Down Red Limit</mat-label>
+        <input matInput type="number" formControlName="downRedLimit">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Up Red Limit</mat-label>
+        <input matInput type="number" formControlName="upRedLimit">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label>Down Yellow Limit</label>
-        <input type="number" class="form-control" formControlName="downYellowLimit">
-      </div>
-      <div class="form-group-item">
-        <label>Up Yellow Limit</label>
-        <input type="number" class="form-control" formControlName="upYellowLimit">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Down Yellow Limit</mat-label>
+        <input matInput type="number" formControlName="downYellowLimit">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Up Yellow Limit</mat-label>
+        <input matInput type="number" formControlName="upYellowLimit">
+      </mat-form-field>
     </div>
 
-    <mat-toolbar class="actions-toolbar">
-      <button mat-flat-button color="primary" type="submit">
-        {{ isEditingSignal ? 'Update Signal' : 'Save Signal' }}
-      </button>
+    <mat-toolbar class="actions-toolbar" color="transparent">
+      <button mat-flat-button color="primary" type="submit">{{ isEditingSignal ? 'Update Signal' : 'Save Signal' }}</button>
     </mat-toolbar>
+
   </form>
 </div>
 
 <!-- LISTA SIGNALS -->
 <div *ngIf="signals.data.length > 0" class="table-container">
   <h2>Signals List</h2>
-  <table mat-table [dataSource]="signals.data" class="mat-elevation-z8 full-width">
 
-    <!-- Columns declarations -->
+  <table mat-table [dataSource]="signals" class="mat-elevation-z8 full-width">
+
     <ng-container matColumnDef="signalId">
       <th mat-header-cell *matHeaderCellDef>ID</th>
       <td mat-cell *matCellDef="let signal">{{ signal.signalId }}</td>
@@ -126,8 +126,6 @@
       <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let signal">{{ signal.name }}</td>
     </ng-container>
-
-    <!-- More columns (unit, minVal, maxVal...) -->
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
@@ -143,60 +141,61 @@
 
     <tr mat-header-row *matHeaderRowDef="['signalId', 'name', 'actions']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['signalId', 'name', 'actions']"></tr>
+
   </table>
 </div>
 
 <!-- FORM PULLER -->
 <div *ngIf="showPullerForm" class="form-container mt-3">
-  <h2 *ngIf="isEditingPuller">Modify Configuration</h2>
-  <h2 *ngIf="!isEditingPuller">Add Configuration</h2>
+  <h2>{{ isEditingPuller ? 'Modify Configuration' : 'Add Configuration' }}</h2>
 
   <form [formGroup]="pullerForm" (ngSubmit)="savePuller()" class="d-flex flex-column">
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label>URL</label>
-        <input type="text" class="form-control" formControlName="url">
-      </div>
-      <div class="form-group-item">
-        <label>API Key</label>
-        <input type="text" class="form-control" formControlName="apiKey">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>URL</mat-label>
+        <input matInput formControlName="url">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>API Key</mat-label>
+        <input matInput formControlName="apiKey">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label>Interval (sec)</label>
-        <input type="number" class="form-control" formControlName="intervalInSec">
-      </div>
-      <div class="form-group-item">
-        <label>Next Executions</label>
-        <input type="text" class="form-control" formControlName="nextExecutions">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Interval (sec)</mat-label>
+        <input matInput type="number" formControlName="intervalInSec">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Next Executions</mat-label>
+        <input matInput formControlName="nextExecutions">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label>Last Start</label>
-        <input type="text" class="form-control" formControlName="lastStart">
-      </div>
-      <div class="form-group-item">
-        <label>Last End</label>
-        <input type="text" class="form-control" formControlName="lastEnd">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Last Start</mat-label>
+        <input matInput formControlName="lastStart">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Last End</mat-label>
+        <input matInput formControlName="lastEnd">
+      </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label>Last Execution Report</label>
-        <input type="text" class="form-control" formControlName="lastExecutionReport">
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Last Execution Report</mat-label>
+        <input matInput formControlName="lastExecutionReport">
+      </mat-form-field>
     </div>
 
-    <mat-toolbar class="actions-toolbar">
-      <button mat-flat-button color="primary" type="submit">
-        {{ isEditingPuller ? 'Save Configuration' : 'Add Configuration' }}
-      </button>
+    <mat-toolbar class="actions-toolbar" color="transparent">
+      <button mat-flat-button color="primary" type="submit">{{ isEditingPuller ? 'Save Configuration' : 'Add Configuration' }}</button>
     </mat-toolbar>
 
   </form>
@@ -206,69 +205,19 @@
 <div *ngIf="pullers.data.length > 0 && showPullers && !showPullerForm" class="table-container">
   <h2>Configurations List</h2>
 
-  <table mat-table [dataSource]="pullers" class="mat-elevation-z8">
+  <table mat-table [dataSource]="pullers" class="mat-elevation-z8 full-width">
 
-    <!-- Puller ID -->
+    <!-- Puller Columns -->
     <ng-container matColumnDef="pullerId">
       <th mat-header-cell *matHeaderCellDef>Puller ID</th>
       <td mat-cell *matCellDef="let puller">{{ puller.pullerId }}</td>
     </ng-container>
 
-    <!-- Equipment ID -->
-    <ng-container matColumnDef="equipmentId">
-      <th mat-header-cell *matHeaderCellDef>Equipment ID</th>
-      <td mat-cell *matCellDef="let puller">{{ puller.equipmentId }}</td>
-    </ng-container>
-
-    <!-- Tenant -->
-    <ng-container matColumnDef="tenant">
-      <th mat-header-cell *matHeaderCellDef>Tenant</th>
-      <td mat-cell *matCellDef="let puller">{{ puller.tenant }}</td>
-    </ng-container>
-
-    <!-- URL -->
     <ng-container matColumnDef="url">
       <th mat-header-cell *matHeaderCellDef>URL</th>
       <td mat-cell *matCellDef="let puller">{{ puller.url }}</td>
     </ng-container>
 
-    <!-- API Key -->
-    <ng-container matColumnDef="apiKey">
-      <th mat-header-cell *matHeaderCellDef>API Key</th>
-      <td mat-cell *matCellDef="let puller">{{ puller.apiKey }}</td>
-    </ng-container>
-
-    <!-- Interval -->
-    <ng-container matColumnDef="intervalInSec">
-      <th mat-header-cell *matHeaderCellDef>Interval (sec)</th>
-      <td mat-cell *matCellDef="let puller">{{ puller.intervalInSec }}</td>
-    </ng-container>
-
-    <!-- Next Executions -->
-    <ng-container matColumnDef="nextExecutions">
-      <th mat-header-cell *matHeaderCellDef>Next Executions</th>
-      <td mat-cell *matCellDef="let puller">{{ puller.nextExecutions }}</td>
-    </ng-container>
-
-    <!-- Last Start -->
-    <ng-container matColumnDef="lastStart">
-      <th mat-header-cell *matHeaderCellDef>Last Start</th>
-      <td mat-cell *matCellDef="let puller">{{ puller.lastStart }}</td>
-    </ng-container>
-
-    <!-- Last End -->
-    <ng-container matColumnDef="lastEnd">
-      <th mat-header-cell *matHeaderCellDef>Last End</th>
-      <td mat-cell *matCellDef="let puller">{{ puller.lastEnd }}</td>
-    </ng-container>
-
-    <!-- Execution Report -->
-    <ng-container matColumnDef="lastExecutionReport">
-      <th mat-header-cell *matHeaderCellDef>Execution Report</th>
-      <td mat-cell *matCellDef="let puller">{{ puller.lastExecutionReport }}</td>
-    </ng-container>
-
-    <!-- Actions (Edit / Delete) -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let puller; let i = index">
@@ -281,10 +230,8 @@
       </td>
     </ng-container>
 
-    <!-- Rows -->
-    <tr mat-header-row *matHeaderRowDef="['pullerId', 'equipmentId', 'tenant', 'url', 'apiKey', 'intervalInSec', 'nextExecutions', 'lastStart', 'lastEnd', 'lastExecutionReport', 'actions']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['pullerId', 'equipmentId', 'tenant', 'url', 'apiKey', 'intervalInSec', 'nextExecutions', 'lastStart', 'lastEnd', 'lastExecutionReport', 'actions']"></tr>
+    <tr mat-header-row *matHeaderRowDef="['pullerId', 'url', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['pullerId', 'url', 'actions']"></tr>
+
   </table>
 </div>
-
-

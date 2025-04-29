@@ -1,50 +1,19 @@
-:host {
+.table-container {
+  margin: 35px;
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.actions-table-bar {
   display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-
-  table.mat-mdc-table.mdc-data-table__table {
-    margin: 8px 35px 35px;
-  }
-
-  mat-toolbar {
-    &.search-table-bar {
-      margin: 32px 32px 0 32px;
-
-      border: 1px solid #e0e0e0;
-      background-color: #fff;
-
-      width: auto;
-      height: auto;
-
-      padding: 24px;
-
-      button {
-        margin-right: 16px;
-      }
-    }
-  }
-
-  .actions-table-bar {
-    display: flex;
-    align-items: center;
-    margin: 16px 32px;
-
-    button {
-      margin-right: 16px;
-    }
-
-    mat-divider[vertical] {
-      height: 32px;
-      margin: 0 16px;
-    }
-  }
-
-  .w-70 {
-    width: 70px;
-  }
-
-  .align-center {
-    text-align: center;
-  }
+  gap: 12px;
+  padding: 16px 0;
+  justify-content: flex-start;
+  background-color: white;
 }
