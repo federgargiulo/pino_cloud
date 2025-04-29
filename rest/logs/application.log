@@ -1,0 +1,1311 @@
+2025-04-29 12:18:03 [main] INFO  i.p.equipment.EquipmentApplication - Starting EquipmentApplication using Java 17.0.2 with PID 21084 (C:\progetti\equipment\rest\target\classes started by giuse in C:\progetti\equipment\rest)
+2025-04-29 12:18:03 [main] INFO  i.p.equipment.EquipmentApplication - The following 1 profile is active: "server"
+2025-04-29 12:18:07 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-29 12:18:08 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 295 ms. Found 13 JPA repository interfaces.
+2025-04-29 12:18:11 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-04-29 12:18:11 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-29 12:18:11 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-04-29 12:18:11 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-29 12:18:12 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-04-29 12:18:12 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 8647 ms
+2025-04-29 12:18:13 [main] INFO  o.s.b.a.e.w.ServletEndpointRegistrar - Registered '/actuator/jolokia' to jolokia-actuator-endpoint
+2025-04-29 12:18:13 [main] INFO  io.hawt.HawtioContextListener - Initialising Hawtio services
+2025-04-29 12:18:13 [main] INFO  io.hawt.jmx.JmxTreeWatcher - Welcome to Hawtio 4.2.0
+2025-04-29 12:18:13 [main] INFO  i.h.w.a.AuthenticationConfiguration - Authentication throttling is enabled
+2025-04-29 12:18:13 [main] INFO  i.h.w.a.AuthenticationConfiguration - Starting hawtio authentication filter, JAAS authentication disabled
+2025-04-29 12:18:13 [main] INFO  i.h.w.auth.ClientRouteRedirectFilter - Hawtio ClientRouteRedirectFilter is using 1800 sec. HttpSession timeout
+2025-04-29 12:18:14 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-29 12:18:14 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-04-29 12:18:14 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-04-29 12:18:15 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-29 12:18:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-04-29 12:18:16 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1d0acb8f
+2025-04-29 12:18:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-04-29 12:18:17 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-29 12:18:20 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-29 12:18:21 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-29 12:18:22 [main] INFO  it.pliot.equipment.conf.InitDb - Executing db script 
+2025-04-29 12:18:22 [main] INFO  it.pliot.equipment.conf.InitDb - Executing : report_data_first_stg_sp.sql 
+2025-04-29 12:18:23 [main] INFO  it.pliot.equipment.conf.InitDb - Preloading Groupit.pliot.equipment.io.UserGrpTO@adb32981
+2025-04-29 12:18:23 [main] INFO  it.pliot.equipment.conf.InitDb - Preloading Groupit.pliot.equipment.io.UserGrpTO@c3933777
+2025-04-29 12:18:23 [main] INFO  it.pliot.equipment.conf.InitDb - Preloading Groupit.pliot.equipment.io.UserGrpTO@b6989f52
+2025-04-29 12:18:23 [main] INFO  it.pliot.equipment.conf.InitDb - Init admin user
+2025-04-29 12:18:24 [main] INFO  it.pliot.equipment.conf.InitDb -  user admin already created 
+2025-04-29 12:18:25 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-29 12:18:26 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-04-29 12:18:27 [main] WARN  o.a.c.i.e.DefaultCamelBeanPostProcessor - No CamelContext defined yet so cannot inject into bean: startupConditionStrategy
+2025-04-29 12:18:30 [main] INFO  o.a.activemq.artemis.core.server - AMQ221000: Primary message broker is starting with configuration Broker Configuration (clustered=false,journalDirectory=C:\Users\giuse\AppData\Local\Temp\artemis-data/journal,bindingsDirectory=data/bindings,largeMessagesDirectory=data/largemessages,pagingDirectory=data/paging)
+2025-04-29 12:18:30 [main] INFO  o.a.activemq.artemis.core.server - AMQ221045: libaio is not available, switching the configuration into NIO
+2025-04-29 12:18:30 [main] INFO  o.a.activemq.artemis.core.server - AMQ221057: Global Max Size is being adjusted to 1/2 of the JVM max size (-Xmx). being defined as 2108686336
+2025-04-29 12:18:30 [main] INFO  o.a.activemq.artemis.core.server - AMQ221043: Protocol module found: [artemis-server]. Adding protocol support for: CORE
+2025-04-29 12:18:30 [main] INFO  org.apache.activemq.audit.base - AMQ601138: User anonymous@unknown is getting notification info on target resource: null
+2025-04-29 12:18:30 [main] INFO  org.apache.activemq.audit.base - AMQ601019: User anonymous@unknown is getting mbean info on target resource: org.apache.activemq.artemis.core.management.impl.ActiveMQServerControlImpl@36545439
+2025-04-29 12:18:30 [main] INFO  org.apache.activemq.audit.base - AMQ601138: User anonymous@unknown is getting notification info on target resource: ActiveMQServerImpl::name=localhost
+2025-04-29 12:18:30 [main] INFO  o.a.activemq.artemis.core.server - AMQ224092: Despite disabled persistence, page files will be persisted.
+2025-04-29 12:18:30 [main] INFO  o.a.activemq.artemis.core.server - AMQ221080: Deploying address DLQ supporting [ANYCAST]
+2025-04-29 12:18:30 [main] INFO  org.apache.activemq.audit.base - AMQ601019: User anonymous@unknown is getting mbean info on target resource: org.apache.activemq.artemis.core.management.impl.AddressControlImpl@1d5ada5a
+2025-04-29 12:18:30 [main] INFO  o.a.activemq.artemis.core.server - AMQ221003: Deploying ANYCAST queue DLQ on address DLQ
+2025-04-29 12:18:31 [main] INFO  org.apache.activemq.audit.base - AMQ601019: User anonymous@unknown is getting mbean info on target resource: org.apache.activemq.artemis.core.management.impl.QueueControlImpl@7ac66113
+2025-04-29 12:18:31 [main] INFO  o.a.activemq.artemis.core.server - AMQ221080: Deploying address ExpiryQueue supporting [ANYCAST]
+2025-04-29 12:18:31 [main] INFO  org.apache.activemq.audit.base - AMQ601019: User anonymous@unknown is getting mbean info on target resource: org.apache.activemq.artemis.core.management.impl.AddressControlImpl@f0b01d4
+2025-04-29 12:18:31 [main] INFO  o.a.activemq.artemis.core.server - AMQ221003: Deploying ANYCAST queue ExpiryQueue on address ExpiryQueue
+2025-04-29 12:18:31 [main] INFO  org.apache.activemq.audit.base - AMQ601019: User anonymous@unknown is getting mbean info on target resource: org.apache.activemq.artemis.core.management.impl.QueueControlImpl@6114adbe
+2025-04-29 12:18:31 [main] INFO  org.apache.activemq.audit.base - AMQ601019: User anonymous@unknown is getting mbean info on target resource: org.apache.activemq.artemis.core.management.impl.AddressControlImpl@10d60285
+2025-04-29 12:18:31 [main] INFO  org.apache.activemq.audit.base - AMQ601019: User anonymous@unknown is getting mbean info on target resource: org.apache.activemq.artemis.core.management.impl.AcceptorControlImpl@1829184b
+2025-04-29 12:18:31 [main] INFO  o.a.activemq.artemis.core.server - AMQ221007: Server is now active
+2025-04-29 12:18:31 [main] INFO  o.a.activemq.artemis.core.server - AMQ221001: Apache ActiveMQ Artemis Message Broker version 2.37.0 [localhost, nodeID=4c5dd872-24e3-11f0-90d5-94e70bcbda95] 
+2025-04-29 12:18:32 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoints beneath base path '/actuator'
+2025-04-29 12:18:33 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-29 12:18:38 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-29 12:18:38 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-04-29 12:18:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:18:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:18:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 34
+
+2025-04-29 12:18:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:18:39 [main] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 4.9.0 (camel-1) is starting
+2025-04-29 12:18:39 [main] INFO  o.a.c.i.engine.AbstractCamelContext - Routes startup (total:0)
+2025-04-29 12:18:39 [main] INFO  o.a.c.i.engine.AbstractCamelContext - Apache Camel 4.9.0 (camel-1) started in 309ms (build:0ms init:0ms start:309ms boot:11s996ms)
+2025-04-29 12:18:39 [main] INFO  i.p.equipment.EquipmentApplication - Started EquipmentApplication in 37.516 seconds (process running for 39.014)
+2025-04-29 12:18:49 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:18:49 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:18:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:18:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:19:04 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29 12:19:04 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-04-29 12:19:04 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms
+2025-04-29 12:19:09 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:19:09 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 21
+
+2025-04-29 12:19:11 [http-nio-8080-exec-6] INFO  i.p.e.service.ext.UserServiceImpl -  user it.pliot.equipment.security.JwtUser@72815f09 
+2025-04-29 12:19:19 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 45
+
+2025-04-29 12:19:19 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:19:29 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 45
+
+2025-04-29 12:19:29 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:19:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:19:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:19:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 45
+
+2025-04-29 12:19:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:19:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:19:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:19:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:19:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:20:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:20:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:20:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:20:19 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:20:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:20:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:20:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:20:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:20:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:20:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:20:49 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:20:49 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:20:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:20:59 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:21:09 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:21:09 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:21:19 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:21:19 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:21:29 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:21:29 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:21:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 44
+
+2025-04-29 12:21:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:21:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:21:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:21:49 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:21:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:21:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:21:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:22:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:22:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:22:19 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:22:19 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:22:29 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:22:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:22:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:22:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:22:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:22:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:22:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:22:49 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:22:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:22:59 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:23:09 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:23:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:23:19 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:23:19 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:23:29 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:23:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:23:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:23:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:23:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:23:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:23:49 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:23:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 12:23:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:23:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:24:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:24:09 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:24:19 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:24:19 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:24:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:24:29 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:24:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:24:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:24:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:24:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:24:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:24:49 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:24:59 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:24:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:25:09 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:25:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:25:19 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:25:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:25:29 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:25:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:25:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:25:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:25:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:25:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:25:49 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:25:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:25:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:25:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:26:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:26:09 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:26:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:26:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:26:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 12:26:29 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:26:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:26:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:26:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:26:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:26:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:26:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:26:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:26:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:27:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:27:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:27:19 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:27:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:27:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:27:29 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:27:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:27:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:27:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:27:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:27:49 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:27:49 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:27:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:27:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:28:09 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:28:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:28:19 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:28:19 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:28:29 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:28:29 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:28:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:28:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 12:28:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:28:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:28:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:28:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:28:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:28:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:29:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:29:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:29:19 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:29:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:29:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:29:29 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:29:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:29:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:29:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:29:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:29:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:29:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:29:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:29:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:30:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:30:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:30:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:30:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:30:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:30:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:30:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:30:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:30:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:30:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:30:49 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:30:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:30:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 12:30:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:31:09 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:31:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:31:19 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:31:19 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:31:29 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:31:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:31:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:31:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:31:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:31:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:31:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:31:49 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:31:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:31:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:32:09 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:32:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:32:19 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:32:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:32:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:32:29 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:32:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:32:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:32:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:32:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:32:49 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:32:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:32:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:32:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:33:09 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:33:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
+2025-04-29 12:33:19 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:33:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:33:29 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:33:29 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:33:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:33:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:33:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:33:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:33:49 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:33:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:33:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:33:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:34:09 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:34:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:34:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:34:19 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:34:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:34:29 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:34:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:34:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:34:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:34:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:34:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:34:49 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:34:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:34:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:35:09 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:35:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:35:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:35:19 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 38
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 37
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 36
+
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:56:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:00 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:09 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 30
+
+2025-04-29 12:57:17 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m32ms907µs601ns).
+2025-04-29 12:57:19 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:19 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 27
+
+2025-04-29 12:57:29 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 27
+
+2025-04-29 12:57:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 27
+
+2025-04-29 12:57:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:57:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:57:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:57:49 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:57:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:57:59 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:58:09 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:58:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:58:19 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:58:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:58:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:58:29 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:58:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:58:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:58:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:58:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:58:49 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:58:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:58:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:58:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:59:09 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:59:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:59:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:59:19 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:59:29 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:59:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:59:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 12:59:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:59:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:59:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 12:59:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 12:59:49 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:59:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 26
+
+2025-04-29 12:59:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:00:09 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:00:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:00:19 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:00:19 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:00:29 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:00:29 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:00:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:00:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:00:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:00:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:00:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:00:49 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:00:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:00:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:01:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:01:09 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:01:19 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:01:19 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:01:29 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:01:29 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:01:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:01:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:01:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:01:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:01:49 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:01:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:01:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:01:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:02:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:02:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:02:19 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:02:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:02:29 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:02:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 25
+
+2025-04-29 13:02:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:02:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:02:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:02:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:02:49 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:02:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:02:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:02:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:03:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:03:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:03:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:03:19 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:03:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:03:29 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:03:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:03:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:03:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:03:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:03:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:03:49 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:03:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:03:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:04:09 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:04:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:04:19 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:04:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:04:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:04:29 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:04:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:04:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:04:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:04:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:04:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:04:49 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 24
+
+2025-04-29 13:04:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:04:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:05:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:05:09 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:05:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:05:19 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:05:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:05:29 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:05:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:05:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:05:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:05:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:05:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:05:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:05:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:05:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:06:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:06:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:06:19 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:06:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:06:29 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:06:29 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:06:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:06:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:06:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:06:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:06:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:06:49 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:06:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:06:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:07:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:07:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:07:19 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:07:19 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 23
+
+2025-04-29 13:07:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:07:29 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:07:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:07:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:07:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:07:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:07:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:07:49 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:07:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:07:59 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:08:09 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:08:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:08:19 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:08:19 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:08:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:08:29 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:08:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:08:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:08:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:08:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:08:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:08:49 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:08:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:08:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:09:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:09:09 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:09:19 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:09:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:09:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:09:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:09:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:09:39 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 22
+
+2025-04-29 13:09:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:09:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:09:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:09:49 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 21
+
+2025-04-29 13:09:59 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:09:59 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 21
+
+2025-04-29 13:10:09 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 21
+
+2025-04-29 13:10:09 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:10:19 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:10:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 21
+
+2025-04-29 13:10:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:10:29 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 21
+
+2025-04-29 13:10:33 [http-nio-8080-exec-8] INFO  i.p.e.service.ext.UserServiceImpl -  user it.pliot.equipment.security.JwtUser@17c97080 
+2025-04-29 13:10:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:10:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:10:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 20
+
+2025-04-29 13:10:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:10:49 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:10:49 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 20
+
+2025-04-29 13:10:59 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 20
+
+2025-04-29 13:10:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:11:09 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:11:09 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 45
+
+2025-04-29 13:11:19 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:11:19 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 45
+
+2025-04-29 13:11:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:11:29 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 13:11:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:11:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 13:11:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:11:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:11:49 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:11:49 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 13:11:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:11:59 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 13:12:09 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 13:12:09 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:12:19 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 13:12:19 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:12:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 13:12:29 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:12:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:12:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:12:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 43
+
+2025-04-29 13:12:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:12:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:12:49 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:12:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:12:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:13:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:13:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:13:19 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:13:19 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:13:29 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:13:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:13:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:13:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:13:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:13:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:13:49 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:13:49 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:13:59 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:13:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:14:09 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:14:09 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:14:19 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:14:19 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:14:29 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:14:29 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:14:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:14:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:14:39 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:14:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:14:49 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:14:49 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:14:59 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:14:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:15:09 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:15:09 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:15:19 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:15:19 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:15:29 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 42
+
+2025-04-29 13:15:29 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:15:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:15:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:15:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:15:39 [pliot-scheduled-task-pool-8] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:15:49 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:15:49 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:15:59 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:15:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:16:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:16:09 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:16:19 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:16:19 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:16:29 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:16:29 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:16:39 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:16:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:16:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:16:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:16:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:16:49 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:16:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:16:59 [pliot-scheduled-task-pool-4] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:17:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:17:09 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:17:19 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:17:19 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:17:29 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:17:29 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:17:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:17:39 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:17:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:17:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:17:49 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:17:49 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 41
+
+2025-04-29 13:17:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:17:59 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:18:09 [pliot-scheduled-task-pool-1] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:18:09 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:18:19 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:18:19 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:18:29 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:18:29 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:18:39 [pliot-scheduled-task-pool-5] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:18:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:18:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:18:39 [pliot-scheduled-task-pool-10] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:18:49 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:18:49 [pliot-scheduled-task-pool-9] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:18:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:18:59 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:19:09 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:19:09 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:19:19 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:19:19 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:19:29 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:19:29 [pliot-scheduled-task-pool-6] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:19:39 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:19:39 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:19:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.s.business.task.ReportCreation -  Aggregate 10 minutes it.pliot.equipment.service.business.task.ReportCreation@39b704f7
+2025-04-29 13:19:39 [pliot-scheduled-task-pool-2] INFO  i.p.e.service.dbms.CallSPService -  call statement CALL  update_report_data_first_stg()
+2025-04-29 13:19:49 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:19:49 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:19:59 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 40
+
+2025-04-29 13:19:59 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:20:09 [pliot-scheduled-task-pool-3] INFO  i.p.e.s.b.task.EquipmentPuller -  pull measure 
+2025-04-29 13:20:09 [pliot-scheduled-task-pool-7] INFO  i.p.e.s.business.task.MemoryMonitor -  Max memory [MB] 4022 Tot memory [MB] 114 Free memory [MB] 39
+
