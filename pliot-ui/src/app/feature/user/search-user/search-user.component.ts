@@ -3,6 +3,7 @@ import { TenantServices } from '../../../service/tenant.service';
 import { UserService } from '../../../service/user.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-user',
@@ -24,7 +25,8 @@ export class SearchUserComponent implements OnInit {
   dataSource = new MatTableDataSource<any>([]);
 
   constructor(private tenantServices: TenantServices,
-              private userService: UserService) {}
+              private userService: UserService,
+              private router: Router ) {}
 
 
   ngOnInit(): void {
@@ -66,7 +68,7 @@ export class SearchUserComponent implements OnInit {
 
             if (resultData) {
               this.usersList = resultData;
-             
+
               this.dataSource.data = resultData;
             }
           }
@@ -90,6 +92,19 @@ export class SearchUserComponent implements OnInit {
    resetPassword( userid: string , index : string ){
       alert( "reset password user " + userid );
   }
+
+   refreshUsers(): void {
+      this.search(); // richiama la search con il tenant selezionato
+    }
+
+    editSelectedUser() {
+      if (this.selection.selected.length !== 1) {
+        alert("Seleziona un solo utente da modificare.");
+        return;
+      }
+      const user = this.selection.selected[0];
+      this.router.navigate(['/detail-user', user.idpId]);
+    }
 
   toggleAllRows() {
     if (this.isAllSelected()) {
