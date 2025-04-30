@@ -1,26 +1,28 @@
-<form #equipmentForm="ngForm" class="d-flex flex-column">
+<form #equipmentForm="ngForm" class="d-flex flex-column" (ngSubmit)="addEquipment(equipmentForm.form.valid)">
   <h2>Create Equipment</h2>
 
   <div class="form-container">
 
     <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="name" class="form-label">Name *</label>
-        <input type="text" class="form-control" id="name" required maxlength="255"
-               [(ngModel)]="addEquipmentForm.name" name="name" #name="ngModel">
-        <div *ngIf="name.errors && isSubmitted" class="text-danger">
-          <div [hidden]="!name.errors?.['required']">
-            Name is required
-          </div>
-        </div>
-      </div>
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Name *</mat-label>
+        <input matInput
+               id="name"
+               required
+               maxlength="255"
+               name="name"
+               [(ngModel)]="addEquipmentForm.name"
+               #name="ngModel">
+        <mat-error *ngIf="name.errors?.['required'] && isSubmitted">
+          Name is required
+        </mat-error>
+      </mat-form-field>
     </div>
 
   </div>
 
-  <mat-toolbar>
-    <button class="btn btn-primary" (click)="addEquipment(equipmentForm.form.valid)"
-            [disabled]="!equipmentForm.form.valid">
+  <mat-toolbar class="actions-toolbar">
+    <button mat-flat-button color="primary" type="submit" [disabled]="!equipmentForm.form.valid">
       Submit
     </button>
   </mat-toolbar>

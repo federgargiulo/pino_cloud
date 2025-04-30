@@ -1,39 +1,74 @@
 :host, form, .form-container {
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
   overflow: auto;
-  flex-direction: column;
+}
+
+h2 {
+  margin: 20px 0 10px 0;
+  font-weight: 500;
 }
 
 .form-container {
-  margin: 35px;
-  gap: 24px;
+  margin: 24px;
   padding: 24px;
   background-color: #fff;
   border: 1px solid #e0e0e0;
-  border-radius: 3px;
+  border-radius: 8px;
+  gap: 24px;
+
   .form-group-item {
     display: flex;
     flex-direction: column;
-    flex-wrap: 1;
     width: 100%;
-    gap: 4px;
-    input, textarea {
-      border-radius: 3px;
-      // background-color: #fafafa;
-    }
+  }
+
+  mat-form-field {
+    width: 100%;
   }
 }
 
-.mat-toolbar.mat-toolbar {
-  background-color: white;
-  border-top: 1px solid #e0e0e0;
-  height: auto;
+.actions-toolbar {
+  background: transparent;
+  margin-top: 24px;
+  padding: 16px 24px;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
-  padding: 24px 35px;
-  button {
-    margin-top: 0 !important;
+  gap: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.table-container {
+  margin: 24px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+
+  table {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  th.mat-header-cell {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+  }
+
+  td.mat-cell {
+    font-size: 13px;
+  }
+
+  button[mat-icon-button] {
+    margin-right: 8px;
+  }
+}
+
+/* Responsive miglioramento */
+@media (max-width: 768px) {
+  .d-flex.flex-row {
+    flex-direction: column;
   }
 }

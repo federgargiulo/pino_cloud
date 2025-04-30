@@ -3,6 +3,13 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EquipmentServices } from '../../../service/equipment.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms'; // Per NgForm
+
 @Component({
   selector: 'app-add-equipment',
   standalone: false,

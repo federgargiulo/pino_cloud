@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+import jakarta.persistence.criteria.Predicate;
 
 import java.util.*;
 
@@ -64,13 +65,19 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
       return findByTenantAndName( tenantId , null );
     }
 
-    public List<EquipmentTO> findByTenantAndName( String tenantId , String name){
-        Equipment probe = new Equipment();
-        probe.setTenant( tenantId );
-        probe.setName( name );
-        Example<Equipment> example = Example.of(probe);
-        List<Equipment> equipments = getRepo().findAll(example);
-        return getConverter().converListData2IO( equipments );
+    public List<EquipmentTO> findByTenantAndName(String tenantId, String name) {
+        Specification<Equipment> spec = (root, query, builder) -> {
+            var predicates = new ArrayList<>();
+            predicates.add(builder.equal(root.get("tenant"), tenantId));
+            predicates.add( builder.or( builder.isNull(root.get("status")), builder.notEqual(root.get("status"), "DELETED")));
+            if (name != null) {
+                predicates.add(builder.equal(root.get("name"), name));
+            }
+            return builder.and(predicates.toArray(new Predicate[0]));
+        };
+
+        List<Equipment> equipments = getRepo().findAll(spec);
+        return getConverter().converListData2IO(equipments);
     }
 
     @Override
@@ -90,6 +97,15 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
             e.getStackTrace();
             throw  new RuntimeException( " errore in lettura " + e.getMessage() );
         }
+    }
+
+    public List<EquipmentTO> findAllNotDeleted() {
+        Specification<Equipment> spec = (root, query, builder) -> builder.or(
+                builder.isNull(root.get("status")),
+                builder.notEqual(root.get("status"), "DELETED")
+        );
+        List<Equipment> equipments = getRepo().findAll(spec);
+        return getConverter().converListData2IO(equipments);
     }
 
 
