@@ -7,11 +7,11 @@ services:
     depends_on:
       - postgres
     volumes:
-      - /home/salvatore/pliot/docker/config:/app/config
-      - /home/salvatore/pliot/docker/logs:/app/logs
+      - ./config:/app/config
+      - ./logs:/app/logs
     environment:
-      JAVA_OPTS: ""
-      SPRING_OPTS: ""
+      JAVA_OPTS: "-Dspring.profiles.active=dev"
+      SPRING_OPTS: "--spring.config.location=/app/config/application.yml"
     extra_hosts:
       - "pinocloud.duckdns.org:13.53.207.26"
 
