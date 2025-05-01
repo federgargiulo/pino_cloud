@@ -1,18 +1,19 @@
 services:
-  app:
-    build: .
-    image: localhost:5000/pliot:latest
-    container_name: java_app
-    depends_on:
-      - postgres
+  nemo_pino_edge:
+    image: cogitoprediction/nemo_pino
+    container_name: nemo_pino_edge
     ports:
       - "8080:8080"
+    depends_on:
+      - postgres
     volumes:
-      - ./config/application.yml:/app/config/application.yml:ro
-      - ./config/montoro.p12:/app/config/montoro.p12:ro
+      - ./config:/app/config
       - ./logs:/app/logs
+    environment:
+      JAVA_OPTS: "-Dspring.profiles.active=edge"
+      SPRING_OPTS: "--spring.config.location=/app/config/application.yml"
     extra_hosts:
-      - "pinocloud.duckdns.org:13.60.67.118"
+      - "pinocloud.duckdns.org:13.53.207.26"
 
   postgres:
     image: postgres:17

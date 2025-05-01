@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    image: localhost:5000/pliot:latest
+    image: cogitoprediction/nemo_pino:latest
     container_name: java_app
     depends_on:
       - postgres

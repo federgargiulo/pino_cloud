@@ -4,9 +4,7 @@ pliot:
     realmName: "master"
     realmManaged: "pliot"
     webClientId: "cogito_web_edge"
-    user: "admin"
-    password: "4%VtlGbS)54\"}.l0A,rW:VAs*-0$/=+3zXYpT*-C<.4isbV6$2"
-    clientId: "admin-cli"
+
   server:
     url: "https://pinocloud.duckdns.org:8080"
   edge:
@@ -104,7 +102,7 @@ server:
   port: 8080
   ssl:
     enabled: true
-    key-store: ./config/montoro.p12
+    key-store: /app/config/montoro.p12
     key-store-password: password
     key-store-type: PKCS12
     key-alias: montoro
