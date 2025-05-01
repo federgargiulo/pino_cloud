@@ -4,15 +4,17 @@ pliot:
     realmName: "master"
     realmManaged: "pliot"
     webClientId: "cogito_web_edge"
-
+    user: "admin"
+    password: "admin"
+    clientId: "admin-cli"
   server:
     url: "https://pinocloud.duckdns.org:8080"
   edge:
-    name: "rasp_montoro"
+    name: "edge_name"
     tokenuri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/token
     client-id: cogito_system_api
     client-secret: VcespKLA64ROkoL1KTGZs3JYEHbqJ5rZ
-    edge-url: http://montoro.synology.me:8080
+    edge-url: https://montoro.synology.me:8080
   base_path: "api"
   load_data: "false"
 logging:

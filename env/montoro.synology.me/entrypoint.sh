@@ -27,6 +27,6 @@ echo "🚀 Starting application..."
 
 echo "command: java $JAVA_OPTS -cp /app/app.jar $SPRING_OPTS"
 
-exec  java -cp /app/app.jar it.pliot.equipment.EquipmentApplication
+exec  java $JAVA_OPTS -jar /app/app.jar $SPRING_OPTS
 
 
