@@ -1,3 +1,22 @@
+
+
+#Docker build  multipiattaforma
+
+https://docs.docker.com/build/building/multi-platform/
+
+1) creare ìl container builder
+   docker buildx create \
+   --name container-builder \
+   --driver docker-container \
+   --bootstrap --use
+
+
+2) build multi piattaforma
+   docker buildx build \
+   --platform linux/amd64,linux/aarch64 \
+   -t cogitoprediction/nemo_pino:latest \
+   --push .
+
 #Docker command per avviare l'applicazione
 #Precondizione Postgres e keycloak già disponibili
 #Sostituire con la directory dove sono contenuti i file di configurazione al posto di <DIRECTORY CONTENENTE IL FILE DI CONFIGURZIONE>
