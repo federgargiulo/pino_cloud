@@ -1,6 +1,7 @@
 services:
   nemo_pino_edge:
     image: cogitoprediction/nemo_pino
+    entrypoint: /entrypoint.sh
     container_name: nemo_pino_edge
     ports:
       - "8080:8080"
@@ -9,8 +10,9 @@ services:
     volumes:
       - ./config:/app/config
       - ./logs:/app/logs
+      - ./entrypoint.sh:/entrypoint.sh
     environment:
-      JAVA_OPTS: "-Dspring.profiles.active=dev"
+      JAVA_OPTS: "-Dspring.profiles.active=edge"
       SPRING_OPTS: "--spring.config.location=/app/config/application.yml"
     extra_hosts:
       - "pinocloud.duckdns.org:13.53.207.26"
