@@ -1,5 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +16,7 @@ export class ProfileComponent implements OnInit {
   lastName: string | null = '';
   email: string | null = '';
   userId: string | null = '';
+  issuer: string | null = '';
 
   constructor(private userService: UserService) {}
 
@@ -24,6 +27,8 @@ export class ProfileComponent implements OnInit {
     this.email = this.userService.getCurrentUserEDmail();
     this.userId = this.userService.getCurrentUserId();
     this.idpId = this.userService.getCurrentUserId();
+    this.issuer = this.userService.getGetJWTAttribute('iss'); // <--- ottieni "iss"
+    console.log('Issuer:', this.issuer);
 
   }
   onSubmit(): void {
@@ -45,5 +50,23 @@ export class ProfileComponent implements OnInit {
           alert('Errore durante l\'aggiornamento del profilo.');
         }
       });
+    }
+
+    logout(){
+      const token = this.userService.keycloak.token;
+      const idToken = this.userService.keycloak.idToken;
+      console.log('idToken:', idToken);
+      if (!token || !idToken ) {
+        console.error('Token non disponibile');
+        return;
+      }
+      const redirectUri = encodeURIComponent(window.location.origin);
+      const iss=this.issuer;
+      //const logoutUrl = iss+'/protocol/openid-connect/logout?redirect_uri='+redirectUri;
+
+      const logoutUrl = iss+'/protocol/openid-connect/logout?id_token_hint='+idToken+'&post_logout_redirect_uri='+redirectUri;
+
+      console.log('logoutUrl:', logoutUrl);
+      window.location.href = logoutUrl;
     }
 }
