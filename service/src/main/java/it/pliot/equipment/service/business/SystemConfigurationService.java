@@ -1,6 +1,7 @@
 package it.pliot.equipment.service.business;
 
 import it.pliot.equipment.io.DashboardConfigurationTO;
+import it.pliot.equipment.io.DatabaseSizeTO;
 import it.pliot.equipment.io.SystemConfigurationTO;
 
 import java.util.List;
@@ -8,5 +9,5 @@ import java.util.List;
 
 public interface SystemConfigurationService extends BaseServiceInterface<SystemConfigurationTO,String> {
 
-
+    public List<DatabaseSizeTO> getDatabaseSizes();
 }
