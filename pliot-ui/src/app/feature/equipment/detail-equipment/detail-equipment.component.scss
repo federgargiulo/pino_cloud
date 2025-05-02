@@ -1,0 +1,74 @@
+:host, form, .form-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+h2 {
+  margin: 20px 0 10px 0;
+  font-weight: 500;
+}
+
+.form-container {
+  margin: 24px;
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  gap: 24px;
+
+  .form-group-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.actions-toolbar {
+  background: transparent;
+  margin-top: 24px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.table-container {
+  margin: 24px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+
+  table {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  th.mat-header-cell {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+  }
+
+  td.mat-cell {
+    font-size: 13px;
+  }
+
+  button[mat-icon-button] {
+    margin-right: 8px;
+  }
+}
+
+/* Responsive miglioramento */
+@media (max-width: 768px) {
+  .d-flex.flex-row {
+    flex-direction: column;
+  }
+}

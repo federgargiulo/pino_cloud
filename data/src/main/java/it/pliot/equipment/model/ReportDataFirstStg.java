@@ -14,8 +14,7 @@ import java.util.Date;
 public class ReportDataFirstStg {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "report_data_first_stg_seq" )
-    private Long id;
+    private String id;
 
     @Column( name = "tenant_id" , nullable = false )
     private String tenantId;
@@ -29,8 +28,20 @@ public class ReportDataFirstStg {
     @Column( name = "reference_timestamp" , nullable = false )
     private Date referenceTimestamp;
 
+
+    @Column( name = "create_timestamp" , nullable = false )
+    private Date creationDttm;
+
     @Column( name = "year_val" , nullable = false )
     private Integer yearVal;
+
+    public Date getCreationDttm() {
+        return creationDttm;
+    }
+
+    public void setCreationDttm(Date creationDttm) {
+        this.creationDttm = creationDttm;
+    }
 
     @Column( name = "month_val" , nullable = false )
     private Integer monthVal;
@@ -57,11 +68,33 @@ public class ReportDataFirstStg {
     private BigDecimal countOfMeasure;
 
 
-    public Long getId() {
+    @Column( name = "received_from_edge_timestamp" , nullable = true )
+    private Date receivedFromEdgeDttm;
+
+    @Column( name = "edge_id" , nullable = true )
+    private String edgeId;
+
+    public Date getReceivedFromEdgeDttm() {
+        return receivedFromEdgeDttm;
+    }
+
+    public void setReceivedFromEdgeDttm(Date receivedFromEdgeDttm) {
+        this.receivedFromEdgeDttm = receivedFromEdgeDttm;
+    }
+
+    public String getEdgeId() {
+        return edgeId;
+    }
+
+    public void setEdgeId(String edgeId) {
+        this.edgeId = edgeId;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

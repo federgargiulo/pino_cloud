@@ -47,12 +47,19 @@ export interface EquipmentDetail { // Anche questa deve essere esportata
     return this.webApiService.get(httpLink.getAllEquipment );
   }
 
+  public getEquipmentsByTenant( tenantId: string  ): Observable<any> {
+    if ( tenantId )
+      return this.webApiService.get( httpLink.getAllEquipment + '?tenantId=' + tenantId );
+    else
+      return this.getAllEquipment();
+  }
+
   public getAllEquipment4CurrentTenant(): Observable<any> {
     return this.webApiService.get(httpLink.getEquipmentForCurrentTenant );
   }
 
   public deleteEquipmentById(id: string): Observable<any> {
-     console.info( "Service is calling" + httpLink.getEquipmentById + " With id: " + id )
+     console.info( "Service is calling" + httpLink.deleteEquipmentById + " With id: " + id )
      return this.webApiService.delete(httpLink.deleteEquipmentById + '/' + id);
   }
 

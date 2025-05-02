@@ -1,30 +1,29 @@
-<div class="container-xl">
-  <div class="table-container"> <!-- Usa la stessa classe dei Signal -->
-    <div class="table-wrapper">
-      <div class="table-title">
+<form #equipmentForm="ngForm" class="d-flex flex-column" (ngSubmit)="addEquipment(equipmentForm.form.valid)">
+  <h2>Create Equipment</h2>
 
-        <form #equipmentForm="ngForm">
-          <div class="table-content">
-            <div class="form-group p-10 row">
-              <div class="col-sm-3">
-                <label for="name" class="p-t-b-10">Name<span class="requiredStar">*</span></label>
-              </div>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="name" required maxlength="255"
-                       [(ngModel)]="addEquipmentForm.name" name="name" #name="ngModel">
-                <div *ngIf="name.errors && isSubmitted" class="alert alert-danger validationError">
-                  <div [hidden]="!name.errors?.['required']">
-                    Name is required
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="form-container">
 
-          <div class="table-footer">
-            <button class="btn btn-primary mt-3"  (click)="addEquipment(EquipmentForm.form.valid)">Submit</button>
-          </div>
-        </form>
-      </div>
+    <div class="d-flex flex-row gap-4">
+      <mat-form-field appearance="outline" class="form-group-item">
+        <mat-label>Name *</mat-label>
+        <input matInput
+               id="name"
+               required
+               maxlength="255"
+               name="name"
+               [(ngModel)]="addEquipmentForm.name"
+               #name="ngModel">
+        <mat-error *ngIf="name.errors?.['required'] && isSubmitted">
+          Name is required
+        </mat-error>
+      </mat-form-field>
     </div>
+
   </div>
+
+  <mat-toolbar class="actions-toolbar">
+    <button mat-flat-button color="primary" type="submit" [disabled]="!equipmentForm.form.valid">
+      Submit
+    </button>
+  </mat-toolbar>
+</form>

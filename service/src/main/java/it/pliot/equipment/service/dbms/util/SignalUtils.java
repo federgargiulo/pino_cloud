@@ -3,6 +3,10 @@ package it.pliot.equipment.service.dbms.util;
 import it.pliot.equipment.io.SignalTO;
 import it.pliot.equipment.model.Signal;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class SignalUtils extends BaseConvertUtil<Signal, SignalTO>{
 
     private static SignalUtils INSTANCE = new SignalUtils();
@@ -28,6 +32,7 @@ public class SignalUtils extends BaseConvertUtil<Signal, SignalTO>{
         data.setUpRedLimit( sio.getUpRedLimit() );
         data.setUpYellowLimit( sio.getUpYellowLimit());
         data.setTenant( sio.getTenant() );
+        data.setStatus( sio.getStatus() );
         return data;
     }
 
@@ -50,6 +55,20 @@ public class SignalUtils extends BaseConvertUtil<Signal, SignalTO>{
         io.setUpdateDttm( s.getUpdateDttm() );
         io.setVersion( String.valueOf( s.getVersion() ) );
         io.setTenant( s.getTenant() );
+        io.setStatus( s.getStatus() );
         return io;
+    }
+
+    public List<Signal> convertListIO2data(List<SignalTO> lio, String edegeId, Date d) {
+        ArrayList<Signal> ldaya = new ArrayList<>();
+        if ( lio == null )
+            return ldaya;
+        lio.forEach(  o -> {
+            Signal s =  io2data( o );
+            s.setEdgeId( edegeId );
+            s.setReceivedFromEdgeDttm( d );
+            ldaya.add(s);
+        } );
+        return ldaya;
     }
 }

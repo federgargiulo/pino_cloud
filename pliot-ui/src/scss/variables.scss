@@ -1,0 +1,6 @@
+@mixin colors() {
+    $primary: map-get($default-config, primary);
+    $neutral: map-get($default-config, neutral);
+    $success: map-get($default-config, success);
+    $alert: map-get($default-config, alert);
+}

@@ -1,7 +1,8 @@
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <h1>PlatIot</h1>
+        <h1>Pino</h1>
+       
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -40,7 +41,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item"[routerLink]="['add-users']">New User</a></li>
-              <li><a class="dropdown-item"[routerLink]="['search-users']">Search</a></li>
+              <li><a class="dropdown-item"[routerLink]="['search-users']">Search</a></li>                                                        
              </ul>
           </li>
 
@@ -51,9 +52,24 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item"[routerLink]="['userdashboard-list']">Dashboards</a></li>
               <li><a class="dropdown-item"[routerLink]="['userdashboard-new']">Add Dashboard</a></li>
+              <li><a class="dropdown-item"[routerLink]="['olap']">Experimental Olap</a></li>
 
             </ul>
           </li>
+
+          <li class="nav-item dropdown">
+            <span *ngIf="userFirstName" class="me-3">Ciao, {{ userFirstName }}</span>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+              Account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="nav-link" [routerLink]="['/profile']">Profile</a></li>
+
+              <li><a class="nav-link" >Logout</a></li>
+            </ul>
+          </li>
+
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

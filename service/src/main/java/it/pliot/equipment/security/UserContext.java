@@ -32,7 +32,10 @@ public class UserContext {
                   u.setFirstName(jwt.getClaim("given_name"));
                   u.setLastName(jwt.getClaim("family_name"));
                   u.setEmail(jwt.getClaim("email"));
-                  u.setTenantId(exractTenantId(jwt.getClaim("groups")));
+                  if ( jwt.hasClaim( "client_id" ) )
+                      u.setTenantId( jwt.getClaim("tenant"));
+                  else
+                      u.setTenantId(exractTenantId(jwt.getClaim("tenant")));
                   return u;
               }
           }
@@ -44,12 +47,11 @@ public class UserContext {
         if ( groups instanceof Collection ){
             Iterator<String> i = ( ( Collection ) groups ).iterator();
             while ( i.hasNext() ){
-                String x = extractTenantName( i.next() );
-                if ( x != null && x.length() > 0 )
-                    return x;
+                return  i.next();
+
             }
         }
-        return null;
+        return (String) groups;
     }
     private static int START_INDEX = Const.GROUP_PREFIX.length() + 1;
 

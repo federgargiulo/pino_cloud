@@ -1,14 +1,24 @@
 pliot:
-  mode: SERVER
   keycloak:
-    url: "http://localhost:8180"
+    url:  ${PLIOT_KEYCLOAK_URL:http://localhost:8180}
     realmName: "master"
     realmManaged: "pliot"
+    webClientId: "edge_app"
     user: "admin"
-    password: "password"
+    password: "admin"
     clientId: "admin-cli"
+  edge:
+    tokenuri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/token
+    client-id: my-client
+    client-secret: my-secret
+    api-url: http://localhost:8080
   base_path: "api"
+  load_data: "false"
 
+
+logging:
+  file:
+    path: ./log
 
 springdoc:
   swagger-ui:
@@ -44,9 +54,9 @@ spring:
     enabled: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/pliot
-    username: postgres
-    password: password
+    url: jdbc:postgresql://host.docker.internal:5432/pliot
+    username: pliot
+    password: pliot
 #H2
 #    url: jdbc:h2:file:./equipment
 #    username: sa
@@ -85,8 +95,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8180/realms/pliot/protocol/openid-connect/certs
-          issuer-uri: http://localhost:8180/realms/pliot
+          jwk-set-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/certs
+          issuer-uri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}
+
 
 management:
   endpoints:

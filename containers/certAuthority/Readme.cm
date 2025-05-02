@@ -1,0 +1,56 @@
+🔧 1. Crea la tua CA custom (una tantum)
+Questo sarà l'autorità che firma i certificati self-signed.
+🔧 2. Esporta il certificato della CA (per firmare e installare nei client)
+# Crea la chiave privata e il certificato della CA
+keytool -genkeypair -alias myCA -keyalg RSA -keysize 2048 -dname "CN=MyLocalCA,OU=Dev,O=MyOrg,L=City,S=State,C=IT" -validity 3650 -keypass capassword -keystore myCA.jks -storepass capassword
+
+🔧 3. Genera una keystore con chiave per il tuo server Spring Boot
+keytool -export -alias myCA -keystore myCA.jks -rfc -file myCA.crt -storepass capassword
+
+🔧 4. Crea una certificate signing request (CSR)
+keytool -genkeypair -alias springboot -keyalg RSA -keysize 2048 -dname "CN=local.myserver.lan,OU=Dev,O=MyOrg,L=City,S=State,C=IT" -validity 365 -keypass serverpass -keystore server.jks -storepass serverpass
+
+🔧 5. Firma il CSR con la tua CA
+
+keytool -gencert -infile springboot.csr -outfile springboot-signed.crt -alias myCA -keystore myCA.jks -storepass capassword -validity 365 -rfc
+
+🔧 6. Importa la CA e il certificato firmato nel server.jks
+
+# Importa la CA
+keytool -import -trustcacerts -alias myCA -file myCA.crt -keystore server.jks -storepass serverpass
+
+# Importa il certificato firmato
+keytool -import -alias springboot -file springboot-signed.crt -keystore server.jks -storepass serverpass
+
+✅ Ora hai un keystore (server.jks) valido per HTTPS, firmato dalla tua CA custom.
+
+✅ Step 2: Configura Spring Boot per usare HTTPS
+Nel tuo application.properties o application.yml:
+server.port=8443
+server.ssl.key-store=classpath:certs/server.jks
+server.ssl.key-store-password=serverpass
+server.ssl.key-store-type=JKS
+server.ssl.key-alias=springboot
+Assicurati che il file server.jks sia nel path src/main/resources/certs/.
+
+
+
+🌐 Bonus: Rispondere all’hostname su rete locale
+
+🧭 1. Assicurati che il nome DNS esista
+Se il tuo certificato è per local.myserver.lan, il client deve sapere come risolverlo.
+
+🟢 Opzioni:
+- Modifica il file /etc/hosts o C:\Windows\System32\drivers\etc\hosts:
+
+192.168.1.10 local.myserver.lan
+- Oppure usa un DNS locale (come dnsmasq o il tuo router/firewall).
+
+🔌 2. Il server deve bindare all’host corretto
+Spring Boot per default si lega a 0.0.0.0 (tutte le interfacce), ma puoi forzare:
+
+server.address=192.168.1.10
+
+
+
+

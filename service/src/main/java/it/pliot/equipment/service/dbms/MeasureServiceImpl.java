@@ -1,5 +1,6 @@
 package it.pliot.equipment.service.dbms;
 
+import it.pliot.equipment.io.AggregateResultTO;
 import it.pliot.equipment.io.MeasureTO;
 
 import it.pliot.equipment.io.PagedResultTO;
@@ -19,9 +20,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 
 @Component
 @Transactional
@@ -56,5 +59,52 @@ public class MeasureServiceImpl extends BaseServiceImpl<MeasureTO, Measure, Stri
     }
 
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
+    public List<AggregateResultTO> getAggregatedData(String level,
+                                                     String sigal_id ,
+                                                     Date from ,
+                                                     Date end) {
+
+        String groupBy;
+        String select;
+        String where =  " WHERE signal_id = ? AND reference_timestamp > ? AND  reference_timestamp < ? ";
+
+        switch (level) {
+
+            case "MONTH":
+                select = " year_val || '-' || month_val ";
+                groupBy = " GROUP BY year_val, month_val ";
+                break;
+            case "DAY":
+                select = " year_val || '-' || month_val || '-' || day_val ";
+                groupBy = "  GROUP BY year_val, month_val , day_val ";
+                break;
+            case "HOUR":
+                select = " year_val || '-' || month_val || '-' || day_val || ':' || hour_val ";
+                groupBy = "  GROUP BY year_val, mon th_val , day_val , hour_val ";
+                break;
+            case "ROW":
+                select = " reference_timestamp ";
+                groupBy = " ";
+
+            default:
+                throw new IllegalArgumentException("Invalid level: " + level);
+        }
+
+            String sql = "SELECT " + select + " AS label, " +
+                "max( max_val ) as max, " +
+                "min( max_val ) as min , " +
+                "AVG( mean_val ) as mean  " +
+                "FROM report_data_first_stg " +
+                where + groupBy + " ORDER BY label";
+        return jdbcTemplate.query(sql, new Object[]{ sigal_id , from , end }, (rs, rowNum) -> new AggregateResultTO(
+                    rs.getString("label"),
+                    rs.getDouble("min"),
+                    rs.getDouble("max"),
+                    rs.getDouble("mean")
+        ));
+
+    }
 }
