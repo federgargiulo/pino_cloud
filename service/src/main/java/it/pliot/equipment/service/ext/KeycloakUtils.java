@@ -56,7 +56,7 @@ public class KeycloakUtils {
         u.setId(user.getIdpId());
         u.setFirstName( user.getFirstName() );
         u.setLastName( user.getLastName() );
-        u.setUsername( user.getUserId() );
+        u.setUsername( user.getUserName() );
         u.setEmail( user.getEmail() );
         u.setEnabled( true );
         return u;

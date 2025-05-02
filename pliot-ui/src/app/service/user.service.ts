@@ -64,6 +64,10 @@ export class UserService {
     return this.getGetJWTAttribute( 'preferred_username' );
   }
 
+  getCurrentUserTenant(): string | null {
+    return this.keycloak.tokenParsed?.['tenant'] || null;
+  }
+
   getCurrentLastName(): string | null {
     return this.getGetJWTAttribute( 'family_name' );
   }
@@ -85,11 +89,11 @@ export class UserService {
     return this.hasRoleImpl( this.keycloak.tokenParsed , role );
   }
   hasRoleImpl(token: any, role: string): boolean {
-    
+
     if (!token || !token.realm_access || !Array.isArray(token.realm_access.roles)) {
       return false;
     }
     return token.realm_access.roles.includes(role);
   }
-  
+
 }

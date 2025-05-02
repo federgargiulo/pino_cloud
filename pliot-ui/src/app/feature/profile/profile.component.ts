@@ -17,6 +17,8 @@ export class ProfileComponent implements OnInit {
   email: string | null = '';
   userId: string | null = '';
   issuer: string | null = '';
+  userGroups: string[] = [];
+  tenant: string | null = '';
 
   constructor(private userService: UserService) {}
 
@@ -26,11 +28,35 @@ export class ProfileComponent implements OnInit {
     this.lastName = this.userService.getCurrentLastName();
     this.email = this.userService.getCurrentUserEDmail();
     this.userId = this.userService.getCurrentUserId();
+    this.tenant = this.userService.getCurrentUserTenant();
     this.idpId = this.userService.getCurrentUserId();
     this.issuer = this.userService.getGetJWTAttribute('iss'); // <--- ottieni "iss"
     console.log('Issuer:', this.issuer);
+    console.log('userId:', this.userId);
+    console.log('username:', this.username);
 
-  }
+      if (this.userId) {
+        this.userService.getUserById(this.userId).subscribe({
+          next: (data: any) => {
+            if (data && data.body) {
+              const user = data.body;
+              this.firstName = user.firstName;
+              this.lastName = user.lastName;
+              this.email = user.email;
+              this.username = user.username || this.username;
+              this.userGroups = user.usrGrp?.map((g: any) => g.description || g.grpName) || [];
+              this.tenant = user.tenant;
+            }
+          },
+          error: (err) => {
+            console.error('Errore nel caricamento del profilo utente:', err);
+          }
+        });
+      }
+    }
+
+
+
   onSubmit(): void {
       const updatedUser = {
         username: this.username,
@@ -38,7 +64,8 @@ export class ProfileComponent implements OnInit {
         lastName: this.lastName,
         email: this.email,
         idpId: this.idpId,
-        userId: this.userId
+        userId: this.userId,
+        tenant: this.tenant
       };
 
       this.userService.updateUser(updatedUser).subscribe({
