@@ -48,9 +48,21 @@ public class UserTO extends BaseEntity {
 
     private String tenant;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     private String firstName;
 
     private String lastName;
+
+    private String userName;
+
+
 
     public String getFirstName() {
         return firstName;
