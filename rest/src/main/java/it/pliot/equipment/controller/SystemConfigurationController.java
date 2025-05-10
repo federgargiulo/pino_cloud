@@ -1,10 +1,7 @@
 package it.pliot.equipment.controller;
 
 import it.pliot.equipment.conf.ApiPrefixController;
-import it.pliot.equipment.io.DashboardConfigurationTO;
-import it.pliot.equipment.io.MeasureTO;
-import it.pliot.equipment.io.SystemConfigurationTO;
-import it.pliot.equipment.io.UserGrpTO;
+import it.pliot.equipment.io.*;
 import it.pliot.equipment.service.business.SystemConfigurationService;
 import it.pliot.equipment.service.business.UserGrpServices;
 import org.slf4j.Logger;
@@ -74,4 +71,12 @@ public class SystemConfigurationController {
     public List<UserGrpTO> getALlGroups(){
         return userGrpServices.findAll();
     }
+
+
+    @GetMapping("/healt/dbsize")
+    public List<DatabaseSizeTO> getDatabaseSizes() {
+        return  this.service.getDatabaseSizes();
+    }
+
+
 }
