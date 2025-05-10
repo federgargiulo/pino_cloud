@@ -6,7 +6,7 @@ import it.pliot.equipment.model.SystemMonitor;
 public class SystemMonitorUtil extends BaseConvertUtil<SystemMonitor, SystemMonitorTO> {
 
 
-    private static SystemMonitorUtil INSTANCE = new SystemMonitorUtil();
+    private static final SystemMonitorUtil INSTANCE = new SystemMonitorUtil();
 
     @Override
     public SystemMonitor io2data(SystemMonitorTO in) {
