@@ -1,7 +1,9 @@
 package it.pliot.equipment.service.business;
 
+import it.pliot.equipment.io.BaseReportItemIO;
+
 import it.pliot.equipment.io.DatabaseSizeTO;
-import it.pliot.equipment.io.SystemConfigurationTO;
+
 import it.pliot.equipment.io.SystemHealthHistoryTO;
 
 import java.util.List;
@@ -16,4 +18,7 @@ public interface SystemHealthHistoryService extends BaseServiceInterface<SystemH
 
     public List<SystemHealthHistoryTO> getDbmsMemoryUsageHistory();
 
+    public List<BaseReportItemIO> getConnectionStatus();
+
+    public List<BaseReportItemIO> getPodMemoryStatus();
 }

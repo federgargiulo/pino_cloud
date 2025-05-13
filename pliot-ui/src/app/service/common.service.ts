@@ -8,7 +8,7 @@ var version="";
 
 var httpLink = {
   getAllGroups:  version + "/configuration/allGroups",
-  dbmsSize:     version + "/healt/dbhistorysize",
+  dbmsSize:     version + "/health/status",
 }
 
 

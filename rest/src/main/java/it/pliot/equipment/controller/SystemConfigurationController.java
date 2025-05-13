@@ -80,14 +80,18 @@ public class SystemConfigurationController {
     }
 
 
-    @GetMapping("/healt/dbhistorysize")
-    public HashMap<String, List<SystemHealthHistoryTO>>  getDatabaseSizes() {
+    @GetMapping("/health/status")
+    public HashMap<String, Object>  getDatabaseSizes() {
 
 
         List<SystemHealthHistoryTO> allLog = this.monitorServices.getDbmsMemoryUsageHistory();
 
+        HashMap<String, Object> result = new HashMap<>();
+        result.put( "DBMS" , allLog );
+        result.put( "CONN_STATUS" , this.monitorServices.getConnectionStatus() );
+        result.put( "POD_MEM" , this.monitorServices.getPodMemoryStatus() );
 
-        return putinhashtableformat( allLog );
+        return result;
 
     }
 

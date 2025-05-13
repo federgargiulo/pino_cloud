@@ -1,5 +1,7 @@
 package it.pliot.equipment.service.dbms;
 
+import it.pliot.equipment.io.BaseReportItemIO;
+
 import it.pliot.equipment.io.DatabaseSizeTO;
 import it.pliot.equipment.io.SystemHealthHistoryTO;
 import it.pliot.equipment.model.SystemHealthHistory;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,6 +63,31 @@ public class SystemHealthHistoryServiceImpl extends BaseServiceImpl<SystemHealth
         );
 
         return jdbcTemplate.query(sql, mapper);
+    }
+
+    public List<BaseReportItemIO> getConnectionStatus() {
+        String sql = """
+            SELECT state, count(*) as total
+                 FROM pg_stat_activity
+                 GROUP BY state
+        """;
+
+        RowMapper<BaseReportItemIO> mapper = (rs, rowNum) -> new BaseReportItemIO(
+                rs.getString("state"),
+                rs.getString( "total")
+        );
+
+        return jdbcTemplate.query(sql, mapper);
+    }
+
+    @Override
+    public List<BaseReportItemIO> getPodMemoryStatus() {
+        ArrayList<BaseReportItemIO> list = new ArrayList<BaseReportItemIO>();
+
+        list.add( new BaseReportItemIO( "Max" , String.valueOf( Runtime.getRuntime().maxMemory()  ) )  );
+        list.add( new BaseReportItemIO( "Tot" , String.valueOf( Runtime.getRuntime().totalMemory()  ) )  );
+        list.add( new BaseReportItemIO( "Free" , String.valueOf( Runtime.getRuntime().freeMemory()  ) )  );
+        return list;
     }
 
     public List<SystemHealthHistoryTO> getDbmsMemorySizeHistory() {
