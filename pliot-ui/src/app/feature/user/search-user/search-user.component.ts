@@ -3,6 +3,8 @@ import { TenantServices } from '../../../service/tenant.service';
 import { UserService } from '../../../service/user.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 const isMockEnabled = true;
 interface tenantList {
@@ -46,79 +48,23 @@ export class SearchUserComponent implements OnInit {
   data = Object.assign( ELEMENT_DATA);
   dataSource = new MatTableDataSource<usersList>(ELEMENT_DATA);
   selection = new SelectionModel<usersList>(true, []);
+  hasSelection = false;
+  hasSingleSelection = false;
 
   tenants: tenantList[] = [
     { tenantId: 'tenant1', tenantName: 'Mock Tenant 1' },
     { tenantId: 'tenant2', tenantName: 'Mock Tenant 2' }
   ];
 
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  removeSelectedRows(): void {
-    if (this.selection.isEmpty()) {
-      console.warn('No rows selected for removal');
-      return;
-    }
-
-    // Confirm deletion with user
-    if (!confirm(`Are you sure you want to delete ${this.selection.selected.length} selected user(s)?`)) {
-      return;
-    }
-
-    // Create a copy of current data to modify
-    const currentData = [...this.dataSource.data];
-
-    this.selection.selected.forEach(user => {
-      const index = currentData.findIndex(u =>
-        u.userId === user.userId  // More reliable than reference comparison
-      );
-
-      if (index > -1) {
-        currentData.splice(index, 1);
-      } else {
-        console.warn(`User ${user.userId} not found in data source`);
-      }
-    });
-
-    // Update data source
-    this.dataSource.data = currentData;
-
-    // Clear selection
-    this.selection.clear();
-
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  toggleAllRows() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-      return;
-    }
-
-    this.selection.select(...this.dataSource.data);
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: usersList): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.userId + 1}`;
-  }
-
-  tenantList: any = [];
-
-  usersList: any = [];
-
-  selectedTenant: string = '';
-
   constructor(private tenantServices: TenantServices,
-    private userService: UserService) { }
+    private userService: UserService,
+    private dialog: MatDialog) {
+    // Sottoscrizione ai cambiamenti della selezione
+    this.selection.changed.subscribe(() => {
+      this.hasSelection = this.selection.hasValue();
+      this.hasSingleSelection = this.selection.selected.length === 1;
+    });
+  }
 
   ngOnInit(): void {
     console.log("init Tenant")
@@ -195,5 +141,73 @@ export class SearchUserComponent implements OnInit {
   resetPassword(userid: string, index: string) {
     alert("reset password user " + userid);
   }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  removeSelectedRows(): void {
+    if (this.selection.isEmpty()) {
+      console.warn('No rows selected for removal');
+      return;
+    }
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { message: `Sei sicuro di voler eliminare ${this.selection.selected.length} utente/i selezionato/i?` }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Create a copy of current data to modify
+        const currentData = [...this.dataSource.data];
+
+        this.selection.selected.forEach(user => {
+          const index = currentData.findIndex(u =>
+            u.userId === user.userId
+          );
+
+          if (index > -1) {
+            currentData.splice(index, 1);
+          } else {
+            console.warn(`User ${user.userId} not found in data source`);
+          }
+        });
+
+        // Update data source
+        this.dataSource.data = currentData;
+
+        // Clear selection
+        this.selection.clear();
+      }
+    });
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: usersList): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.userId + 1}`;
+  }
+
+  tenantList: any = [];
+
+  usersList: any = [];
+
+  selectedTenant: string = '';
 }
 

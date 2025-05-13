@@ -21,17 +21,18 @@
 </mat-toolbar>
 
 <div class="actions-table-bar">
-  <button class="actions-table-bar__button" mat-button disabled (click)="removeSelectedRows()">
-    <span class="material-symbols-outlined" [routerLink]="['profile']"> edit </span>
+  <button class="actions-table-bar__button" mat-button color="primary" [disabled]="!hasSingleSelection">
+    <span class="material-symbols-outlined">edit</span>
     Modifica
   </button>
-  <button class="actions-table-bar__button" mat-button disabled (click)="removeSelectedRows()">
-    <span class="material-symbols-outlined" [routerLink]="['profile']"> delete </span>
+  <button class="actions-table-bar__button" mat-button color="primary" (click)="removeSelectedRows()" [disabled]="!hasSelection">
+    <span class="material-symbols-outlined">delete</span>
     Elimina
   </button>
   <mat-divider [vertical]="true"></mat-divider>
-  <button class="actions-table-bar__button" mat-button disabled (click)="removeSelectedRows()">
-    <span class="material-symbols-outlined" [routerLink]="['profile']"> filter_list </span>
+  <button class="actions-table-bar__button" mat-button color="primary" routerLink="/user/add">
+    <span class="material-symbols-outlined">filter_list</span>
+    Filtra
   </button>
 </div>
 <!-- new table -->
