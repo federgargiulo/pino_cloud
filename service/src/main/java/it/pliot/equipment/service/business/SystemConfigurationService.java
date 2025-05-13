@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface SystemConfigurationService extends BaseServiceInterface<SystemConfigurationTO,String> {
 
-    public List<DatabaseSizeTO> getDatabaseSizes();
+
 }

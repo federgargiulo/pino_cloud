@@ -1,28 +1,36 @@
 package it.pliot.equipment.service.dbms.util;
 
-import it.pliot.equipment.io.SystemMonitorTO;
-import it.pliot.equipment.model.SystemMonitor;
+import it.pliot.equipment.io.SystemHealthHistoryTO;
+import it.pliot.equipment.model.SystemHealthHistory;
 
-public class SystemMonitorUtil extends BaseConvertUtil<SystemMonitor, SystemMonitorTO> {
+public class SystemMonitorUtil extends BaseConvertUtil<SystemHealthHistory, SystemHealthHistoryTO> {
 
 
     private static final SystemMonitorUtil INSTANCE = new SystemMonitorUtil();
 
     @Override
-    public SystemMonitor io2data(SystemMonitorTO in) {
-        SystemMonitor out = new SystemMonitor();
-        out.setDate(in.getDate());
-        out.setMetrics( in.getMetrics() );
-        out.setValue( in.getValue() );
+    public SystemHealthHistory io2data(SystemHealthHistoryTO in) {
+        SystemHealthHistory out = new SystemHealthHistory();
+        out.setReport_dttm(in.getReport_dttm());
+        out.setId( in.getId() );
+        out.setComponent( in.getComponent() );
+        out.setMetric( in.getMetric() );
+        out.setVal( in.getVal() );
+        out.setEdge( in.getEdge() );
+        out.setTenat( in.getTenat() );
         return out;
     }
 
     @Override
-    public SystemMonitorTO data2io(SystemMonitor in) {
-        SystemMonitorTO out = new SystemMonitorTO();
-        out.setDate(in.getDate());
-        out.setMetrics( in.getMetrics() );
-        out.setValue( in.getValue() );
+    public SystemHealthHistoryTO data2io(SystemHealthHistory in) {
+        SystemHealthHistoryTO out = new SystemHealthHistoryTO();
+        out.setReport_dttm(in.getReport_dttm());
+        out.setId( in.getId() );
+        out.setComponent( in.getComponent() );
+        out.setMetric( in.getMetric() );
+        out.setVal( in.getVal() );
+        out.setEdge( in.getEdge() );
+        out.setTenat( in.getTenat() );
         return out;
     }
 

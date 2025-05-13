@@ -16,6 +16,7 @@ import { SearchUserComponent } from './feature/user/search-user/search-user.comp
 import { DetailUserComponent } from './feature/user/detail-user/detail-user.component';
 import { PivotTableComponent } from './olap/pivot-table/pivot-table.component';
 import { ProfileComponent } from './feature/profile/profile.component';
+import { MonitorComponent } from './feature/system/monitor/monitor.component';
 
 const routes: Routes = [
 
@@ -35,8 +36,8 @@ const routes: Routes = [
   { path: 'add-users', component: DetailUserComponent, title: 'Add Users' },
   { path: 'detail-user/:id', component: DetailUserComponent, title: 'Modifica Users' },
   { path: 'olap', component: PivotTableComponent, title: 'Modifica Users' },
-  { path: 'profile', component: ProfileComponent, title: 'Profile' }
-
+  { path: 'profile', component: ProfileComponent, title: 'Profile' },
+  { path: 'system-status', component: MonitorComponent, title: 'Status' }
 
 ];
 

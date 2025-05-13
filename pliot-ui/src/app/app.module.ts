@@ -43,6 +43,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 
 import { MatCardModule } from '@angular/material/card';
+import { MonitorComponent } from './feature/system/monitor/monitor.component';
 
 
 
@@ -89,6 +90,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     SearchUserComponent,
     DetailUserComponent,
     ProfileComponent,
+    MonitorComponent,
   ],
   imports: [
     BrowserModule,

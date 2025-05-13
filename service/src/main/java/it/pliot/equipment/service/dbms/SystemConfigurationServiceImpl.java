@@ -26,10 +26,6 @@ public class SystemConfigurationServiceImpl  extends BaseServiceImpl<SystemConfi
         implements SystemConfigurationService {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-
-    @Autowired
     private SystemConfigurationRepository repo;
 
     @Override
@@ -47,20 +43,6 @@ public class SystemConfigurationServiceImpl  extends BaseServiceImpl<SystemConfi
 
 
 
-    public List<DatabaseSizeTO> getDatabaseSizes() {
-        String sql = """
-            SELECT datname, pg_size_pretty(pg_database_size(datname)) AS size
-            FROM pg_database
-            WHERE datistemplate = false;
-        """;
-
-        RowMapper<DatabaseSizeTO> mapper = (rs, rowNum) -> new DatabaseSizeTO(
-                rs.getString("datname"),
-                rs.getString("size")
-        );
-
-        return jdbcTemplate.query(sql, mapper);
-    }
 
 
 }

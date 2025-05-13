@@ -3,6 +3,8 @@ package it.pliot.equipment.service.dbms.util;
 import it.pliot.equipment.io.TenantTO;
 import it.pliot.equipment.model.Tenant;
 
+import java.util.Date;
+
 public class ConvertUtils {
 
 
@@ -15,5 +17,8 @@ public class ConvertUtils {
     }
 
 
-
+    public static Date sqldate2date(java.sql.Date date) {
+        if ( date == null ) return null;
+        return new Date( date.getTime() );
+    }
 }
