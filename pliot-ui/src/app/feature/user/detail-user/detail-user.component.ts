@@ -6,7 +6,6 @@ import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'console';
 import { CommonService } from '../../../service/common.service';
-const isMockEnabled = true;
 
 
 @Component({
@@ -119,43 +118,24 @@ export class DetailUserComponent {
 
 
 
-    ngOnInit(): void {
+  ngOnInit(): void {
       this.getAllTenants();
       this.laodAllGrp().then(() => {
         this.route.paramMap.subscribe(params => {
           const userId = params.get('id');
-
           if (userId) {
-            if (isMockEnabled) {
-              const mockUser = {
-                idpId: 'idp-mock',
-                userId: 'user123',
-                firstName: 'Mario',
-                lastName: 'Rossi',
-                email: 'mario@example.com',
-                tenant: 'tenant1',
-                address: 'Via Roma 1',
-                phone: '333444555',
-                gender: 'M',
-                usrGrp: [{ grpName: 'Admin' }]
-              };
-              this.setFormValues(mockUser);
-              this.isPersisted = true;
-              this.setPasswordValidators(false);
-            } else {
-              this.userService.getUserById(userId).subscribe({
-                next: (data) => {
-                  this.setFormValues(data.body);
-                  this.isPersisted = true;
-                  this.setPasswordValidators(false);
-                },
-                error: (err) => {
-                  console.error('Errore nel caricamento del dettaglio utente:', err);
-                }
-              });
-            }
+            this.userService.getUserById(userId).subscribe({
+              next: (data) => {
+                this.setFormValues(data.body); // ✅ ora grpList è già valorizzata
+                this.isPersisted = true;
+                this.setPasswordValidators(false);
+              },
+              error: (err) => {
+                console.error('Errore nel caricamento del dettaglio utente:', err);
+              }
+            });
           } else {
-            this.setPasswordValidators(true);
+            this.setPasswordValidators(true); // creazione
           }
         });
       });
@@ -163,58 +143,41 @@ export class DetailUserComponent {
 
 
 
-    async laodAllGrp(): Promise<void> {
-      return new Promise((resolve) => {
-        if (isMockEnabled) {
-          this.grpList = [
-            { grpName: 'Admin' },
-            { grpName: 'User' },
-            { grpName: 'Manager' }
-          ];
-          resolve();
-        } else {
-          this.commonServices.getAllGreoups().subscribe((data: any) => {
-            if (data?.body) {
-              this.grpList = data.body;
-            }
-            resolve();
+     async laodAllGrp(): Promise<void> {
+          return new Promise((resolve) => {
+            this.commonServices.getAllGreoups().subscribe((data: any) => {
+              if (data && data.body) {
+                this.grpList = data.body;
+              }
+              resolve();
+            });
           });
         }
-      });
-    }
 
 
-async getAllTenants() {
-  console.log("get all tenant");
-  if (isMockEnabled) {
-    this.tenantList = [
-      { tenantId: 'tenant1', name: 'Tenant Uno' },
-      { tenantId: 'tenant2', name: 'Tenant Due' }
-    ];
-    return;
-  }
+ async getAllTenants() {
+          console.log( "get all tenant" )
+          this.tenantServices.getAllTenants().subscribe((data : any) => {
+           console.log("Dati ricevuti dal server:", data)
+            if (data != null && data.body != null) {
+              var resultData = data.body;
 
-  console.log( "get all tenant" )
-  this.tenantServices.getAllTenants().subscribe((data : any) => {
-   console.log("Dati ricevuti dal server:", data)
-    if (data != null && data.body != null) {
-      var resultData = data.body;
-
-      if (resultData) {
-        this.tenantList = resultData;
-      }
-    }
-  },
-  (error : any)=> {
-      if (error) {
-        if (error.status == 404) {
-          if(error.error && error.error.message){
-            this.tenantList = [];
-          }
+              if (resultData) {
+                this.tenantList = resultData;
+              }
+            }
+          },
+          (error : any)=> {
+              if (error) {
+                if (error.status == 404) {
+                  if(error.error && error.error.message){
+                    this.tenantList = [];
+                  }
+                }
+              }
+            });
         }
-      }
-    });
-}
+
 
 
 
