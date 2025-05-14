@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EquipmentServices } from '../../../service/equipment.service';
 import { SignalServices } from '../../../service/signal.service';
 
+
 @Component({
   selector: 'app-detail-equipment',
   standalone: false,
@@ -129,6 +130,8 @@ export class DetailEquipmentComponent implements OnInit {
 
   loadSignals(): void {
     const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+
+
     this.signalService.getSignalsByEquipmentId(equipmentId).subscribe(data => {
       this.signals.data = data.body || [];
       console.log("Signals caricati:", this.signals.data);

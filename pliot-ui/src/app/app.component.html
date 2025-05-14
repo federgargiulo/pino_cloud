@@ -47,23 +47,23 @@
       </button>
     </div>
     <!-- Tenant -->
-    <div class="drawer-button-container" [class.opened]="showTenantItems" *ngIf="isPliotAdmin()">
-      <button mat-button class="mat-drawer-button" (click)="showTenantItems = !showTenantItems">
+    <div class="drawer-button-container" [class.opened]="showTenantItems">
+      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('tenant')">
         <span class="d-flex align-items-center">
-          <span class="material-symbols-outlined"> server_person </span>
+          <span class="material-symbols-outlined"> business </span>
           <span class="px-1"> Tenant </span>
         </span>
         <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showTenantItems"> stat_minus_1 </span>
         <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showTenantItems"> stat_1 </span>
       </button>
       @if (showTenantItems) {
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-tenant']"> Search </button>
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['add-tenant']"> Create </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-tenant']" routerLinkActive="active-link"> Search </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['add-tenant']" routerLinkActive="active-link"> Create </button>
       }
     </div>
     <!-- Equipment -->
     <div class="drawer-button-container" [class.opened]="showEquipmentItems">
-      <button mat-button class="mat-drawer-button" (click)="showEquipmentItems = !showEquipmentItems">
+      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('equipment')">
         <span class="d-flex align-items-center">
           <span class="material-symbols-outlined"> construction </span>
           <span class="px-1"> Equipment </span>
@@ -72,28 +72,28 @@
         <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showEquipmentItems"> stat_1 </span>
       </button>
       @if (showEquipmentItems) {
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-equipment']"> Search </button>
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['add-equipment']"> Create </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-equipment']" routerLinkActive="active-link"> Search </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['add-equipment']" routerLinkActive="active-link"> Create </button>
       }
     </div>
     <!-- Users -->
-    <div class="drawer-button-container" [class.opened]="showUsersItems">
-      <button mat-button class="mat-drawer-button" (click)="showUsersItems = !showUsersItems">
+    <div class="drawer-button-container" [class.opened]="showUserItems">
+      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('user')">
         <span class="d-flex align-items-center">
-          <span class="material-symbols-outlined"> group </span>
+          <span class="material-symbols-outlined"> person </span>
           <span class="px-1"> Users </span>
         </span>
-        <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showUsersItems"> stat_minus_1 </span>
-        <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showUsersItems"> stat_1 </span>
+        <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showUserItems"> stat_minus_1 </span>
+        <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showUserItems"> stat_1 </span>
       </button>
-      @if (showUsersItems) {
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['add-users']"> New Users </button>
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-users']"> Search </button>
+      @if (showUserItems) {
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['search-users']" routerLinkActive="active-link"> Search </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['add-users']" routerLinkActive="active-link"> Create </button>
       }
     </div>
     <!-- Dashboard -->
     <div class="drawer-button-container" [class.opened]="showDashboardItems">
-      <button mat-button class="mat-drawer-button" (click)="showDashboardItems = !showDashboardItems">
+      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('dashboard')">
         <span class="d-flex align-items-center">
           <span class="material-symbols-outlined"> dashboard </span>
           <span class="px-1"> Dashboard </span>
@@ -102,10 +102,8 @@
         <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showDashboardItems"> stat_1 </span>
       </button>
       @if (showDashboardItems) {
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['userdashboard-list']"> Dashboards </button>
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['userdashboard-new']"> Add Dashboard </button>
-      <button mat-button class="mat-drawer-button-item" [routerLink]="['olap']">
-        Experimental Olap </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['userdashboard-list']" routerLinkActive="active-link"> List </button>
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['userdashboard-new']" routerLinkActive="active-link"> View </button>
       }
     </div>
     <div class="drawer-button-container" >
