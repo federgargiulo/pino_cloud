@@ -15,7 +15,7 @@ export class AppComponent {
   showDashboardItems = false;
   showAccountItems = false;
   title = 'pliot-ui';
-<<<<<<< HEAD
+
   constructor( private modalService: NgbModal , private userService: UserService ) {
 
   }

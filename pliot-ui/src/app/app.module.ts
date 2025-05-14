@@ -137,7 +137,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     MatCheckboxModule,
     MatDividerModule,
     MatCardModule,
-    OlapModule
+    OlapModule,
     MatDialogModule,
     MatDialogContent,
     MatDialogActions,

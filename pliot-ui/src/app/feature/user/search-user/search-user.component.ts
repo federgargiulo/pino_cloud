@@ -41,6 +41,7 @@ export class SearchUserComponent implements OnInit {
   constructor(
     private tenantServices: TenantServices,
     private userService: UserService,
+    private router: Router,
     private dialog: MatDialog
   ) {
     // Sottoscrizione ai cambiamenti della selezione
