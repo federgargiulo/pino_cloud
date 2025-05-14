@@ -1,3 +1,16 @@
 @mixin buttons() {
   // empty
+  button.mdc-button.mat-mdc-button-base:not(.actions-table-bar__button, .mat-drawer-button) {
+    border-radius: 1px;
+    height: 100%;
+    padding: 10px 18px;
+    &.mat-secondary {
+      background-color: #eff4ff;
+      color: #1b5cb4;
+    }
+
+    .mdc-button__label {
+      font-weight: 400;
+    }
+  }
 }
