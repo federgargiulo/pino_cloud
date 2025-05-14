@@ -47,7 +47,7 @@
       </button>
     </div>
     <!-- Tenant -->
-    <div class="drawer-button-container" [class.opened]="showTenantItems">
+    <div class="drawer-button-container" [class.opened]="showTenantItems" *ngIf="isPliotAdmin()">
       <button mat-button class="mat-drawer-button" (click)="toggleDrawer('tenant')">
         <span class="d-flex align-items-center">
           <span class="material-symbols-outlined"> business </span>
