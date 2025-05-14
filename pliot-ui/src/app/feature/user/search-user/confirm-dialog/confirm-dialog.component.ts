@@ -1,26 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-dialog',
-  standalone: true,
-  imports: [MatDialogModule, MatButtonModule],
-  template: `
-    <h2 mat-dialog-title>Conferma</h2>
-    <mat-dialog-content>
-      {{ data.message }}
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button (click)="onNoClick()">Annulla</button>
-      <button mat-raised-button color="primary" (click)="onYesClick()">Conferma</button>
-    </mat-dialog-actions>
-  `,
-  styles: [`
-    mat-dialog-actions {
-      padding: 16px;
-    }
-  `]
+  templateUrl: './confirm-dialog.component.html',
+  styleUrls: ['./confirm-dialog.component.scss'],
+  standalone: false,
 })
 export class ConfirmDialogComponent {
   constructor(

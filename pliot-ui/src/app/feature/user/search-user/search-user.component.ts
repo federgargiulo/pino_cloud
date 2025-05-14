@@ -36,16 +36,16 @@ const ELEMENT_DATA: usersList[] = [
     idpId: 'idp2'
   }
 ];
+
 @Component({
   selector: 'app-search-user',
   standalone: false,
   templateUrl: './search-user.component.html',
-  styleUrl: './search-user.component.scss',
+  styleUrl: './search-user.component.scss'
 })
 export class SearchUserComponent implements OnInit {
-
   displayedColumns: string[] = ['select', 'userId', 'firstName', 'lastName', 'email', 'idpId'];
-  data = Object.assign( ELEMENT_DATA);
+  data = Object.assign(ELEMENT_DATA);
   dataSource = new MatTableDataSource<usersList>(ELEMENT_DATA);
   selection = new SelectionModel<usersList>(true, []);
   hasSelection = false;
@@ -56,9 +56,11 @@ export class SearchUserComponent implements OnInit {
     { tenantId: 'tenant2', tenantName: 'Mock Tenant 2' }
   ];
 
-  constructor(private tenantServices: TenantServices,
+  constructor(
+    private tenantServices: TenantServices,
     private userService: UserService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog
+  ) {
     // Sottoscrizione ai cambiamenti della selezione
     this.selection.changed.subscribe(() => {
       this.hasSelection = this.selection.hasValue();
@@ -69,7 +71,6 @@ export class SearchUserComponent implements OnInit {
   ngOnInit(): void {
     console.log("init Tenant")
     this.getAllTenants();
-
   }
 
   getAllTenants() {
@@ -100,9 +101,6 @@ export class SearchUserComponent implements OnInit {
     }
   }
 
-
-
-
   search() {
     if (isMockEnabled) {
       // 👇 MOCK DATA
@@ -131,12 +129,9 @@ export class SearchUserComponent implements OnInit {
     }
   }
 
-
-
   deleteUser(userid: string, index: number) {
     alert("delete user " + userid);
   }
-
 
   resetPassword(userid: string, index: string) {
     alert("reset password user " + userid);
@@ -165,7 +160,7 @@ export class SearchUserComponent implements OnInit {
         // Create a copy of current data to modify
         const currentData = [...this.dataSource.data];
 
-        this.selection.selected.forEach(user => {
+        this.selection.selected.forEach((user: any) => {
           const index = currentData.findIndex(u =>
             u.userId === user.userId
           );
@@ -205,9 +200,7 @@ export class SearchUserComponent implements OnInit {
   }
 
   tenantList: any = [];
-
   usersList: any = [];
-
   selectedTenant: string = '';
 }
 
