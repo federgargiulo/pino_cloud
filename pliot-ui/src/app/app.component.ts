@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -15,10 +16,30 @@ export class AppComponent {
   showAccountItems = false;
   title = 'pliot-ui';
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private router: Router) {}
 
   public open(modal: any): void {
     this.modalService.open(modal);
+  }
+
+  isTenantRouteActive(): boolean {
+    return this.router.isActive('/search-tenant', false) ||
+           this.router.isActive('/add-tenant', false);
+  }
+
+  isEquipmenttRouteActive(): boolean {
+    return this.router.isActive('/search-equipment', false) ||
+           this.router.isActive('/add-equipment', false);
+  }
+
+  isUserItemRouteActive(): boolean {
+    return this.router.isActive('/search-users', false) ||
+           this.router.isActive('/add-users', false);
+  }
+
+  isDashboardRouteActive(): boolean {
+    return this.router.isActive('/userdashboard-list', false) ||
+           this.router.isActive('/userdashboard-new', false);
   }
 
   toggleDrawer(drawer: 'user' | 'equipment' | 'tenant' | 'dashboard'): void {
