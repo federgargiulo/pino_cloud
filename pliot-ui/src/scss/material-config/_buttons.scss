@@ -1,6 +1,6 @@
 @mixin buttons() {
   // empty
-  button.mdc-button.mat-mdc-button-base:not(.actions-table-bar__button, .mat-drawer-button) {
+  button.mdc-button.mat-mdc-button-base:not(.actions-table-bar__button, .mat-drawer-button, .mat-drawer-button-item) {
     border-radius: 1px;
     height: 100%;
     padding: 10px 18px;
