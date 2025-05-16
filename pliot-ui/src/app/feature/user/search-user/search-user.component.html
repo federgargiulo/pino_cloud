@@ -10,13 +10,46 @@
   <form>
     <mat-form-field class="w-300">
       <mat-label>Seleziona Tenant</mat-label>
-      <mat-select>
+      <mat-select required>
         @for (tenant of tenants; track tenant) {
           <mat-option [value]="tenant.tenantId">{{tenant.tenantName}}</mat-option>
         }
       </mat-select>
+      <mat-hint>You can pick up your favorite car here</mat-hint>
     </mat-form-field>
-    <button type="button" mat-flat-button>Cerca</button>
+
+    <mat-form-field >
+      <mat-label>Favorite animal</mat-label>
+      <mat-select [formControl]="animalControl" required>
+        <mat-option>--</mat-option>
+        @for (animal of animals; track animal) {
+          <mat-option [value]="animal">{{animal.name}}</mat-option>
+        }
+      </mat-select>
+      @if (animalControl.hasError('required')) {
+        <mat-error>Please choose an animal</mat-error>
+      }
+      <mat-hint>{{animalControl.value?.sound}}</mat-hint>
+    </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+            placeholder="Ex. pat@example.com">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+      }
+      @if (emailFormControl.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <button type="button" mat-flat-button class="button-margin-top">Cerca</button>
   </form>
 </mat-toolbar>
 

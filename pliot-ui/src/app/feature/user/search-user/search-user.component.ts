@@ -5,6 +5,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 const isMockEnabled = true;
 interface tenantList {
@@ -37,6 +39,19 @@ const ELEMENT_DATA: usersList[] = [
   }
 ];
 
+interface Animal {
+  name: string;
+  sound: string;
+}
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
 @Component({
   selector: 'app-search-user',
   standalone: false,
@@ -55,6 +70,19 @@ export class SearchUserComponent implements OnInit {
     { tenantId: 'tenant1', tenantName: 'Mock Tenant 1' },
     { tenantId: 'tenant2', tenantName: 'Mock Tenant 2' }
   ];
+
+  animalControl = new FormControl<Animal | null>(null, Validators.required);
+  selectFormControl = new FormControl('', Validators.required);
+  animals: Animal[] = [
+    {name: 'Dog', sound: 'Woof!'},
+    {name: 'Cat', sound: 'Meow!'},
+    {name: 'Cow', sound: 'Moo!'},
+    {name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!'},
+  ];
+
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
+  matcher = new MyErrorStateMatcher();
 
   constructor(
     private tenantServices: TenantServices,
