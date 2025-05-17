@@ -39,9 +39,17 @@ export class SearchTenantComponent implements OnInit {
   getAllTenants(): void {
     this.tenantServices.getAllTenants().subscribe(
       (data: any) => {
-        if (data?.body) {
+
+        // ✅ Se è un array (mock), assegnalo direttamente
+        if (Array.isArray(data)) {
+          this.tenantList = data;
+           this.dataSource.data = this.tenantList;
+        } else if (data?.body) {
+          // ✅ Se è una response con .body (chiamata reale), prendi body
           this.tenantList = data.body;
           this.dataSource.data = this.tenantList;
+        } else {
+          this.tenantList = [];
         }
       },
       (error: any) => {

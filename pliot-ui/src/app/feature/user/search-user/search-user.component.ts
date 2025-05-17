@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
-const isMockEnabled = true;
 interface tenantList {
   tenantId: string;
   tenantName: string;
