@@ -70,4 +70,22 @@ services:
       #command: ["bash", "/etc/kafka-connect/register-connectors.sh"]
       depends_on:
         - kafka-broker-1
-        
+        - mongo
+  mongo:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+  
+  mongo-express:
+    image: mongo-express:1.0.2
+    ports:
+      - "27081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+    depends_on:
+      - mongo
