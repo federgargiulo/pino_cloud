@@ -8,6 +8,7 @@ var version="";
 
 var httpLink = {
   getAllGroups:  version + "/configuration/allGroups",
+  dbmsSize:     version + "/health/status",
 }
 
 
@@ -21,5 +22,8 @@ export class CommonService {
       return this.webApiService.get(httpLink.getAllGroups );
     }
  
+    public getDbmsSize(): Observable<any> {
+      return this.webApiService.get(httpLink.dbmsSize );
+    }
  
 }

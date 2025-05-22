@@ -4,6 +4,23 @@ import { UserService } from '../../../service/user.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+
+const isMockEnabled = true;
+interface tenantList {
+  tenantId: string;
+  tenantName: string;
+}
+
+export interface usersList {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  idpId: string;
+}
+
 
 @Component({
   selector: 'app-search-user',
@@ -14,83 +31,125 @@ import { Router } from '@angular/router';
 
 
 export class SearchUserComponent implements OnInit {
-
-  tenantList: any = [];
-  usersList: any = [];
-
-  selectedTenant: string = '';
-
   displayedColumns: string[] = ['select', 'userId', 'firstName', 'lastName', 'email', 'idpId'];
-  selection = new SelectionModel<any>(true, []);
+
   dataSource = new MatTableDataSource<any>([]);
+  selection = new SelectionModel<usersList>(true, []);
+  hasSelection = false;
+  hasSingleSelection = false;
 
-  constructor(private tenantServices: TenantServices,
-              private userService: UserService,
-              private router: Router ) {}
-
+  constructor(
+    private tenantServices: TenantServices,
+    private userService: UserService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {
+    // Sottoscrizione ai cambiamenti della selezione
+    this.selection.changed.subscribe(() => {
+      this.hasSelection = this.selection.hasValue();
+      this.hasSingleSelection = this.selection.selected.length === 1;
+    });
+  }
 
   ngOnInit(): void {
-      console.log( "init Tenant" )
-      this.getAllTenants();
-
-    }
-
-    async getAllTenants() {
-        console.log( "get all tenant" )
-        this.tenantServices.getAllTenants().subscribe((data : any) => {
-         console.log("Dati ricevuti dal server:", data)
-          if (data != null && data.body != null) {
-            var resultData = data.body;
-
-            if (resultData) {
-              this.tenantList = resultData;
-            }
-          }
-        },
-        (error : any)=> {
-            if (error) {
-              if (error.status == 404) {
-                if(error.error && error.error.message){
-                  this.tenantList = [];
-                }
-              }
-            }
-          });
-      }
-
-      search(){
-        console.log( "get users by tenant" )
-        this.userService.getUserdByTenant( this.selectedTenant ).subscribe((data : any) => {
-         console.log("Dati ricevuti dal server:", data)
-          if (data != null && data.body != null) {
-            var resultData = data.body;
-
-            if (resultData) {
-              this.usersList = resultData;
-
-              this.dataSource.data = resultData;
-            }
-          }
-        },
-        (error : any)=> {
-            if (error) {
-              if (error.status == 404) {
-                if(error.error && error.error.message){
-                  this.tenantList = [];
-                }
-              }
-            }
-          });
-      }
-
-    deleteUser( userid: string , index : number ){
-        alert( "delete user " + userid );
-    }
-
-
-   resetPassword( userid: string , index : string ){
-      alert( "reset password user " + userid );
+    console.log("init Tenant")
+    this.getAllTenants();
   }
+
+      async getAllTenants() {
+          console.log( "get all tenant" )
+          this.tenantServices.getAllTenants().subscribe((data : any) => {
+           console.log("Dati ricevuti dal server:", data)
+            if (data != null && data.body != null) {
+              var resultData = data.body;
+
+              if (resultData) {
+                this.tenantList = resultData;
+              }
+            }
+          },
+          (error : any)=> {
+              if (error) {
+                if (error.status == 404) {
+                  if(error.error && error.error.message){
+                    this.tenantList = [];
+                  }
+                }
+              }
+            });
+        }
+
+        search(){
+          console.log( "get users by tenant" )
+          this.userService.getUserdByTenant( this.selectedTenant ).subscribe((data : any) => {
+           console.log("Dati ricevuti dal server:", data)
+            if (data != null && data.body != null) {
+              var resultData = data.body;
+
+              if (resultData) {
+                this.usersList = resultData;
+
+                this.dataSource.data = resultData;
+              }
+            }
+          },
+          (error : any)=> {
+              if (error) {
+                if (error.status == 404) {
+                  if(error.error && error.error.message){
+                    this.tenantList = [];
+                  }
+                }
+              }
+            });
+        }
+
+
+  deleteUser(userid: string, index: number) {
+    alert("delete user " + userid);
+  }
+
+  resetPassword(userid: string, index: string) {
+    alert("reset password user " + userid);
+  }
+
+
+   removeSelectedRows(): void {
+      if (this.selection.isEmpty()) {
+        console.warn('No rows selected for removal');
+        return;
+      }
+
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '400px',
+        data: { message: `Sei sicuro di voler eliminare ${this.selection.selected.length} utente/i selezionato/i?` }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // Create a copy of current data to modify
+          const currentData = [...this.dataSource.data];
+
+          this.selection.selected.forEach((user: any) => {
+            const index = currentData.findIndex(u =>
+              u.userId === user.userId
+            );
+
+            if (index > -1) {
+              currentData.splice(index, 1);
+            } else {
+              console.warn(`User ${user.userId} not found in data source`);
+            }
+          });
+
+          // Update data source
+          this.dataSource.data = currentData;
+
+          // Clear selection
+          this.selection.clear();
+        }
+      });
+    }
 
    refreshUsers(): void {
       this.search(); // richiama la search con il tenant selezionato
@@ -119,18 +178,18 @@ export class SearchUserComponent implements OnInit {
     return numSelected === numRows;
   }
 
-  checkboxLabel(row?: any): string {
+
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: usersList): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.userId + 1}`;
   }
 
-  removeSelectedRows() {
-    const selectedUsers = this.selection.selected;
-    console.log('Users selezionati da rimuovere:', selectedUsers);
-    // Qui puoi eventualmente implementare la logica di delete multiplo
-  }
-
+  tenantList: any = [];
+  usersList: any = [];
+  selectedTenant: string = '';
 }
 

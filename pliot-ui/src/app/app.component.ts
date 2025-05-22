@@ -4,19 +4,18 @@ import { UserService } from './service/user.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
   standalone: false,
-  styleUrl: './app.component.scss'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-
-
 export class AppComponent {
-  showTenantItems = false;
+  showUserItems = false;
   showEquipmentItems = false;
-  showUsersItems = false;
+  showTenantItems = false;
   showDashboardItems = false;
   showAccountItems = false;
   title = 'pliot-ui';
+
   constructor( private modalService: NgbModal , private userService: UserService ) {
 
   }
@@ -33,4 +32,27 @@ export class AppComponent {
     return this.userService.hasRole( "pliot_admin" );
   }
 
+  toggleDrawer(drawer: 'user' | 'equipment' | 'tenant' | 'dashboard'): void {
+    // Chiudi tutti i drawer
+    this.showUserItems = false;
+    this.showEquipmentItems = false;
+    this.showTenantItems = false;
+    this.showDashboardItems = false;
+
+    // Apri solo il drawer selezionato
+    switch (drawer) {
+      case 'user':
+        this.showUserItems = true;
+        break;
+      case 'equipment':
+        this.showEquipmentItems = true;
+        break;
+      case 'tenant':
+        this.showTenantItems = true;
+        break;
+      case 'dashboard':
+        this.showDashboardItems = true;
+        break;
+    }
+  }
 }

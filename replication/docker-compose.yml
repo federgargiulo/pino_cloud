@@ -1,0 +1,91 @@
+services:
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.4
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+
+  kafka-broker-1:
+    image: confluentinc/cp-kafka:7.4.4
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-1:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.4.4
+    hostname: schema-registry
+    depends_on:
+      - kafka-broker-1
+    ports:
+      - 28081:28081
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_LISTENERS: http://schema-registry:28081
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka-broker-1:9092
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 8084:8080
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-broker-1:9092
+    depends_on:
+      - kafka-broker-1
+
+  kafka-connect:
+      image: confluentinc/cp-kafka-connect:7.4.4
+      ports:
+        - 8083:8083
+      environment:
+        CONNECT_BOOTSTRAP_SERVERS: kafka-broker-1:9092
+        CONNECT_GROUP_ID: kafka-connect
+        CONNECT_CONFIG_STORAGE_TOPIC: connect-configs
+        CONNECT_OFFSET_STORAGE_TOPIC: connect-offsets
+        CONNECT_STATUS_STORAGE_TOPIC: connect-status
+        CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+        CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+        CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+        CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+        CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+        CONNECT_PLUGIN_PATH: /etc/kafka-connect/plugins
+        CONNECT_REST_ADVERTISED_HOST_NAME: localhost
+      volumes:
+        - ./plugins:/etc/kafka-connect/plugins
+        - ./connectors:/etc/kafka-connect/connectors
+        - ./register-connectors.sh:/etc/kafka-connect/register-connectors.sh
+      #command: ["bash", "/etc/kafka-connect/register-connectors.sh"]
+      depends_on:
+        - kafka-broker-1
+        - mongo
+  mongo:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+  
+  mongo-express:
+    image: mongo-express:1.0.2
+    ports:
+      - "27081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+    depends_on:
+      - mongo

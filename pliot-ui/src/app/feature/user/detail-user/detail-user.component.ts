@@ -8,7 +8,6 @@ import { error } from 'console';
 import { CommonService } from '../../../service/common.service';
 
 
-
 @Component({
   selector: 'app-detail-user',
   standalone: false,
@@ -119,7 +118,7 @@ export class DetailUserComponent {
 
 
 
-    ngOnInit(): void {
+  ngOnInit(): void {
       this.getAllTenants();
       this.laodAllGrp().then(() => {
         this.route.paramMap.subscribe(params => {
@@ -142,19 +141,21 @@ export class DetailUserComponent {
       });
     }
 
-    async laodAllGrp(): Promise<void> {
-      return new Promise((resolve) => {
-        this.commonServices.getAllGreoups().subscribe((data: any) => {
-          if (data && data.body) {
-            this.grpList = data.body;
-          }
-          resolve();
-        });
-      });
-    }
 
 
-      async getAllTenants() {
+     async laodAllGrp(): Promise<void> {
+          return new Promise((resolve) => {
+            this.commonServices.getAllGreoups().subscribe((data: any) => {
+              if (data && data.body) {
+                this.grpList = data.body;
+              }
+              resolve();
+            });
+          });
+        }
+
+
+ async getAllTenants() {
           console.log( "get all tenant" )
           this.tenantServices.getAllTenants().subscribe((data : any) => {
            console.log("Dati ricevuti dal server:", data)
@@ -176,6 +177,11 @@ export class DetailUserComponent {
               }
             });
         }
+
+
+
+
+
 
         setPasswordValidators(isRequired: boolean) {
           const passwordControl = this.userForm.get('password');
