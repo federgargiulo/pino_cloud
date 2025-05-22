@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpProviderService } from './http-provider.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DatePipe } from "@angular/common";
 
-
+const isMockEnabled = false;
 
 var version="";
 
 var httpLink = {
   findMeasure:  version + "/measure",
-  
+
 }
 var PAGE = 0;
 
@@ -23,7 +23,7 @@ export class MeasureService {
 
 
   constructor(private webApiService: HttpProviderService , private datePipe: DatePipe   ) { }
-  
+
     getYesterdaysDate() {
       var date = new Date();
       date.setDate(date.getDate()-1);
@@ -31,17 +31,39 @@ export class MeasureService {
     }
 
    public findMeasures( signalId: string, ): Observable<any> {
-      let dte = new Date();
-      dte.setDate(dte.getDate() - 2);
-      
-      let dateStr = this.datePipe.transform( dte , 'YYYY/MM/dd')  
-      
 
-      return this.webApiService.get( httpLink.findMeasure ,
-             { signalId: signalId , 
+     if (isMockEnabled) {
+       // ✅ Simulazione di misura
+       const mockData = {
+         total: 2,
+         content: [
+           {
+             timestamp: new Date().toISOString(),
+             signalId: signalId,
+             value: Math.random() * 100,
+             unit: 'kWh'
+           },
+           {
+             timestamp: new Date(Date.now() - 3600000).toISOString(), // 1 ora fa
+             signalId: signalId,
+             value: Math.random() * 100,
+             unit: 'kWh'
+           }
+         ]
+       };
+
+       return of({ body: mockData });
+     } else {
+
+        let dte = new Date();
+        dte.setDate(dte.getDate() - 2);
+        let dateStr = this.datePipe.transform( dte , 'YYYY/MM/dd')
+        return this.webApiService.get( httpLink.findMeasure ,
+             { signalId: signalId ,
                from: ''+dateStr,
                page: '0' ,
                pageSize : '100' } );
-    }
-    
+     }
+   }
+
 }
