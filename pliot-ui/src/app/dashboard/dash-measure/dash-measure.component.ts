@@ -85,7 +85,23 @@ export class DashMeasureComponent implements OnInit {
   }
 
   loadChartsInfo( data:any  ){
-    var d = JSON.parse( data.configuration );
+
+     let d: any;
+
+      try {
+        d = typeof data.configuration === 'string'
+          ? JSON.parse(data.configuration)
+          : data.configuration;
+      } catch (e) {
+        console.error('❌ Errore parsing JSON configuration:', data.configuration);
+        return;
+      }
+
+      if (!Array.isArray(d.signals)) {
+        console.warn('⚠️ Nessun campo signals valido in configurazione:', d);
+        return;
+      }
+
 
     d.signals.forEach( ( x :any , index : any)  => {
       var newconf = this.getNewConfiguration(x.chartType ,  x.label );
