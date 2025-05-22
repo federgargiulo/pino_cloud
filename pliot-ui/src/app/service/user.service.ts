@@ -3,7 +3,7 @@ import { HttpProviderService } from './http-provider.service';
 import { Observable, of } from 'rxjs';
 import Keycloak from 'keycloak-js';
 
-const isMockEnabled = false;
+const isMockEnabled = true;
 
 var version="";
 
