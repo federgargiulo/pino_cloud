@@ -28,15 +28,7 @@ public class TenantTO  {
 
     private String address;
 
-    private String idpGrpId;
 
-    public String getIdpGrpId() {
-        return idpGrpId;
-    }
-
-    public void setIdpGrpId(String idpGrpId) {
-        this.idpGrpId = idpGrpId;
-    }
 
     public static TenantTO newrtenant(String tenId , String name, String descr, String email, String address, String zipCode, String country, String profile, String state) {
         TenantTO t = new TenantTO();

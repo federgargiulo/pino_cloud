@@ -11,13 +11,36 @@ import java.util.UUID;
 public class Equipment extends BaseEntity{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
     public Equipment( String name ){
         this.name = name;
     }
 
     private String tenant;
+
+    public Date getReceivedFromEdgeDttm() {
+        return receivedFromEdgeDttm;
+    }
+
+    public void setReceivedFromEdgeDttm(Date receivedFromEdgeDttm) {
+        this.receivedFromEdgeDttm = receivedFromEdgeDttm;
+    }
+
+    public String getEdgeId() {
+        return edgeId;
+    }
+
+    public void setEdgeId(String edgeId) {
+        this.edgeId = edgeId;
+    }
+
+    @Column( name = "received_from_edge_timestamp" , nullable = true )
+    private Date receivedFromEdgeDttm;
+
+    @Column( name = "edge_id" , nullable = true )
+    private String edgeId;
+
 
     public String getTenant() {
         return tenant;
@@ -63,17 +86,6 @@ public class Equipment extends BaseEntity{
     public String getStatus() {
         return status;
     }
-
-    public List<Signal> getSignals() {
-        return signals;
-    }
-
-    public void setSignals(List<Signal> signals) {
-        this.signals = signals;
-    }
-
-    @OneToMany
-    private List<Signal> signals;
 
     public Equipment(){}
 

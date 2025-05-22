@@ -1,5 +1,9 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {
+  BrowserModule,
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,11 +13,13 @@ import { HelpAngularComponent } from './common/help-angular/help-angular.compone
 import { HeaderComponent } from './common/header/header.component';
 import { HomeComponent } from './common/home/home.component';
 import { AddEquipmentComponent } from './feature/equipment/add-equipment/add-equipment.component';
-import {  withInterceptorsFromDi , provideHttpClient, withInterceptors } from '@angular/common/http';
-
+import {
+  withInterceptorsFromDi,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { SearchEquipmentComponent } from './feature/equipment/search-equipment/search-equipment.component';
 import { DashMeasureComponent } from './dashboard/dash-measure/dash-measure.component';
-
 import { DetailEquipmentComponent } from './feature/equipment/detail-equipment/detail-equipment.component';
 import { UserdashboardListComponent } from './dashboard/userdashboard-list/userdashboard-list.component';
 import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userdashboard-view.component';
@@ -22,38 +28,71 @@ import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.compo
 import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-tenant.component';
 import { DatePipe } from '@angular/common';
 import { DashconfManagerComponent } from './dashboard/common/dashconf-manager/dashconf-manager.component';
-
 import { addBearer } from './interceptors/auth.interceptor';
-import { AutoRefreshTokenService, createInterceptorCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, IncludeBearerTokenCondition, includeBearerTokenInterceptor, provideKeycloak, UserActivityService, withAutoRefreshToken } from 'keycloak-angular';
-import { EnvironmentProviders }  from '@angular/core';
-import { logInterceptor  } from './interceptors/log.interceptor';
-
+import {
+  AutoRefreshTokenService,
+  createInterceptorCondition,
+  INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
+  IncludeBearerTokenCondition,
+  includeBearerTokenInterceptor,
+  provideKeycloak,
+  UserActivityService,
+  withAutoRefreshToken,
+} from 'keycloak-angular';
+import { logInterceptor } from './interceptors/log.interceptor';
 import { SearchUserComponent } from './feature/user/search-user/search-user.component';
 import { DetailUserComponent } from './feature/user/detail-user/detail-user.component';
-import { LocUtilsService } from './loc-utils.service';
+import { ConfigurationService } from './service/config.service.';
+import { OlapModule } from './olap/olap.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ProfileComponent } from './feature/profile/profile.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MonitorComponent } from './feature/system/monitor/monitor.component';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import {
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogModule,
+} from '@angular/material/dialog';
+import { ConfirmDialogModule } from './feature/user/search-user/confirm-dialog/confirm-dialog.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
+var loc = new ConfigurationService();
 
-var loc = new LocUtilsService (); 
-
-export const  KEYCLOAK_PRIVIDER = () => provideKeycloak({
+export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
   config: {
-    url: loc.getIDPUrl() ,   // URL del server Keycloak
-    realm: loc.getRealm()  ,                 // Nome del realm
-    clientId: loc.getClientId() ,           // Client ID registrato su Keycloak
+    url: loc.getIDPUrl(),
+    realm: loc.getRealm(),
+    clientId: loc.getClientId(),
   },
-    initOptions: {
-      onLoad: 'login-required',  // Oppure 'check-sso' se non vuoi forzare il login
-        redirectUri: window.location.origin, // Assicura che sia corretto
-        silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
-        checkLoginIframe: false,
-    },
-    features: [
-      withAutoRefreshToken({
-        onInactivityTimeout: 'logout',
-        sessionTimeout: 60000
-      })
-    ],
+
+  initOptions: {
+    onLoad: 'login-required',  // Oppure 'check-sso' se non vuoi forzare il login
+    redirectUri: loc.getRedirectUri(), // Assicura che sia corretto
+    silentCheckSsoRedirectUri: loc.getSilentCheckSsoRedirectUri(), // usata se check-sso abilitato
+    checkLoginIframe: false,
+  },
+  features: [
+    withAutoRefreshToken({
+      onInactivityTimeout: 'logout',
+      sessionTimeout: 60000
+    })
+   ],
     providers: [AutoRefreshTokenService, UserActivityService]
+
   });
 
 @NgModule({
@@ -74,21 +113,46 @@ export const  KEYCLOAK_PRIVIDER = () => provideKeycloak({
     DashconfManagerComponent,
     SearchUserComponent,
     DetailUserComponent,
-
+    ProfileComponent,
+    MonitorComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    RouterModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule, // Aggiunto per i form
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatCardModule,
+    OlapModule,
+    MatDialogModule,
+    MatDialogContent,
+    MatDialogActions,
+    OlapModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ConfirmDialogModule,
   ],
   providers: [
     KEYCLOAK_PRIVIDER(),
     provideClientHydration(withEventReplay()),
-    provideHttpClient( withInterceptors([addBearer , logInterceptor ]) )
-     ,DatePipe
+    provideHttpClient(withInterceptors([addBearer, logInterceptor])),
+    DatePipe,
   ],
-  bootstrap: [AppComponent]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'console';
- 
+import { CommonService } from '../../../service/common.service';
 
 
 @Component({
@@ -18,33 +18,65 @@ export class DetailUserComponent {
 
     userForm: FormGroup;
     tenantList: any = [];
-    
+    grpList: any = [];
+
     selectedTenant: string = '';
-  
+
     constructor( private route: ActivatedRoute,
-                 private fb: FormBuilder, private tenantServices: TenantServices , 
-                 private userService : UserService ) {
-      
-      this.userForm = this.fb.group({
-        idpId: [''],
-        userId:  ['' ,  [Validators.required ] ],
-        firstName:  ['' , [Validators.required ] ],  
-        lastName:  ['' , [Validators.required ] ],           
-        email: ['', [Validators.required, Validators.email]],
-        tenant:['' , [Validators.required]]
-       
-      });
+                 private fb: FormBuilder, private tenantServices: TenantServices ,
+                 private userService : UserService ,
+                 private commonServices: CommonService ) {
+
+     this.userForm = this.fb.group({
+       idpId: [''],
+       userId: ['', [Validators.required]],
+       firstName: ['', [Validators.required]],
+       lastName: ['', [Validators.required]],
+       email: ['', [Validators.required, Validators.email]],
+       tenant: ['', [Validators.required]],
+       password: [''],
+       address: [''],
+         phone: [''],
+         gender: [''],
+         usrGrp:  [[]]
+     });
     }
 
-    onSubmit(){
-      
-        this.userService.createUser( this.userForm.value ).subscribe(async data => {
-          this.manageSuccessOnSave( data )
-        },
-        async error => {
-          this.manageSuccessOnSave( error )  
+
+
+
+    onSubmit() {
+      if (this.userForm.invalid) return;
+
+      const formValue = this.userForm.value;
+      const userPayload = { ...formValue };
+      delete userPayload.confirmPassword;
+
+      if (this.isPersisted) {
+        // 🛠 MODIFICA
+        this.userService.updateUser(userPayload).subscribe({
+          next: (data) => {
+            this.manageSuccessOnSave(data);
+
+          },
+          error: (err) => {
+            this.manageSuccessOnSave(err);
+          }
         });
+      } else {
+        // ✅ CREAZIONE
+        this.userService.createUser(userPayload).subscribe({
+          next: (data) => {
+            this.manageSuccessOnSave(data);
+
+          },
+          error: (err) => {
+            this.manageSuccessOnSave(err);
+          }
+        });
+      }
     }
+
 
     isPersisted = false;
     successMessage: string = '';
@@ -52,62 +84,84 @@ export class DetailUserComponent {
     manageSuccessOnSave( data:any ){
       if (data != null && data.body != null) {
         var resultData = data.body;
-      
+        this.setFormValues( resultData );
         this.isPersisted = true;
         if (resultData != null && resultData.isSuccess) {
-          this.successMessage = 'User creata con successo!';   
+          this.successMessage = 'User creata con successo!';
         }
-    
+
       }
     }
-   
-    setFormValues( resultData :any ){
-       var x =  { 
-          idpId : resultData.idpId ,
-          userId : resultData.userId,
-          firstName: resultData.firstName, // Aggiunto title
-          lastName: resultData.lastName,
-          email: resultData.email,
-          tenant: resultData.tenant
-        }
-        this.userForm.setValue( x );
-      
-    }
-    
-    ngOnInit(): void {
-        console.log( "init Tenant" )
-        this.getAllTenants();
-        this.route.paramMap.subscribe(params => {
 
-          var userId = params.get('id') || '';
-          if ( userId ! ){
-            alert( "load user " + userId );
-            this.userService.getUserById( userId ).subscribe({
+    setFormValues(resultData: any) {
+      console.log('Backend usrGrp:', resultData.usrGrp);
+      console.log('Loaded grpList:', this.grpList);
+      const selectedGroups = this.grpList.filter((grp: any) =>
+        resultData.usrGrp?.some((g: any) => g.grpName === grp.grpName)
+      );
+      console.log('selectedGroups:', selectedGroups);
+      const x = {
+        idpId: resultData.idpId,
+        userId: resultData.userId,
+        firstName: resultData.firstName,
+        lastName: resultData.lastName,
+        email: resultData.email,
+        tenant: resultData.tenant,
+        address: resultData.address || '',
+        phone: resultData.phone || '',
+        gender: resultData.gender || '',
+        usrGrp: selectedGroups
+      };
+
+      this.userForm.patchValue(x);
+    }
+
+
+
+  ngOnInit(): void {
+      this.getAllTenants();
+      this.laodAllGrp().then(() => {
+        this.route.paramMap.subscribe(params => {
+          const userId = params.get('id');
+          if (userId) {
+            this.userService.getUserById(userId).subscribe({
               next: (data) => {
-                alert( data.body.lastName  );
-                this.setFormValues( data.body );
+                this.setFormValues(data.body); // ✅ ora grpList è già valorizzata
                 this.isPersisted = true;
+                this.setPasswordValidators(false);
               },
               error: (err) => {
-                console.error('Errore nel caricamento del dettaglio della dashboard', err);
-
+                console.error('Errore nel caricamento del dettaglio utente:', err);
               }
-            })
-
+            });
+          } else {
+            this.setPasswordValidators(true); // creazione
           }
-            
+        });
+      });
+    }
 
-        })
-  
-      }
-  
-      async getAllTenants() {
+
+
+     async laodAllGrp(): Promise<void> {
+          return new Promise((resolve) => {
+            this.commonServices.getAllGreoups().subscribe((data: any) => {
+              if (data && data.body) {
+                this.grpList = data.body;
+              }
+              resolve();
+            });
+          });
+        }
+
+
+ async getAllTenants() {
           console.log( "get all tenant" )
           this.tenantServices.getAllTenants().subscribe((data : any) => {
            console.log("Dati ricevuti dal server:", data)
             if (data != null && data.body != null) {
               var resultData = data.body;
-  
+
               if (resultData) {
                 this.tenantList = resultData;
               }
@@ -124,4 +178,22 @@ export class DetailUserComponent {
             });
         }
 
+
+
+
+
+
+        setPasswordValidators(isRequired: boolean) {
+          const passwordControl = this.userForm.get('password');
+          if (isRequired) {
+            passwordControl?.setValidators([Validators.required]);
+          } else {
+            passwordControl?.clearValidators();
+          }
+          passwordControl?.updateValueAndValidity();
+        }
+
+        compareGroups = (o1: any, o2: any): boolean => {
+          return o1 && o2 && o1.grpName === o2.grpName;
+        };
 }

@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor user as u
+
+box user device
+participant "Edge UI" as eui
+participant "Server UI" as sui
+database Db as edb
+end box
+
+
+box device
+participant "Sensor" as s
+participant edge as edge
+database Db as edb
+end box
+
+box server
+participant Keycloak as k
+participant server as ser
+database Db as sedb
+end box
+
+=== Edge Registration ==
+note left
+è necessario creare un client confidential su keycloak
+per la device
+end note
+u -> edge : firstStart
+activate edge
+edge -> k : getTocken client,secret
+edge -> ser: registerEdgeForTenant
+activate ser
+ser -> sedb
+ser --> edge
+edge -> edb: storeTenantInfo
+deactivate ser
+
+
+@enduml

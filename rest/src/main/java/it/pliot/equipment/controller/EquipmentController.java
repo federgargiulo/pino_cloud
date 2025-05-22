@@ -16,13 +16,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @ApiPrefixController
 public class EquipmentController {
 
-    private static final Logger log = LoggerFactory.getLogger(InitDb.class);
+    private static final Logger log = LoggerFactory.getLogger(EquipmentController.class);
 
     @Autowired
     private EquipmentServices equipmentService;
@@ -30,16 +36,14 @@ public class EquipmentController {
     @Autowired
     private SignalServices signalServices;
 
-
     @Autowired
     private EquipmentPullerServices equipmentPullerServices;
 
-
-
     @GetMapping("/equipments")
-    public List<EquipmentTO> all( ) {
-
-        return equipmentService.findAll();
+    public List<EquipmentTO> getEquipmentsForTenant(@RequestParam(value = "tenantId", required = false) String tenantId) {
+        if ( tenantId == null || tenantId.length() == 0 )
+            return equipmentService.findAllNotDeleted();
+        return equipmentService.findByTenant(tenantId);
     }
 
 
@@ -94,8 +98,10 @@ public class EquipmentController {
 
     @DeleteMapping("/equipments/{id}")
     public ResponseEntity<Void> deleteEquipment(@PathVariable("id") String id  ) {
-            equipmentService.delete( id );
-            return ResponseEntity.noContent().build();
+       EquipmentTO equipmentTO = equipmentService.findById(id);
+       equipmentTO.setStatus("DELETED");
+       equipmentService.save( equipmentTO );
+       return ResponseEntity.noContent().build();
     }
 
 
@@ -126,7 +132,10 @@ public class EquipmentController {
 
     @DeleteMapping("/equipments/{id}/signals/{idSignal}")
     public ResponseEntity<Void> deleteSignalById(@PathVariable("idSignal") String idSignal  ) {
-        signalServices.delete( idSignal );
+
+        SignalTO signalTO = signalServices.findById(idSignal);
+        signalTO.setStatus("DELETED");
+        signalServices.save( signalTO );
         return ResponseEntity.noContent().build();
     }
 
@@ -149,7 +158,8 @@ public class EquipmentController {
 
     @GetMapping("/equipments/{id}/pullers/{idPuller}")
     public EquipmentPullerTO getEquipmentPullerById(@PathVariable("idPuller") String id) {
-        return equipmentPullerServices.findById( id );
+        EquipmentPullerTO puller = equipmentPullerServices.findById( id );
+        return puller;
     }
 
     @DeleteMapping("/equipments/{equipmentId}/pullers/{idPuller}")
@@ -160,15 +170,27 @@ public class EquipmentController {
 
     @PostMapping("/equipments/{equipmentId}/pullers")
     public EquipmentPullerTO createEquipmentPuller(@PathVariable("equipmentId") String equipmentId , @RequestBody EquipmentPullerTO equipmentPullerTO ) {
-        equipmentPullerTO.setIdEquipment(equipmentId);
+        equipmentPullerTO.setEquipmentId(equipmentId);
+        Date nextEsecution=addSecondsToNow(equipmentPullerTO.getIntervalInSec());
+        equipmentPullerTO.setLastEnd(nextEsecution);
+        equipmentPullerTO.setNextExecutions(nextEsecution);
         return equipmentPullerServices.create( equipmentPullerTO );
 
+    }
+
+    private Date addSecondsToNow(Integer seconds) {
+        if (seconds == null) {
+            throw new IllegalArgumentException("Il parametro deve essere un numero intero valido.");
+        }
+        Instant now = Instant.now();
+        Instant futureInstant = now.plus(seconds, ChronoUnit.SECONDS);
+        return Date.from(futureInstant);
     }
 
     @PatchMapping("/equipments/{equipmentId}/pullers/{pullerId}")
     public ResponseEntity<EquipmentPullerTO> updatePuller(@PathVariable("equipmentId") String equipmentId , @PathVariable("pullerId") String pullerId , @RequestBody EquipmentPullerTO equipmentPullerTO) {
         try {
-            equipmentPullerTO.setIdEquipment(equipmentId);
+            equipmentPullerTO.setEquipmentId(equipmentId);
             equipmentPullerTO.setPullerId( pullerId );
             equipmentPullerTO = equipmentPullerServices.save( equipmentPullerTO );
             return new ResponseEntity<>(equipmentPullerTO, HttpStatus.OK );

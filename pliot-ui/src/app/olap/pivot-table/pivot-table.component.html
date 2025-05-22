@@ -1,0 +1,67 @@
+
+<h2>VIsualizza Dati Ricevuti</h2>
+
+<div class="form-container">
+  <div class="d-flex flex-row gap-4">
+    <div class="form-group-item">
+         <mat-form-field appearance="fill">
+          <mat-label>Tenant</mat-label>
+          <mat-select [(ngModel)]="selectedTenantId" (selectionChange)="onTenantChange($event.value)"  class="test" >
+            <mat-option *ngFor="let t of tenantList" [value]="t.tenantId"  class="combo-pivot">{{ t.name }}</mat-option>
+          </mat-select>
+        </mat-form-field> 
+    </div>
+    <div class="form-group-item">
+      <mat-form-field appearance="fill">
+        <mat-label>Equipment</mat-label>
+        <mat-select [(ngModel)]="selectedEquipmentId" (selectionChange)="onEquipmentChange($event.value)">
+          <mat-option *ngFor="let x of equipmentList" [value]="x.equipmentId"  class="combo-pivot">{{ x.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group-item">
+        <mat-form-field appearance="fill">
+        <mat-label>Segnale</mat-label>
+        <mat-select [(ngModel)]="selectedSignalId" (selectionChange)="onSignalChange($event.value)">
+          <mat-option *ngFor="let x of signalList" [value]="x.signalId"  class="combo-pivot">{{ x.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>  
+  <div class="d-flex flex-row gap-4">
+      <div class="form-group-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Raggruppamento</mat-label>
+          <mat-select [(value)]="selectedAggregation" >
+            <mat-option  class="combo-pivot" value="MONTH">Mensile</mat-option>
+            <mat-option  class="combo-pivot" value="DAY">Giornaliero</mat-option>
+            <mat-option  class="combo-pivot" value="HOUR">Orario</mat-option>
+            <mat-option  class="combo-pivot" value="ROW">Intervallo Minimo</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group-item">
+        <mat-form-field appearance="fill"  >
+          <mat-label>Range Temporale</mat-label>
+          <mat-date-range-input class="custom-date-range" [rangePicker]="picker" [(ngModel)]="dateRange" >
+            <input matStartDate [min]="minDate" [max]="maxDate" placeholder="Data Inizio">
+            <input matEndDate [min]="minDate" [max]="maxDate" placeholder="Data Fine">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker class="custom-date-range"  ></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+      <div class="form-group-item">
+        <button mat-button (click)="loadData()">Basic</button>
+      </div>
+
+  </div>
+  
+<div style="flex: 1;">
+  <app-chart-view [data]="data"></app-chart-view>
+</div>
+</div>
+ 
+

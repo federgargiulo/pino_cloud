@@ -11,6 +11,7 @@ public class UserTO extends BaseEntity {
     private String idpId;
     private String userId;
 
+
     public String getUser_pk() {
         return user_pk;
     }
@@ -47,9 +48,21 @@ public class UserTO extends BaseEntity {
 
     private String tenant;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     private String firstName;
 
     private String lastName;
+
+    private String userName;
+
+
 
     public String getFirstName() {
         return firstName;
@@ -121,12 +134,12 @@ public class UserTO extends BaseEntity {
         this.password = password;
     }
 
-    public List<UserGrpTO> getRoles() {
-        return roles;
+    public List<UserGrpTO> getUsrGrp() {
+        return usrGrp;
     }
 
-    public void setRoles(List<UserGrpTO> roles) {
-        this.roles = roles;
+    public void setUsrGrp(List<UserGrpTO> usrGrp) {
+        this.usrGrp = usrGrp;
     }
 
 
@@ -140,7 +153,7 @@ public class UserTO extends BaseEntity {
 
     private String password;
 
-    private List<UserGrpTO> roles = new ArrayList<>();
+    private List<UserGrpTO> usrGrp = new ArrayList<>();
 
 
 }

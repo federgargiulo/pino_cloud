@@ -1,7 +1,13 @@
 package it.pliot.equipment.service.dbms.util;
 
+import it.pliot.equipment.io.UserGrpTO;
 import it.pliot.equipment.io.UserTO;
 import it.pliot.equipment.model.User;
+import it.pliot.equipment.model.UserGrp;
+import it.pliot.equipment.security.JwtUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserUtils extends BaseConvertUtil<User, UserTO> {
 
@@ -19,6 +25,12 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
     public User io2data(UserTO in) {
         if (in == null) return null;
         User out = new User();
+        return cp2data( in , out );
+    }
+
+    public User cp2data(UserTO in , User out  ) {
+        if (in == null) return null;
+
         out.setAddress(in.getAddress());
         out.setUserId(in.getUserId());
         out.setFirstName(in.getFirstName());
@@ -27,7 +39,7 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
         out.setGender(in.getGender());
         out.setIdpId(in.getIdpId());
         out.setPhone(in.getPhone());
-        out.setUserGroups(UserGrpUtils.instance().converListIO2data(in.getRoles()));
+        out.setUserGroups(UserGrpUtils.instance().converListIO2data(in.getUsrGrp()));
         out.setTenant(in.getTenant());
         out.setCreatedDttm(in.getCreatedDttm());
         out.setUpdateDttm(in.getCreatedDttm());
@@ -48,12 +60,36 @@ public class UserUtils extends BaseConvertUtil<User, UserTO> {
         out.setIdpId(in.getIdpId());
         out.setPhone(in.getPhone());
         out.setTenant(in.getTenant());
-        out.setRoles(UserGrpUtils.instance().converListData2IO(in.getUserGroups()));
+        out.setUsrGrp(UserGrpUtils.instance().converListData2IO(in.getUserGroups()));
         out.setCreatedDttm(in.getCreatedDttm());
         out.setUpdateDttm(in.getCreatedDttm());
         out.setType(in.getType());
-        return out;
+       return out;
 
     }
 
+    public List<UserGrpTO> convertListData2Io(List<UserGrp> userGrps) {
+        List<UserGrpTO> result = new ArrayList<>();
+
+        userGrps.forEach(group -> {
+            UserGrpTO to = new UserGrpTO();
+           to.setGrpName(group.getGrpName());
+            to.setDescription(group.getDescription());
+
+            result.add(to);
+        });
+
+        return result;
+    }
+
+    public UserTO jwt2to(JwtUser u) {
+        UserTO to = new UserTO();
+        to.setIdpId( u.getIdpId() );
+        to.setFirstName( u.getFirstName() );
+        to.setLastName( u.getLastName() );
+        to.setEmail( u.getEmail() );
+        to.setTenant( u.getTenantId() );
+        to.setUserId( u.getUserId() );
+        return to;
+    }
 }

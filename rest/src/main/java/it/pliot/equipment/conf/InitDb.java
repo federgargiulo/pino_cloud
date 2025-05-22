@@ -1,8 +1,11 @@
 package it.pliot.equipment.conf;
 
 import it.pliot.equipment.Const;
+import it.pliot.equipment.GlobalConfig;
+import it.pliot.equipment.Mode;
 import it.pliot.equipment.io.*;
 import it.pliot.equipment.service.business.*;
+import it.pliot.equipment.service.ext.UserAlreadyPresentException;
 import jakarta.annotation.PostConstruct;
 
 import org.slf4j.Logger;
@@ -16,10 +19,11 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
@@ -30,7 +34,7 @@ public class InitDb {
     private static final Logger log = LoggerFactory.getLogger(InitDb.class);
 
     @Autowired
-    private UserGrpServices roleService;
+    private UserGrpServices usrGrp;
     @Autowired
     private TenantServices tenanServices;
 
@@ -44,8 +48,12 @@ public class InitDb {
     private EquipmentPullerServices equipmentPullerService;
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private UserServices userServices;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private GlobalConfig config;
 
 
     private void executeSqlScripts() {
@@ -69,19 +77,49 @@ public class InitDb {
         }
     }
 
+    public UserTO getAdmin(){
+        UserTO u = new UserTO();
+        u.setUserId( Const.ADMIN_PLIOT_USERID );
+        u.setEmail( Const.ADMIN_PLIOT_MAIL );
+        u.setLastName( Const.ADMIN_PLIOT_LASTNAME );
+        u.setFirstName( Const.ADMIN_PLIOT_FIRSFNAME );
+        u.setPassword( Const.DEFAULT_PASSWORD );
+        u.setTenant( Const.ADMIN_PLIOT_TENANT );
+
+        return u;
+    }
+
+
 
     @PostConstruct
     public void initDb( ) {
 
         executeSqlScripts();
-        log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ) );
-        log.info("Preloading Role" + roleService.save(  UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
-        log.info("Preloading Role" + roleService.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );
+
+        UserGrpTO adminGrp = UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ;
+        log.info("Preloading Group" + usrGrp.save(  adminGrp  ) );
+        log.info("Preloading Group" + usrGrp.save( UserGrpTO.newroleio(Const.USER_TENANT_GRP , "USER " ) ));
+        log.info("Preloading Group" + usrGrp.save( UserGrpTO.newroleio( Const.TENANT_ADMIN_GRP  , "Tenant Administrator " ) ) );
+        if ( Mode.SERVER.equals( config.getMode() ) ) {
+            log.info("Init admin user" );
+
+            UserTO admin = getAdmin();
+            ArrayList<UserGrpTO> grp = new ArrayList<UserGrpTO>();
+            grp.add(adminGrp);
+            admin.setUsrGrp(grp);
+            try {
+                userServices.create(admin);
+            } catch (UserAlreadyPresentException e) {
+                log.info(" user admin already created ");
+            }
+        }
+        if ( ! config.isLoadEnabled() )
+            return;
+
         TenantTO t = tenanServices.create( TenantTO.newrtenant(Const.DEV_TENANT_ID , Const.DEV_TENANT_NAME , Const.DEV_TENANT_DESC, Const.DEV_EMAIL, Const.DEV_ADDRESS, Const.DEV_ZIPCODE, Const.DEV_COUNTRY,Const.DEV_PROFILE, Const.DEV_STATE ) );
 
         log.info("Preloading Tenant" +  t ) ;
         EquipmentTO eq = EquipmentTO.newEquipment( "Pump" , Const.DEV_TENANT_ID );
-
         createEquipmentAndRelations( eq );
 
         EquipmentTO eq2 = equipmentService.create( EquipmentTO.newEquipment( "Inverter" , Const.DEV_TENANT_ID ) );
@@ -108,7 +146,7 @@ public class InitDb {
 
         Date now = new Date();
         EquipmentPullerTO puller = new EquipmentPullerTO();
-        puller.setIdEquipment(eq.getEquipmentId());
+        puller.setEquipmentId(eq.getEquipmentId());
         puller.setUrl("http://localhost:8000/data");
         puller.setApiKey("123456700");
         puller.setIntervalInSec( 20 );

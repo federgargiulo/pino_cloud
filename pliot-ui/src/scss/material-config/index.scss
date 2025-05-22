@@ -1,0 +1,37 @@
+// import mixin files
+@import 'app-header';
+@import 'buttons';
+@import 'checkbox';
+@import 'chip';
+@import 'dialogs';
+@import 'divider';
+@import 'footer';
+@import 'icons';
+@import 'inputs';
+@import 'labels';
+@import 'radio-buttons';
+@import 'slide-toggle';
+@import 'side-nav';
+@import 'snack-bar';
+@import 'table';
+@import 'tabs';
+@import 'tooltip';
+
+// mixin @include
+@include app-header();
+@include buttons();
+@include checkbox();
+@include chip();
+@include dialogs();
+@include divider();
+@include footer();
+@include icons();
+@include inputs();
+@include labels();
+@include radio-buttons();
+@include slide-toggle();
+@include side-nav();
+@include snack-bar();
+@include table();
+@include tabs();
+@include tooltip();

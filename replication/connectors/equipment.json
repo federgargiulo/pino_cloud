@@ -1,0 +1,15 @@
+{
+    "name": "jdbc-postgres-equipment",
+    "config": {
+      "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+      "dialect.name": "PostgreSqlDatabaseDialect",
+      "connection.url": "jdbc:postgresql://192.168.1.75:5432/pliot",
+      "connection.user": "postgres",
+      "connection.password": "postgres",  
+      "mode": "bulk",
+      "table.whitelist": "equipment",
+      "topic.prefix": "jdbc-",
+      "poll.interval.ms": "10000",
+      "validate.non.null": false
+    }
+  }

@@ -1,0 +1,99 @@
+@import '../base.scss';
+
+@mixin side-nav() {
+  mat-drawer-container {
+    h2 {
+      font-size: 24px;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin: 35px 0 0 35px;
+    }
+  &.mat-drawer-container {
+    display: flex;
+    flex-grow: 1;
+    overflow: auto;
+    mat-drawer {
+      &.mat-drawer {
+        width: 230px;
+        padding: 24px 0;
+        border-right: 1px solid #e0e0e0;
+        border-radius: 0;
+        background-color: white;
+        .mat-drawer-inner-container {
+          display: flex;
+          flex-direction: column;
+          .drawer-button-container {
+            display: flex;
+            flex-direction: column;
+            &.opened {
+              button.mdc-button {
+                background-color: #2c67c016;
+              }
+            }
+            button.mdc-button {
+              margin: 0;
+              padding: 0 24px;
+              border-radius: 0;
+              display: flex;
+              justify-content: start;
+              align-items: center;
+              &.active-link {
+                background-color: #2c68c0 !important;
+                .mdc-button__label {
+                  color: white;
+                }
+              }
+              .mat-mdc-button-persistent-ripple.mdc-button__ripple {
+                display: none;
+              }
+              .mdc-button__label {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                font-weight: 400;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                .material-symbols-outlined {
+                  font-size: 18px;
+                }
+                .mat-drawer-button-closed,
+                .mat-drawer-button-opened  {
+                  position: relative;
+                  right: -5px;
+                }
+              }
+              &.mat-drawer-button-item {
+                padding-left: 46px;
+                .mdc-button__label {
+                  font-size: 14px;
+                  font-weight: 400;
+                  text-transform: capitalize;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .mat-drawer-content {
+      display: flex;
+      flex-grow: 1;
+      overflow: auto;
+      .example-sidenav-content {
+        display: flex;
+        flex-grow: 1;
+        overflow: auto;
+      }
+    }
+    .mat-drawer-content {
+      display: flex;
+      flex-grow: 1;
+      overflow: auto;
+      // padding: 35px;
+      //background-color: white;
+      background-color: #fafafa;
+      }
+    }
+  }
+}

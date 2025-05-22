@@ -9,7 +9,7 @@ public class EquipmentPullerTO {
 
     private String pullerId;
 
-    private String idEquipment;
+    private String equipmentId;
 
     private String tenant;
 
@@ -68,12 +68,12 @@ public class EquipmentPullerTO {
         this.pullerId = pullerId;
     }
 
-    public String getIdEquipment() {
-        return idEquipment;
+    public String getEquipmentId() {
+        return equipmentId;
     }
 
-    public void setIdEquipment(String idEquipment) {
-        this.idEquipment = idEquipment;
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     public String getTenant() {

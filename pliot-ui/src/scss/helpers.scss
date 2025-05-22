@@ -1,0 +1,219 @@
+$directions: ('top', 'right', 'bottom', 'left');
+@import 'base.scss';
+
+@each $direction in $directions {
+    @for $i from 1 through 10 {
+        .padding-#{$i}x {
+            padding: $u * $i;
+        }
+
+        .margin-#{$i}x {
+            margin: $u * $i;
+        }
+    }
+
+    @for $i from 1 through 10 {
+        .padding-#{$direction}-#{$i}x {
+            padding-#{$direction}: $u * $i;
+        }
+
+        .margin-#{$i}x {
+            margin-#{$direction}: $u * $i;
+        }
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+.d-inline {
+    display: inline;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-inline-flex {
+    display: inline-flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-column-reverse {
+    flex-direction: column-reverse;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.justify-content-start {
+   justify-content: start;
+}
+
+.justify-content-end {
+    justify-content: end;
+ }
+
+.justify-content-center {
+    justify-content: center;
+ }
+
+.justify-content-between {
+    justify-content: space-between;
+ }
+
+.justify-content-around {
+    justify-content: space-around;
+ }
+
+.align-items-start {
+   align-items: start;
+ }
+
+.align-items-end {
+    align-items: end;
+  }
+
+.align-items-center {
+    align-items: center;
+  }
+
+.align-items-baseline {
+    align-items: baseline;
+  }
+
+.align-items-stretch {
+    align-items: stretch;
+  }
+
+.align-self-start {
+    align-self: start;
+  }
+
+.align-self-end {
+    align-self: end;
+  }
+
+.align-self-center {
+    align-self: center;
+  }
+
+.align-self-baseline {
+    align-self: baseline;
+  }
+
+.align-self-stretch {
+    align-self: stretch;
+  }
+
+
+.flex-nowrap {
+    flex-wrap: nowrap;
+  }
+
+.flex-wrap {
+    flex-wrap: wrap;
+  }
+
+.flex-wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+
+.order-0 {
+    order: 0;
+}
+
+.order-1 {
+    order: 1;
+}
+
+.order-2 {
+    order: 2;
+}
+
+.order-3 {
+    order: 3;
+}
+
+.order-4 {
+    order: 4;
+}
+
+.order-5 {
+    order: 5;
+}
+
+.order-6 {
+    order: 6;
+}
+
+.order-7 {
+    order: 7;
+}
+
+.order-8 {
+    order: 8;
+}
+
+.order-9 {
+    order: 9;
+}
+
+.order-10 {
+    order: 10;
+}
+
+.order-11 {
+    order: 11;
+}
+
+.order-12 {
+    order: 12;
+}
+
+.align-content-start {
+    align-content: start;
+}
+
+.align-content-end {
+    align-content: end;
+}
+
+.align-content-center {
+    align-content: center;
+}
+
+.align-content-around {
+    align-content: space-around;
+}
+
+.align-content-stretch {
+    align-content: stretch;
+}
+
+.w-300 {
+  width: 300px;
+}
+
+// :focus {
+//   outline: unset;
+//   border: none;
+//   box-shadow: none;
+// }
