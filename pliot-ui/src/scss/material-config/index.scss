@@ -1,21 +1,21 @@
 // import mixin files
-@import 'app-header';
-@import 'buttons';
-@import 'checkbox';
-@import 'chip';
-@import 'dialogs';
-@import 'divider';
-@import 'footer';
-@import 'icons';
-@import 'inputs';
-@import 'labels';
-@import 'radio-buttons';
-@import 'slide-toggle';
-@import 'side-nav';
-@import 'snack-bar';
-@import 'table';
-@import 'tabs';
-@import 'tooltip';
+@use "app-header" as *;
+@use "buttons" as *;
+@use "checkbox" as *;
+@use "chip" as *;
+@use "dialogs" as *;
+@use "divider" as *;
+@use "footer" as *;
+@use "icons" as *;
+@use "inputs" as *;
+@use "labels" as *;
+@use "radio-buttons" as *;
+@use "slide-toggle" as *;
+@use "side-nav" as *;
+@use "snack-bar" as *;
+@use "table" as *;
+@use "tabs" as *;
+@use "tooltip" as *;
 
 // mixin @include
 @include app-header();

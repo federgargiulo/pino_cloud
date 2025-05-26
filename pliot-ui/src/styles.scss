@@ -2,9 +2,9 @@
 
 @use '@angular/material' as mat;
 @use './scss/material-config/theme-colors' as theme;
+@use './scss/index';
 
 @include mat.core();
-@import './scss/index';
 
 html {
   @include mat.theme(

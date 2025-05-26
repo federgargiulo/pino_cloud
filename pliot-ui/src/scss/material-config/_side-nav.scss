@@ -25,9 +25,21 @@
           .drawer-button-container {
             display: flex;
             flex-direction: column;
+            &.active-closed {
+              button.mdc-button {
+                background-color: #2c68c0;
+                .mdc-button__label {
+                  color: white;
+                }
+              }
+            }
             &.opened {
               button.mdc-button {
-                background-color: #2c67c016;
+                background-color: #2c67c011;
+                .mdc-button__label {
+                  color: #2c68c0;
+                  font-weight: 600;
+                }
               }
             }
             button.mdc-button {
@@ -54,6 +66,7 @@
                 font-weight: 400;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
+                color: rgb(50, 50, 50);
                 .material-symbols-outlined {
                   font-size: 18px;
                 }
