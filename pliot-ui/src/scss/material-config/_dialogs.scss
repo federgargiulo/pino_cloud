@@ -25,4 +25,9 @@
       border-top: 1px solid lightgrey;
     }
   }
+
+  .cdk-overlay-pane.equipment-edit-dialog.mat-mdc-dialog-panel {
+    min-width: 80vw;
+    min-height: 80vh;
+  }
 }

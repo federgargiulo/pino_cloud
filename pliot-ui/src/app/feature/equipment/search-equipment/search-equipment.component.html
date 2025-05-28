@@ -1,16 +1,16 @@
 <h2>Equipment List</h2>
 
-<mat-toolbar class="actions-table-bar" color="transparent">
-  <button mat-flat-button color="primary" [disabled]="selection.selected.length !== 1" (click)="editSelectedEquipment()">
-    <mat-icon>edit</mat-icon>
+<div div class="actions-table-bar">
+  <button class="actions-table-bar__button" mat-button color="primary" [disabled]="selection.selected.length !== 1" (click)="editSelectedRows()">
+    <span class="material-symbols-outlined">edit</span>
     Modifica
   </button>
 
-  <button mat-flat-button color="warn" [disabled]="selection.selected.length === 0" (click)="deleteSelectedEquipment()">
-    <mat-icon>delete</mat-icon>
+  <button class="actions-table-bar__button" mat-button color="primary" [disabled]="selection.selected.length === 0" (click)="deleteSelectedEquipment()">
+    <span class="material-symbols-outlined">delete</span>
     Elimina
   </button>
-</mat-toolbar>
+</div>
 
 <div class="table-container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">

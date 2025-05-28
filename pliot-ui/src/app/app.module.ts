@@ -69,6 +69,7 @@ import {
 import { ConfirmDialogModule } from './feature/user/search-user/confirm-dialog/confirm-dialog.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { EquipmentConfirmDialogModule } from './feature/equipment/search-equipment/equipment-confirm-dialog/equipment-confirm-dialog.module';
 
 var loc = new ConfigurationService();
 
@@ -145,6 +146,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     BrowserAnimationsModule,
     HttpClientModule,
     ConfirmDialogModule,
+    EquipmentConfirmDialogModule
   ],
   providers: [
     KEYCLOAK_PRIVIDER(),

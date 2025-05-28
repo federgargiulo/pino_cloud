@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { EquipmentServices } from '../../../service/equipment.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { EquipmentConfirmDialogComponent } from './equipment-confirm-dialog/equipment-confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-search-equipment',
@@ -16,7 +18,7 @@ export class SearchEquipmentComponent implements OnInit {
   dataSource = new MatTableDataSource<any>([]);
   selection = new SelectionModel<any>(true, []);
 
-  constructor(private equipmentServices: EquipmentServices, private router: Router) {}
+  constructor(private equipmentServices: EquipmentServices, private router: Router, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     console.log("init");
@@ -43,6 +45,15 @@ export class SearchEquipmentComponent implements OnInit {
   refreshEquipment() {
     this.getAllEquipment();
   }
+
+
+  editSelectedRows(): void {
+    this.dialog.open(EquipmentConfirmDialogComponent, {
+      // width: '400px',
+      panelClass: 'equipment-edit-dialog',
+    });
+  }
+
 
   editSelectedEquipment() {
     const selected = this.selection.selected[0];
