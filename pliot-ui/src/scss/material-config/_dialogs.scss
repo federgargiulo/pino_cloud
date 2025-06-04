@@ -10,19 +10,26 @@
       border-radius: 1px;
       background-color: white;
     }
-    h2.mat-mdc-dialog-title {
-      border-bottom: 1px solid lightgrey;
-      padding: 16px 24px;
-      text-transform: uppercase;
-      &::before {
-        display: none;
+    .mat-mdc-dialog-inner-container.mdc-dialog__container {
+      .mat-mdc-dialog-surface.mdc-dialog__surface {
+        * {
+          h2.mat-mdc-dialog-title {
+            border-bottom: 1px solid lightgrey;
+            padding: 16px 24px;
+            text-transform: uppercase;
+            &::before {
+              display: none;
+            }
+          }
+          mat-dialog-content.mat-mdc-dialog-content.mdc-dialog__content {
+            padding: 24px !important;
+          }
+          mat-dialog-actions.mat-mdc-dialog-actions.mdc-dialog__actions {
+            border-top: 1px solid lightgrey;
+          }
+        }
+
       }
-    }
-    mat-dialog-content.mat-mdc-dialog-content.mdc-dialog__content {
-      padding: 24px !important;
-    }
-    mat-dialog-actions.mat-mdc-dialog-actions.mdc-dialog__actions {
-      border-top: 1px solid lightgrey;
     }
   }
 

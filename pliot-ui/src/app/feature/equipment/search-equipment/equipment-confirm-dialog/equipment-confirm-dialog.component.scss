@@ -4,4 +4,9 @@ mat-dialog-actions {
 
 form {
   flex-grow: 1;
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }

@@ -1,11 +1,26 @@
-
-
 @use '@angular/material' as mat;
-@use './scss/material-config/theme-colors' as theme;
-@use './scss/index';
+@use './scss/theme' as theme;
+@use './scss/index' as scss;
 
 @include mat.core();
+@include mat.all-component-themes(theme.$my-theme);
 
+/*
+@use '@angular/material' as mat;
+@use './scss/material-config/theme-colors' as theme;
+@use './scss/index' as scss;
+
+// Da:
+@import '@angular/material/theming';
+
+// mixin @include
+@import './app/feature/equipment/search-equipment/equipment-confirm-dialog/equipment-confirm-dialog.component.theme';
+@include equipment-confirm-dialog-theme();
+
+@include mat.core();
+*/
+
+/*
 html {
   @include mat.theme(
     (
@@ -14,6 +29,7 @@ html {
     )
   );
 }
+*/
 
 /* You can add global styles to this file, and also import other style files */
 /* License: none (public domain) */

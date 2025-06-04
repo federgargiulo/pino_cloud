@@ -1,13 +1,9 @@
-<mat-toolbar color="primary">
-  <img src="logo.png" alt="Logo" width="40" style="margin-right: 8px;" />
-  <span>Pino</span>
-
-
-
-</mat-toolbar>
-
 <nav class="app-header">
   <div class="app-header-left">
+    <div class="app-header-left-logo">
+      <img src="logo.png" alt="Logo" width="40" style="margin-right: 8px;" />
+      <span>Pino</span>
+    </div>
     <button type="button" mat-button (click)="drawer.toggle()">
       <span class="material-symbols-outlined"> menu </span>
     </button>
@@ -15,7 +11,7 @@
 
   <form class="app-header-center">
 
-    <mat-form-field>
+    <mat-form-field class="header-search">
       <span class="material-symbols-outlined"> search </span>
       <input matInput type="search" placeholder="Search" aria-label="Search">
     </mat-form-field>
