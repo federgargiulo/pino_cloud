@@ -23,20 +23,26 @@
           .drawer-button-container {
             display: flex;
             flex-direction: column;
+            &.opened {
+              button.mdc-button {
+                background-color: #00a0c410;
+                .mdc-button__label {
+                  color: #00a0c4;
+                  font-weight: 600;
+                }
+              }
+              button.mdc-button.active-link.mat-drawer-button-item  {
+                .mdc-button__label {
+                  color: #00a0c4;
+                  font-weight: 600 !important;
+                }
+              }
+            }
             &.active-closed {
               button.mdc-button {
                 background-color: #2c68c0;
                 .mdc-button__label {
                   color: white;
-                }
-              }
-            }
-            &.opened {
-              button.mdc-button {
-                background-color: #2c67c011;
-                .mdc-button__label {
-                  color: #2c68c0;
-                  font-weight: 600;
                 }
               }
             }
@@ -47,10 +53,18 @@
               display: flex;
               justify-content: start;
               align-items: center;
+              height: 45px;
               &.active-link {
-                background-color: #2c68c0 !important;
+                border-left: 2px solid #00a0c4 !important;
+                // background-color: #2c68c0 !important;
                 .mdc-button__label {
-                  color: white;
+                  color: #00a0c4;
+                  font-weight: 600;
+                }
+              }
+              &:hover {
+                .mdc-button__label {
+                  color: #00a0c4;
                 }
               }
               .mat-mdc-button-persistent-ripple.mdc-button__ripple {
@@ -64,7 +78,7 @@
                 font-weight: 400;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
-                color: rgb(50, 50, 50);
+                color: rgb(100, 100, 100);
                 .material-symbols-outlined {
                   font-size: 18px;
                 }
@@ -75,11 +89,21 @@
                 }
               }
               &.mat-drawer-button-item {
-                padding-left: 46px;
+                padding-left: 22px;
+                margin-left: 33px;
+                border-left: 2px solid rgba(44, 103, 192, 0.15);
+                background-color: transparent !important;
+                height: 35px;
                 .mdc-button__label {
                   font-size: 14px;
                   font-weight: 400;
                   text-transform: capitalize;
+                  color: rgb(100, 100, 100);
+                }
+                &:hover {
+                  .mdc-button__label {
+                    color: #00a0c4;
+                  }
                 }
               }
             }

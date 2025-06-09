@@ -1,21 +1,17 @@
 <nav class="app-header">
   <div class="app-header-left">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      <span class="material-symbols-outlined"> menu </span>
+    </button>
     <div class="app-header-left-logo">
       <img src="logo.png" alt="Logo" width="40" style="margin-right: 8px;" />
       <span>Pino</span>
     </div>
-    <button type="button" mat-button (click)="drawer.toggle()">
-      <span class="material-symbols-outlined"> menu </span>
-    </button>
   </div>
 
   <form class="app-header-center">
 
-    <mat-form-field class="header-search">
-      <span class="material-symbols-outlined"> search </span>
-      <input matInput type="search" placeholder="Search" aria-label="Search">
-    </mat-form-field>
-    <button mat-button type="submit">Search</button>
+
   </form>
 
   <div class="app-header-right" >
@@ -36,7 +32,7 @@
     <!-- Home -->
     <div class="drawer-button-container">
       <button mat-button class="mat-drawer-button" aria-current="page" href="#">
-        <span class="d-flex align-items-center">
+        <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> home </span>
           <span class="px-1"> Home </span>
         </span>
@@ -45,7 +41,7 @@
     <!-- Tenant -->
     <div class="drawer-button-container" [class.opened]="showTenantItems" *ngIf="isPliotAdmin()">
       <button mat-button class="mat-drawer-button" (click)="toggleDrawer('tenant')">
-        <span class="d-flex align-items-center">
+        <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> business </span>
           <span class="px-1"> Tenant </span>
         </span>
@@ -60,7 +56,7 @@
     <!-- Equipment -->
     <div class="drawer-button-container" [class.opened]="showEquipmentItems">
       <button mat-button class="mat-drawer-button" (click)="toggleDrawer('equipment')">
-        <span class="d-flex align-items-center">
+        <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> construction </span>
           <span class="px-1"> Equipment </span>
         </span>
@@ -75,7 +71,7 @@
     <!-- Users -->
     <div class="drawer-button-container" [class.opened]="showUserItems">
       <button mat-button class="mat-drawer-button" (click)="toggleDrawer('user')">
-        <span class="d-flex align-items-center">
+        <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> person </span>
           <span class="px-1"> Users </span>
         </span>
@@ -90,7 +86,7 @@
     <!-- Dashboard -->
     <div class="drawer-button-container" [class.opened]="showDashboardItems">
       <button mat-button class="mat-drawer-button" (click)="toggleDrawer('dashboard')">
-        <span class="d-flex align-items-center">
+        <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> dashboard </span>
           <span class="px-1"> Dashboard </span>
         </span>
@@ -103,7 +99,7 @@
       }
     </div>
     <div class="drawer-button-container" >
-         <button mat-button class="mat-drawer-button-item" [routerLink]="['system-status']">SYSTEM STATUS</button>
+         <button mat-button class="mat-drawer-button" [routerLink]="['system-status']">SYSTEM STATUS</button>
     </div>
   </mat-drawer>
 
