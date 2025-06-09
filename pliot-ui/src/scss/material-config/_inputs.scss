@@ -66,7 +66,7 @@
                   }
                   &::after {
                     content: "keyboard_arrow_down";
-                    font-family: 'Material Symbols Outlined';
+                    font-family: 'Material Symbols Outlined' !important;
                     font-weight: 200;
                     font-style: normal;
                     font-size: 28px;  /* Preferred icon size */

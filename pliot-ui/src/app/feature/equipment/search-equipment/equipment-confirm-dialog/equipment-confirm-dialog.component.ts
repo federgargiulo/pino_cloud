@@ -1,10 +1,18 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
 import { EquipmentServices } from '../../../../service/equipment.service';
 import { SignalServices } from '../../../../service/signal.service';
+import { DeleteConfirmDialogComponent } from './delete-confirm-dialog.component';
+
+interface Signal {
+  signalId: string;
+  name: string;
+  equipmentId: string;
+}
 
 @Component({
   selector: 'app-equipment-confirm-dialog',
@@ -19,6 +27,7 @@ export class EquipmentConfirmDialogComponent implements OnInit {
     private equipmentService: EquipmentServices,
     private signalService: SignalServices,
     public dialogRef: MatDialogRef<EquipmentConfirmDialogComponent>,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: { message: string }
   ) {}
 
@@ -29,6 +38,8 @@ export class EquipmentConfirmDialogComponent implements OnInit {
   onYesClick(): void {
     this.dialogRef.close(true);
   }
+
+  displayedColumns: string[] = ['select', 'signalId', 'name'];
 
   equipmentId!: string;
   equipmentForm!: FormGroup;
@@ -47,6 +58,43 @@ export class EquipmentConfirmDialogComponent implements OnInit {
   showPullers = false;
   isEditingPuller = false;
   selectedPullerId: string | null = null;
+  pullerSelection = new SelectionModel<any>(true, []);
+
+  selection = new SelectionModel<Signal>(true, []);
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.signals.data.length;
+    return numSelected === numRows;
+  }
+
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+    this.selection.select(...this.signals.data);
+  }
+
+  checkboxLabel(row?: Signal): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
+  }
+
+  removeSelectedRows() {
+    this.selection.selected.forEach(signal => {
+      this.deleteSignal(signal.equipmentId, signal.signalId);
+    });
+    this.selection.clear();
+  }
+
+  editSelectedSignal() {
+    if (this.selection.selected.length === 1) {
+      this.editSignal(this.selection.selected[0]);
+    }
+  }
 
   ngOnInit(): void {
 
@@ -67,6 +115,16 @@ export class EquipmentConfirmDialogComponent implements OnInit {
     this.initPullerForm();
   }
 
+  private atLeastOneFieldRequired(controls: string[]): ValidationErrors | null {
+    return (group: AbstractControl): ValidationErrors | null => {
+      const hasValue = controls.some(controlName => {
+        const control = group.get(controlName);
+        return control && control.value && control.value.trim() !== '';
+      });
+      return hasValue ? null : { atLeastOneRequired: true };
+    };
+  }
+
   private initSignalForm(): void {
     this.signalForm = this.formBuilder.group({
       signalId: [''],
@@ -80,7 +138,7 @@ export class EquipmentConfirmDialogComponent implements OnInit {
       downYellowLimit: [''],
       upRedLimit: [''],
       upYellowLimit: ['']
-    });
+    }, { validators: this.atLeastOneFieldRequired(['unitOfMeasurement', 'name', 'minVal', 'maxVal', 'downRedLimit', 'downYellowLimit', 'upRedLimit', 'upYellowLimit']) });
   }
 
   private initPullerForm(): void {
@@ -95,7 +153,7 @@ export class EquipmentConfirmDialogComponent implements OnInit {
       lastStart: [''],
       lastEnd: [''],
       lastExecutionReport: ['']
-    });
+    }, { validators: this.atLeastOneFieldRequired(['url', 'apiKey', 'intervalInSec']) });
   }
 
   loadEquipmentDetail(id: string): void {
@@ -185,17 +243,25 @@ export class EquipmentConfirmDialogComponent implements OnInit {
     this.showSignalForm = false;
     this.isEditingSignal = false;
     this.selectedSignalId = null;
+    this.selection.clear();
   }
 
   deleteSignal(equipmentId: string, signalId: string): void {
-    if (!confirm("Sei sicuro di voler eliminare questo Signal?")) return;
+    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
+      width: '400px',
+      data: { itemType: 'signal' }
+    });
 
-    this.signalService.deleteSignalById(equipmentId, signalId).subscribe({
-      next: () => {
-        this.loadSignals();
-      },
-      error: (err) => {
-        console.error("Errore durante l'eliminazione del Signal:", err);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.signalService.deleteSignalById(equipmentId, signalId).subscribe({
+          next: () => {
+            this.loadSignals();
+          },
+          error: (err) => {
+            console.error("Errore durante l'eliminazione del Signal:", err);
+          }
+        });
       }
     });
   }
@@ -260,23 +326,74 @@ export class EquipmentConfirmDialogComponent implements OnInit {
     this.showPullerForm = false;
     this.isEditingPuller = false;
     this.selectedPullerId = null;
+    this.pullerSelection.clear();
   }
 
   deletePullerById(pullerId: string, index: number): void {
-    if (!confirm("Sei sicuro di voler eliminare questo Puller?")) return;
+    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
+      width: '400px',
+      data: { itemType: 'puller' }
+    });
 
-    const equipmentId = this.equipmentForm.get('equipmentId')?.value;
-    this.equipmentService.deletePullerById(equipmentId, pullerId).subscribe({
-      next: () => {
-        this.loadPullers();
-      },
-      error: (err) => {
-        console.error("Errore durante l'eliminazione del Puller:", err);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+        this.equipmentService.deletePullerById(equipmentId, pullerId).subscribe({
+          next: () => {
+            this.loadPullers();
+          },
+          error: (err) => {
+            console.error("Errore durante l'eliminazione del Puller:", err);
+          }
+        });
       }
     });
   }
 
   togglePullerList(): void {
     this.showPullers = !this.showPullers;
+  }
+
+  isAllPullersSelected() {
+    const numSelected = this.pullerSelection.selected.length;
+    const numRows = this.pullers.data.length;
+    return numSelected === numRows;
+  }
+
+  toggleAllPullerRows() {
+    if (this.isAllPullersSelected()) {
+      this.pullerSelection.clear();
+      return;
+    }
+    this.pullerSelection.select(...this.pullers.data);
+  }
+
+  pullerCheckboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllPullersSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.pullerSelection.isSelected(row) ? 'deselect' : 'select'} row`;
+  }
+
+  editSelectedPuller() {
+    if (this.pullerSelection.selected.length === 1) {
+      this.editPuller(this.pullerSelection.selected[0]);
+    }
+  }
+
+  deleteSelectedPullers() {
+    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
+      width: '400px',
+      data: { itemType: 'puller' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.pullerSelection.selected.forEach(puller => {
+          this.deletePullerById(puller.pullerId, 0);
+        });
+        this.pullerSelection.clear();
+      }
+    });
   }
 }

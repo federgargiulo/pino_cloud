@@ -10,6 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { DeleteConfirmDialogComponent } from './delete-confirm-dialog.component';
 @NgModule({
   declarations: [
     EquipmentConfirmDialogComponent
@@ -24,7 +27,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatInputModule,
     MatExpansionModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    DeleteConfirmDialogComponent
   ],
   exports: [
     EquipmentConfirmDialogComponent

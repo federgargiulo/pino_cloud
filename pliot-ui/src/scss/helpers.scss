@@ -123,6 +123,13 @@ $directions: ('top', 'right', 'bottom', 'left');
     align-self: stretch;
   }
 
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.w-50-percent {
+    width: 50%;
+}
 
 .flex-nowrap {
     flex-wrap: nowrap;

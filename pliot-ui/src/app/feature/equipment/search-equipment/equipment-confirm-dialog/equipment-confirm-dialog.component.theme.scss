@@ -1,6 +1,17 @@
 @mixin equipment-confirm-dialog-theme() {
   app-equipment-confirm-dialog {
     // background-color: red;
+
+    mat-dialog-content {
+      &.mat-mdc-dialog-content {
+        &.mdc-dialog__content {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+      }
+    }
+
     .mat-expansion-panel-body {
       display: flex;
       flex-direction: row;
@@ -24,8 +35,12 @@
         }
       }
 
+      .actions-table-bar {
+        margin: 32px 24px 0 24px;
+      }
+
       table {
-        margin: 24px;
+        margin: 8px 24px 24px 24px;
       }
     }
   }

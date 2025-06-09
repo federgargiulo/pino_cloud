@@ -113,7 +113,12 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: "Inter", sans-serif;
 }
+* {
+  font-family: "Inter", sans-serif;
+}
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -127,6 +132,7 @@ menu,
 nav,
 section {
   display: block;
+  font-family: "Inter", sans-serif;
 }
 body {
   line-height: 1;
@@ -137,6 +143,7 @@ body {
   letter-spacing: 0.5px;
   font-size: 14px;
   box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 ol,
 ul {
@@ -145,6 +152,7 @@ ul {
 blockquote,
 q {
   quotes: none;
+  font-family: "Inter", sans-serif;
 }
 blockquote:before,
 blockquote:after,
@@ -152,10 +160,12 @@ q:before,
 q:after {
   content: "";
   content: none;
+  font-family: "Inter", sans-serif;
 }
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  font-family: "Inter", sans-serif;
 }
 body,
 html,
@@ -165,21 +175,27 @@ app-root {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  font-family: "Inter", sans-serif;
 }
 app-root > div {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   overflow: auto;
+  font-family: "Inter", sans-serif;
 }
 html,
 body {
   height: 100%;
+  font-family: "Inter", sans-serif;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
