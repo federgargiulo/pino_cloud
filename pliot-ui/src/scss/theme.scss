@@ -1,1 +1,10 @@
-@forward 'theme-values' show $my-theme;
+@use '@angular/material' as mat;
+@use './palettes' as palettes;
+
+$my-theme: mat.m2-define-light-theme((
+  color: (
+    primary: palettes.$primary,
+    accent: palettes.$accent,
+    warn: palettes.$warn,
+  )
+));

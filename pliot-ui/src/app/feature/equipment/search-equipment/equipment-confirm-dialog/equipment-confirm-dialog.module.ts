@@ -5,8 +5,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { EquipmentConfirmDialogComponent } from './equipment-confirm-dialog.component';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 @NgModule({
   declarations: [
     EquipmentConfirmDialogComponent
@@ -17,7 +20,11 @@ import { MatFormField } from '@angular/material/form-field';
     MatButtonModule,
     MatTableModule,
     ReactiveFormsModule,
-    MatFormField
+    MatFormFieldModule,
+    MatInputModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatDividerModule
   ],
   exports: [
     EquipmentConfirmDialogComponent

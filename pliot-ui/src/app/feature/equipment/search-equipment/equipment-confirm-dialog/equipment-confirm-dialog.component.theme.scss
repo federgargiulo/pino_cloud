@@ -1,180 +1,31 @@
 @mixin equipment-confirm-dialog-theme() {
   app-equipment-confirm-dialog {
-    background-color: red;
-    mat-form-field.mat-mdc-form-field {
-      margin-top: 17px !important;
-      height: 38px;
+    // background-color: red;
+    .mat-expansion-panel-body {
+      display: flex;
+      flex-direction: row;
+      // gap: 40px !important;
+      padding: 0;
 
-      &:has(.mat-mdc-form-field-subscript-wrapper .mat-mdc-form-field-hint-wrapper) {
-        margin-bottom: 15px;
+      form, table {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
       }
 
-      &:has(.mat-mdc-form-field-subscript-wrapper .mat-mdc-form-field-error-wrapper) {
-        margin-bottom: 15px;
-      }
-
-      &.mat-focused {
-        .mat-mdc-text-field-wrapper {
-          &.mdc-text-field {
-            border: 1px solid blue;
-          }
-        }
-      }
-
-      .mat-mdc-text-field-wrapper {
-        overflow: visible;
-        padding: 0;
-        &:hover .mat-mdc-form-field-focus-overlay {
-            opacity: 0.05;
-        }
-        &.mdc-text-field {
-          border: 1px solid lightgray;
-          border-radius: 1px;
-          background-color: transparent;
-          .mat-mdc-form-field-focus-overlay {
-
-          }
-          .mat-mdc-form-field-flex {
-            .mat-mdc-form-field-infix {
-              padding: 9.5px 14px;
-              min-height: auto;
-              label.mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
-                transition: none !important;
-                transform: none !important;
-                top: -20px !important;
-                left: -2px !important;
-              }
-              // input text field
-              input.mat-mdc-input-element.mat-mdc-form-field-input-control {
-                &::-webkit-input-placeholder {
-                  color: lightgray;
-                  opacity: 1;
-                }
-                div {
-                  display: none;
-                }
-              }
-              // select
-              mat-select.mat-mdc-select {
-                .mat-mdc-select-trigger {
-                  .mat-mdc-select-value {
-                    display: flex;
-                    flex-grow: 1;
-                    align-items: center;
-                    height: 16px;
-                    .mat-mdc-select-placeholder {
-                      width: 100%;
-                    }
-                    &::after {
-                      content: "keyboard_arrow_down";
-                      font-family: 'Material Symbols Outlined';
-                      font-weight: 200;
-                      font-style: normal;
-                      font-size: 28px;  /* Preferred icon size */
-                      display: inline-block;
-                      line-height: 1;
-                      text-transform: none;
-                      letter-spacing: normal;
-                      word-wrap: normal;
-                      white-space: nowrap;
-                      direction: ltr;
-                      position: relative;
-                      right: -8px;
-                      color: #aaa;
-                    }
-                    .mat-mdc-select-value-text {
-                      height: 16.5px;
-                      width: 100%;
-                      display: flex;
-                      flex-align: center;
-                      align-items: center;
-                      justify-content: space-between;
-                    }
-                  }
-                  .mat-mdc-select-arrow-wrapper {
-                    display: none;
-                  }
-                }
-                // pannello aperto
-                &[aria-expanded="true"] {
-                  .mat-mdc-select-trigger {
-                    .mat-mdc-select-value {
-                      &::after {
-                        content: "keyboard_arrow_up";
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          .mdc-line-ripple {
-            display: none;
+      form {
+        padding-top: 24px;
+        > div {
+          padding: 0 24px;
+          gap: 24px;
+          mat-form-field {
+            flex-grow: 1;
           }
         }
       }
 
-      .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
-        height: 12px;
-        top: 3px;
-        &::before {
-          display: none;
-        }
-        .mat-mdc-form-field-hint-wrapper {
-          padding: 0 !important;
-          mat-hint.mat-mdc-form-field-hint {
-            font-size: 12px;
-            &::before {
-              display: none;
-            }
-          }
-        }
-
-        .mat-mdc-form-field-error-wrapper {
-          padding: 0;
-          mat-error.mat-mdc-form-field-error {
-            font-size: 12px;
-            &::before {
-              display: none;
-            }
-          }
-          &::before {
-            display: none;
-          }
-        }
-      }
-
-      &.mat-form-field-animations-enabled {
-        .mat-mdc-text-field-wrapper {
-          &.mdc-text-field {
-            .mat-mdc-form-field-flex {
-              .mat-mdc-form-field-infix {
-                label.mdc-floating-label.mat-mdc-floating-label {
-                  transition: none !important;
-                  transform: none !important;
-                  top: -20px !important;
-                  left: -2px !important;
-                }
-              }
-            }
-          }
-        }
-      }
-
-      &.mat-form-field-invalid.ng-invalid {
-        .mat-mdc-text-field-wrapper {
-          &.mdc-text-field {
-            border-color: red;
-          }
-        }
-      }
-
-      &.mat-focused.ng-valid {
-        .mat-mdc-text-field-wrapper {
-          &.mdc-text-field {
-            border-color: blue;
-          }
-        }
+      table {
+        margin: 24px;
       }
     }
   }

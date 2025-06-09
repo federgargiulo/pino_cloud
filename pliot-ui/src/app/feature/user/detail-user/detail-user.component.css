@@ -4,7 +4,7 @@
     overflow: auto;
     flex-direction: column;
   }
-  
+
   .form-container {
     margin: 35px;
     gap: 24px;
@@ -20,11 +20,11 @@
       gap: 4px;
       input, textarea {
         border-radius: 3px;
-        // background-color: #fafafa;
+        /* background-color: #fafafa; */
       }
     }
   }
-  
+
   .mat-toolbar.mat-toolbar {
     background-color: white;
     border-top: 1px solid #e0e0e0;
@@ -37,4 +37,3 @@
       margin-top: 0 !important;
     }
   }
-  

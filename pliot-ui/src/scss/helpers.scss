@@ -1,5 +1,5 @@
 $directions: ('top', 'right', 'bottom', 'left');
-@import 'base.scss';
+@use './base.scss' as *;
 
 @each $direction in $directions {
     @for $i from 1 through 10 {

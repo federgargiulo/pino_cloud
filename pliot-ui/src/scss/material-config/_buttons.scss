@@ -11,6 +11,11 @@
 
     .mdc-button__label {
       font-weight: 400;
+      font-size: 14px;
+      line-height: 14px;
+    }
+    .mat-mdc-button-touch-target {
+      height: 38px;
     }
 
     &.button-margin-top {

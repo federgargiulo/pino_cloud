@@ -1,0 +1,59 @@
+@mixin expansion-panel() {
+  // empty
+  mat-expansion-panel {
+    border-radius: 1px !important;
+    &.mat-expansion-panel {
+      &:not([class*=mat-elevation-z]) {
+        box-shadow: none;
+        border: 1px solid lightgray;
+      }
+
+      .mat-expansion-panel-header {
+        height: 55px;
+        border-radius: 0;
+        .mat-expansion-indicator {
+          height: 24.5px;
+          svg {
+            display: none;
+          }
+          &::after {
+            display: none;
+          }
+          &::before {
+            content: 'add';
+            font-family: 'Material Symbols Outlined' !important;
+            font-size: 24px;  /* Preferred icon size */
+            text-transform: none;
+            white-space: nowrap;
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 300,
+            'GRAD' -25,
+            'opsz' 48
+          }
+        }
+        &.mat-expanded {
+          border-bottom: 1px solid lightgray;
+          .mat-expansion-indicator {
+            &::before {
+              content: 'remove';
+              font-family: 'Material Symbols Outlined' !important;
+              font-size: 24px;  /* Preferred icon size */
+              text-transform: none;
+              white-space: nowrap;
+              font-variation-settings:
+              'FILL' 1,
+              'wght' 300,
+              'GRAD' -25,
+              'opsz' 48
+            }
+          }
+        }
+      }
+
+      .mat-expansion-panel-body {
+        padding: 0;
+      }
+    }
+  }
+}
