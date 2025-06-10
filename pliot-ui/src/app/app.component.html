@@ -4,7 +4,7 @@
       <span class="material-symbols-outlined"> menu </span>
     </button>
     <div class="app-header-left-logo">
-      <img src="logo.png" alt="Logo" width="40" style="margin-right: 8px;" />
+      <img src="logo.png" alt="Logo" width="40" style="margin-right: 12px;" />
       <span>Pino</span>
     </div>
   </div>
@@ -15,15 +15,23 @@
   </form>
 
   <div class="app-header-right" >
-    <button mat-button>
-      <span class="material-symbols-outlined"> notifications </span>
-    </button>
-    <button mat-button>
-      <span class="material-symbols-outlined"> settings </span>
-    </button>
-    <button mat-button >
-      <span class="material-symbols-outlined" [routerLink]="['profile']"> person </span>
-    </button>
+    <div class='app-header-right-actions'>
+      <button mat-button>
+        <span class="material-symbols-outlined"> notifications </span>
+      </button>
+      <button mat-button>
+        <span class="material-symbols-outlined"> settings </span>
+      </button>
+    </div>
+    <div class='user-profile-container d-flex align-items-center'>
+      <div class='user-profile-info d-flex flex-column align-items-end'>
+        <span class='user-profile-name'>Andrea Palladino</span>
+        <span class='user-profile-role'>Administrator</span>
+      </div>
+      <button mat-button class='user-profile-icon'>
+        <span class='user-profile-icon-letter'>A</span>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -31,7 +39,7 @@
   <mat-drawer #drawer class="example-sidenav" mode="side" opened>
     <!-- Home -->
     <div class="drawer-button-container">
-      <button mat-button class="mat-drawer-button" aria-current="page" href="#">
+      <button mat-button class="mat-drawer-button" [routerLink]="['/']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
         <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> home </span>
           <span class="px-1"> Home </span>
@@ -40,7 +48,7 @@
     </div>
     <!-- Tenant -->
     <div class="drawer-button-container" [class.opened]="showTenantItems" *ngIf="isPliotAdmin()">
-      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('tenant')">
+      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('tenant')" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
         <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> business </span>
           <span class="px-1"> Tenant </span>
@@ -55,7 +63,7 @@
     </div>
     <!-- Equipment -->
     <div class="drawer-button-container" [class.opened]="showEquipmentItems">
-      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('equipment')">
+      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('equipment')" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
         <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> construction </span>
           <span class="px-1"> Equipment </span>
@@ -70,7 +78,7 @@
     </div>
     <!-- Users -->
     <div class="drawer-button-container" [class.opened]="showUserItems">
-      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('user')">
+      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('user')" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
         <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> person </span>
           <span class="px-1"> Users </span>
@@ -85,7 +93,7 @@
     </div>
     <!-- Dashboard -->
     <div class="drawer-button-container" [class.opened]="showDashboardItems">
-      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('dashboard')">
+      <button mat-button class="mat-drawer-button" (click)="toggleDrawer('dashboard')" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
         <span class="d-flex align-items-center gap-14">
           <span class="material-symbols-outlined"> dashboard </span>
           <span class="px-1"> Dashboard </span>
@@ -98,8 +106,8 @@
       <button mat-button class="mat-drawer-button-item" [routerLink]="['userdashboard-new']" routerLinkActive="active-link"> View </button>
       }
     </div>
-    <div class="drawer-button-container" >
-         <button mat-button class="mat-drawer-button" [routerLink]="['system-status']">SYSTEM STATUS</button>
+    <div class="drawer-button-container">
+      <button mat-button class="mat-drawer-button" [routerLink]="['system-status']" routerLinkActive="active-link">SYSTEM STATUS</button>
     </div>
   </mat-drawer>
 

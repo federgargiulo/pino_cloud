@@ -1,7 +1,7 @@
 @mixin app-header() {
 
   nav.app-header {
-    // padding: 24px;
+    padding: 0 24px;
     display: flex;
     border-bottom: 1px solid #e0e0e0;
     height: 50px;
@@ -11,7 +11,7 @@
       &-left {
         display: flex;
         align-items: center;
-        // gap: 24px;
+        gap: 13px;
         //justify-content: space-between;
         // gap: 12px;
         // padding-left: 24px;
@@ -24,24 +24,61 @@
           }
           span {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 5px;
             color: #00a0c4;
           }
         }
       }
-      &-right, &-center {
+
+      &-right {
         display: flex;
         align-items: center;
-        gap: 0;
+        gap: 24px;
+        .user-profile-container {
+          gap: 12px;
+          .user-profile-info {
+            .user-profile-name {
+              font-size: 12px !important;
+              font-weight: 600 !important;
+              color: #646464;
+            }
+            .user-profile-role {
+              font-size: 10px !important;
+              color: #646464;
+            }
+          }
+          .user-profile-icon {
+            width: 30px !important;
+            height: 30px !important;
+            border-radius: 50% !important;
+            background-color: #00a0c4;
+            color: #fff !important;
+            .user-profile-icon-letter {
+              font-size: 14px !important;
+              font-weight: 300 !important;
+              text-transform: uppercase !important;
+              // letter-spacing: 2px !important;
+              color: #fff;
+            }
+          }
+        }
+        .app-header-right-actions {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+      }
+
+      &-right, &-center {
         button.mdc-button {
-          padding: 0 12px !important;
+          // padding: 0 12px !important;
           &:last-of-type {
-            margin-right: 12px;
+            // margin-right: 12px;
           }
           &:first-of-type {
-            margin-left: 12px;
+            // margin-left: 12px;
           }
           border-radius: 0;
           height: 50px;
@@ -50,9 +87,11 @@
           }
         }
       }
+
       &-left {
         width: 229px;
       }
+
       &-center {
         border-left: 1px solid #e0e0e0;
         border-right: 1px solid #e0e0e0;
@@ -70,12 +109,14 @@
 
     button.mdc-button {
       min-width: auto;
-      padding: 0 8px !important;
-      margin: 0 12px;
+      padding: 0 1px !important;
+      // margin: 0 12px;
       border-radius: 0;
-      height: 50px !important;
+      height: auto !important;
+
       .material-symbols-outlined {
         font-size: 18px;
+        color: #646464;
       }
     }
 
