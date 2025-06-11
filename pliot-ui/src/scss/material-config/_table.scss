@@ -24,6 +24,9 @@
     }
     .mat-mdc-row {
       display: flex;
+      &:last-child>.mat-mdc-cell {
+        border-bottom: 1px solid #e0e0e0;
+      }
       .mat-mdc-cell {
         border-color: #e0e0e0;
         vertical-align: middle;

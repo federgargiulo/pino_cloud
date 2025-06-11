@@ -3,8 +3,9 @@
     h2 {
       font-size: 24px;
       text-transform: uppercase;
-      font-weight: 500;
+      font-weight: 600;
       margin: 35px 0 0 35px;
+      color: #646464;
     }
   &.mat-drawer-container {
     display: flex;
@@ -17,9 +18,65 @@
         border-right: 1px solid #e0e0e0;
         border-radius: 0;
         background-color: white;
+
         .mat-drawer-inner-container {
           display: flex;
           flex-direction: column;
+          justify-content: space-between;
+
+          .drawer-search-container {
+            padding: 0 24px;
+            display: flex;
+            mat-form-field.mat-mdc-form-field {
+              width: 100%;
+              .mat-mdc-form-field-icon-suffix {
+                padding: 0 8px 0 4px;
+               .mdc-icon-button.mat-mdc-icon-button.mat-mdc-button-base {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 21px;
+                height: 21px;
+                padding: 0;
+                .mat-mdc-button-touch-target {
+                  width: 21px;
+                  height: 21px;
+                }
+               }
+              }
+              label {
+                display: none;
+              }
+              .mat-mdc-form-field-subscript-wrapper {
+                display: none;
+              }
+              .mat-mdc-form-field-infix {
+                padding: 9.5px 8px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .material-symbols-outlined {
+                  font-size: 18px;
+                  color: #646464;
+                }
+                input.mat-mdc-input-element.mat-mdc-form-field-input-control::-webkit-input-placeholder {
+                  color: #646464;
+                  font-size: 12px;
+                }
+              }
+              display: flex;
+              align-items: center;
+              margin: 0 !important;
+              height: 38px;
+              background-color: #e0e0e045;
+              border-radius: 30px;
+              .mat-mdc-text-field-wrapper.mdc-text-field {
+                border: none;
+              }
+
+            }
+          }
+
           .drawer-button-container {
             display: flex;
             flex-direction: column;
@@ -93,9 +150,9 @@
                 margin-left: 33px;
                 border-left: 2px solid rgba(44, 103, 192, 0.15);
                 background-color: transparent !important;
-                height: 35px;
+                height: 40px;
                 .mdc-button__label {
-                  font-size: 14px;
+                  font-size: 12px;
                   font-weight: 400;
                   text-transform: capitalize;
                   color: rgb(100, 100, 100);
@@ -115,6 +172,7 @@
       display: flex;
       flex-grow: 1;
       overflow: auto;
+
       .example-sidenav-content {
         display: flex;
         flex-grow: 1;

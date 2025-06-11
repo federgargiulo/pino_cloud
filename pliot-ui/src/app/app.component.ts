@@ -1,9 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from './service/user.service';
 import { filter } from 'rxjs/operators';
 import { MatDrawer } from '@angular/material/sidenav';
+
+interface MenuItem {
+  id: string;
+  label: string;
+  subItems?: { id: string; label: string }[];
+}
 
 @Component({
   selector: 'app-root',
@@ -11,7 +17,7 @@ import { MatDrawer } from '@angular/material/sidenav';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
 
   showTenantItems = false;
@@ -20,35 +26,164 @@ export class AppComponent {
   showDashboardItems = false;
   showAccountItems = false;
   title = 'pliot-ui';
+  searchText = '';
+
+  menuItems: MenuItem[] = [
+    { id: 'home', label: 'Home' },
+    {
+      id: 'tenant',
+      label: 'Tenant',
+      subItems: [
+        { id: 'search-tenant', label: 'Search Tenant' },
+        { id: 'add-tenant', label: 'Create Tenant' }
+      ]
+    },
+    {
+      id: 'equipment',
+      label: 'Equipment',
+      subItems: [
+        { id: 'search-equipment', label: 'Search Equipment' },
+        { id: 'add-equipment', label: 'Create Equipment' }
+      ]
+    },
+    {
+      id: 'users',
+      label: 'Users',
+      subItems: [
+        { id: 'search-users', label: 'Search Users' },
+        { id: 'add-users', label: 'Create Users' }
+      ]
+    },
+    {
+      id: 'dashboard',
+      label: 'Dashboard',
+      subItems: [
+        { id: 'userdashboard-list', label: 'List Dashboard' },
+        { id: 'userdashboard-new', label: 'View Dashboard' }
+      ]
+    },
+    { id: 'system-status', label: 'System Status' }
+  ];
+
+  visibleMenuItems: { [key: string]: boolean } = {};
 
   constructor(private router: Router, private modalService: NgbModal, private userService: UserService) {
-    // Log iniziale dello stato
-    console.log('Stato iniziale dei pannelli:', {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      const url = event.urlAfterRedirects;
+      this.updateActivePanel(url);
+    });
+  }
+
+  ngOnInit() {
+    console.log('Initial panel states:', {
       tenant: this.showTenantItems,
       equipment: this.showEquipmentItems,
       user: this.showUserItems,
       dashboard: this.showDashboardItems
     });
+    this.initializeVisibleMenuItems();
+    this.updateActivePanel(this.router.url);
+  }
 
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      const url = event.urlAfterRedirects;
-      console.log('URL corrente:', url);
+  private initializeVisibleMenuItems() {
+    this.menuItems.forEach(item => {
+      this.visibleMenuItems[item.id] = true;
+      if (item.subItems) {
+        item.subItems.forEach(subItem => {
+          this.visibleMenuItems[subItem.id] = true;
+        });
+      }
+    });
+  }
 
-      // Update panel states based on the URL
-      this.showTenantItems = url.includes('/search-tenant') || url.includes('/add-tenant');
-      this.showEquipmentItems = url.includes('/search-equipment') || url.includes('/add-equipment');
-      this.showUserItems = url.includes('/search-users') || url.includes('/add-users');
-      this.showDashboardItems = url.includes('/userdashboard-list') || url.includes('/userdashboard-new');
+  private updateActivePanel(url: string) {
+    // Resetta tutti i pannelli
+    this.showTenantItems = false;
+    this.showEquipmentItems = false;
+    this.showUserItems = false;
+    this.showDashboardItems = false;
 
-      // Log dello stato dopo l'aggiornamento
-      console.log('Stato dei pannelli dopo navigazione:', {
-        tenant: this.showTenantItems,
-        equipment: this.showEquipmentItems,
-        user: this.showUserItems,
-        dashboard: this.showDashboardItems
-      });
+    // Apri il pannello corrispondente all'URL corrente
+    if (url.includes('/search-tenant') || url.includes('/add-tenant')) {
+      this.showTenantItems = true;
+    } else if (url.includes('/search-equipment') || url.includes('/add-equipment')) {
+      this.showEquipmentItems = true;
+    } else if (url.includes('/search-users') || url.includes('/add-users')) {
+      this.showUserItems = true;
+    } else if (url.includes('/userdashboard-list') || url.includes('/userdashboard-new')) {
+      this.showDashboardItems = true;
+    }
+
+    console.log('Updated panel states:', {
+      tenant: this.showTenantItems,
+      equipment: this.showEquipmentItems,
+      user: this.showUserItems,
+      dashboard: this.showDashboardItems
+    });
+  }
+
+  toggleDrawer(section: string) {
+    console.log('Toggling section:', section);
+    console.log('Current URL:', this.router.url);
+
+    const currentUrl = this.router.url;
+    let isActiveSection = false;
+
+    // Verifica se la sezione è attiva
+    switch (section) {
+      case 'tenant':
+        isActiveSection = currentUrl.includes('/search-tenant') || currentUrl.includes('/add-tenant');
+        if (!isActiveSection) {
+          this.showTenantItems = !this.showTenantItems;
+          if (this.showTenantItems) {
+            this.showEquipmentItems = false;
+            this.showUserItems = false;
+            this.showDashboardItems = false;
+          }
+        }
+        break;
+      case 'equipment':
+        isActiveSection = currentUrl.includes('/search-equipment') || currentUrl.includes('/add-equipment');
+        if (!isActiveSection) {
+          this.showEquipmentItems = !this.showEquipmentItems;
+          if (this.showEquipmentItems) {
+            this.showTenantItems = false;
+            this.showUserItems = false;
+            this.showDashboardItems = false;
+          }
+        }
+        break;
+      case 'user':
+        isActiveSection = currentUrl.includes('/search-users') || currentUrl.includes('/add-users');
+        if (!isActiveSection) {
+          this.showUserItems = !this.showUserItems;
+          if (this.showUserItems) {
+            this.showTenantItems = false;
+            this.showEquipmentItems = false;
+            this.showDashboardItems = false;
+          }
+        }
+        break;
+      case 'dashboard':
+        isActiveSection = currentUrl.includes('/userdashboard-list') || currentUrl.includes('/userdashboard-new');
+        if (!isActiveSection) {
+          this.showDashboardItems = !this.showDashboardItems;
+          if (this.showDashboardItems) {
+            this.showTenantItems = false;
+            this.showEquipmentItems = false;
+            this.showUserItems = false;
+          }
+        }
+        break;
+    }
+
+    console.log('Final panel states:', {
+      tenant: this.showTenantItems,
+      equipment: this.showEquipmentItems,
+      user: this.showUserItems,
+      dashboard: this.showDashboardItems
     });
   }
 
@@ -60,77 +195,61 @@ export class AppComponent {
     return this.userService.hasRole(role);
   }
 
-  public isPliotAdmin(): boolean {
+  isPliotAdmin(): boolean {
     return this.userService.hasRole("pliot_admin");
   }
 
-  toggleDrawer(section: string): void {
-    const currentUrl = this.router.url;
-    console.log('Toggle drawer chiamato per sezione:', section);
-    console.log('URL corrente:', currentUrl);
+  filterMenuItems() {
+    const searchLower = this.searchText.toLowerCase();
 
-    let isActive = false;
+    this.menuItems.forEach(item => {
+      const mainItemVisible = this.matchesSearch(item.label, searchLower);
+      let hasVisibleSubItems = false;
 
-    // Check if the section has an active route
-    switch (section) {
-      case 'tenant':
-        isActive = currentUrl.includes('/search-tenant') || currentUrl.includes('/add-tenant');
-        break;
-      case 'equipment':
-        isActive = currentUrl.includes('/search-equipment') || currentUrl.includes('/add-equipment');
-        break;
-      case 'user':
-        isActive = currentUrl.includes('/search-users') || currentUrl.includes('/add-users');
-        break;
-      case 'dashboard':
-        isActive = currentUrl.includes('/userdashboard-list') || currentUrl.includes('/userdashboard-new');
-        break;
-    }
+      if (item.subItems) {
+        item.subItems.forEach(subItem => {
+          const subItemVisible = this.matchesSearch(subItem.label, searchLower);
+          this.visibleMenuItems[subItem.id] = subItemVisible;
+          if (subItemVisible) {
+            hasVisibleSubItems = true;
+          }
+        });
+      }
 
-    console.log('La sezione è attiva?', isActive);
+      // Mostra l'elemento principale se corrisponde alla ricerca o se ha sottomenu visibili
+      this.visibleMenuItems[item.id] = mainItemVisible || hasVisibleSubItems;
 
-    // Toggle the selected section
-    switch (section) {
-      case 'tenant':
-        this.showTenantItems = !this.showTenantItems;
-        if (!isActive) {
-          this.showEquipmentItems = false;
-          this.showUserItems = false;
-          this.showDashboardItems = false;
+      // Se c'è una corrispondenza nella ricerca, espandi automaticamente il sottomenu
+      if (mainItemVisible || hasVisibleSubItems) {
+        switch (item.id) {
+          case 'tenant':
+            this.showTenantItems = true;
+            break;
+          case 'equipment':
+            this.showEquipmentItems = true;
+            break;
+          case 'users':
+            this.showUserItems = true;
+            break;
+          case 'dashboard':
+            this.showDashboardItems = true;
+            break;
         }
-        break;
-      case 'equipment':
-        this.showEquipmentItems = !this.showEquipmentItems;
-        if (!isActive) {
-          this.showTenantItems = false;
-          this.showUserItems = false;
-          this.showDashboardItems = false;
-        }
-        break;
-      case 'user':
-        this.showUserItems = !this.showUserItems;
-        if (!isActive) {
-          this.showTenantItems = false;
-          this.showEquipmentItems = false;
-          this.showDashboardItems = false;
-        }
-        break;
-      case 'dashboard':
-        this.showDashboardItems = !this.showDashboardItems;
-        if (!isActive) {
-          this.showTenantItems = false;
-          this.showEquipmentItems = false;
-          this.showUserItems = false;
-        }
-        break;
-    }
-
-    // Log dello stato finale
-    console.log('Stato finale dei pannelli:', {
-      tenant: this.showTenantItems,
-      equipment: this.showEquipmentItems,
-      user: this.showUserItems,
-      dashboard: this.showDashboardItems
+      }
     });
+  }
+
+  isMenuItemVisible(item: string): boolean {
+    return this.visibleMenuItems[item] || false;
+  }
+
+  private matchesSearch(text: string, search: string): boolean {
+    return text.toLowerCase().includes(search);
+  }
+
+  clearSearch() {
+    this.searchText = '';
+    this.initializeVisibleMenuItems();
+    this.updateActivePanel(this.router.url);
   }
 }

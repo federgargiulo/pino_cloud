@@ -5,15 +5,15 @@
           color="primary"
           [disabled]="selection.selected.length !== 1"
           (click)="editSelectedTenant()">
-    <mat-icon>edit</mat-icon>
-    Modifica
+          <span class="material-symbols-outlined">edit_square</span>
+          Modifica
   </button>
 
   <button mat-flat-button
           color="warn"
           [disabled]="selection.selected.length === 0"
           (click)="removeSelectedRows()">
-    <mat-icon>delete</mat-icon>
+    <span class="material-symbols-outlined">delete</span>
     Elimina
   </button>
 </mat-toolbar>

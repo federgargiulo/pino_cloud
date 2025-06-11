@@ -54,6 +54,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ProfileComponent } from './feature/profile/profile.component';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
@@ -138,6 +139,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     MatCheckboxModule,
     MatDividerModule,
     MatCardModule,
+    MatMenuModule,
     OlapModule,
     MatDialogModule,
     MatDialogContent,

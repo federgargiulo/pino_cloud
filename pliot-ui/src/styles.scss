@@ -4,6 +4,7 @@
 @use './scss/index' as scss;
 
 @use './app/feature/equipment/search-equipment/equipment-confirm-dialog/equipment-confirm-dialog.component.theme' as equipment-confirm-dialog-theme;
+@use './app/app.component.theme' as app-root-theme;
 
 @use '@angular/material' as mat;
 @include mat.core();
@@ -11,6 +12,7 @@
 
 // mixin @include
 @include equipment-confirm-dialog-theme.equipment-confirm-dialog-theme();
+@include app-root-theme.app-root();
 
 /*
 html {
