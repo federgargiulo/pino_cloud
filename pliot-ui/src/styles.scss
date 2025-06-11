@@ -5,6 +5,7 @@
 
 @use './app/feature/equipment/search-equipment/equipment-confirm-dialog/equipment-confirm-dialog.component.theme' as equipment-confirm-dialog-theme;
 @use './app/app.component.theme' as app-root-theme;
+@use './app/feature/profile/profile.component.theme' as profile-theme;
 
 @use '@angular/material' as mat;
 @include mat.core();
@@ -13,6 +14,7 @@
 // mixin @include
 @include equipment-confirm-dialog-theme.equipment-confirm-dialog-theme();
 @include app-root-theme.app-root();
+@include profile-theme.app-profile();
 
 /*
 html {

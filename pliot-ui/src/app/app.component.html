@@ -14,7 +14,7 @@
 
   </form>
 
-  <div class="app-header-right" >
+  <div class="app-header-right">
     <div class='app-header-right-actions'>
       <button mat-button>
         <span class="material-symbols-outlined"> notifications </span>
@@ -32,14 +32,14 @@
         <span class='user-profile-icon-letter'>A</span>
       </button>
       <mat-menu #userMenu="matMenu" id="app-header-user-menu" class="app-header-user-menu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="navigateToProfile()">
           <span class="d-flex align-items-center gap-14">
             <span class="material-symbols-outlined">manage_accounts</span>
             <span class="px-1">Profile Settings</span>
-        </span>
-        <span class="material-symbols-outlined">chevron_right</span>
-      </button>
-        <button mat-menu-item>
+          </span>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
           <span class="d-flex align-items-center gap-14">
             <span class="material-symbols-outlined">logout</span>
             <span class="px-1">Log Out</span>
@@ -60,7 +60,8 @@
       <ng-container *ngFor="let item of menuItems">
         <!-- Home -->
         <div class="drawer-button-container" *ngIf="item.id === 'home' && isMenuItemVisible(item.id)">
-          <button mat-button class="mat-drawer-button" [routerLink]="['/']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+          <button mat-button class="mat-drawer-button" [routerLink]="['/']" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: true}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">home</span>
               <span class="px-1">{{ item.label }}</span>
@@ -69,96 +70,105 @@
         </div>
 
         <!-- Tenant -->
-        <div class="drawer-button-container" [class.opened]="showTenantItems" *ngIf="item.id === 'tenant' && isPliotAdmin() && isMenuItemVisible(item.id)">
-          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('tenant')" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
+        <div class="drawer-button-container" [class.opened]="showTenantItems"
+          *ngIf="item.id === 'tenant' && isPliotAdmin() && isMenuItemVisible(item.id)">
+          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('tenant')"
+            [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">business</span>
               <span class="px-1">{{ item.label }}</span>
             </span>
-            <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showTenantItems">stat_minus_1</span>
-            <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showTenantItems">stat_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-closed"
+              [class.d-none]="showTenantItems">stat_minus_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-opened"
+              [class.d-none]="!showTenantItems">stat_1</span>
           </button>
           @if (showTenantItems) {
-            <ng-container *ngFor="let subItem of item.subItems">
-              <button mat-button class="mat-drawer-button-item"
-                      [routerLink]="[subItem.id]"
-                      routerLinkActive="active-link"
-                      *ngIf="isMenuItemVisible(subItem.id)">
-                {{ subItem.label }}
-              </button>
-            </ng-container>
+          <ng-container *ngFor="let subItem of item.subItems">
+            <button mat-button class="mat-drawer-button-item" [routerLink]="[subItem.id]" routerLinkActive="active-link"
+              *ngIf="isMenuItemVisible(subItem.id)">
+              {{ subItem.label }}
+            </button>
+          </ng-container>
           }
         </div>
 
         <!-- Equipment -->
-        <div class="drawer-button-container" [class.opened]="showEquipmentItems" *ngIf="item.id === 'equipment' && isMenuItemVisible(item.id)">
-          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('equipment')" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
+        <div class="drawer-button-container" [class.opened]="showEquipmentItems"
+          *ngIf="item.id === 'equipment' && isMenuItemVisible(item.id)">
+          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('equipment')"
+            [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">manufacturing</span>
               <span class="px-1">{{ item.label }}</span>
             </span>
-            <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showEquipmentItems">stat_minus_1</span>
-            <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showEquipmentItems">stat_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-closed"
+              [class.d-none]="showEquipmentItems">stat_minus_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-opened"
+              [class.d-none]="!showEquipmentItems">stat_1</span>
           </button>
           @if (showEquipmentItems) {
-            <ng-container *ngFor="let subItem of item.subItems">
-              <button mat-button class="mat-drawer-button-item"
-                      [routerLink]="[subItem.id]"
-                      routerLinkActive="active-link"
-                      *ngIf="isMenuItemVisible(subItem.id)">
-                {{ subItem.label }}
-              </button>
-            </ng-container>
+          <ng-container *ngFor="let subItem of item.subItems">
+            <button mat-button class="mat-drawer-button-item" [routerLink]="[subItem.id]" routerLinkActive="active-link"
+              *ngIf="isMenuItemVisible(subItem.id)">
+              {{ subItem.label }}
+            </button>
+          </ng-container>
           }
         </div>
 
         <!-- Users -->
-        <div class="drawer-button-container" [class.opened]="showUserItems" *ngIf="item.id === 'users' && isMenuItemVisible(item.id)">
-          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('user')" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
+        <div class="drawer-button-container" [class.opened]="showUserItems"
+          *ngIf="item.id === 'users' && isMenuItemVisible(item.id)">
+          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('user')"
+            [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">person</span>
               <span class="px-1">{{ item.label }}</span>
             </span>
-            <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showUserItems">stat_minus_1</span>
-            <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showUserItems">stat_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-closed"
+              [class.d-none]="showUserItems">stat_minus_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-opened"
+              [class.d-none]="!showUserItems">stat_1</span>
           </button>
           @if (showUserItems) {
-            <ng-container *ngFor="let subItem of item.subItems">
-              <button mat-button class="mat-drawer-button-item"
-                      [routerLink]="[subItem.id]"
-                      routerLinkActive="active-link"
-                      *ngIf="isMenuItemVisible(subItem.id)">
-                {{ subItem.label }}
-              </button>
-            </ng-container>
+          <ng-container *ngFor="let subItem of item.subItems">
+            <button mat-button class="mat-drawer-button-item" [routerLink]="[subItem.id]" routerLinkActive="active-link"
+              *ngIf="isMenuItemVisible(subItem.id)">
+              {{ subItem.label }}
+            </button>
+          </ng-container>
           }
         </div>
 
         <!-- Dashboard -->
-        <div class="drawer-button-container" [class.opened]="showDashboardItems" *ngIf="item.id === 'dashboard' && isMenuItemVisible(item.id)">
-          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('dashboard')" [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
+        <div class="drawer-button-container" [class.opened]="showDashboardItems"
+          *ngIf="item.id === 'dashboard' && isMenuItemVisible(item.id)">
+          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('dashboard')"
+            [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">dashboard</span>
               <span class="px-1">{{ item.label }}</span>
             </span>
-            <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showDashboardItems">stat_minus_1</span>
-            <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showDashboardItems">stat_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-closed"
+              [class.d-none]="showDashboardItems">stat_minus_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-opened"
+              [class.d-none]="!showDashboardItems">stat_1</span>
           </button>
           @if (showDashboardItems) {
-            <ng-container *ngFor="let subItem of item.subItems">
-              <button mat-button class="mat-drawer-button-item"
-                      [routerLink]="[subItem.id]"
-                      routerLinkActive="active-link"
-                      *ngIf="isMenuItemVisible(subItem.id)">
-                {{ subItem.label }}
-              </button>
-            </ng-container>
+          <ng-container *ngFor="let subItem of item.subItems">
+            <button mat-button class="mat-drawer-button-item" [routerLink]="[subItem.id]" routerLinkActive="active-link"
+              *ngIf="isMenuItemVisible(subItem.id)">
+              {{ subItem.label }}
+            </button>
+          </ng-container>
           }
         </div>
 
         <!-- System Status -->
         <div class="drawer-button-container" *ngIf="item.id === 'system-status' && isMenuItemVisible(item.id)">
-          <button mat-button class="mat-drawer-button" [routerLink]="['system-status']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: false}">
+          <button mat-button class="mat-drawer-button" [routerLink]="['system-status']" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">browse_activity</span>
               <span class="px-1">{{ item.label }}</span>
@@ -167,16 +177,54 @@
         </div>
       </ng-container>
     </div>
-    <!-- Search Input -->
-    <div class="drawer-search-container">
-      <mat-form-field class="drawer-search-field">
-        <span class="material-symbols-outlined">search</span>
-        <mat-label>Cerca nel menu</mat-label>
-        <input matInput [(ngModel)]="searchText" (keyup)="filterMenuItems()" placeholder="Digita per cercare...">
-        <button mat-icon-button matSuffix (click)="clearSearch()" *ngIf="searchText">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </mat-form-field>
+
+    <div>
+      <div class="drawer-menu-items">
+        <div class="drawer-button-container">
+          <button mat-button class="mat-drawer-button" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: true}">
+            <span class="d-flex align-items-center gap-14">
+              <span class="material-symbols-outlined">notifications</span>
+              <span class="px-1">notifications</span>
+            </span>
+            <span matBadge="4" matBadgeOverlap="false" class="notification-badge">
+
+            </span>
+          </button>
+        </div>
+        <div class="drawer-button-container">
+          <button mat-button class="mat-drawer-button" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: true}">
+            <span class="d-flex align-items-center gap-14">
+              <span class="material-symbols-outlined">help</span>
+              <span class="px-1">support</span>
+            </span>
+          </button>
+        </div>
+        <div class="drawer-button-container">
+          <button mat-button class="mat-drawer-button" [routerLink]="['/profile']" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: true}">
+            <span class="d-flex align-items-center gap-14">
+              <span class="material-symbols-outlined">settings</span>
+              <span class="px-1">settings</span>
+            </span>
+          </button>
+        </div>
+
+      </div>
+
+      <mat-divider></mat-divider>
+      <!-- Search Input -->
+      <div class="drawer-search-container" style="padding-top: 24px;">
+        <mat-form-field class="drawer-search-field">
+          <span class="material-symbols-outlined">search</span>
+          <mat-label>Cerca nel menu</mat-label>
+          <input matInput [(ngModel)]="searchText" (keyup)="filterMenuItems()" placeholder="Digita per cercare...">
+          <button mat-icon-button matSuffix (click)="clearSearch()" *ngIf="searchText">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </mat-form-field>
+      </div>
     </div>
   </mat-drawer>
 

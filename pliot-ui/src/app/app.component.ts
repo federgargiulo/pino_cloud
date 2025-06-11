@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   showAccountItems = false;
   title = 'pliot-ui';
   searchText = '';
+  issuer: string | null = '';
 
   menuItems: MenuItem[] = [
     { id: 'home', label: 'Home' },
@@ -251,5 +252,27 @@ export class AppComponent implements OnInit {
     this.searchText = '';
     this.initializeVisibleMenuItems();
     this.updateActivePanel(this.router.url);
+  }
+
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
+  }
+
+  logout(){
+    const token = this.userService.keycloak.token;
+    const idToken = this.userService.keycloak.idToken;
+    console.log('idToken:', idToken);
+    if (!token || !idToken ) {
+      console.error('Token non disponibile');
+      return;
+    }
+    const redirectUri = encodeURIComponent(window.location.origin);
+    const iss=this.issuer;
+    //const logoutUrl = iss+'/protocol/openid-connect/logout?redirect_uri='+redirectUri;
+
+    const logoutUrl = iss+'/protocol/openid-connect/logout?id_token_hint='+idToken+'&post_logout_redirect_uri='+redirectUri;
+
+    console.log('logoutUrl:', logoutUrl);
+    window.location.href = logoutUrl;
   }
 }

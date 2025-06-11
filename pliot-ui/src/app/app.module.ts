@@ -58,7 +58,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MonitorComponent } from './feature/system/monitor/monitor.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -138,9 +140,12 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     MatTableModule,
     MatCheckboxModule,
     MatDividerModule,
+    MatBadgeModule,
     MatCardModule,
+    MatTabsModule,
     MatMenuModule,
     OlapModule,
+    MatTabsModule,
     MatDialogModule,
     MatDialogContent,
     MatDialogActions,
