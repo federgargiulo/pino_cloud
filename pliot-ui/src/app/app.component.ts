@@ -100,35 +100,42 @@ export class AppComponent implements OnInit {
   }
 
   private updateActivePanel(url: string) {
-    // Resetta tutti i pannelli
-    this.showTenantItems = false;
-    this.showEquipmentItems = false;
-    this.showUserItems = false;
-    this.showDashboardItems = false;
+    // Verifica quali pannelli hanno voci attive
+    const hasActiveTenant = url.includes('/search-tenant') || url.includes('/add-tenant');
+    const hasActiveEquipment = url.includes('/search-equipment') || url.includes('/add-equipment');
+    const hasActiveUser = url.includes('/search-users') || url.includes('/add-users');
+    const hasActiveDashboard = url.includes('/userdashboard-list') || url.includes('/userdashboard-new');
 
-    // Apri il pannello corrispondente all'URL corrente
-    if (url.includes('/search-tenant') || url.includes('/add-tenant')) {
+    // Mantieni aperti i pannelli con voci attive
+    if (hasActiveTenant) {
       this.showTenantItems = true;
-    } else if (url.includes('/search-equipment') || url.includes('/add-equipment')) {
+    }
+    if (hasActiveEquipment) {
       this.showEquipmentItems = true;
-    } else if (url.includes('/search-users') || url.includes('/add-users')) {
+    }
+    if (hasActiveUser) {
       this.showUserItems = true;
-    } else if (url.includes('/userdashboard-list') || url.includes('/userdashboard-new')) {
+    }
+    if (hasActiveDashboard) {
       this.showDashboardItems = true;
     }
 
-    console.log('Updated panel states:', {
-      tenant: this.showTenantItems,
-      equipment: this.showEquipmentItems,
-      user: this.showUserItems,
-      dashboard: this.showDashboardItems
-    });
+    // Chiudi solo i pannelli senza voci attive
+    if (!hasActiveTenant) {
+      this.showTenantItems = false;
+    }
+    if (!hasActiveEquipment) {
+      this.showEquipmentItems = false;
+    }
+    if (!hasActiveUser) {
+      this.showUserItems = false;
+    }
+    if (!hasActiveDashboard) {
+      this.showDashboardItems = false;
+    }
   }
 
   toggleDrawer(section: string) {
-    console.log('Toggling section:', section);
-    console.log('Current URL:', this.router.url);
-
     const currentUrl = this.router.url;
     let isActiveSection = false;
 
@@ -138,54 +145,27 @@ export class AppComponent implements OnInit {
         isActiveSection = currentUrl.includes('/search-tenant') || currentUrl.includes('/add-tenant');
         if (!isActiveSection) {
           this.showTenantItems = !this.showTenantItems;
-          if (this.showTenantItems) {
-            this.showEquipmentItems = false;
-            this.showUserItems = false;
-            this.showDashboardItems = false;
-          }
         }
         break;
       case 'equipment':
         isActiveSection = currentUrl.includes('/search-equipment') || currentUrl.includes('/add-equipment');
         if (!isActiveSection) {
           this.showEquipmentItems = !this.showEquipmentItems;
-          if (this.showEquipmentItems) {
-            this.showTenantItems = false;
-            this.showUserItems = false;
-            this.showDashboardItems = false;
-          }
         }
         break;
       case 'user':
         isActiveSection = currentUrl.includes('/search-users') || currentUrl.includes('/add-users');
         if (!isActiveSection) {
           this.showUserItems = !this.showUserItems;
-          if (this.showUserItems) {
-            this.showTenantItems = false;
-            this.showEquipmentItems = false;
-            this.showDashboardItems = false;
-          }
         }
         break;
       case 'dashboard':
         isActiveSection = currentUrl.includes('/userdashboard-list') || currentUrl.includes('/userdashboard-new');
         if (!isActiveSection) {
           this.showDashboardItems = !this.showDashboardItems;
-          if (this.showDashboardItems) {
-            this.showTenantItems = false;
-            this.showEquipmentItems = false;
-            this.showUserItems = false;
-          }
         }
         break;
     }
-
-    console.log('Final panel states:', {
-      tenant: this.showTenantItems,
-      equipment: this.showEquipmentItems,
-      user: this.showUserItems,
-      dashboard: this.showDashboardItems
-    });
   }
 
   public open(modal: any): void {
