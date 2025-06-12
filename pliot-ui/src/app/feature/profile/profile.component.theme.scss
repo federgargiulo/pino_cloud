@@ -13,9 +13,11 @@
                 .mdc-tab.mat-mdc-tab {
                   flex-grow: initial;
                   &.mdc-tab--active.mdc-tab-indicator--active {
-                    border: 1px solid lightgray;
+                    border: 1px solid #e0e0e0;
                     border-radius: 1px;
                     background-color: #fff;
+                    border-bottom: none;
+                    font-weight: 600;
                   }
                 }
               }
@@ -38,6 +40,10 @@
             }
           }
         }
+      }
+
+      .mdc-tab-indicator__content--underline {
+        border-top-width: 3px !important;
       }
     }
   }

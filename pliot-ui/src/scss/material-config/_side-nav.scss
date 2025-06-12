@@ -44,8 +44,10 @@
                 }
                }
               }
-              label {
-                display: none;
+              .mat-mdc-form-field-infix {
+                label.mdc-floating-label.mat-mdc-floating-label {
+                  display: none !important;
+                }
               }
               .mat-mdc-form-field-subscript-wrapper {
                 display: none;

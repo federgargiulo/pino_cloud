@@ -2,7 +2,11 @@
 
   mat-form-field.mat-mdc-form-field {
     margin-top: 17px !important;
-    height: 45px;
+    height: 38px;
+
+    .mat-mdc-form-field-focus-overlay {
+      display: none !important;
+    }
 
     &:has(.mat-mdc-form-field-subscript-wrapper .mat-mdc-form-field-hint-wrapper) {
       margin-bottom: 24px;
@@ -14,6 +18,9 @@
 
     &.mat-focused {
       .mat-mdc-text-field-wrapper {
+        &:hover .mat-mdc-form-field-focus-overlay {
+          opacity: 0 !important;
+        }
         &.mdc-text-field {
           border: 1px solid blue;
         }
@@ -24,10 +31,10 @@
       overflow: visible;
       padding: 0;
       &:hover .mat-mdc-form-field-focus-overlay {
-        opacity: 0.05;
+        opacity: 0 !important;
       }
       &.mdc-text-field {
-        border: 1px solid lightgray;
+        border: 1px solid #00000099;
         border-radius: 1px;
         background-color: transparent;
         .mat-mdc-form-field-focus-overlay {
@@ -35,18 +42,23 @@
         }
         .mat-mdc-form-field-flex {
           .mat-mdc-form-field-infix {
-            padding: 9.5px 14px;
-            min-height: auto;
+            padding: 0 14px;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            label.mdc-floating-label.mat-mdc-floating-label,
             label.mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
               transition: none !important;
               transform: none !important;
-              top: -20px !important;
-              left: -2px !important;
+              top: -21px !important;
+              left: -1.5px !important;
+              display: block !important;
+              will-change: unset !important;
             }
             // input text field
             input.mat-mdc-input-element.mat-mdc-form-field-input-control {
               &::-webkit-input-placeholder {
-                color: lightgray;
+                color: #00000099;
                 opacity: 1;
               }
               div {
@@ -114,16 +126,17 @@
     }
 
     .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
-      height: 12px;
+      // height: 12px;
       top: 3px;
       &::before {
         display: none;
       }
       .mat-mdc-form-field-hint-wrapper {
         padding: 0 !important;
-        top: -4px;
+        top: -1px;
         mat-hint.mat-mdc-form-field-hint {
           font-size: 12px;
+          line-height: 14px;
           &::before {
             display: none;
           }
@@ -152,8 +165,11 @@
               label.mdc-floating-label.mat-mdc-floating-label {
                 transition: none !important;
                 transform: none !important;
-                top: -20px !important;
-                left: -2px !important;
+                top: -21px !important;
+                left: -1.5px !important;
+                position: absolute;
+                display: block !important;
+                will-change: unset !important;
               }
             }
           }
@@ -183,7 +199,7 @@
     padding: 0;
     border-radius: 1px;
     background-color: white;
-    // border: 1px solid lightgray;
+    // border: 1px solid #00000099;
     // border-top-width: 0;
     mat-option.mat-mdc-option.mdc-list-item {
       min-height: 35px;

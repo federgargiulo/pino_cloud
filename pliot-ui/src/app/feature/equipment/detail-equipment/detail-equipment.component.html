@@ -4,36 +4,36 @@
 
   <div class="form-container">
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Equipment ID</mat-label>
         <input matInput formControlName="equipmentId" readonly>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Tenant</mat-label>
         <input matInput formControlName="tenant" readonly>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Status</mat-label>
         <input matInput formControlName="status">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Created Date</mat-label>
         <input matInput formControlName="createdDttm" readonly>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Updated Date</mat-label>
         <input matInput formControlName="updateDttm" readonly>
       </mat-form-field>
@@ -57,48 +57,48 @@
 
   <form [formGroup]="signalForm" (ngSubmit)="saveSignal()" class="d-flex flex-column">
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Unit of Measurement</mat-label>
         <input matInput formControlName="unitOfMeasurement">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Min Value</mat-label>
         <input matInput type="number" formControlName="minVal">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Max Value</mat-label>
         <input matInput type="number" formControlName="maxVal">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Down Red Limit</mat-label>
         <input matInput type="number" formControlName="downRedLimit">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Up Red Limit</mat-label>
         <input matInput type="number" formControlName="upRedLimit">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Down Yellow Limit</mat-label>
         <input matInput type="number" formControlName="downYellowLimit">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Up Yellow Limit</mat-label>
         <input matInput type="number" formControlName="upYellowLimit">
       </mat-form-field>
@@ -152,43 +152,43 @@
   <form [formGroup]="pullerForm" (ngSubmit)="savePuller()" class="d-flex flex-column">
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>URL</mat-label>
         <input matInput formControlName="url">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>API Key</mat-label>
         <input matInput formControlName="apiKey">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Interval (sec)</mat-label>
         <input matInput type="number" formControlName="intervalInSec">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Next Executions</mat-label>
         <input matInput formControlName="nextExecutions">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Last Start</mat-label>
         <input matInput formControlName="lastStart">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Last End</mat-label>
         <input matInput formControlName="lastEnd">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Last Execution Report</mat-label>
         <input matInput formControlName="lastExecutionReport">
       </mat-form-field>

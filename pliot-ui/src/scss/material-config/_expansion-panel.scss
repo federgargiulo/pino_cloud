@@ -5,7 +5,7 @@
     &.mat-expansion-panel {
       &:not([class*=mat-elevation-z]) {
         box-shadow: none;
-        border: 1px solid lightgray;
+        border: 1px solid #00000099;
       }
 
       .mat-expansion-panel-header {
@@ -33,7 +33,7 @@
           }
         }
         &.mat-expanded {
-          border-bottom: 1px solid lightgray;
+          border-bottom: 1px solid #00000099;
           .mat-expansion-indicator {
             &::before {
               content: 'remove';
