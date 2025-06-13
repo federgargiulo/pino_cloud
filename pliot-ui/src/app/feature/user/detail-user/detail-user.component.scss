@@ -7,21 +7,15 @@
 
   .form-container {
     margin: 35px;
-    gap: 24px;
     padding: 24px;
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 3px;
+    > div {
+      gap: 24px;
+    }
     .form-group-item {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: 1;
       width: 100%;
-      gap: 4px;
-      input, textarea {
-        border-radius: 3px;
-        /* background-color: #fafafa; */
-      }
     }
   }
 
