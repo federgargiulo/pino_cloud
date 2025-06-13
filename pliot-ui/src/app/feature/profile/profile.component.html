@@ -1,43 +1,81 @@
-<mat-toolbar >
-  <button class="btn btn-primary mt-3" (click)="logout()">Logout</button>
-</mat-toolbar>
+  <h2>Settings Page</h2>
+  <form (ngSubmit)="onSubmit()" #profileForm="ngForm" class="d-flex flex-column p-4">
+  <mat-tab-group>
+    <mat-tab label="Profile Settings">
 
+      <div class="d-flex flex-column profile-container">
+        <!-- User details -->
+        <div class="user-details d-flex flex-row profile-user-details-container">
+          <div class="user-details-item-avatar">A</div>
 
-<form (ngSubmit)="onSubmit()" #profileForm="ngForm" class="d-flex flex-column p-4">
-  <h2>Profile</h2>
-  <div class="form-container">
+          <div class="d-flex flex-column profile-user-details-info-container">
+            <div class="user-details-item d-flex flex-row profile-user-details-info-item">
+              <div class="user-details-item-label profile-user-details-info-item-label">username:</div>
+              <div class="user-details-item-value profile-user-details-info-item-value">pallino</div>
+            </div>
+            <div class="user-details-item d-flex flex-row profile-user-details-info-item">
+              <div class="user-details-item-label profile-user-details-info-item-label">user ID:</div>
+              <div class="user-details-item-value profile-user-details-info-item-value">1234567890</div>
+            </div>
+          </div>
 
-    <input type="hidden" name="idpId" [(ngModel)]="idpId">
+          <div class="d-flex flex-column profile-user-details-info-container">
+            <div class="user-details-item d-flex flex-row profile-user-details-info-item">
+              <div class="user-details-item-label profile-user-details-info-item-label">nome:</div>
+              <div class="user-details-item-value profile-user-details-info-item-value">Andrea</div>
+            </div>
+            <div class="user-details-item d-flex flex-row profile-user-details-info-item">
+              <div class="user-details-item-label profile-user-details-info-item-label">cognome:</div>
+              <div class="user-details-item-value profile-user-details-info-item-value">Palladino</div>
+            </div>
+          </div>
 
-    <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="username" class="form-label">Username</label>
-        <input id="username" name="username" type="text" class="form-control" [(ngModel)]="username" required>
+          <div class="d-flex flex-column profile-user-details-info-container">
+            <div class="user-details-item d-flex flex-row profile-user-details-info-item">
+              <div class="user-details-item-label profile-user-details-info-item-label">email:</div>
+              <div class="user-details-item-value profile-user-details-info-item-value">andrea.palladinogmail.com</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit form -->
+        <div class="form-container d-flex flex-row">
+          <input type="hidden" name="idpId" [(ngModel)]="idpId">
+          <h3>Account Information</h3>
+          <div>
+            <mat-form-field class="form-group-item">
+              <mat-label>Username</mat-label>
+              <input matInput id="username" name="username" type="text" class="form-control" [(ngModel)]="username" required>
+            </mat-form-field>
+            <mat-form-field class="form-group-item">
+              <mat-label>User ID</mat-label>
+              <input matInput id="userId" name="userId" type="text" class="form-control" [(ngModel)]="userId" readonly>
+            </mat-form-field>
+          </div>
+          <h3>Personal Information</h3>
+          <div>
+            <mat-form-field class="form-group-item">
+              <mat-label>Nome</mat-label>
+              <input matInput id="firstName" name="firstName" type="text" class="form-control" [(ngModel)]="firstName" required>
+            </mat-form-field>
+            <mat-form-field class="form-group-item">
+              <mat-label>Cognome</mat-label>
+              <input matInput id="lastName" name="lastName" type="text" class="form-control" [(ngModel)]="lastName" required>
+            </mat-form-field>
+          </div>
+          <mat-form-field class="form-group-item">
+            <mat-label>Email</mat-label>
+            <input matInput id="email" name="email" type="email" class="form-control" [(ngModel)]="email" required>
+          </mat-form-field>
+        </div>
       </div>
-      <div class="form-group-item">
-        <label for="userId" class="form-label">User ID</label>
-        <input id="userId" name="userId" type="text" class="form-control" [(ngModel)]="userId" readonly>
-      </div>
-    </div>
 
-    <div class="d-flex flex-row gap-4">
-      <div class="form-group-item">
-        <label for="firstName" class="form-label">Nome</label>
-        <input id="firstName" name="firstName" type="text" class="form-control" [(ngModel)]="firstName" required>
-      </div>
-      <div class="form-group-item">
-        <label for="lastName" class="form-label">Cognome</label>
-        <input id="lastName" name="lastName" type="text" class="form-control" [(ngModel)]="lastName" required>
-      </div>
-    </div>
+    </mat-tab>
+    <mat-tab label="Application Settings"></mat-tab>
+    <mat-tab label="Permissions Settings"></mat-tab>
+  </mat-tab-group>
 
-    <div class="form-group-item">
-      <label for="email" class="form-label">Email</label>
-      <input id="email" name="email" type="email" class="form-control" [(ngModel)]="email" required>
-    </div>
-  </div>
-
-  <mat-toolbar>
-    <button type="submit" color="primary" class="btn btn-primary mt-3">Salva modifiche</button>
+  <mat-toolbar class="actions-toolbar">
+    <button mat-flat-button type="submit" color="primary">Salva modifiche</button>
   </mat-toolbar>
-</form>
+  </form>

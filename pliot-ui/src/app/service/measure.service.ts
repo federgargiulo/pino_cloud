@@ -3,7 +3,7 @@ import { HttpProviderService } from './http-provider.service';
 import { Observable, of } from 'rxjs';
 import { DatePipe } from "@angular/common";
 
-const isMockEnabled = false;
+const isMockEnabled = true;
 
 var version="";
 

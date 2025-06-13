@@ -54,10 +54,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ProfileComponent } from './feature/profile/profile.component';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MonitorComponent } from './feature/system/monitor/monitor.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -69,6 +72,8 @@ import {
 import { ConfirmDialogModule } from './feature/user/search-user/confirm-dialog/confirm-dialog.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { EquipmentConfirmDialogModule } from './feature/equipment/search-equipment/equipment-confirm-dialog/equipment-confirm-dialog.module';
+import { EditUserDialogModule } from './feature/user/search-user/edit-user-dialog/edit-user-dialog.module';
 
 var loc = new ConfigurationService();
 
@@ -136,8 +141,12 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     MatTableModule,
     MatCheckboxModule,
     MatDividerModule,
+    MatBadgeModule,
     MatCardModule,
+    MatTabsModule,
+    MatMenuModule,
     OlapModule,
+    MatTabsModule,
     MatDialogModule,
     MatDialogContent,
     MatDialogActions,
@@ -145,6 +154,8 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     BrowserAnimationsModule,
     HttpClientModule,
     ConfirmDialogModule,
+    EquipmentConfirmDialogModule,
+    EditUserDialogModule
   ],
   providers: [
     KEYCLOAK_PRIVIDER(),

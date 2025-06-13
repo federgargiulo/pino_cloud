@@ -4,19 +4,19 @@
   <div class="form-container">
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>ID</mat-label>
         <input matInput formControlName="tenantId" [disabled]="true">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field  class="form-group-item">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="email">
         <mat-error *ngIf="tenantForm.controls['email'].invalid && tenantForm.controls['email'].touched">
@@ -26,48 +26,48 @@
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description"></textarea>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Profile</mat-label>
         <input matInput formControlName="profile">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Country</mat-label>
         <input matInput formControlName="country">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>State</mat-label>
         <input matInput formControlName="state">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Zip Code</mat-label>
         <input matInput formControlName="zipCode">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Address</mat-label>
         <input matInput formControlName="address">
       </mat-form-field>
     </div>
 
     <div class="d-flex flex-row gap-4">
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Date Created</mat-label>
         <input matInput formControlName="createdDttm" [disabled]="true">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="form-group-item">
+      <mat-form-field class="form-group-item">
         <mat-label>Date Updated</mat-label>
         <input matInput formControlName="updateDttm" [disabled]="true">
       </mat-form-field>
