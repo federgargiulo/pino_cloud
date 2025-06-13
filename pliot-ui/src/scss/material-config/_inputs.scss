@@ -145,6 +145,7 @@
 
       .mat-mdc-form-field-error-wrapper {
         padding: 0;
+        top: -4px;
         mat-error.mat-mdc-form-field-error {
           font-size: 12px;
           &::before {
@@ -189,6 +190,15 @@
       .mat-mdc-text-field-wrapper {
         &.mdc-text-field {
           border-color: blue;
+        }
+      }
+    }
+
+    &.mat-form-field-disabled {
+      .mat-mdc-text-field-wrapper {
+        &.mdc-text-field {
+          border-color: transparent;
+          background-color: #efefef;
         }
       }
     }

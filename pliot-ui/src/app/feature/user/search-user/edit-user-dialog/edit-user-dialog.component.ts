@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TenantServices } from '../../../../service/tenant.service';
 import { UserService } from '../../../../service/user.service';
@@ -57,6 +58,7 @@ interface UserData {
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
+    MatSelectModule,
     ReactiveFormsModule,
   ],
 })

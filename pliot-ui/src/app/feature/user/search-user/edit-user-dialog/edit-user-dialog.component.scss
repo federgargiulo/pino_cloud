@@ -3,17 +3,34 @@
   flex-direction: column;
   flex-grow: 1;
   overflow: auto;
-  .equipment-form {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    column-gap: 24px;
-    mat-form-field.mat-mdc-form-field {
-     min-width: 31.34%;
-     @media (max-width: 1065px) {
-      min-width: 100%;
-     }
+  mat-form-field.mat-mdc-form-field {
+    width: 100%;
+    @media (max-width: 1065px) {
+     min-width: 100%;
     }
+   }
+
+   form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: auto;
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      // flex-grow: 1;
+      overflow: auto;
+      > div {
+        display: flex;
+        flex-direction: row;
+        column-gap: 24px;
+        width: 100%;
+      }
+    }
+   }
+
+  mat-dialog-content {
+    display: flex;
   }
 
   mat-dialog-actions {
