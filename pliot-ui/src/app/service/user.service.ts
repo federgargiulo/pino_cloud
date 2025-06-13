@@ -1,4 +1,4 @@
- import { inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpProviderService } from './http-provider.service';
 import { Observable, of } from 'rxjs';
 import Keycloak from 'keycloak-js';
@@ -99,6 +99,16 @@ export class UserService {
     } else {
         console.info( "Service is calling getUserById " + httpLink.getUserById + " With data " + userId )
         return this.webApiService.get(httpLink.getUserById + '/' + userId );
+    }
+  }
+
+  public deleteUser(userId: string): Observable<any> {
+    if (isMockEnabled) {
+      console.info(`Mock deleting user with id ${userId}`);
+      return of({ success: true });
+    } else {
+      console.info("Service is calling delete user with id: " + userId);
+      return this.webApiService.delete(httpLink.baseDashboard + '/' + userId);
     }
   }
 

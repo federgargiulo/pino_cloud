@@ -1,0 +1,101 @@
+<h2 mat-dialog-title>Gestione User</h2>
+
+<mat-dialog-content>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="d-flex flex-column">
+  <div class="form-container">
+    <input id="idpId" type="hidden" formControlName="idpId">
+
+    <div class="d-flex flex-row gap-4">
+      <div class="form-group-item">
+        <label for="tenant" class="form-label">Tenant *</label>
+        <select id="tenant" class="form-control" formControlName="tenant" required>
+          <option *ngFor="let tenant of tenantList" [value]="tenant.tenantId">{{ tenant.tenantId }}</option>
+        </select>
+        <div *ngIf="userForm.controls['tenant'].invalid && userForm.controls['tenant'].touched" class="text-danger">
+          Il tenant è obbligatorio
+        </div>
+      </div>
+
+      <div class="form-group-item">
+        <label for="userId" class="form-label">User ID *</label>
+        <input id="userId" class="form-control" formControlName="userId">
+        <div *ngIf="userForm.controls['userId'].invalid && userForm.controls['userId'].touched" class="text-danger">
+          User ID è obbligatorio
+        </div>
+      </div>
+
+      <div class="form-group-item">
+        <label for="email" class="form-label">Email *</label>
+        <input id="email" class="form-control" formControlName="email">
+        <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched" class="text-danger">
+          Email è obbligatoria
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row gap-4">
+      <div class="form-group-item">
+        <label for="firstName" class="form-label">Nome *</label>
+        <input id="firstName" class="form-control" formControlName="firstName">
+        <div *ngIf="userForm.controls['firstName'].invalid && userForm.controls['firstName'].touched" class="text-danger">
+          Nome è obbligatorio
+        </div>
+      </div>
+
+      <div class="form-group-item">
+        <label for="lastName" class="form-label">Cognome *</label>
+        <input id="lastName" class="form-control" formControlName="lastName">
+        <div *ngIf="userForm.controls['lastName'].invalid && userForm.controls['lastName'].touched" class="text-danger">
+          Cognome è obbligatorio
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row gap-4">
+      <div class="form-group-item">
+        <label for="address" class="form-label">Indirizzo</label>
+        <input id="address" class="form-control" formControlName="address">
+      </div>
+
+      <div class="form-group-item">
+        <label for="phone" class="form-label">Telefono</label>
+        <input id="phone" class="form-control" formControlName="phone">
+      </div>
+
+      <div class="form-group-item">
+        <label for="gender" class="form-label">Genere</label>
+        <select id="gender" class="form-control" formControlName="gender">
+          <option value="">-- Seleziona --</option>
+          <option value="M">Maschio</option>
+          <option value="F">Femmina</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row gap-4">
+      <div class="form-group-item">
+        <label for="usrGrp" class="form-label">Gruppi di Appartenenza</label>
+        <select id="usrGrp" class="form-control" multiple formControlName="usrGrp" [compareWith]="compareGroups">
+          <option *ngFor="let grp of grpList" [ngValue]="grp">{{ grp.description }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row gap-4" *ngIf="!isPersisted">
+      <div class="form-group-item">
+        <label for="password" class="form-label">Password *</label>
+        <input id="password" type="password" class="form-control" formControlName="password">
+        <div *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched" class="text-danger">
+          La password è obbligatoria
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Annulla</button>
+  <button mat-flat-button color="primary" [disabled]="userForm.invalid"
+    (click)="onYesClick()">Conferma</button>
+</mat-dialog-actions>

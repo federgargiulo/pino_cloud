@@ -4,7 +4,10 @@ import { EquipmentServices } from '../../../service/equipment.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EquipmentConfirmDialogComponent } from './equipment-confirm-dialog/equipment-confirm-dialog.component';
+import { DeleteConfirmDialogComponent } from './equipment-confirm-dialog/delete-confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-search-equipment',
@@ -18,7 +21,12 @@ export class SearchEquipmentComponent implements OnInit {
   dataSource = new MatTableDataSource<any>([]);
   selection = new SelectionModel<any>(true, []);
 
-  constructor(private equipmentServices: EquipmentServices, private router: Router, private dialog: MatDialog) {}
+  constructor(
+    private equipmentServices: EquipmentServices,
+    private router: Router,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     console.log("init");
@@ -46,14 +54,11 @@ export class SearchEquipmentComponent implements OnInit {
     this.getAllEquipment();
   }
 
-
   editSelectedRows(): void {
     this.dialog.open(EquipmentConfirmDialogComponent, {
-      // width: '400px',
       panelClass: 'equipment-edit-dialog',
     });
   }
-
 
   editSelectedEquipment() {
     const selected = this.selection.selected[0];
@@ -63,25 +68,83 @@ export class SearchEquipmentComponent implements OnInit {
   }
 
   deleteSelectedEquipment() {
-    const selectedEquipments = this.selection.selected;
-    selectedEquipments.forEach(equipment => {
-      this.deleteEquipment(equipment.equipmentId);
-    });
-  }
-
-  deleteEquipment(id: string) {
-    if (!confirm(`Sei sicuro di voler eliminare l'equipment con ID ${id}?`)) {
+    if (this.selection.isEmpty()) {
+      this.snackBar.open('Seleziona almeno un equipment da eliminare', 'Chiudi', {
+        duration: 3000,
+        horizontalPosition: 'end',
+        verticalPosition: 'top'
+      });
       return;
     }
 
-    this.equipmentServices.deleteEquipmentById(id).subscribe({
-      next: () => {
-        console.log(`Equipment con ID ${id} eliminato`);
-        this.dataSource.data = this.dataSource.data.filter(e => e.equipmentId !== id);
-        this.selection.clear();
-      },
-      error: (err) => {
-        console.error("Errore durante l'eliminazione:", err);
+    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
+      width: '400px',
+      data: {
+        message: `Sei sicuro di voler eliminare ${this.selection.selected.length} equipment selezionato/i?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const currentData = [...this.dataSource.data];
+        let successCount = 0;
+        let errorCount = 0;
+
+        this.selection.selected.forEach((equipment: any) => {
+          this.equipmentServices.deleteEquipmentById(equipment.equipmentId).subscribe({
+            next: () => {
+              const index = currentData.findIndex(e => e.equipmentId === equipment.equipmentId);
+              if (index > -1) {
+                currentData.splice(index, 1);
+                successCount++;
+              }
+
+              if (successCount + errorCount === this.selection.selected.length) {
+                this.dataSource.data = currentData;
+                this.selection.clear();
+
+                if (successCount > 0) {
+                  this.snackBar.open(`${successCount} equipment eliminato/i con successo`, 'Chiudi', {
+                    duration: 3000,
+                    horizontalPosition: 'end',
+                    verticalPosition: 'top'
+                  });
+                }
+                if (errorCount > 0) {
+                  this.snackBar.open(`Errore durante l'eliminazione di ${errorCount} equipment`, 'Chiudi', {
+                    duration: 3000,
+                    horizontalPosition: 'end',
+                    verticalPosition: 'top'
+                  });
+                }
+              }
+            },
+            error: (error: HttpErrorResponse) => {
+              console.error(`Errore durante l'eliminazione dell'equipment ${equipment.equipmentId}:`, error);
+              errorCount++;
+
+              if (successCount + errorCount === this.selection.selected.length) {
+                this.dataSource.data = currentData;
+                this.selection.clear();
+
+                if (successCount > 0) {
+                  this.snackBar.open(`${successCount} equipment eliminato/i con successo`, 'Chiudi', {
+                    duration: 3000,
+                    horizontalPosition: 'end',
+                    verticalPosition: 'top'
+                  });
+                }
+                if (errorCount > 0) {
+                  this.snackBar.open(`Errore durante l'eliminazione di ${errorCount} equipment`, 'Chiudi', {
+                    duration: 3000,
+                    horizontalPosition: 'end',
+                    verticalPosition: 'top'
+                  });
+                }
+              }
+            }
+          });
+        });
       }
     });
   }
@@ -106,5 +169,4 @@ export class SearchEquipmentComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
   }
-
 }
