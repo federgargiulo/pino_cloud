@@ -33,12 +33,7 @@ build/
 ### VS Code ###
 .vscode/
 /rest/target/
-package-lock.json
-package.json
 
-yarn.lock
-
-*.lock
 *.yaml
 
 *actions

@@ -1,5 +1,5 @@
 $directions: ('top', 'right', 'bottom', 'left');
-@import 'base.scss';
+@use './base.scss' as *;
 
 @each $direction in $directions {
     @for $i from 1 through 10 {
@@ -21,6 +21,10 @@ $directions: ('top', 'right', 'bottom', 'left');
             margin-#{$direction}: $u * $i;
         }
     }
+}
+
+.gap-14 {
+    gap: 14px;
 }
 
 .d-none {
@@ -123,6 +127,13 @@ $directions: ('top', 'right', 'bottom', 'left');
     align-self: stretch;
   }
 
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.w-50-percent {
+    width: 50%;
+}
 
 .flex-nowrap {
     flex-wrap: nowrap;

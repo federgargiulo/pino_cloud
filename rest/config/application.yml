@@ -12,6 +12,8 @@ pliot:
     client-id: my-client
     client-secret: my-secret
     api-url: http://localhost:8080
+  server:
+    url: "http://localhost:8080"
   base_path: "api"
   load_data: "false"
 
@@ -54,7 +56,7 @@ spring:
     enabled: true
 
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/pliot
+    url: jdbc:postgresql://localhost:5432/pliot
     username: pliot
     password: pliot
 #H2

@@ -1,3 +1,38 @@
 @mixin labels() {
   // empty
+  .app-labels {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    border-radius: 1px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    &.error {
+      color: #a32100;
+      background-color: #f5dbd9;
+    }
+    &.warning {
+      color: #313131;
+      background-color: #feecb5;
+    }
+    &.info {
+      color: #004a70;
+      background-color: #e1f1f6;
+    }
+    &.success {
+      color: #266900;
+      background-color: #dff0d0;
+    }
+    &.ACTIVE {
+      color: #266900;
+      background-color: #dff0d0;
+    }
+    &.INACTIVE {
+      color: #a32100;
+      background-color: #f5dbd9;
+    }
+  }
 }

@@ -1,0 +1,33 @@
+:host, form, .form-container {
+    display: flex;
+    flex-grow: 1;
+    overflow: auto;
+    flex-direction: column;
+  }
+
+  .form-container {
+    margin: 35px;
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    > div {
+      gap: 24px;
+    }
+    .form-group-item {
+      width: 100%;
+    }
+  }
+
+  .mat-toolbar.mat-toolbar {
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24px 35px;
+    button {
+      margin-top: 0 !important;
+    }
+  }

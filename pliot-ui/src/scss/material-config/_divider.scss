@@ -1,10 +1,17 @@
 @mixin divider() {
   mat-divider {
     &.mat-divider{
-      &.mat-divider-vertical {
-        border-color: #e0e0e0;
-        height: 50%;
+      &.divider-50 {
+        &.mat-divider-vertical {
+          border-color: #e0e0e0;
+          height: 50%;
+        }
       }
     }
+  }
+
+  mat-divider.mat-divider.mat-divider-vertical {
+    border-color: #e0e0e0;
+    height: 100%;
   }
 }

@@ -1,5 +1,26 @@
-@import 'theme.scss';
-@import 'material-config/index.scss';
-@import 'helpers.scss';
-@import 'animations.scss';
-@import 'base.scss';
+@use "theme";
+@use "material-config/index" as material;
+@use "helpers";
+@use "animations";
+@use "base";
+
+// mixin @include
+@include material.app-header();
+@include material.buttons();
+@include material.checkbox();
+@include material.chip();
+@include material.dialogs();
+@include material.divider();
+@include material.footer();
+@include material.icons();
+@include material.inputs();
+@include material.labels();
+@include material.radio-buttons();
+@include material.side-nav();
+@include material.slide-toggle();
+@include material.snack-bar();
+@include material.table();
+@include material.tabs();
+@include material.toggle-buttons();
+@include material.tooltip();
+@include material.expansion-panel();
