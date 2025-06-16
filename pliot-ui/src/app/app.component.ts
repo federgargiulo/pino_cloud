@@ -31,6 +31,8 @@ export class AppComponent implements OnInit {
   fullName: string = '';
   initial: string = '';
   userRole: string = '';
+  userGroupNames: string[] = [];
+
 
   menuItems: MenuItem[] = [
     { id: 'home', label: 'Home' },
@@ -104,6 +106,7 @@ export class AppComponent implements OnInit {
 
         const roles = (user.usrGrp || []).map((grp: any) => grp.description);
         this.userRole = roles.join(', ');
+        this.userGroupNames = (user.usrGrp || []).map((grp: any) => grp.grpName);
       } else {
         console.warn('Dati utente non disponibili');
       }
@@ -202,7 +205,7 @@ export class AppComponent implements OnInit {
   }
 
   isPliotAdmin(): boolean {
-    return this.userService.hasRole("pliot_admin");
+    return this.userGroupNames.includes('pliot_admin');
   }
 
   filterMenuItems() {
