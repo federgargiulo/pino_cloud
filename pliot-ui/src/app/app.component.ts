@@ -84,6 +84,7 @@ export class AppComponent implements OnInit {
       user: this.showUserItems,
       dashboard: this.showDashboardItems
     });
+    this.issuer = this.userService.keycloak?.issuer || '';
     this.initializeVisibleMenuItems();
     this.updateActivePanel(this.router.url);
   }
@@ -238,21 +239,11 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
 
-  logout(){
-    const token = this.userService.keycloak.token;
-    const idToken = this.userService.keycloak.idToken;
-    console.log('idToken:', idToken);
-    if (!token || !idToken ) {
-      console.error('Token non disponibile');
-      return;
-    }
-    const redirectUri = encodeURIComponent(window.location.origin);
-    const iss=this.issuer;
-    //const logoutUrl = iss+'/protocol/openid-connect/logout?redirect_uri='+redirectUri;
 
-    const logoutUrl = iss+'/protocol/openid-connect/logout?id_token_hint='+idToken+'&post_logout_redirect_uri='+redirectUri;
 
-    console.log('logoutUrl:', logoutUrl);
-    window.location.href = logoutUrl;
+  logout() {
+    this.userService.keycloak.logout({
+      redirectUri: window.location.origin
+    });
   }
 }

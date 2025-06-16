@@ -13,10 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TenantServices } from '../../../../service/tenant.service';
 import { UserService } from '../../../../service/user.service';
 import { CommonService } from '../../../../service/common.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-
-import { error } from 'console';
-import { Router } from 'express';
 
 interface Group {
   id: string;
@@ -26,11 +22,6 @@ interface Group {
 interface Tenant {
   id: string;
   name: string;
-}
-
-interface ApiResponse<T> {
-  body: T;
-  isSuccess?: boolean;
 }
 
 interface UserData {
@@ -64,19 +55,19 @@ interface UserData {
 })
 export class EditUserDialogComponent implements OnInit {
   userForm: FormGroup;
-  tenantList: any = [];
-  grpList: any = [];
+  tenantList: any[] = [];
+  grpList: any[] = [];
 
-  selectedTenant: string = '';
+  isPersisted = false;
+  successMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: { user?: UserData },
     private userService: UserService,
     private tenantService: TenantServices,
-    @Inject(CommonService) private commonServices: CommonService,
-    private route: ActivatedRoute
+    private commonServices: CommonService
   ) {
     this.userForm = this.fb.group({
       idpId: [''],
@@ -93,100 +84,20 @@ export class EditUserDialogComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    if (this.userForm.invalid) return;
-
-    const formValue = this.userForm.value;
-    const userPayload = { ...formValue };
-    delete userPayload.confirmPassword;
-
-    if (this.isPersisted) {
-      // 🛠 MODIFICA
-      this.userService.updateUser(userPayload).subscribe({
-        next: (data) => {
-          this.manageSuccessOnSave(data);
-        },
-        error: (err) => {
-          this.manageSuccessOnSave(err);
-        },
-      });
-    } else {
-      // ✅ CREAZIONE
-      this.userService.createUser(userPayload).subscribe({
-        next: (data) => {
-          this.manageSuccessOnSave(data);
-        },
-        error: (err) => {
-          this.manageSuccessOnSave(err);
-        },
-      });
-    }
-  }
-
-  isPersisted = false;
-  successMessage: string = '';
-
-  manageSuccessOnSave(data: any) {
-    if (data != null && data.body != null) {
-      var resultData = data.body;
-      this.setFormValues(resultData);
-      this.isPersisted = true;
-      if (resultData != null && resultData.isSuccess) {
-        this.successMessage = 'User creata con successo!';
-      }
-    }
-  }
-
-  setFormValues(resultData: any) {
-    console.log('Backend usrGrp:', resultData.usrGrp);
-    console.log('Loaded grpList:', this.grpList);
-    const selectedGroups = this.grpList.filter((grp: any) =>
-      resultData.usrGrp?.some((g: any) => g.grpName === grp.grpName)
-    );
-    console.log('selectedGroups:', selectedGroups);
-    const x = {
-      idpId: resultData.idpId,
-      userId: resultData.userId,
-      firstName: resultData.firstName,
-      lastName: resultData.lastName,
-      email: resultData.email,
-      tenant: resultData.tenant,
-      address: resultData.address || '',
-      phone: resultData.phone || '',
-      gender: resultData.gender || '',
-      usrGrp: selectedGroups,
-    };
-
-    this.userForm.patchValue(x);
-  }
-
   ngOnInit(): void {
     this.getAllTenants();
-    this.laodAllGrp().then(() => {
-      this.route.paramMap.subscribe((params: ParamMap) => {
-        const userId = params.get('id');
-        if (userId) {
-          this.userService.getUserById(userId).subscribe({
-            next: (data: ApiResponse<UserData>) => {
-              this.setFormValues(data.body);
-              this.isPersisted = true;
-              this.setPasswordValidators(false);
-            },
-            error: (err: HttpErrorResponse) => {
-              console.error(
-                'Errore nel caricamento del dettaglio utente:',
-                err
-              );
-            },
-          });
-        } else {
-          this.setPasswordValidators(true);
-        }
-      });
+    this.loadAllGroups().then(() => {
+      if (this.data?.user) {
+        this.setFormValues(this.data.user);
+        this.isPersisted = true;
+        this.setPasswordValidators(false);
+      } else {
+        this.setPasswordValidators(true);
+      }
     });
   }
 
-  async laodAllGrp(): Promise<void> {
+  async loadAllGroups(): Promise<void> {
     return new Promise((resolve) => {
       this.commonServices.getAllGreoups().subscribe((data: any) => {
         if (data && data.body) {
@@ -197,29 +108,40 @@ export class EditUserDialogComponent implements OnInit {
     });
   }
 
-  async getAllTenants() {
-    console.log('get all tenant');
+  getAllTenants() {
     this.tenantService.getAllTenants().subscribe(
       (data: any) => {
-        console.log('Dati ricevuti dal server:', data);
-        if (data != null && data.body != null) {
-          var resultData = data.body;
-
-          if (resultData) {
-            this.tenantList = resultData;
-          }
+        if (data && data.body) {
+          this.tenantList = data.body;
         }
       },
       (error: any) => {
-        if (error) {
-          if (error.status == 404) {
-            if (error.error && error.error.message) {
-              this.tenantList = [];
-            }
-          }
+        if (error?.status === 404) {
+          this.tenantList = [];
         }
       }
     );
+  }
+
+  setFormValues(user: UserData) {
+    const selectedGroups = this.grpList.filter((grp: any) =>
+      user.usrGrp?.some((g: any) => g.grpName === grp.grpName)
+    );
+
+    const patch = {
+      idpId: user.idpId,
+      userId: user.userId,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      tenant: user.tenant,
+      address: user.address || '',
+      phone: user.phone || '',
+      gender: user.gender || '',
+      usrGrp: selectedGroups,
+    };
+
+    this.userForm.patchValue(patch);
   }
 
   setPasswordValidators(isRequired: boolean) {
@@ -235,6 +157,36 @@ export class EditUserDialogComponent implements OnInit {
   compareGroups = (o1: any, o2: any): boolean => {
     return o1 && o2 && o1.grpName === o2.grpName;
   };
+
+  onSubmit() {
+    if (this.userForm.invalid) return;
+
+    const formValue = this.userForm.value;
+    const userPayload = { ...formValue };
+
+    if (this.isPersisted) {
+      this.userService.updateUser(userPayload).subscribe({
+        next: (data) => this.manageSuccessOnSave(data),
+        error: (err) => this.manageSuccessOnSave(err),
+      });
+    } else {
+      this.userService.createUser(userPayload).subscribe({
+        next: (data) => this.manageSuccessOnSave(data),
+        error: (err) => this.manageSuccessOnSave(err),
+      });
+    }
+  }
+
+  manageSuccessOnSave(data: any) {
+    if (data?.body) {
+      this.setFormValues(data.body);
+      this.isPersisted = true;
+      this.successMessage = this.isPersisted
+        ? 'Utente aggiornato con successo!'
+        : 'Utente creato con successo!';
+      this.dialogRef.close(data.body);
+    }
+  }
 
   onCancel() {
     this.dialogRef.close();
