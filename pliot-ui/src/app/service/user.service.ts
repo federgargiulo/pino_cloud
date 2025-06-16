@@ -160,4 +160,14 @@ export class UserService {
     return token.realm_access.roles.includes(role);
   }
 
+  public getCurrentUserFromBackend(): Observable<any> {
+    const userId = this.getCurrentUserId(); // usa il 'sub' dal token
+    if (userId) {
+      return this.getUserById(userId);
+    } else {
+      console.warn('Impossibile ottenere userId dal token');
+      return of(null);
+    }
+  }
+
 }

@@ -28,6 +28,9 @@ export class AppComponent implements OnInit {
   title = 'pliot-ui';
   searchText = '';
   issuer: string | null = '';
+  fullName: string = '';
+  initial: string = '';
+  userRole: string = '';
 
   menuItems: MenuItem[] = [
     { id: 'home', label: 'Home' },
@@ -84,7 +87,28 @@ export class AppComponent implements OnInit {
       user: this.showUserItems,
       dashboard: this.showDashboardItems
     });
+    const firstName = this.userService.getCurrentFirstName() || '';
+    const lastName = this.userService.getCurrentLastName() || '';
+    this.fullName = `${firstName} ${lastName}`.trim();
+    this.initial = firstName ? firstName.charAt(0).toUpperCase() : '';
+    const groups = this.userService.getCurrentUserGroups();
+    this.userRole = groups.join(', ');
+    console.log('Token completo:', this.userService.keycloak.tokenParsed);
     this.issuer = this.userService.keycloak?.issuer || '';
+
+    this.userService.getCurrentUserFromBackend().subscribe(response => {
+      const user = response?.body;
+      if (user) {
+        this.fullName = `${user.firstName} ${user.lastName}`.trim();
+        this.initial = user.firstName?.charAt(0).toUpperCase() || '';
+
+        const roles = (user.usrGrp || []).map((grp: any) => grp.description);
+        this.userRole = roles.join(', ');
+      } else {
+        console.warn('Dati utente non disponibili');
+      }
+    });
+
     this.initializeVisibleMenuItems();
     this.updateActivePanel(this.router.url);
   }

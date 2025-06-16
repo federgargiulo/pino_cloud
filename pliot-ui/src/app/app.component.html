@@ -25,11 +25,11 @@
     </div>
     <div class='user-profile-container d-flex align-items-center'>
       <div class='user-profile-info d-flex flex-column align-items-end'>
-        <span class='user-profile-name'>Andrea Palladino</span>
-        <span class='user-profile-role'>Administrator</span>
+        <span class='user-profile-name'>{{ fullName }}</span>
+        <span class='user-profile-role'>{{ userRole }}</span>
       </div>
       <button mat-button class='user-profile-icon' [matMenuTriggerFor]="userMenu">
-        <span class='user-profile-icon-letter'>A</span>
+        <span class='user-profile-icon-letter'>{{ initial }}</span>
       </button>
       <mat-menu #userMenu="matMenu" id="app-header-user-menu" class="app-header-user-menu">
         <button mat-menu-item (click)="navigateToProfile()">
