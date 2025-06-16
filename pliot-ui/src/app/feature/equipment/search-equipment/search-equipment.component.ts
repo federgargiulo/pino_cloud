@@ -55,9 +55,13 @@ export class SearchEquipmentComponent implements OnInit {
   }
 
   editSelectedRows(): void {
-    this.dialog.open(EquipmentConfirmDialogComponent, {
-      panelClass: 'equipment-edit-dialog',
-    });
+    const selected = this.selection.selected[0];
+    if (selected) {
+      this.dialog.open(EquipmentConfirmDialogComponent, {
+        panelClass: 'equipment-edit-dialog',
+        data: { equipmentId: selected.equipmentId }
+      });
+    }
   }
 
   editSelectedEquipment() {

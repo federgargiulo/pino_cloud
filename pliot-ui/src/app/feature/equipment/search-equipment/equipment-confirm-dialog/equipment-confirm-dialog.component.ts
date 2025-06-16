@@ -22,13 +22,12 @@ interface Signal {
 })
 export class EquipmentConfirmDialogComponent implements OnInit {
   constructor(
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private equipmentService: EquipmentServices,
     private signalService: SignalServices,
     public dialogRef: MatDialogRef<EquipmentConfirmDialogComponent>,
     private dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: { message: string }
+    @Inject(MAT_DIALOG_DATA) public data: { equipmentId: string, message?: string }
   ) {}
 
   onNoClick(): void {
@@ -106,10 +105,8 @@ export class EquipmentConfirmDialogComponent implements OnInit {
       createdDttm: [{ value: '', disabled: true }],
       updateDttm: [{ value: '', disabled: true }]
     });
-    this.route.paramMap.subscribe(params => {
-      this.equipmentId = params.get('id') || '';
-      this.loadEquipmentDetail(this.equipmentId);
-    });
+   this.equipmentId = this.data.equipmentId;
+   this.loadEquipmentDetail(this.equipmentId);
 
     this.initSignalForm();
     this.initPullerForm();
