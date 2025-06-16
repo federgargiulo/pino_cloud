@@ -13,3 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  // padding: 35px;
+  // gap: 35px;
+  table.mat-mdc-table.mdc-data-table__table {
+    margin: 8px 35px 35px;
+  }
+
+  mat-toolbar {
+    &.search-table-bar {
+      margin: 32px 32px 0 32px;
+
+      border:  1px solid #e0e0e0;
+      background-color: #fff;
+
+      width: auto;
+      width: auto;
+      height: auto;
+
+      padding: 24px;
+
+      form {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  .w-70 {
+    width: 70px;
+  }
+
+  .align-center {
+    text-align: center;
+  }
+}
