@@ -19,5 +19,8 @@ public interface EdgeServices extends BaseServiceInterface<EdgeTO,String> {
 
     public EdgeTO register( EdgeTO edge );
 
+    public List<EdgeTO> findByTenant( String tenant );
+
+
 
 }
