@@ -1,4 +1,4 @@
-package it.pliot.equipment.security.casupport;
+package it.pliot.equipment.casupport;
 
 import java.io.*;
 import java.security.KeyPair;
@@ -12,7 +12,7 @@ public class CaPersistence {
 
 
 
-  public void save( ByteArrayOutputStream byteArray, String alias ){
+    public void save( ByteArrayOutputStream byteArray, String alias ){
         FileOutputStream f = null;
         try {
             f = new FileOutputStream( SERVER_PATH + "/" + alias );

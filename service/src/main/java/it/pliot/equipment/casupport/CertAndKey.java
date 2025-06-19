@@ -1,4 +1,4 @@
-package it.pliot.equipment.security.casupport;
+package it.pliot.equipment.casupport;
 
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;

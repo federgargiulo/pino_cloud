@@ -1,4 +1,4 @@
-package it.pliot.equipment.security.casupport;
+package it.pliot.equipment.casupport;
 
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.generators.RSAKeyPairGenerator;
@@ -12,6 +12,7 @@ import java.security.*;
 import java.security.cert.X509Certificate;
 import java.security.spec.RSAPrivateCrtKeySpec;
 import java.security.spec.RSAPublicKeySpec;
+import java.util.Base64;
 
 public class CaUtils {
 
@@ -26,8 +27,8 @@ public class CaUtils {
         return new CertAndKey(certificate, privateKey);
     }
 
-    public static ByteArrayOutputStream saveKeyStoreToBuffer(String alias , String password,
-                                              CertAndKey cerAndKey
+    public static ByteArrayOutputStream exportKeyStoreToBuffer(String alias , String password,
+                                                               CertAndKey cerAndKey
                                                              ) throws Exception {
         KeyStore ks = KeyStore.getInstance("PKCS12");
         ks.load(null, null);
@@ -36,6 +37,14 @@ public class CaUtils {
         ks.store(bos, password.toCharArray());
         return bos;
 
+    }
+
+    public static String exportKeyStoreTobase64Buffer(String alias , String password,
+                                                               CertAndKey cerAndKey
+    ) throws Exception {
+        ByteArrayOutputStream out = exportKeyStoreToBuffer( alias , password , cerAndKey );
+        byte [] b = Base64.getEncoder().encode( out.toByteArray() );
+        return  new String( b );
     }
 
     public static KeyPair generateRSAKeyPair() throws Exception {

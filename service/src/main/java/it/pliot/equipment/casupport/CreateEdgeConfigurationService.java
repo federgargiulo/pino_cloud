@@ -1,4 +1,4 @@
-package it.pliot.equipment.security.casupport;
+package it.pliot.equipment.casupport;
 
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream;
@@ -7,9 +7,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
 public class CreateEdgeConfigurationService {
-
-
-    CaServer caServer = new CaServer();
+    private CaServer caServer = null;
+    public CreateEdgeConfigurationService( String cn , String password ){
+        caServer = new CaServer( cn , password );
+    }
 
     public byte [] createReleaseFile( String edge ) throws Exception {
 
@@ -28,12 +29,15 @@ public class CreateEdgeConfigurationService {
     }
 
 
+    private static final String CA_CN = "CN=PinoCA";
+    private static final String CA_PASSWORD = "capassword";
 
 
     public static void main( String [] args ) throws Exception{
 
 
-            CreateEdgeConfigurationService edge = new CreateEdgeConfigurationService();
+            CreateEdgeConfigurationService edge =
+                    new CreateEdgeConfigurationService( CA_CN ,  CA_PASSWORD );
             byte [] buffer = edge.createReleaseFile( "host.local");
             FileOutputStream f = new FileOutputStream( "c:/tmp/edge.tar");
             f.write( buffer );
