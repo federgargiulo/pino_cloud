@@ -1,63 +1,71 @@
 <form [formGroup]="tenantForm" (ngSubmit)="onSubmit()" class="d-flex flex-column">
   <h2>Create Tenant</h2>
   <div class="form-container">
-  <div class="d-flex flex-row gap-4">
-    <div class="form-group-item">
-      <label for="tenantId" class="form-label">Tenant ID</label>
-      <input type="text" id="tenantId" class="form-control" formControlName="tenantId">
-    </div>
-    <div class="form-group-item">
-      <label for="name" class="form-label">Name *</label>
-      <input type="text" id="name" class="form-control" formControlName="name" required>
-      <div *ngIf="tenantForm.controls['name'].invalid && tenantForm.controls['name'].touched" class="text-danger">
-        Name is required
-      </div>
-    </div>
-    <div class="form-group-item">
-      <label for="email" class="form-label">Email *</label>
-      <input type="email" id="email" class="form-control" formControlName="email" required>
-      <div *ngIf="tenantForm.controls['email'].invalid && tenantForm.controls['email'].touched" class="text-danger">
-        Valid email is required
-      </div>
-    </div>
-  </div>
+    <div class="d-flex flex-row gap-4">
+      <mat-form-field  class="form-group-item">
+        <mat-label>Tenant ID</mat-label>
+        <input matInput id="tenantId" formControlName="tenantId" aria-label="Tenant ID">
+      </mat-form-field>
 
-  <div class="form-group-item">
-    <label for="description" class="form-label">Description</label>
-    <textarea id="description" class="form-control" formControlName="description"></textarea>
-  </div>
+      <mat-form-field  class="form-group-item">
+        <mat-label>Name *</mat-label>
+        <input matInput id="name" formControlName="name" required aria-label="Name">
+        <mat-error *ngIf="tenantForm.controls['name'].invalid && tenantForm.controls['name'].touched">
+          Name is required
+        </mat-error>
+      </mat-form-field>
 
-  <div class="d-flex flex-row gap-4">
-    <div class="form-group-item">
-      <label for="profile" class="form-label">Profile</label>
-      <input type="text" id="profile" class="form-control" formControlName="profile">
+      <mat-form-field  class="form-group-item">
+        <mat-label>Email *</mat-label>
+        <input matInput type="email" id="email" formControlName="email" required aria-label="Email">
+        <mat-error *ngIf="tenantForm.controls['email'].invalid && tenantForm.controls['email'].touched">
+          Valid email is required
+        </mat-error>
+      </mat-form-field>
     </div>
-    <div class="form-group-item">
-      <label for="country" class="form-label">Country</label>
-      <input type="text" id="country" class="form-control" formControlName="country">
-    </div>
-    <div class="form-group-item">
-      <label for="state" class="form-label">State</label>
-      <input type="text" id="state" class="form-control" formControlName="state">
-    </div>
-  </div>
 
-  <div class="d-flex flex-row gap-4">
-    <div class="form-group-item">
-      <label for="zipCode" class="form-label">ZIP Code</label>
-      <input type="text" id="zipCode" class="form-control" formControlName="zipCode">
+    <mat-form-field  class="form-group-item w-100">
+      <mat-label>Description</mat-label>
+      <textarea matInput id="description" formControlName="description" rows="3" aria-label="Description"></textarea>
+    </mat-form-field>
+
+    <div class="d-flex flex-row gap-4">
+      <mat-form-field  class="form-group-item">
+        <mat-label>Profile</mat-label>
+        <input matInput id="profile" formControlName="profile" aria-label="Profile">
+      </mat-form-field>
+
+      <mat-form-field  class="form-group-item">
+        <mat-label>Country</mat-label>
+        <input matInput id="country" formControlName="country" aria-label="Country">
+      </mat-form-field>
+
+      <mat-form-field  class="form-group-item">
+        <mat-label>State</mat-label>
+        <input matInput id="state" formControlName="state" aria-label="State">
+      </mat-form-field>
     </div>
-    <div class="form-group-item">
-      <label for="address" class="form-label">Address</label>
-      <input type="text" id="address" class="form-control" formControlName="address">
+
+    <div class="d-flex flex-row gap-4">
+      <mat-form-field  class="form-group-item">
+        <mat-label>ZIP Code</mat-label>
+        <input matInput id="zipCode" formControlName="zipCode" aria-label="ZIP Code">
+      </mat-form-field>
+
+      <mat-form-field  class="form-group-item">
+        <mat-label>Address</mat-label>
+        <input matInput id="address" formControlName="address" aria-label="Address">
+      </mat-form-field>
     </div>
+
     <!-- Campi hidden -->
     <input type="hidden" formControlName="createdDttm">
     <input type="hidden" formControlName="updateDttm">
   </div>
-</div>
 
   <mat-toolbar>
-    <button type="submit" class="btn btn-primary mt-3" [disabled]="tenantForm.invalid">Create</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="tenantForm.invalid">
+      Create
+    </button>
   </mat-toolbar>
 </form>

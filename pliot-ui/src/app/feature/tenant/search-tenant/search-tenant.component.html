@@ -1,23 +1,5 @@
 <h2>TENANT LIST</h2>
 
-<!--mat-toolbar class="actions-table-bar" color="transparent">
-  <button mat-flat-button
-          color="primary"
-          [disabled]="selection.selected.length !== 1"
-          (click)="editSelectedTenant()">
-          <span class="material-symbols-outlined">edit_square</span>
-          Modifica
-  </button>
-
-  <button mat-flat-button
-          color="warn"
-          [disabled]="selection.selected.length === 0"
-          (click)="removeSelectedRows()">
-    <span class="material-symbols-outlined">delete</span>
-    Elimina
-  </button>
-</mat-toolbar -->
-
 <div div class="actions-table-bar">
   <button class="actions-table-bar__button" mat-button color="primary"
           [disabled]="selection.selected.length !== 1"
@@ -32,11 +14,7 @@
     <span class="material-symbols-outlined">delete</span>
     Elimina
   </button>
-
-  <mat-divider vertical class="divider-50"></mat-divider>
-
 </div>
-<div class="table-container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
 
     <!-- Checkbox Column -->
@@ -120,4 +98,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
     </tr>
   </table>
-</div>

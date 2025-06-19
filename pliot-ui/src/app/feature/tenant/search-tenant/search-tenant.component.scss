@@ -31,3 +31,10 @@
       margin-top: 0 !important;
     }
   }
+
+  table.mat-mdc-table {
+    margin: 8px 35px 35px;
+    display: flex;
+    flex-grow: 1;
+    overflow: auto;
+  }
