@@ -16,6 +16,12 @@
       margin-bottom: 24px;
     }
 
+    &:has(.mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix textarea) {
+      height: auto;
+      min-height: 63px !important;
+      flex-shrink: 0;
+    }
+
     &.mat-focused {
       .mat-mdc-text-field-wrapper {
         &:hover .mat-mdc-form-field-focus-overlay {
@@ -42,10 +48,22 @@
         }
         .mat-mdc-form-field-flex {
           .mat-mdc-form-field-infix {
-            padding: 0 14px;
+            padding: 0 9.5px;
             min-height: 36px;
             display: flex;
             align-items: center;
+            &:has(textarea) {
+              padding: 0;
+              min-height: 63px !important;
+              flex-shrink: 0;
+            }
+
+            textarea {
+              padding: 9.5px 9.5px;
+              min-height: 63px !important;
+              flex-shrink: 0;
+            }
+
             label.mdc-floating-label.mat-mdc-floating-label,
             label.mdc-floating-label.mat-mdc-floating-label.mdc-floating-label--float-above {
               transition: none !important;
