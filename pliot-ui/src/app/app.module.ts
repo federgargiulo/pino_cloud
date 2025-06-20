@@ -70,6 +70,9 @@ import { ConfirmDialogModule } from './feature/user/search-user/confirm-dialog/c
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+import { EdgeDetailComponent } from './feature/edge/edge-detail/edge-detail.component';
+import { EdgeListComponent } from './feature/edge/edge-list/edge-list.component';
+
 var loc = new ConfigurationService();
 
 export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
@@ -115,6 +118,8 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     DetailUserComponent,
     ProfileComponent,
     MonitorComponent,
+    EdgeDetailComponent,
+    EdgeListComponent,
   ],
   imports: [
     BrowserModule,

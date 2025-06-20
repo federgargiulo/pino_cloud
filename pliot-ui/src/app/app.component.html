@@ -61,6 +61,16 @@
       <button mat-button class="mat-drawer-button-item" [routerLink]="['add-tenant']" routerLinkActive="active-link"> Create </button>
       }
     </div>
+    <!-- Edge --->
+
+    <div class="drawer-button-container" >
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['edge-list']">Edge List</button>
+    </div>
+    <div class="drawer-button-container" >
+      <button mat-button class="mat-drawer-button-item" [routerLink]="['edge-detail']">Edge Detail</button>
+    </div>
+
+
     <!-- Equipment -->
     <div class="drawer-button-container" [class.opened]="showEquipmentItems">
       <button mat-button class="mat-drawer-button" (click)="toggleDrawer('equipment')">

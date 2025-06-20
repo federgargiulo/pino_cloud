@@ -17,6 +17,9 @@ import { DetailUserComponent } from './feature/user/detail-user/detail-user.comp
 import { PivotTableComponent } from './olap/pivot-table/pivot-table.component';
 import { ProfileComponent } from './feature/profile/profile.component';
 import { MonitorComponent } from './feature/system/monitor/monitor.component';
+import { EdgeListComponent } from './feature/edge/edge-list/edge-list.component';
+import { EdgeDetailComponent } from './feature/edge/edge-detail/edge-detail.component';
+
 
 const routes: Routes = [
 
@@ -37,7 +40,9 @@ const routes: Routes = [
   { path: 'detail-user/:id', component: DetailUserComponent, title: 'Modifica Users' },
   { path: 'olap', component: PivotTableComponent, title: 'Modifica Users' },
   { path: 'profile', component: ProfileComponent, title: 'Profile' },
-  { path: 'system-status', component: MonitorComponent, title: 'Status' }
+  { path: 'system-status', component: MonitorComponent, title: 'Status' },
+  { path: 'edge-list', component: EdgeListComponent, title: 'Edge List' },
+  { path: 'edge-det', component: EdgeDetailComponent, title: 'Edge Detail' }
 
 ];
 
