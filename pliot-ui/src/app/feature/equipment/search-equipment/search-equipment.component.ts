@@ -45,6 +45,7 @@ export class SearchEquipmentComponent implements OnInit {
       if (error) {
         if (error.status === 404 && error.error?.message) {
           this.dataSource.data = [];
+          this.selection.clear();
         }
       }
     });
@@ -57,9 +58,16 @@ export class SearchEquipmentComponent implements OnInit {
   editSelectedRows(): void {
     const selected = this.selection.selected[0];
     if (selected) {
-      this.dialog.open(EquipmentConfirmDialogComponent, {
+      const dialogRef = this.dialog.open(EquipmentConfirmDialogComponent, {
         panelClass: 'equipment-edit-dialog',
         data: { equipmentId: selected.equipmentId }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === true) {
+          this.getAllEquipment(); // ricarica la tabella
+          this.selection.clear();
+        }
       });
     }
   }

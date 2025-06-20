@@ -59,7 +59,7 @@ public class EquipmentPullerServiceImpl
     public List<EquipmentPullerTO> puller4Equipment( String equipmentId ) {
 
         EquipmentPuller probe = new EquipmentPuller();
-        probe.setIdEquipment( equipmentId);
+        probe.setEquipmentId( equipmentId);
         Example<EquipmentPuller> example = Example.of(probe);
         List<EquipmentPuller> sens= getRepo().findAll(example);
         return getConverter().converListData2IO(sens);

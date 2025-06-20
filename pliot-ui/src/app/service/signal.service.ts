@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpProviderService } from './http-provider.service';
 
-const isMockEnabled = true;
+const isMockEnabled = false;
 
 var version="";
 
@@ -152,7 +152,7 @@ var httpLink = {
         ];
         return of({ body: mockSignals });
       } else {
-        console.info( "Service is calling getSignalsByEquipmentId" + httpLink.getSignalsByEquipmentId + " With id: " + id )
+        console.info( " is calServiceling getSignalsByEquipmentId" + httpLink.getSignalsByEquipmentId + " With id: " + id )
         return this.webApiService.get(httpLink.getSignalsByEquipmentId + '/' + id + '/signals');
       }
     }
