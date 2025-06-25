@@ -90,7 +90,7 @@ export class SearchEquipmentComponent implements OnInit {
   editSelectedRows(): void {
     const selected = this.selection.selected[0];
     if (selected) {
-      const dialogRef = this.dialog.open(EquipmentDialogComponent, {
+      const dialogRef = this.dialog.open(EquipmentConfirmDialogComponent, {
         width: '600px',
         data: { equipmentId: selected.equipmentId }
       });
