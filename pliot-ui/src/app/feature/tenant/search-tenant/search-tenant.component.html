@@ -1,13 +1,33 @@
 <h2>TENANT LIST</h2>
 
+<mat-toolbar class="search-table-bar">
+  <form class="d-flex align-items-center gap-4" (ngSubmit)="applyFilter()">
+    <mat-form-field class="w-300">
+      <mat-label>Search Tenant</mat-label>
+      <input matInput placeholder="Search tenant" [(ngModel)]="searchValue" name="searchValue" (input)="onInputChange()" #input>
+    </mat-form-field>
+
+    <button type="submit" mat-flat-button color="secondary" style="margin-bottom: 9px;" (click)="clearFilter(input)">
+      Reset
+    </button>
+    <button type="submit" mat-flat-button color="primary" style="margin-bottom: 9px;" (click)="applyFilter()">
+      Search
+    </button>
+  </form>
+</mat-toolbar>
+
 <div div class="actions-table-bar">
+  <button class="actions-table-bar__button" mat-button color="primary"
+          (click)="createNewTenant()">
+    <span class="material-symbols-outlined">add</span>
+    Nuovo Tenant
+  </button>
   <button class="actions-table-bar__button" mat-button color="primary"
           [disabled]="selection.selected.length !== 1"
           (click)="editSelectedTenant()">
     <span class="material-symbols-outlined">edit_square</span>
     Modifica
   </button>
-
   <button class="actions-table-bar__button" mat-button color="primary"
           [disabled]="selection.selected.length === 0"
           (click)="removeSelectedRows()">
@@ -15,86 +35,88 @@
     Elimina
   </button>
 </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
 
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox
-          (change)="$event ? toggleAllRows() : null"
-          [checked]="selection.hasValue() && isAllSelected()"
-          [indeterminate]="selection.hasValue() && !isAllSelected()"
-          [aria-label]="checkboxLabel()">
-        </mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <mat-checkbox
-          (click)="$event.stopPropagation()"
-          (change)="$event ? selection.toggle(row) : null"
-          [checked]="selection.isSelected(row)"
-          [aria-label]="checkboxLabel(row)">
-        </mat-checkbox>
-      </td>
-    </ng-container>
+<!-- Table Tenant -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
 
-    <!-- Dynamically Generated Columns -->
-    <ng-container matColumnDef="tenantId">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.tenantId}} </td>
-    </ng-container>
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox
+        (change)="$event ? toggleAllRows() : null"
+        [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()"
+        [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        (change)="$event ? selection.toggle(row) : null"
+        [checked]="selection.isSelected(row)"
+        [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
+  <!-- Dynamically Generated Columns -->
+  <ng-container matColumnDef="tenantId">
+    <th mat-header-cell *matHeaderCellDef class="w-70"> ID </th>
+    <td mat-cell *matCellDef="let element" class="w-70"> {{element.tenantId}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="profile">
-      <th mat-header-cell *matHeaderCellDef> Profile </th>
-      <td mat-cell *matCellDef="let element"> {{element.profile}} </td>
-    </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef> Address </th>
-      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
-    </ng-container>
+  <ng-container matColumnDef="profile">
+    <th mat-header-cell *matHeaderCellDef class="w-100 align-center"> Profile </th>
+    <td mat-cell *matCellDef="let element" class="w-100 align-center"> {{element.profile}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="country">
-      <th mat-header-cell *matHeaderCellDef> Country </th>
-      <td mat-cell *matCellDef="let element"> {{element.country}} </td>
-    </ng-container>
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef> Address </th>
+    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="zipCode">
-      <th mat-header-cell *matHeaderCellDef> Zip Code </th>
-      <td mat-cell *matCellDef="let element"> {{element.zipCode}} </td>
-    </ng-container>
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef class="w-100 align-center"> Country </th>
+    <td mat-cell *matCellDef="let element" class="w-100 align-center"> {{element.country}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="state">
-      <th mat-header-cell *matHeaderCellDef> State </th>
-      <td mat-cell *matCellDef="let element"> {{element.state}} </td>
-    </ng-container>
+  <ng-container matColumnDef="zipCode">
+    <th mat-header-cell *matHeaderCellDef class="w-100 align-center"> Zip Code </th>
+    <td mat-cell *matCellDef="let element" class="w-100 align-center"> {{element.zipCode}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef class="w-70 align-center"> State </th>
+    <td mat-cell *matCellDef="let element" class="w-70 align-center"> {{element.state}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="createdDttm">
-      <th mat-header-cell *matHeaderCellDef> Created </th>
-      <td mat-cell *matCellDef="let element"> {{element.createdDttm}} </td>
-    </ng-container>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="updateDttm">
-      <th mat-header-cell *matHeaderCellDef> Last Update </th>
-      <td mat-cell *matCellDef="let element"> {{element.updateDttm}} </td>
-    </ng-container>
+  <ng-container matColumnDef="createdDttm">
+    <th mat-header-cell *matHeaderCellDef> Created </th>
+    <td mat-cell *matCellDef="let element"> {{element.createdDttm}} </td>
+  </ng-container>
 
-    <!-- Table rows -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
-    </tr>
-  </table>
+  <ng-container matColumnDef="updateDttm">
+    <th mat-header-cell *matHeaderCellDef> Last Update </th>
+    <td mat-cell *matCellDef="let element"> {{element.updateDttm}} </td>
+  </ng-container>
+
+  <!-- Table rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+  </tr>
+</table>

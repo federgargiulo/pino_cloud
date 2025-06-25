@@ -23,6 +23,10 @@ $directions: ('top', 'right', 'bottom', 'left');
     }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .gap-14 {
     gap: 14px;
 }

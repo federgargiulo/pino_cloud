@@ -8,7 +8,7 @@
       </mat-form-field>
 
       <mat-form-field  class="form-group-item">
-        <mat-label>Name *</mat-label>
+        <mat-label>Name</mat-label>
         <input matInput id="name" formControlName="name" required aria-label="Name">
         <mat-error *ngIf="tenantForm.controls['name'].invalid && tenantForm.controls['name'].touched">
           Name is required
@@ -16,7 +16,7 @@
       </mat-form-field>
 
       <mat-form-field  class="form-group-item">
-        <mat-label>Email *</mat-label>
+        <mat-label>Email</mat-label>
         <input matInput type="email" id="email" formControlName="email" required aria-label="Email">
         <mat-error *ngIf="tenantForm.controls['email'].invalid && tenantForm.controls['email'].touched">
           Valid email is required

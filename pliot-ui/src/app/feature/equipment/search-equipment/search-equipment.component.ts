@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EquipmentConfirmDialogComponent } from './equipment-confirm-dialog/equipment-confirm-dialog.component';
 import { DeleteConfirmDialogComponent } from './equipment-confirm-dialog/delete-confirm-dialog.component';
+import { EquipmentDialogComponent } from './equipment-dialog/equipment-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -20,6 +21,7 @@ export class SearchEquipmentComponent implements OnInit {
   displayedColumns: string[] = ['select', 'equipmentId', 'name', 'tenant', 'status', 'createdDttm', 'updateDttm'];
   dataSource = new MatTableDataSource<any>([]);
   selection = new SelectionModel<any>(true, []);
+  searchValue: string = '';
 
   constructor(
     private equipmentServices: EquipmentServices,
@@ -31,6 +33,19 @@ export class SearchEquipmentComponent implements OnInit {
   ngOnInit(): void {
     console.log("init");
     this.getAllEquipment();
+  }
+
+  openAddEquipmentDialog(): void {
+    const dialogRef = this.dialog.open(EquipmentDialogComponent, {
+      width: '600px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.getAllEquipment(); // ricarica la tabella
+      }
+    });
   }
 
   async getAllEquipment() {
@@ -51,6 +66,23 @@ export class SearchEquipmentComponent implements OnInit {
     });
   }
 
+  onInputChange() {
+    // Se l'input è vuoto o contiene solo spazi, resetta il filtro
+    if (!this.searchValue || this.searchValue.trim() === '') {
+      this.dataSource.filter = '';
+    }
+  }
+
+  applyFilter() {
+    this.dataSource.filter = this.searchValue.trim().toLowerCase();
+  }
+
+  clearFilter(input: any) {
+    this.searchValue = '';
+    input.value = '';
+    this.dataSource.filter = '';
+  }
+
   refreshEquipment() {
     this.getAllEquipment();
   }
@@ -58,8 +90,8 @@ export class SearchEquipmentComponent implements OnInit {
   editSelectedRows(): void {
     const selected = this.selection.selected[0];
     if (selected) {
-      const dialogRef = this.dialog.open(EquipmentConfirmDialogComponent, {
-        panelClass: 'equipment-edit-dialog',
+      const dialogRef = this.dialog.open(EquipmentDialogComponent, {
+        width: '600px',
         data: { equipmentId: selected.equipmentId }
       });
 
