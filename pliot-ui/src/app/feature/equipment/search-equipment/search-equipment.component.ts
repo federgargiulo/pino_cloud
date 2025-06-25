@@ -91,7 +91,7 @@ export class SearchEquipmentComponent implements OnInit {
     const selected = this.selection.selected[0];
     if (selected) {
       const dialogRef = this.dialog.open(EquipmentConfirmDialogComponent, {
-        width: '600px',
+        panelClass: 'equipment-edit-dialog',
         data: { equipmentId: selected.equipmentId }
       });
 
