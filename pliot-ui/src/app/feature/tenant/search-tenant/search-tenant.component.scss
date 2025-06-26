@@ -1,8 +1,19 @@
-:host, form, .form-container {
+:host {
     display: flex;
     flex-grow: 1;
     overflow: auto;
     flex-direction: column;
+  }
+
+  form {
+    display: flex;
+    flex-grow: 1;
+    overflow: auto;
+    flex-direction: row;
+    gap: 16px;
+    mat-form-field {
+      width: 500px;
+    }
   }
 
   .form-container {
@@ -21,13 +32,38 @@
 
   .mat-toolbar.mat-toolbar {
     background-color: white;
-    border-top: 1px solid #e0e0e0;
+    border: 1px solid #e0e0e0;
     height: auto;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 24px 35px;
+    margin: 32px 32px 0 32px;
+    padding: 24px;
+    width: auto;
     button {
       margin-top: 0 !important;
     }
+  }
+
+  table.mat-mdc-table {
+    margin: 8px 35px 35px;
+    display: flex;
+    flex-grow: 1;
+    overflow: auto;
+  }
+
+  .w-70 {
+    flex-shrink: 0;
+    width: 70px !important;
+  }
+
+  .w-100 {
+    flex-shrink: 0;
+    width: 100px !important;
+  }
+
+  .align-center {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
   }

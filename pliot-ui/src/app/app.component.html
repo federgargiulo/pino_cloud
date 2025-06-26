@@ -70,8 +70,8 @@
         </div>
 
         <!-- Tenant -->
-        <div class="drawer-button-container" [class.opened]="showTenantItems"
-          *ngIf="item.id === 'tenant' && isPliotAdmin() && isMenuItemVisible(item.id)">
+        <!-- <div class="drawer-button-container" [class.opened]="showTenantItems"
+             *ngIf="item.id === 'tenant' && isPliotAdmin() && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" (click)="toggleDrawer('tenant')"
             [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
@@ -91,10 +91,21 @@
             </button>
           </ng-container>
           }
+        </div> -->
+
+        <div class="drawer-button-container" *ngIf="item.id === 'tenant' && isPliotAdmin() && isMenuItemVisible(item.id)">
+          <button mat-button class="mat-drawer-button" [routerLink]="['search-tenant']" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: true}">
+            <span class="d-flex align-items-center gap-14">
+              <span class="material-symbols-outlined">business</span>
+              <span class="px-1">{{ item.label }}</span>
+            </span>
+          </button>
         </div>
 
         <!-- Equipment -->
-        <div class="drawer-button-container" [class.opened]="showEquipmentItems"
+
+        <!-- <div class="drawer-button-container" [class.opened]="showEquipmentItems"
           *ngIf="item.id === 'equipment' && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" (click)="toggleDrawer('equipment')"
             [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
@@ -115,6 +126,16 @@
             </button>
           </ng-container>
           }
+        </div> -->
+
+        <div class="drawer-button-container" *ngIf="item.id === 'equipment' && isMenuItemVisible(item.id)">
+          <button mat-button class="mat-drawer-button" [routerLink]="['search-equipment']" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: true}">
+            <span class="d-flex align-items-center gap-14">
+              <span class="material-symbols-outlined">manufacturing</span>
+              <span class="px-1">{{ item.label }}</span>
+            </span>
+          </button>
         </div>
 
         <!-- Users -->

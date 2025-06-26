@@ -77,7 +77,7 @@ public class EquipmentPuller {
         return equipmentId;
     }
 
-    public void setIdEquipment(String equipmentId) {
+    public void setEquipmentId(String equipmentId) {
         this.equipmentId = equipmentId;
     }
 

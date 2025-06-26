@@ -35,6 +35,7 @@ export class EquipmentConfirmDialogComponent implements OnInit {
   }
 
   onYesClick(): void {
+    this.updateEquipment();
     this.dialogRef.close(true);
   }
 
@@ -199,16 +200,17 @@ export class EquipmentConfirmDialogComponent implements OnInit {
     this.signalService.getSignalsByEquipmentId(equipmentId).subscribe(data => {
       this.signals.data = data.body || [];
       console.log("Signals caricati:", this.signals.data);
+      this.selection.clear();
     });
   }
 
   saveSignal(): void {
     const equipmentId = this.equipmentForm.get('equipmentId')?.value;
-
     if (this.signalForm.valid) {
       const signalData = this.signalForm.getRawValue();
 
       if (this.isEditingSignal) {
+        console.log("this.signalForm.valid:", this.signalForm.valid);
         this.signalService.updateSignal(equipmentId, signalData.signalId, signalData).subscribe({
           next: () => {
             this.loadSignals();
@@ -244,6 +246,8 @@ export class EquipmentConfirmDialogComponent implements OnInit {
   }
 
   deleteSignal(equipmentId: string, signalId: string): void {
+    console.log('Equipment ID', equipmentId);
+    console.log('Signal ID', signalId);
     const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
       width: '400px',
       data: { itemType: 'signal' }
@@ -253,6 +257,7 @@ export class EquipmentConfirmDialogComponent implements OnInit {
       if (result) {
         this.signalService.deleteSignalById(equipmentId, signalId).subscribe({
           next: () => {
+            console.log('Signal deleted');
             this.loadSignals();
           },
           error: (err) => {
@@ -285,11 +290,24 @@ export class EquipmentConfirmDialogComponent implements OnInit {
     });
   }
 
+
   savePuller(): void {
     const equipmentId = this.equipmentForm.get('equipmentId')?.value;
+    const tenant = this.equipmentForm.get('tenant')?.value;
+
+    // Assicurati che equipmentId e tenant siano sempre settati
+    this.pullerForm.get('equipmentId')?.setValue(equipmentId);
+    this.pullerForm.get('tenant')?.setValue(tenant);
 
     if (this.pullerForm.valid) {
       const pullerData = this.pullerForm.getRawValue();
+
+      // Rimuovi il pullerId se è nullo o stringa vuota
+      if (!pullerData.pullerId || pullerData.pullerId.trim() === '') {
+        delete pullerData.pullerId;
+      }
+
+      console.info('createEquipmentPuller per equipmentId:', equipmentId, pullerData);
 
       if (this.isEditingPuller) {
         this.equipmentService.updatePuller(equipmentId, this.selectedPullerId!, pullerData).subscribe({
@@ -308,8 +326,11 @@ export class EquipmentConfirmDialogComponent implements OnInit {
           error: (err) => console.error('Errore creazione Puller:', err)
         });
       }
+    } else {
+      console.warn('Form non valido:', this.pullerForm.errors);
     }
   }
+
 
   editPuller(puller: any): void {
     this.isEditingPuller = true;
