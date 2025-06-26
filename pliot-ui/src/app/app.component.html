@@ -140,7 +140,7 @@
 
         <!-- Users -->
         <div class="drawer-button-container" [class.opened]="showUserItems"
-          *ngIf="item.id === 'users' && isMenuItemVisible(item.id)">
+          *ngIf="item.id === 'users' && isPliotAdmin() && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" (click)="toggleDrawer('user')"
             [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
