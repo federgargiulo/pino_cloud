@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpProviderService } from './http-provider.service';
 import { of } from 'rxjs'; // assicurati di importarlo
 
-const isMockEnabled = false;
+const isMockEnabled = true;
 
 var version="";
 

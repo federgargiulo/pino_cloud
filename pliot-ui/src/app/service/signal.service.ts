@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpProviderService } from './http-provider.service';
 
-const isMockEnabled = false;
+const isMockEnabled = true;
 
 var version="";
 
