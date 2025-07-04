@@ -1,6 +1,27 @@
 <h2>Equipment List</h2>
 
+<mat-toolbar class="search-table-bar">
+  <form class="d-flex align-items-center gap-4" (ngSubmit)="applyFilter()">
+    <mat-form-field class="w-300">
+      <mat-label>Search Equipment</mat-label>
+      <input matInput placeholder="Search equipment" [(ngModel)]="searchValue" name="searchValue" (input)="onInputChange()" #input>
+    </mat-form-field>
+
+    <button type="submit" mat-flat-button color="secondary" style="margin-bottom: 9px;" (click)="clearFilter(input)">
+      Reset
+    </button>
+    <button type="submit" mat-flat-button color="primary" style="margin-bottom: 9px;" (click)="applyFilter()">
+      Search
+    </button>
+  </form>
+</mat-toolbar>
+
 <div div class="actions-table-bar">
+  <button class="actions-table-bar__button" mat-button color="primary" (click)="openAddEquipmentDialog()">
+    <span class="material-symbols-outlined">add</span>
+    Add Equipment
+  </button>
+
   <button class="actions-table-bar__button" mat-button color="primary" [disabled]="selection.selected.length !== 1" (click)="editSelectedRows()">
     <span class="material-symbols-outlined">edit_square</span>
     Modifica
