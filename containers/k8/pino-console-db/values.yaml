@@ -37,9 +37,9 @@ serverDefinitions:
     "1": {
       "Name": "PostgreSQL interno",
       "Group": "Servers",
-      "Host": "pino-db-idp",
+      "Host": "pino-app-pino-dbpos-app",
       "Port": 5432,
-      "Username": "keycloak",
+      "Username": "pino",
       "SSLMode": "prefer",
       "MaintenanceDB": "postgres"
     }

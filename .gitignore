@@ -34,10 +34,7 @@ build/
 .vscode/
 /rest/target/
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ea5111e2dbac0227e0a7bef018dcf32b94484ce0
+*.tgz
 
 *actions
 *logs
