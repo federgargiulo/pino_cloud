@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nemo-pino
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nemo-pino
+  template:
+    metadata:
+      labels:
+        app: nemo-pino
+    spec:
+      containers:
+        - name: nemo-pino
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: JAVA_OPTS
+              value: "{{ .Values.env.JAVA_OPTS }}"
+            - name: SPRING_OPTS
+              value: "{{ .Values.env.SPRING_OPTS }}"
+          volumeMounts:
+            - name: config-volume
+              mountPath: {{ .Values.config.mountPath }}
+              readOnly: true
+            - name: logs-volume
+              mountPath: {{ .Values.config.logsPath }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: nemo-pino-config
+        - name: logs-volume
+          emptyDir: {{}}
