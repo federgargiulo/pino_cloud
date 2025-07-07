@@ -34,7 +34,7 @@ build/
 .vscode/
 /rest/target/
 
-*.yaml
+
 
 *actions
 *logs
