@@ -54,9 +54,9 @@ spring:
     enabled: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/pliot
-    username: pliot
-    password: pliot
+    url: jdbc:postgresql://pino-dbpos-idp:5432/pino
+    username: keycloak
+    password: G1us3pp3
 #H2
 #    url: jdbc:h2:file:./equipment
 #    username: sa
@@ -101,10 +101,10 @@ spring:
 
 server:
   port: 8080
-  ssl:
-    enabled: true
-    certificate: ./config/fullchain.pem
-    certificate-private-key: ./config/privkey.pem
+  #ssl:
+  #  enabled: true
+  #  certificate: ./config/fullchain.pem
+  #  certificate-private-key: ./config/privkey.pem
 
 
 management:

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nemo-pino
+  name: pino-server-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nemo-pino
+      app: pino-server-app
   template:
     metadata:
       labels:
-        app: nemo-pino
+        app: pino-server-app
     spec:
       containers:
-        - name: nemo-pino
+        - name: pino-server-app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -32,6 +32,6 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: nemo-pino-config
+            name: pino-server-app-config
         - name: logs-volume
-          emptyDir: {{}}
+          emptyDir: {}

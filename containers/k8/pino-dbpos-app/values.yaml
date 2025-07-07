@@ -158,7 +158,7 @@ auth:
   password: "G1us3pp3"
   ## @param auth.database Name for a custom database to create
   ##
-  database: "pino"
+  database: "postgres"
   ## @param auth.replicationUsername Name of the replication user
   ##
   replicationUsername: repl_user

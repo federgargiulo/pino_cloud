@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nemo-pino-config
+  name: pino-server-app-config
 data:
   {{ .Values.config.applicationFileName }}: |
 {{ .Files.Get "application_prod.yml" | indent 4 }}
