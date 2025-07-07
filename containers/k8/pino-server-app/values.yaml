@@ -1,0 +1,20 @@
+image:
+  repository: cogitoprediction/nemo_pino
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+config:
+  mountPath: /app/config
+  applicationFileName: application_prod.yml
+  logsPath: /app/logs
+
+env:
+  JAVA_OPTS: "-Dspring.profiles.active=server"
+  SPRING_OPTS: "--spring.config.location=/app/config/application_prod.yml"
+
+persistence:
+  enabled: false
