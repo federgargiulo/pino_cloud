@@ -18,9 +18,7 @@ serviceAccount:
   create: true
   # Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: "helloworld"
+
 
 podAnnotations: {}
 
@@ -36,7 +34,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: pino-helloworld
+  name: pino-helloworld-v3
   type: ClusterIP
   port: 5678
 
@@ -44,9 +42,9 @@ ingress:
   enabled: true
   apiVersion: networking.k8s.io/v1
   annotations: 
-    nemo.eu/ingress-expose: "true"
+    nemo.eu/ingress-expose: true
   hosts:
-    - host: pino-helloword.workload.nemo.onelab.eu
+    - host: pino-helloworld-v3.workload.nemo.onelab.eu
       paths:
         - path: /
           pathType: ImplementationSpecific

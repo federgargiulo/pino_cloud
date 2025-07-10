@@ -4,6 +4,10 @@ metadata:
   name: {{ include "helloworld.fullname" . }}
   labels:
     {{- include "helloworld.labels" . | nindent 4 }}
+  {{- if .Values.ingress.annotations }}
+  annotations:
+    {{- .Values.ingress.annotations | toYaml | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +16,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "helloworld.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ include "helloworld.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

@@ -60,3 +60,7 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "ingress.apiVersion" -}}
+networking.k8s.io/v1
+{{- end -}}

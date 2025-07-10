@@ -37,9 +37,9 @@ serverDefinitions:
     "1": {
       "Name": "PostgreSQL interno",
       "Group": "Servers",
-      "Host": "pino-app-pino-dbpos-app",
+      "Host": "pino-db-idp",
       "Port": 5432,
-      "Username": "pino",
+      "Username": "keycloak",
       "SSLMode": "prefer",
       "MaintenanceDB": "postgres"
     }
@@ -47,14 +47,13 @@ serverDefinitions:
 ingress:
   ## If true, pgAdmin Ingress will be created
   ##
-  apiVersion: networking.k8s.io/v1
   enabled: true
   className: ''
   annotations:
     nemo.eu/ingress-expose: "true"
-    external-dns.alpha.kubernetes.io/hostname: pino-console-db.workload.nemo.onelab.eu
+    external-dns.alpha.kubernetes.io/hostname: pino-console-db-v4.workload.nemo.onelab.eu
   hosts:
-    - host: pino-console-db.workload.nemo.onelab.eu
+    - host: pino-console-db-v4.workload.nemo.onelab.eu
       paths:
         - path: /
           pathType: ImplementationSpecific

@@ -1,11 +1,11 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "pgadmin.fullname" . -}}
+{{- $fullName := include "helloworld.fullname" . -}}
 apiVersion: {{ template "ingress.apiVersion" . }}
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "pgadmin.labels" . | nindent 4 }}
+    {{- include "helloworld.labels" . | nindent 4 }}
   {{- if .Values.ingress.annotations }}
   annotations:
     {{- .Values.ingress.annotations | toYaml | nindent 4 }}

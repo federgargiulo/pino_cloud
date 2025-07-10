@@ -5,5 +5,5 @@ home: https://www.pgadmin.org/
 maintainers:
 - email: rowanruseler@gmail.com
   name: rowanruseler
-name: pino-console-db
+name: pino-console-db-v4
 version: 1.0.0
