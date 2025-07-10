@@ -1,0 +1,6 @@
+apiVersion: v2
+name: pino-db-idp-v1
+description: A Helm chart for PostgreSQL with ingress enabled on NEMO
+type: application
+version: 2.2.10
+appVersion: 16.3.0

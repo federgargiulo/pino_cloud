@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "pino-db-idp.fullname" . }}
+  labels:
+    app: {{ include "pino-db-idp.name" . }}
+  annotations:
+    {{- if .Values.ingress.enabled }}
+    nemo.eu/ingress-expose: "true"
+    {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+  selector:
+    app: {{ include "pino-db-idp.name" . }}
