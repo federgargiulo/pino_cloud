@@ -9,42 +9,25 @@ image:
   pullPolicy: IfNotPresent
   tag: "0.2.3"
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
 
 
-podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
 
 service:
-  name: pino-helloworld-v3
   type: ClusterIP
   port: 5678
 
+strategy: {}
+
 ingress:
+  ## If true, pgAdmin Ingress will be created
+  ##
   enabled: true
-  apiVersion: networking.k8s.io/v1
-  annotations: 
-    nemo.eu/ingress-expose: true
+  className: ''
+  annotations:
+    nemo.eu/ingress-expose: "true"
+    external-dns.alpha.kubernetes.io/hostname: pino-helloworld-v5.workload.nemo.onelab.eu
   hosts:
-    - host: pino-helloworld-v3.workload.nemo.onelab.eu
+    - host: pino-helloworld-v5.workload.nemo.onelab.eu
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -83,3 +66,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+serviceAccount:
+  create: false

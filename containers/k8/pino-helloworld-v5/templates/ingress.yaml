@@ -1,11 +1,11 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "helloworld.fullname" . -}}
+{{- $fullName := include "pgadmin.fullname" . -}}
 apiVersion: {{ template "ingress.apiVersion" . }}
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "helloworld.labels" . | nindent 4 }}
+    {{- include "pgadmin.labels" . | nindent 4 }}
   {{- if .Values.ingress.annotations }}
   annotations:
     {{- .Values.ingress.annotations | toYaml | nindent 4 }}
@@ -21,22 +21,16 @@ spec:
       secretName: {{ .secretName }}
   {{- end }}
 {{- end }}
-  {{- if .Values.ingress.className }}
-  ingressClassName: {{ .Values.ingress.className }}
-  {{- end }}
   rules:
   {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
         {{- range .paths }}
-          - path: {{ .path | quote }}
-            pathType: {{ .pathType | default "Prefix" }}
+          - path: {{ . }}
             backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  name: http
+              serviceName: {{ $fullName }}
+              servicePort: http
         {{- end }}
   {{- end }}
 {{- end }}
