@@ -54,8 +54,8 @@ spring:
     enabled: true
 
   datasource:
-    url: jdbc:postgresql://pino-dbpos-idp:5432/pino
-    username: keycloak
+    url: jdbc:postgresql://pino-db-app-v2.8f0c1d24-deea-468d-9a60-8bdc22a7a1ca.svc.cluster.local:5432/pino
+    username: pino
     password: G1us3pp3
 #H2
 #    url: jdbc:h2:file:./equipment

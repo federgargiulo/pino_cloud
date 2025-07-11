@@ -1,7 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ include "pinoserver.fullname" . }}
+  labels:
+    {{- include "pinoserver.labels" . | nindent 4 }}
+  {{- if .Values.ingress.annotations }}
+  annotations:
+    {{- .Values.ingress.annotations | toYaml | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
   selector:
@@ -9,3 +15,6 @@ spec:
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.port }}
+  selector:
+    app.kubernetes.io/name: {{ include "pinoserver.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
