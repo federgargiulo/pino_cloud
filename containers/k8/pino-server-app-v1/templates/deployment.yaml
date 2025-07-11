@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pino-server-app
+  name: {{ .Chart.Name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pino-server-app
+      app: {{ .Chart.Name }}
   template:
     metadata:
       labels:
-        app: pino-server-app
+        app: {{ .Chart.Name }}
     spec:
       containers:
-        - name: pino-server-app
+        - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -32,6 +32,6 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: pino-server-app-config
+            name: {{ .Chart.Name }}-config
         - name: logs-volume
           emptyDir: {}

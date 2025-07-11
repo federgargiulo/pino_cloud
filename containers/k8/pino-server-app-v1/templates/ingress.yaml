@@ -2,7 +2,7 @@
 apiVersion: {{ .Values.ingress.apiVersion }}
 kind: Ingress
 metadata:
-  name: pino-server-app
+  name: {{ .Chart.Name }}
   {{- if .Values.ingress.className }}
   ingressClassName: {{ .Values.ingress.className }}
   {{- end }}
@@ -21,7 +21,7 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: pino-server-app
+                name: {{ .Chart.Name }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}

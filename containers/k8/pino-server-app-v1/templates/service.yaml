@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pino-server-app
+  name: {{ .Chart.Name }}
 spec:
   type: {{ .Values.service.type }}
   selector:
-    app: pino-server-app
+    app: {{ .Chart.Name }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.port }}

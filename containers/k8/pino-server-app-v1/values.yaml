@@ -25,9 +25,9 @@ ingress:
   className: ''
   annotations:
     nemo.eu/ingress-expose: "true"
-    external-dns.alpha.kubernetes.io/hostname: pino-server-app.workload.nemo.onelab.eu
+    external-dns.alpha.kubernetes.io/hostname: pino-server-app-v1.workload.nemo.onelab.eu
   hosts:
-    - host: pino-server-app.workload.nemo.onelab.eu
+    - host: pino-server-app-v1.workload.nemo.onelab.eu
       paths:
         - path: /
           pathType: ImplementationSpecific

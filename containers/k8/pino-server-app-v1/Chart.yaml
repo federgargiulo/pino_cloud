@@ -1,6 +1,6 @@
 apiVersion: v2
-name: pino-server-app
+name: pino-server-app-v1
 description: A Helm chart for deploying cogitoprediction/nemo_pino
 type: application
-version: 0.1.0
+version: 1.0.0
 appVersion: "1.0"
