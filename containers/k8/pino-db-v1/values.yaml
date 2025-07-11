@@ -23,16 +23,8 @@ global:
     pgHbaConfiguration: |
       host all all 0.0.0.0/0 md5
 ingress:
-  enabled: true
-  className: ''
-  annotations:
-    nemo.eu/ingress-expose: "true"
-    external-dns.alpha.kubernetes.io/hostname: pino-db-idp-v1.workload.nemo.onelab.eu
-  hosts:
-    - host: pino-db-idp-v1.workload.nemo.onelab.eu
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
+  enabled: false
+  
   tls: []
 ldap:
   enabled: false
