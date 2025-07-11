@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "pino-db-idp.name" . }}
+  labels:
+    app: {{ include "pino-db-idp.name" . }}
+    helm.sh/chart: {{ include "pino-db-idp.chart" . }}
+    app.kubernetes.io/name: {{ include "pino-db-idp.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "pino-db-idp.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "pino-db-idp.name" . }}
+    spec:
+      containers:
+        - name: {{ include "pino-db-idp.name" . }}
+          image: "bitnami/postgresql:{{ .Chart.AppVersion }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRESQL_USERNAME
+              value: {{ .Values.auth.username | quote }}
+            - name: POSTGRESQL_PASSWORD
+              value: {{ .Values.auth.password | quote }}
+            - name: POSTGRESQL_DATABASE
+              value: {{ .Values.auth.database | quote }}
