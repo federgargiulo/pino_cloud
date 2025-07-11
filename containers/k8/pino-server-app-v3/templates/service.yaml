@@ -10,11 +10,11 @@ metadata:
   {{- end }}
 spec:
   type: {{ .Values.service.type }}
-  selector:
-    app: {{ .Chart.Name }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
   selector:
     app.kubernetes.io/name: {{ include "pinoserver.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
