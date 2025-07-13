@@ -1364,10 +1364,10 @@ postgresql:
 ## @param externalDatabase.annotations Additional custom annotations for external database secret object
 ##
 externalDatabase:
-  host: "pino-dbpos-idp"
+  host: "pino-db-app-v2.8f0c1d24-deea-468d-9a60-8bdc22a7a1ca.svc.cluster.local"
   port: 5432
-  user: keycloak
-  database: postgres
+  user: pino
+  database: keycloak
   password: "G1us3pp3"
   existingSecret: ""
   existingSecretHostKey: ""

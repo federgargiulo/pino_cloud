@@ -30,7 +30,7 @@ keywords:
 maintainers:
 - name: Broadcom, Inc. All Rights Reserved.
   url: https://github.com/bitnami/charts
-name: pino-kl-idp
+name: pino-kl-idp-v1
 sources:
 - https://github.com/bitnami/charts/tree/main/bitnami/keycloak
-version: 2.0.0
+version: 1.0.0
