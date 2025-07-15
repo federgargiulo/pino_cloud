@@ -1,6 +1,0 @@
-apiVersion: v2
-appVersion: 1.16.0
-description: A helloWorld chart for Kubernetes using ingress nginx
-name: pino-helloworld-v4
-type: application
-version: 1.0.0
