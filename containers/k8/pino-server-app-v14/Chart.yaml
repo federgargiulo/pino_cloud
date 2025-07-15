@@ -1,0 +1,7 @@
+apiVersion: v2
+appVersion: 4.18.0
+name: pino-server-app-v14
+description: A Helm chart for deploying cogitoprediction/nemo_pino
+type: application
+version: 1.0.0
+
