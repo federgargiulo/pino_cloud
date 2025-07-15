@@ -1,6 +1,6 @@
 image:
   repository: cogitoprediction/nemo_pino
-  tag: 1_1
+  tag: 2
   pullPolicy: IfNotPresent
 
 service:
