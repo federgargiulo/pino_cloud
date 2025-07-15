@@ -39,7 +39,7 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
 
     @Override
     public EquipmentTO create(EquipmentTO io) {
-        if ( io.getEquipmentId() == null )
+        if ( null == io.getEquipmentId() || "".equals(io.getEquipmentId()) )
             io.setEquipmentId(UUID.randomUUID().toString());
         return super.create(io);
     }

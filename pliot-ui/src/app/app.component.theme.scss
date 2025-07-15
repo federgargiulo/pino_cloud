@@ -1,0 +1,37 @@
+@mixin app-root() {
+  .cdk-overlay-connected-position-bounding-box {
+    // empty
+    &:has(.cdk-overlay-pane .app-header-user-menu) {
+      margin-top: 20px;
+    }
+    .cdk-overlay-pane {
+      // empty
+      .mat-mdc-menu-panel.app-header-user-menu {
+        border-radius: 3px !important;
+        min-width: 225px;
+        .mat-mdc-menu-content {
+          padding:0;
+          button.mat-mdc-menu-item {
+            min-height: 45px;
+            .mat-mdc-menu-item-text {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              color: #646464;
+              font-size: 12px;
+              font-weight: 400;
+              text-transform: capitalize;
+              .material-symbols-outlined {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  app-root {
+    // empty
+  }
+}

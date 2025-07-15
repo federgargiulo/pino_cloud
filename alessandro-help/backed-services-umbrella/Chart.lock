@@ -1,0 +1,12 @@
+dependencies:
+- name: postgres-extra-config
+  repository: file://charts/postgres-extra-config
+  version: 0.1.0
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 16.7.15
+- name: keycloak
+  repository: https://charts.bitnami.com/bitnami
+  version: 24.7.5
+digest: sha256:c38789a53dfbeab26db2f0550c9077245174b4bec5be98d216283322be359b30
+generated: "2025-07-03T17:10:39.095424+02:00"

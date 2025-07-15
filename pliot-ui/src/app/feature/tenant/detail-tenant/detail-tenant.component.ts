@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   selector: 'app-detail-tenant',
   standalone: false,
   templateUrl: './detail-tenant.component.html',
-  styleUrl: './detail-tenant.component.css'
+  styleUrl: './detail-tenant.component.scss'
 })
 export class DetailTenantComponent implements OnInit {
   tenantId!: string; // ID della risorsa

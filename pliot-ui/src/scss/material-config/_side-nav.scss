@@ -1,12 +1,11 @@
-@import '../base.scss';
-
 @mixin side-nav() {
   mat-drawer-container {
     h2 {
       font-size: 24px;
       text-transform: uppercase;
-      font-weight: 500;
+      font-weight: 600;
       margin: 35px 0 0 35px;
+      color: #646464;
     }
   &.mat-drawer-container {
     display: flex;
@@ -14,20 +13,115 @@
     overflow: auto;
     mat-drawer {
       &.mat-drawer {
-        width: 230px;
+        width: 254px;
         padding: 24px 0;
         border-right: 1px solid #e0e0e0;
         border-radius: 0;
         background-color: white;
+
         .mat-drawer-inner-container {
           display: flex;
           flex-direction: column;
+          justify-content: space-between;
+
+          .drawer-search-container {
+            padding: 0 24px;
+            display: flex;
+            mat-form-field.mat-mdc-form-field {
+              width: 100%;
+              .mat-mdc-form-field-icon-suffix {
+                padding: 0 8px 0 4px;
+               .mdc-icon-button.mat-mdc-icon-button.mat-mdc-button-base {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 21px;
+                height: 21px;
+                padding: 0;
+                .material-symbols-outlined {
+                  font-size: 18px;
+                  color: #646464;
+                }
+                .mat-mdc-button-touch-target {
+                  width: 21px;
+                  height: 21px;
+                }
+               }
+              }
+              .mat-mdc-form-field-infix {
+                label.mdc-floating-label.mat-mdc-floating-label {
+                  display: none !important;
+                }
+              }
+              .mat-mdc-form-field-subscript-wrapper {
+                display: none;
+              }
+              .mat-mdc-form-field-infix {
+                padding: 9.5px 8px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .material-symbols-outlined {
+                  font-size: 18px;
+                  color: #646464;
+                }
+                input.mat-mdc-input-element.mat-mdc-form-field-input-control::-webkit-input-placeholder {
+                  color: #646464;
+                  font-size: 12px;
+                }
+              }
+              display: flex;
+              align-items: center;
+              margin: 0 !important;
+              height: 38px;
+              background-color: #e0e0e045;
+              border-radius: 30px;
+              .mat-mdc-text-field-wrapper.mdc-text-field {
+                border: none;
+              }
+
+            }
+          }
+
           .drawer-button-container {
             display: flex;
             flex-direction: column;
+
+            &:not(:has(button.mdc-button.mat-drawer-button-item)) {
+              button.mdc-button {
+                &.active-link {
+                  border-left: 0 solid transparent !important;
+                  background-color: #00a0c410;
+                  // background-color: #2c68c0 !important;
+                  .mdc-button__label {
+                    color: #00a0c4;
+                    font-weight: 600 !important;
+                  }
+                }
+              }
+            }
+
             &.opened {
               button.mdc-button {
-                background-color: #2c67c016;
+                background-color: #00a0c410;
+                .mdc-button__label {
+                  color: #00a0c4;
+                  font-weight: 600;
+                }
+              }
+              button.mdc-button.active-link.mat-drawer-button-item  {
+                .mdc-button__label {
+                  color: #00a0c4;
+                  font-weight: 600 !important;
+                }
+              }
+            }
+            &.active-closed {
+              button.mdc-button {
+                background-color: #2c68c0;
+                .mdc-button__label {
+                  color: white;
+                }
               }
             }
             button.mdc-button {
@@ -37,10 +131,18 @@
               display: flex;
               justify-content: start;
               align-items: center;
+              height: 40px;
               &.active-link {
-                background-color: #2c68c0 !important;
+                border-left: 2px solid #00a0c4 !important;
+                // background-color: #2c68c0 !important;
                 .mdc-button__label {
-                  color: white;
+                  color: #00a0c4;
+                  font-weight: 600;
+                }
+              }
+              &:hover {
+                .mdc-button__label {
+                  color: #00a0c4;
                 }
               }
               .mat-mdc-button-persistent-ripple.mdc-button__ripple {
@@ -52,8 +154,9 @@
                 justify-content: space-between;
                 width: 100%;
                 font-weight: 400;
-                text-transform: uppercase;
+                text-transform: capitalize;
                 letter-spacing: 0.5px;
+                color: rgb(100, 100, 100);
                 .material-symbols-outlined {
                   font-size: 18px;
                 }
@@ -62,13 +165,39 @@
                   position: relative;
                   right: -5px;
                 }
+                .mat-badge.notification-badge {
+                  position: relative;
+                  right: 13px;
+                  .mat-badge-content.mat-badge-active {
+                    background-color: #00a0c42f;
+                    color: #00a0c4;
+                    border-radius: 3px;
+                    height: 18px;
+                    width: 18px;
+                    font-size: 10px;
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  }
+                }
               }
               &.mat-drawer-button-item {
-                padding-left: 46px;
+                padding-left: 22px;
+                margin-left: 33px;
+                border-left: 2px solid rgba(44, 103, 192, 0.15);
+                background-color: transparent !important;
+                height: 40px;
                 .mdc-button__label {
-                  font-size: 14px;
+                  font-size: 12px;
                   font-weight: 400;
                   text-transform: capitalize;
+                  color: rgb(100, 100, 100);
+                }
+                &:hover {
+                  .mdc-button__label {
+                    color: #00a0c4;
+                  }
                 }
               }
             }
@@ -80,6 +209,7 @@
       display: flex;
       flex-grow: 1;
       overflow: auto;
+
       .example-sidenav-content {
         display: flex;
         flex-grow: 1;

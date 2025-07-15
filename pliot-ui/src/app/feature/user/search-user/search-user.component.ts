@@ -6,6 +6,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 interface tenantList {
   tenantId: string;
@@ -41,7 +46,8 @@ export class SearchUserComponent implements OnInit {
     private tenantServices: TenantServices,
     private userService: UserService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     // Sottoscrizione ai cambiamenti della selezione
     this.selection.changed.subscribe(() => {
@@ -105,17 +111,60 @@ export class SearchUserComponent implements OnInit {
 
 
   deleteUser(userid: string, index: number) {
-    alert("delete user " + userid);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { message: `Sei sicuro di voler eliminare l'utente ${userid}?` }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.deleteUser(userid).subscribe({
+          next: () => {
+            this.snackBar.open('Utente eliminato con successo', 'Chiudi', {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top'
+            });
+            this.search();
+          },
+          error: (error: HttpErrorResponse) => {
+            this.snackBar.open('Errore durante l\'eliminazione dell\'utente', 'Chiudi', {
+              duration: 3000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top'
+            });
+          }
+        });
+      }
+    });
   }
 
   resetPassword(userid: string, index: string) {
-    alert("reset password user " + userid);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { message: `Sei sicuro di voler resettare la password dell'utente ${userid}?` }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Qui puoi aggiungere la logica per resettare la password
+        this.snackBar.open('Password resettata con successo', 'Chiudi', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+      }
+    });
   }
 
 
    removeSelectedRows(): void {
       if (this.selection.isEmpty()) {
-        console.warn('No rows selected for removal');
+        this.snackBar.open('Seleziona almeno un utente da eliminare', 'Chiudi', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
         return;
       }
 
@@ -126,26 +175,65 @@ export class SearchUserComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          // Create a copy of current data to modify
           const currentData = [...this.dataSource.data];
+          let successCount = 0;
+          let errorCount = 0;
 
           this.selection.selected.forEach((user: any) => {
-            const index = currentData.findIndex(u =>
-              u.userId === user.userId
-            );
+            this.userService.deleteUser(user.idpId).subscribe({
+              next: () => {
+                const index = currentData.findIndex(u => u.userId === user.userId);
+                if (index > -1) {
+                  currentData.splice(index, 1);
+                  successCount++;
+                }
 
-            if (index > -1) {
-              currentData.splice(index, 1);
-            } else {
-              console.warn(`User ${user.userId} not found in data source`);
-            }
+                if (successCount + errorCount === this.selection.selected.length) {
+                  this.dataSource.data = currentData;
+                  this.selection.clear();
+
+                  if (successCount > 0) {
+                    this.snackBar.open(`${successCount} utente/i eliminato/i con successo`, 'Chiudi', {
+                      duration: 3000,
+                      horizontalPosition: 'end',
+                      verticalPosition: 'top'
+                    });
+                  }
+                  if (errorCount > 0) {
+                    this.snackBar.open(`Errore durante l'eliminazione di ${errorCount} utente/i`, 'Chiudi', {
+                      duration: 3000,
+                      horizontalPosition: 'end',
+                      verticalPosition: 'top'
+                    });
+                  }
+                }
+              },
+              error: (error: HttpErrorResponse) => {
+                console.error(`Errore durante l'eliminazione dell'utente ${user.idpId}:`, error);
+                errorCount++;
+
+                if (successCount + errorCount === this.selection.selected.length) {
+                  this.dataSource.data = currentData;
+                  this.selection.clear();
+
+                  if (successCount > 0) {
+                    this.snackBar.open(`${successCount} utente/i eliminato/i con successo`, 'Chiudi', {
+                      duration: 3000,
+                      horizontalPosition: 'end',
+                      verticalPosition: 'top'
+                    });
+                  }
+                  if (errorCount > 0) {
+                    this.snackBar.open(`Errore durante l'eliminazione di ${errorCount} utente/i`, 'Chiudi', {
+                      duration: 3000,
+                      horizontalPosition: 'end',
+                      verticalPosition: 'top'
+                    });
+                  }
+                }
+              }
+            });
           });
-
-          // Update data source
-          this.dataSource.data = currentData;
-
-          // Clear selection
-          this.selection.clear();
         }
       });
     }
@@ -156,11 +244,41 @@ export class SearchUserComponent implements OnInit {
 
     editSelectedUser() {
       if (this.selection.selected.length !== 1) {
-        alert("Seleziona un solo utente da modificare.");
+        this.snackBar.open('Seleziona un solo utente da modificare', 'Chiudi', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
         return;
       }
-      const user = this.selection.selected[0];
-      this.router.navigate(['/detail-user', user.idpId]);
+
+      const selectedUser = this.selection.selected[0];
+      const dialogRef = this.dialog.open(EditUserDialogComponent, {
+        data: { user: selectedUser },
+        panelClass: 'equipment-edit-dialog'
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.userService.updateUser(result).subscribe({
+            next: () => {
+              this.snackBar.open('Utente modificato con successo', 'Chiudi', {
+                duration: 3000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top'
+              });
+              this.search(); // Ricarica la lista degli utenti
+            },
+            error: (error: HttpErrorResponse) => {
+              this.snackBar.open('Errore durante la modifica dell\'utente', 'Chiudi', {
+                duration: 3000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top'
+              });
+            }
+          });
+        }
+      });
     }
 
   toggleAllRows() {

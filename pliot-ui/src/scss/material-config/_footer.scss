@@ -1,3 +1,14 @@
 @mixin footer() {
   // empty
+  mat-toolbar.mat-toolbar.actions-toolbar {
+    &.mat-toolbar-single-row {
+      background-color: white;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: flex-end;
+      padding: 24px 36px;
+      flex-shrink: 0;
+      height: auto;
+    }
+  }
 }

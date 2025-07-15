@@ -26,6 +26,7 @@ import { UserdashboardViewComponent } from './dashboard/userdashboard-view/userd
 import { SearchTenantComponent } from './feature/tenant/search-tenant/search-tenant.component';
 import { AddTenantComponent } from './feature/tenant/add-tenant/add-tenant.component';
 import { DetailTenantComponent } from './feature/tenant/detail-tenant/detail-tenant.component';
+import { ConfirmDialogComponent } from './feature/tenant/search-tenant/confirm-dialog/confirm-dialog.component';
 import { DatePipe } from '@angular/common';
 import { DashconfManagerComponent } from './dashboard/common/dashconf-manager/dashconf-manager.component';
 import { addBearer } from './interceptors/auth.interceptor';
@@ -53,11 +54,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProfileComponent } from './feature/profile/profile.component';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MonitorComponent } from './feature/system/monitor/monitor.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -69,33 +74,37 @@ import {
 import { ConfirmDialogModule } from './feature/user/search-user/confirm-dialog/confirm-dialog.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { EquipmentConfirmDialogModule } from './feature/equipment/search-equipment/equipment-confirm-dialog/equipment-confirm-dialog.module';
+import { EditUserDialogModule } from './feature/user/search-user/edit-user-dialog/edit-user-dialog.module';
+import { TenantDialogModule } from './feature/tenant/search-tenant/tenant-dialog/tenant-dialog.module';
+import { EquipmentDialogComponent } from './feature/equipment/search-equipment/equipment-dialog/equipment-dialog.component';
 
 import { EdgeDetailComponent } from './feature/edge/edge-detail/edge-detail.component';
 import { EdgeListComponent } from './feature/edge/edge-list/edge-list.component';
 
 var loc = new ConfigurationService();
 
-export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
-  config: {
-    url: loc.getIDPUrl(),
-    realm: loc.getRealm(),
-    clientId: loc.getClientId(),
-  },
+export const KEYCLOAK_PRIVIDER = () =>
+  provideKeycloak({
+    config: {
+      url: loc.getIDPUrl(),
+      realm: loc.getRealm(),
+      clientId: loc.getClientId(),
+    },
 
-  initOptions: {
-    onLoad: 'login-required',  // Oppure 'check-sso' se non vuoi forzare il login
-    redirectUri: loc.getRedirectUri(), // Assicura che sia corretto
-    silentCheckSsoRedirectUri: loc.getSilentCheckSsoRedirectUri(), // usata se check-sso abilitato
-    checkLoginIframe: false,
-  },
-  features: [
-    withAutoRefreshToken({
-      onInactivityTimeout: 'logout',
-      sessionTimeout: 60000
-    })
-   ],
-    providers: [AutoRefreshTokenService, UserActivityService]
-
+    initOptions: {
+      onLoad: 'login-required', // Oppure 'check-sso' se non vuoi forzare il login
+      redirectUri: loc.getRedirectUri(), // Assicura che sia corretto
+      silentCheckSsoRedirectUri: loc.getSilentCheckSsoRedirectUri(), // usata se check-sso abilitato
+      checkLoginIframe: false,
+    },
+    features: [
+      withAutoRefreshToken({
+        onInactivityTimeout: 'logout',
+        sessionTimeout: 60000,
+      }),
+    ],
+    providers: [AutoRefreshTokenService, UserActivityService],
   });
 
 @NgModule({
@@ -113,6 +122,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     SearchTenantComponent,
     AddTenantComponent,
     DetailTenantComponent,
+    ConfirmDialogComponent,
     DashconfManagerComponent,
     SearchUserComponent,
     DetailUserComponent,
@@ -120,6 +130,7 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     MonitorComponent,
     EdgeDetailComponent,
     EdgeListComponent,
+    EquipmentDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -138,24 +149,30 @@ export const KEYCLOAK_PRIVIDER = () => provideKeycloak({
     MatSidenavModule,
     MatIconModule,
     MatToolbarModule,
+    MatSnackBarModule,
     MatTableModule,
     MatCheckboxModule,
     MatDividerModule,
+    MatBadgeModule,
     MatCardModule,
+    MatTabsModule,
+    MatMenuModule,
     OlapModule,
     MatDialogModule,
     MatDialogContent,
     MatDialogActions,
-    OlapModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ConfirmDialogModule,
+    EquipmentConfirmDialogModule,
+    EditUserDialogModule,
+    TenantDialogModule
   ],
   providers: [
     KEYCLOAK_PRIVIDER(),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withInterceptors([addBearer, logInterceptor])),
-    DatePipe,
+    DatePipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

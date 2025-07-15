@@ -2,54 +2,56 @@
 
 <mat-toolbar class="search-table-bar">
   <form (ngSubmit)="search()" class="d-flex align-items-center gap-4">
-    <mat-form-field appearance="outline" class="w-300">
+    <mat-form-field class="w-300">
       <mat-label>Seleziona Tenant</mat-label>
       <mat-select [(ngModel)]="selectedTenant" name="tenant" required>
         @for (tenant of tenantList; track tenant) {
         <mat-option [value]="tenant.tenantId">{{ tenant.tenantId }}</mat-option>
         }
       </mat-select>
+      <mat-hint>You can pick up your favorite car here</mat-hint>
     </mat-form-field>
 
-    <button type="submit" mat-flat-button color="primary">
+    <button type="submit" mat-flat-button color="primary" style="margin-bottom: 9px;">
       Cerca
     </button>
   </form>
 </mat-toolbar>
 
-<div class="actions-table-bar d-flex align-items-center gap-4 mt-3">
-  <button mat-flat-button color="primary"
-          [disabled]="selection.selected.length !== 1"
-          (click)="editSelectedUser()">
-    <mat-icon>edit</mat-icon> Modifica
+<div div class="actions-table-bar">
+  <button class="actions-table-bar__button" mat-button color="primary"
+    [disabled]="selection.selected.length !== 1"
+    (click)="editSelectedUser()">
+    <span class="material-symbols-outlined">edit_square</span>
+    Modifica
   </button>
 
-  <button mat-flat-button color="warn"
-          [disabled]="selection.selected.length === 0"
-          (click)="removeSelectedRows()">
-    <mat-icon>delete</mat-icon> Elimina
+  <button class="actions-table-bar__button" mat-button color="primary"
+  [disabled]="selection.selected.length === 0"
+  (click)="removeSelectedRows()">
+    <span class="material-symbols-outlined">delete</span>
+    Elimina
   </button>
 
-  <mat-divider vertical></mat-divider>
+  <mat-divider vertical class="divider-50"></mat-divider>
 
-  <button mat-icon-button color="accent"
-          (click)="refreshUsers()">
-    <mat-icon>refresh</mat-icon>
+  <button class="actions-table-bar__button" mat-button color="primary" (click)="refreshUsers()">
+    <span class="material-symbols-outlined">refresh</span>
   </button>
 </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width mt-4">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 flex-grow-1">
 
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
-    <th mat-header-cell *matHeaderCellDef>
+    <th mat-header-cell *matHeaderCellDef class="w-70">
       <mat-checkbox (change)="$event ? toggleAllRows() : null"
                     [checked]="selection.hasValue() && isAllSelected()"
                     [indeterminate]="selection.hasValue() && !isAllSelected()"
                     [aria-label]="checkboxLabel()">
       </mat-checkbox>
     </th>
-    <td mat-cell *matCellDef="let row">
+    <td mat-cell *matCellDef="let row" class="w-70">
       <mat-checkbox (click)="$event.stopPropagation()"
                     (change)="$event ? selection.toggle(row) : null"
                     [checked]="selection.isSelected(row)"

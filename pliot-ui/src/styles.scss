@@ -1,11 +1,22 @@
+// styles.scss
 
+@use './scss/theme' as theme;
+@use './scss/index' as scss;
+
+@use './app/feature/equipment/search-equipment/equipment-confirm-dialog/equipment-confirm-dialog.component.theme' as equipment-confirm-dialog-theme;
+@use './app/app.component.theme' as app-root-theme;
+@use './app/feature/profile/profile.component.theme' as profile-theme;
 
 @use '@angular/material' as mat;
-@use './scss/material-config/theme-colors' as theme;
-
 @include mat.core();
-@import './scss/index';
+@include mat.all-component-themes(theme.$my-theme);
 
+// mixin @include
+@include equipment-confirm-dialog-theme.equipment-confirm-dialog-theme();
+@include app-root-theme.app-root();
+@include profile-theme.app-profile();
+
+/*
 html {
   @include mat.theme(
     (
@@ -14,6 +25,7 @@ html {
     )
   );
 }
+*/
 
 /* You can add global styles to this file, and also import other style files */
 /* License: none (public domain) */
@@ -105,7 +117,12 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: "Inter", sans-serif;
 }
+* {
+  font-family: "Inter", sans-serif;
+}
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -119,6 +136,7 @@ menu,
 nav,
 section {
   display: block;
+  font-family: "Inter", sans-serif;
 }
 body {
   line-height: 1;
@@ -129,6 +147,7 @@ body {
   letter-spacing: 0.5px;
   font-size: 14px;
   box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 ol,
 ul {
@@ -137,6 +156,7 @@ ul {
 blockquote,
 q {
   quotes: none;
+  font-family: "Inter", sans-serif;
 }
 blockquote:before,
 blockquote:after,
@@ -144,10 +164,12 @@ q:before,
 q:after {
   content: "";
   content: none;
+  font-family: "Inter", sans-serif;
 }
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  font-family: "Inter", sans-serif;
 }
 body,
 html,
@@ -157,21 +179,27 @@ app-root {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  font-family: "Inter", sans-serif;
 }
 app-root > div {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   overflow: auto;
+  font-family: "Inter", sans-serif;
 }
 html,
 body {
   height: 100%;
+  font-family: "Inter", sans-serif;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}

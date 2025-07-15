@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "pinoserver.fullname" . }}
+  labels:
+    {{- include "pinoserver.labels" . | nindent 4 }}
+  {{- if .Values.ingress.annotations }}
+  annotations:
+    {{- .Values.ingress.annotations | toYaml | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "pinoserver.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

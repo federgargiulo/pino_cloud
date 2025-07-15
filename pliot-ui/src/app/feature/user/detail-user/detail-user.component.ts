@@ -7,12 +7,11 @@ import { ActivatedRoute } from '@angular/router';
 import { error } from 'console';
 import { CommonService } from '../../../service/common.service';
 
-
 @Component({
   selector: 'app-detail-user',
   standalone: false,
   templateUrl: './detail-user.component.html',
-  styleUrl: './detail-user.component.css'
+  styleUrl: './detail-user.component.scss'
 })
 export class DetailUserComponent {
 

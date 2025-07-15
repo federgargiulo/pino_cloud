@@ -1,0 +1,122 @@
+---
+# Source: springboot-helm-chart/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: springboot-helm-chart
+  labels:
+    helm.sh/chart: springboot-helm-chart-1.1.0
+    app.kubernetes.io/name: springboot-helm-chart
+    app.kubernetes.io/instance: springboot-helm-chart
+    app.kubernetes.io/version: "1.2.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: springboot-helm-chart/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springboot-helm-chart
+  labels:
+    helm.sh/chart: springboot-helm-chart-1.1.0
+    app.kubernetes.io/name: springboot-helm-chart
+    app.kubernetes.io/instance: springboot-helm-chart
+    app.kubernetes.io/version: "1.2.0"
+    app.kubernetes.io/managed-by: Helm
+data:
+    NAV_BGCOLOR: "lightblue"
+    WELCOME_TEXT: "Hello world."
+---
+# Source: springboot-helm-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-helm-chart
+  labels:
+    helm.sh/chart: springboot-helm-chart-1.1.0
+    app.kubernetes.io/name: springboot-helm-chart
+    app.kubernetes.io/instance: springboot-helm-chart
+    app.kubernetes.io/version: "1.2.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: springboot-helm-chart
+    app.kubernetes.io/instance: springboot-helm-chart
+---
+# Source: springboot-helm-chart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-helm-chart
+  labels:
+    helm.sh/chart: springboot-helm-chart-1.1.0
+    app.kubernetes.io/name: springboot-helm-chart
+    app.kubernetes.io/instance: springboot-helm-chart
+    app.kubernetes.io/version: "1.2.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: springboot-helm-chart
+      app.kubernetes.io/instance: springboot-helm-chart
+  template:
+    metadata:
+      annotations:
+        checksum/config: ea970e1ca9063512f68fb9eca3d7aa384c729c7de945d9bb51aed81ab0f7f223
+      labels:
+        app.kubernetes.io/name: springboot-helm-chart
+        app.kubernetes.io/instance: springboot-helm-chart
+    spec:
+      serviceAccountName: springboot-helm-chart
+      securityContext:
+        {}
+      containers:
+        - name: springboot-helm-chart
+          securityContext:
+            {}
+          image: "public.ecr.aws/viadee/k8s-demo-app:1.2.0"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness  
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http
+          resources:
+            {}
+          envFrom:
+            - configMapRef:
+                name: springboot-helm-chart
+---
+# Source: springboot-helm-chart/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "springboot-helm-chart-test-connection"
+  labels:
+    helm.sh/chart: springboot-helm-chart-1.1.0
+    app.kubernetes.io/name: springboot-helm-chart
+    app.kubernetes.io/instance: springboot-helm-chart
+    app.kubernetes.io/version: "1.2.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['springboot-helm-chart:8080']
+  restartPolicy: Never
