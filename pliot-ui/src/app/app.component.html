@@ -143,7 +143,7 @@
 
         <!-- Users -->
         <div class="drawer-button-container" [class.opened]="showUserItems"
-             *ngIf="item.id === 'users' && isMenuItemVisible(item.id)">
+             *ngIf="item.id === 'users' && isPliotAdmin() && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" (click)="toggleDrawer('user')"
                   [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
@@ -165,7 +165,35 @@
           }
         </div>
 
-        <!-- Dashboard -->
+
+        <!-- Edge -->
+        <div class="drawer-button-container" [class.opened]="showEdgeItems"
+             *ngIf="item.id === 'edge' && isMenuItemVisible(item.id)">
+          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('edge')"
+                  [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
+            <span class="d-flex align-items-center gap-14">
+              <span class="material-symbols-outlined">hub</span>
+              <span class="px-1">{{ item.label }}</span>
+            </span>
+            <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showEdgeItems">stat_minus_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showEdgeItems">stat_1</span>
+          </button>
+
+          @if (showEdgeItems) {
+          <ng-container *ngFor="let subItem of item.subItems">
+            <button mat-button class="mat-drawer-button-item"
+                    [routerLink]="[subItem.id]"
+                    routerLinkActive="active-link"
+                    *ngIf="isMenuItemVisible(subItem.id)">
+              {{ subItem.label }}
+            </button>
+          </ng-container>
+          }
+        </div>
+
+
+
+          <!-- Dashboard -->
         <div class="drawer-button-container" [class.opened]="showDashboardItems"
              *ngIf="item.id === 'dashboard' && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" (click)="toggleDrawer('dashboard')"

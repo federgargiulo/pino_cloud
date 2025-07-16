@@ -20,6 +20,7 @@ interface MenuItem {
 export class AppComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
 
+  showEdgeItems = false;
   showTenantItems = false;
   showEquipmentItems = false;
   showUserItems = false;
@@ -66,6 +67,15 @@ export class AppComponent implements OnInit {
       subItems: [
         { id: 'userdashboard-list', label: 'List Dashboard' },
         { id: 'userdashboard-new', label: 'View Dashboard' }
+      ]
+    },
+    {
+      id: 'edge',
+      label: 'Edge',
+      subItems: [
+        { id: 'edge-list', label: 'Edge List' },
+        { id: 'edge-detail', label: 'Edge Detail' },
+        { id: 'add-edge', label: 'Create Edge' }
       ]
     },
     { id: 'system-status', label: 'System Status' }
@@ -133,6 +143,7 @@ export class AppComponent implements OnInit {
     const hasActiveEquipment = url.includes('/search-equipment') || url.includes('/add-equipment');
     const hasActiveUser = url.includes('/search-users') || url.includes('/add-users');
     const hasActiveDashboard = url.includes('/userdashboard-list') || url.includes('/userdashboard-new');
+    const hasActiveEdge = url.includes('/edge-list') || url.includes('/edge-detail');
 
     // Mantieni aperti i pannelli con voci attive
     if (hasActiveTenant) {
@@ -148,6 +159,10 @@ export class AppComponent implements OnInit {
       this.showDashboardItems = true;
     }
 
+    if (hasActiveEdge) {
+      this.showEdgeItems = true;
+    }
+
     // Chiudi solo i pannelli senza voci attive
     if (!hasActiveTenant) {
       this.showTenantItems = false;
@@ -161,6 +176,10 @@ export class AppComponent implements OnInit {
     if (!hasActiveDashboard) {
       this.showDashboardItems = false;
     }
+    if (!hasActiveEdge) {
+      this.showEdgeItems = false;
+    }
+
   }
 
   toggleDrawer(section: string) {
@@ -191,6 +210,12 @@ export class AppComponent implements OnInit {
         isActiveSection = currentUrl.includes('/userdashboard-list') || currentUrl.includes('/userdashboard-new');
         if (!isActiveSection) {
           this.showDashboardItems = !this.showDashboardItems;
+        }
+        break;
+        case 'edge':
+        isActiveSection = currentUrl.includes('/edge-list') || currentUrl.includes('/edge-detail');
+        if (!isActiveSection) {
+          this.showEdgeItems = !this.showEdgeItems;
         }
         break;
     }
@@ -242,6 +267,9 @@ export class AppComponent implements OnInit {
             break;
           case 'dashboard':
             this.showDashboardItems = true;
+            break;
+          case 'edge':
+            this.showEdgeItems = true;
             break;
         }
       }
