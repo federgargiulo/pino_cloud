@@ -41,9 +41,10 @@ public class EquipmentController {
 
     @GetMapping("/equipments")
     public List<EquipmentTO> getEquipmentsForTenant(@RequestParam(value = "tenantId", required = false) String tenantId) {
-        if ( tenantId == null || tenantId.length() == 0 )
+        String tenantIdFromContext = UserContext.currentUser().getTenantId();
+        if ( tenantIdFromContext == null || tenantIdFromContext.length() == 0 || "ALL".equalsIgnoreCase(tenantIdFromContext))
             return equipmentService.findAllNotDeleted();
-        return equipmentService.findByTenant(tenantId);
+        return equipmentService.findByTenant(tenantIdFromContext);
     }
 
 
