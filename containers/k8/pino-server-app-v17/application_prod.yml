@@ -53,8 +53,8 @@ spring:
   jmx:
     enabled: true
 
-  datasource:
-    url: jdbc:postgresql://pino-db-app-v2.8f0c1d24-deea-468d-9a60-8bdc22a7a1ca.svc.cluster.local:5432/pino-app
+  datasource:  
+    url: jdbc:postgresql://pino-db-app-v2-prod.d38522f7-de28-479c-af3a-15bf1fd3775e.svc.cluster.local:5432/pino-app
     username: pino
     password: G1us3pp3
 #H2
