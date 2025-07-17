@@ -30,6 +30,17 @@
   }
 </script>
 
+<script>
+
+  try {
+    var c = getConfiguration();
+    if ( c )
+       document.getElementById('appConfig').textContent = c;
+  } catch (error) {
+
+  }
+</script>
+
 <app-root></app-root>
 </body>
 </html>

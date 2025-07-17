@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EquipmentServices } from '../../../service/equipment.service';
+import { UserService } from '../../../service/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EquipmentConfirmDialogComponent } from './equipment-confirm-dialog/equipment-confirm-dialog.component';
@@ -27,7 +28,8 @@ export class SearchEquipmentComponent implements OnInit {
     private equipmentServices: EquipmentServices,
     private router: Router,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -49,21 +51,42 @@ export class SearchEquipmentComponent implements OnInit {
   }
 
   async getAllEquipment() {
-    console.log("get all equipment");
-    this.equipmentServices.getAllEquipment().subscribe((data: any) => {
-      console.log("Dati ricevuti dal server:", data);
-      if (data != null && data.body != null) {
-        this.dataSource.data = data.body;
-      }
-    },
-    (error: any) => {
-      if (error) {
-        if (error.status === 404 && error.error?.message) {
-          this.dataSource.data = [];
-          this.selection.clear();
+
+    const tenant = this.userService.getCurrentUserTenant();
+
+    if (tenant) {
+      console.log("get all equipment for tenant:",tenant);
+      this.equipmentServices.getEquipmentsByTenant(tenant).subscribe((data: any) => {
+        console.log("Dati ricevuti dal server:", data);
+        if (data != null && data.body != null) {
+          this.dataSource.data = data.body;
         }
-      }
-    });
+      },
+      (error: any) => {
+        if (error) {
+          if (error.status === 404 && error.error?.message) {
+            this.dataSource.data = [];
+            this.selection.clear();
+          }
+        }
+      });
+    }else{
+        console.log("get all equipment");
+        this.equipmentServices.getAllEquipment().subscribe((data: any) => {
+          console.log("Dati ricevuti dal server:", data);
+          if (data != null && data.body != null) {
+            this.dataSource.data = data.body;
+          }
+        },
+        (error: any) => {
+           if (error) {
+              if (error.status === 404 && error.error?.message) {
+                this.dataSource.data = [];
+                this.selection.clear();
+              }
+           }
+        });
+    }
   }
 
   onInputChange() {
