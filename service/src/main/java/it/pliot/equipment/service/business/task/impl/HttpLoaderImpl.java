@@ -92,7 +92,12 @@ public class HttpLoaderImpl {
         s = signalServices.create( s );
         return s;
     }
-
+    public static String replaceIdInUrl(String url, String newId) {
+        if (url != null && url.endsWith("/{id}")) {
+            return url.replaceAll("/\\{id}$", "/" + newId);
+        }
+        return url;
+    }
     private static ResponseDTO callApi(EquipmentPullerTO eqPuller, ApplicationContext context) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-type", "application/json;charset=UTF-8");
@@ -105,7 +110,7 @@ public class HttpLoaderImpl {
 
             // Effettua la chiamata GET con le intestazioni
         ResponseEntity<ResponseDTO> response = restTemplate.exchange(
-                    eqPuller.getUrl() + "/" + eqPuller.getEquipmentId() , HttpMethod.GET, entity, ResponseDTO.class
+                    replaceIdInUrl( eqPuller.getUrl(), eqPuller.getEquipmentId() ) , HttpMethod.GET, entity, ResponseDTO.class
             );
 
         ResponseDTO o = response.getBody();
