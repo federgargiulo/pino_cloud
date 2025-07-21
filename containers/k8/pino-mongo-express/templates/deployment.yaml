@@ -1,0 +1,56 @@
+{{- $fullName := include "mongo_express.fullname" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "mongo_express.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "mongo_express.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "mongo_express.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: mongo-express
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+              value: {{ .Values.mongodb.username }}
+            - name: ME_CONFIG_MONGODB_PORT
+              value: {{ .Values.mongodb.port | quote }}
+            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+              value: {{ .Values.mongodb.password }}
+            - name: ME_CONFIG_MONGODB_SERVER
+              value: {{ .Values.mongodb.host }}
+            - name: ME_CONFIG_BASICAUTH_USERNAME
+              value: {{ .Values.auth.username }}
+            - name: ME_CONFIG_BASICAUTH_PASSWORD
+              value: {{ .Values.auth.password }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port:  {{ .Values.service.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port:  {{ .Values.service.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 5
