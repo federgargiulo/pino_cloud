@@ -81,7 +81,7 @@ public class HttpLoaderImpl {
                 if ( st.getName().equals( x.getName() ) )
                     return st;
             }
-            throw new RuntimeException( "signal not found ");
+            return createSignal( eqPuller, x , signlaServices );
         }
 
 
