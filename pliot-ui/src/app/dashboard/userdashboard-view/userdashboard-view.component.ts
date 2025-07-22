@@ -115,7 +115,7 @@ export class UserdashboardViewComponent implements OnInit {
       });
     }
     manageUpdate(){
-      alert( this.dashBoardForm.value.configuration )
+      //alert( this.dashBoardForm.value.configuration )
       this.userDashboardService.updateUserDashboard( this.dashBoardForm.value ).subscribe(async data => {
         this.manageSuccessOnSaveDashboard( data )
       },

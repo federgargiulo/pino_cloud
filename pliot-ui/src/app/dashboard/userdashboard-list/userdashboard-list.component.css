@@ -1,0 +1,12 @@
+.full-width-table {
+  width: 100%;
+  overflow: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mat-column-actions {
+  min-width: 160px;
+}

@@ -11,17 +11,17 @@ import { UserService } from '../../service/user.service';
 })
 
 export class UserdashboardListComponent implements OnInit {
- 
-  dashBoardsList: any []= [];
 
+  dashBoardsList: any []= [];
+  displayedColumns: string[] = ['title', 'descr', 'configuration', 'actions'];
   isLoading: boolean = true;
-  
+
   currentUserId: any;
 
  constructor( private userDashboardService: UserDashboardService , private userService: UserService ){
     console.info( " sono nel costruttore ");
     this.currentUserId = userService.getCurrentUserId();
- } 
+ }
 
   ngOnInit(): void {
     console.info( "load list ")
@@ -40,11 +40,11 @@ export class UserdashboardListComponent implements OnInit {
    }
 
    deleteDasboard( identifier:String, event: Event ){
-      event.preventDefault(); 
+      event.preventDefault();
       this.userDashboardService.deleteUserDashboard( identifier ).subscribe(
         {
           next: (data) => {
-          
+
             this.dashBoardsList = this.dashBoardsList.filter( item => item.id !==  identifier );
           },
           error: (err) => {
