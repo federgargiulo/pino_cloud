@@ -168,7 +168,7 @@
 
         <!-- Edge -->
         <div class="drawer-button-container" [class.opened]="showEdgeItems"
-             *ngIf="item.id === 'edge' && isMenuItemVisible(item.id)">
+             *ngIf="item.id === 'edge' && isMenuItemVisible(item.id) && isServerMode()">
           <button mat-button class="mat-drawer-button" (click)="toggleDrawer('edge')"
                   [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">

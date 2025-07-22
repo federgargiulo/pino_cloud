@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from './service/user.service';
 import { filter } from 'rxjs/operators';
 import { MatDrawer } from '@angular/material/sidenav';
+import { ConfigurationService } from './service/config.service.';
 
 interface MenuItem {
   id: string;
@@ -74,8 +75,7 @@ export class AppComponent implements OnInit {
       label: 'Edge',
       subItems: [
         { id: 'edge-list', label: 'Edge List' },
-        { id: 'edge-detail', label: 'Edge Detail' },
-        { id: 'add-edge', label: 'Create Edge' }
+        { id: 'edge-detail', label: 'Edge Detail' }
       ]
     },
     { id: 'system-status', label: 'System Status' }
@@ -83,13 +83,20 @@ export class AppComponent implements OnInit {
 
   visibleMenuItems: { [key: string]: boolean } = {};
 
-  constructor(private router: Router, private modalService: NgbModal, private userService: UserService) {
+  constructor(private router: Router, 
+    private modalService: NgbModal, 
+    private userService: UserService ,
+    private config : ConfigurationService ) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
       const url = event.urlAfterRedirects;
       this.updateActivePanel(url);
     });
+  }
+
+  isServerMode( ){
+    return "SERVER" == this.config.getConfig().mode
   }
 
   ngOnInit() {
@@ -269,7 +276,7 @@ export class AppComponent implements OnInit {
             this.showDashboardItems = true;
             break;
           case 'edge':
-            this.showEdgeItems = true;
+            this.showEdgeItems = true ;
             break;
         }
       }

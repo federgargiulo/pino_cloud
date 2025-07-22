@@ -76,7 +76,7 @@ export class MonitorComponent implements OnInit {
 
 
   renderConnectionChart( records : any) {
-     alert( records );
+ 
      const grouped = new Map<string, number>();
      for (const entry of records) {
         const lab =  entry.status ;

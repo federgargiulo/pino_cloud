@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'search-users', component: SearchUserComponent, title: 'Search Users' },
   { path: 'add-users', component: DetailUserComponent, title: 'Add Users' },
   { path: 'detail-user/:id', component: DetailUserComponent, title: 'Modifica Users' },
-  { path: 'olap', component: PivotTableComponent, title: 'Modifica Users' },
+  { path: 'olap', component: PivotTableComponent, title: 'Olap' },
   { path: 'profile', component: ProfileComponent, title: 'Profile' },
   { path: 'system-status', component: MonitorComponent, title: 'Status' },
   { path: 'edge-list', component: EdgeListComponent, title: 'Edge List' },

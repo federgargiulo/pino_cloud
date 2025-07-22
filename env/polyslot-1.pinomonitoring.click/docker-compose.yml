@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   nemo_pino_edge:
-    image: cogitoprediction/nemo_pino:1_2
+    image: cogitoprediction/nemo_pino:3
     container_name: nemo_pino_edge
     ports:
       - "8081:8081"
