@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
       label: 'Dashboard',
       subItems: [
         { id: 'userdashboard-list', label: 'List Dashboard' },
-        { id: 'userdashboard-new', label: 'View Dashboard' }
+        { id: 'userdashboard-new', label: 'Create Dashboard' }
       ]
     },
     {
@@ -83,8 +83,8 @@ export class AppComponent implements OnInit {
 
   visibleMenuItems: { [key: string]: boolean } = {};
 
-  constructor(private router: Router, 
-    private modalService: NgbModal, 
+  constructor(private router: Router,
+    private modalService: NgbModal,
     private userService: UserService ,
     private config : ConfigurationService ) {
     this.router.events.pipe(

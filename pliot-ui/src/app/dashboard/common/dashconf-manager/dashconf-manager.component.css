@@ -1,0 +1,20 @@
+.form-field-small {
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.signal-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* aumenta lo spazio tra i campi */
+  margin-bottom: 16px; /* spazio tra righe */
+}
+
+.signal-field {
+  flex: 1 1 200px;
+  min-width: 200px;
+}

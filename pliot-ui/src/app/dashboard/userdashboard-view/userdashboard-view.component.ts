@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 })
 
 export class UserdashboardViewComponent implements OnInit {
-  
+
   dashBoardForm : FormGroup;
   successMessage: string = '';
 
@@ -22,13 +22,13 @@ export class UserdashboardViewComponent implements OnInit {
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private equipmentServices: EquipmentServices,
-              private userDashboardService: UserDashboardService ) { 
-                
+              private userDashboardService: UserDashboardService ) {
+
                 this.dashBoardForm = this.fb.group({
                   id : [''],
                   title: ['', Validators.required], // Aggiunto title
                   descr: ['', Validators.required],
-                  configuration: [''], 
+                  configuration: [''],
                   shared: ['false']  // Aggiunto desc
                 });
 
@@ -42,14 +42,14 @@ export class UserdashboardViewComponent implements OnInit {
 
        this.route.paramMap.subscribe(params => {
             var dashId = params.get('id') || '';
-           
+
             if ( dashId ! ){
               this.isPersisted = true;
               this.userDashboardService.getUserDashboardById( dashId ).subscribe(
                 {
 
                   next: (data) => {
-                    
+
                     this.setFormValues( data.body );
                     this.isPersisted = true;
                   },
@@ -60,7 +60,7 @@ export class UserdashboardViewComponent implements OnInit {
                 }
               )
             }
-           
+
 
           })
 
@@ -79,7 +79,7 @@ export class UserdashboardViewComponent implements OnInit {
     }
 
     setFormValues( resultData : any ){
-      
+
       this.dashBoardForm.setValue( { id : resultData.id ,
         title: resultData.title, // Aggiunto title
         descr: resultData.descr,
@@ -95,9 +95,9 @@ export class UserdashboardViewComponent implements OnInit {
         this.isPersisted = true;
         if (resultData != null && resultData.isSuccess) {
           this.successMessage = 'Dashboard creata con successo!';
-        
+
         }
-    
+
       }
     }
 
@@ -111,7 +111,7 @@ export class UserdashboardViewComponent implements OnInit {
         this.manageSuccessOnSaveDashboard( data )
       },
         async error => {
-          this.manageErrorOnSaveDashboard( error )  
+          this.manageErrorOnSaveDashboard( error )
       });
     }
     manageUpdate(){
@@ -120,26 +120,33 @@ export class UserdashboardViewComponent implements OnInit {
         this.manageSuccessOnSaveDashboard( data )
       },
         async error => {
-          this.manageErrorOnSaveDashboard( error )  
+          this.manageErrorOnSaveDashboard( error )
       });
     }
-   
+
 
     onSubmit() {
-    
+
       if (this.dashBoardForm.valid) {
-        if ( this.dashBoardForm.value.id ! ) 
+        if ( this.dashBoardForm.value.id ! )
           this.manageUpdate();
         else
           this.manageSave();
-          
+
       }
     }
 
     updateJson(json: string) {
-      
+
       this.dashBoardForm.controls['configuration'].setValue(json);
     }
 
+onCancel() {
+  // Se sei in un dialog:
+  // this.dialogRef.close();
+
+  // Altrimenti:
+  this.router.navigate(['/']);
+}
 }
 
