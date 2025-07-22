@@ -74,15 +74,15 @@ public class HttpLoaderImpl {
     private SignalTO findOrRegister(EquipmentPullerTO eqPuller , List<SignalTO> signals, KeyValueDTO x , SignalServices signlaServices ) {
         SignalTO s = null;
         if ( signals == null || signals.isEmpty() )
-            s = createSignal( eqPuller, x , signlaServices );
+            return createSignal( eqPuller, x , signlaServices );
         else{
             for ( int i = 0 ; i < signals.size() ; i ++ ){
                 SignalTO st =  signals.get( i );
                 if ( st.getName().equals( x.getName() ) )
                     return st;
             }
+            throw new RuntimeException( "signal not found ");
         }
-        return createSignal( eqPuller , x , signlaServices );
 
 
     }
