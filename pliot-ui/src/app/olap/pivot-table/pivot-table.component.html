@@ -21,7 +21,7 @@
     </div>
     <div class="form-group-item">
         <mat-form-field appearance="fill">
-        <mat-label>Segnale</mat-label>
+        <mat-label>Segnal</mat-label>
         <mat-select [(ngModel)]="selectedSignalId" (selectionChange)="onSignalChange($event.value)">
           <mat-option *ngFor="let x of signalList" [value]="x.signalId"  class="combo-pivot">{{ x.name }}</mat-option>
         </mat-select>

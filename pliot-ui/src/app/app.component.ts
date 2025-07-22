@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
       subItems: [
         { id: 'userdashboard-list', label: 'List Dashboard' },
         { id: 'userdashboard-new', label: 'Create Dashboard' },
-        { id: 'olap' , label : 'Search a Signal ' }
+        { id: 'olap' , label : 'Search Signal' }
       ]
     },
     {

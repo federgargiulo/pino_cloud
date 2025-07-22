@@ -1,18 +1,23 @@
 .charts-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(455px, 1fr)); /* era 320px */
+  gap: 1.5rem; /* opzionale: aumenta lo spazio tra i grafici */
   padding: 1rem;
 }
 
 .chart-card {
   background-color: #fff;
   border-radius: 16px;
-  padding: 1rem;
+  padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 }
 
 .chart-card:hover {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
 }
