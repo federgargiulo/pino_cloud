@@ -16,7 +16,7 @@ export class UserdashboardViewComponent implements OnInit {
 
   dashBoardForm : FormGroup;
   successMessage: string = '';
-
+  isEditMode: boolean = false;
   isSubmitted: boolean = false;
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -29,7 +29,7 @@ export class UserdashboardViewComponent implements OnInit {
                   title: ['', Validators.required], // Aggiunto title
                   descr: ['', Validators.required],
                   configuration: [''],
-                  shared: ['false']  // Aggiunto desc
+                  shared: [false]  // Aggiunto desc
                 });
 
   }
@@ -39,7 +39,8 @@ export class UserdashboardViewComponent implements OnInit {
   signalId : string ="";
 
    ngOnInit()  {
-
+       const id = this.route.snapshot.paramMap.get('id');
+       this.isEditMode = !!id;
        this.route.paramMap.subscribe(params => {
             var dashId = params.get('id') || '';
 
@@ -83,7 +84,7 @@ export class UserdashboardViewComponent implements OnInit {
       this.dashBoardForm.setValue( { id : resultData.id ,
         title: resultData.title, // Aggiunto title
         descr: resultData.descr,
-        shared: resultData.shared,
+         shared: resultData.shared === true || resultData.shared === 'true',
         configuration: resultData.configuration,
        } ) ;
     }
@@ -115,7 +116,7 @@ export class UserdashboardViewComponent implements OnInit {
       });
     }
     manageUpdate(){
-      //alert( this.dashBoardForm.value.configuration )
+
       this.userDashboardService.updateUserDashboard( this.dashBoardForm.value ).subscribe(async data => {
         this.manageSuccessOnSaveDashboard( data )
       },

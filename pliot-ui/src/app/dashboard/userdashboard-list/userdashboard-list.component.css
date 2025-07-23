@@ -10,3 +10,40 @@
 .mat-column-actions {
   min-width: 160px;
 }
+
+.dashboard-list-title {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.mat-column-configuration {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 400px; /* o quello che preferisci */
+}
+
+.json-preview {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: monospace;
+  font-size: 13px;
+  background-color: #f5f5f5;
+  padding: 8px;
+  border-radius: 4px;
+  max-width: 400px;
+  overflow: auto;
+}
+
+.json-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 6px 10px;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  max-height: none;
+}

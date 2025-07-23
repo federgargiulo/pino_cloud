@@ -1,5 +1,5 @@
 <div class="dashboard-list-container" *ngIf="!isLoading">
-  <h2>Dashboards</h2>
+  <h2 class="dashboard-list-title">DASHBOARDS</h2>
 
   <table mat-table [dataSource]="dashBoardsList" class="mat-elevation-z2 full-width-table">
 
@@ -17,10 +17,18 @@
 
     <!-- Configurazione -->
     <ng-container matColumnDef="configuration">
-      <th mat-header-cell *matHeaderCellDef> Configuration </th>
-      <td mat-cell *matCellDef="let d"> {{ d.configuration }} </td>
+      <th mat-header-cell *matHeaderCellDef style="width: 100%">Configuration</th>
+      <td mat-cell *matCellDef="let d">
+        <pre class="json-content">{{ d.configuration }}</pre>
+      </td>
     </ng-container>
-
+    <!-- Shared -->
+    <ng-container matColumnDef="shared">
+      <th mat-header-cell *matHeaderCellDef> Shared </th>
+      <td mat-cell *matCellDef="let d">
+        {{ d.shared === true || d.shared === 'true' ? 'Yes' : 'No' }}
+      </td>
+    </ng-container>
     <!-- Actions -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef class="text-center"> Actions </th>

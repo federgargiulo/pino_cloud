@@ -1,4 +1,4 @@
-<h2 class="page-title">Create Dashboard</h2>
+<h2 mat-dialog-title>{{ isEditMode ? 'Dashboard Detail' : 'Create Dashboard' }}</h2>
 
 <div class="dashboard-form-container">
   <form [formGroup]="dashBoardForm" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-4">
@@ -25,8 +25,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Dashboard Shared</mat-label>
       <mat-select formControlName="shared">
-        <mat-option [value]="'false'">NO</mat-option>
-        <mat-option [value]="'true'">YES</mat-option>
+        <mat-option [value]="true">Yes</mat-option>
+        <mat-option [value]="false">No</mat-option>
       </mat-select>
     </mat-form-field>
 

@@ -13,7 +13,7 @@ import { UserService } from '../../service/user.service';
 export class UserdashboardListComponent implements OnInit {
 
   dashBoardsList: any []= [];
-  displayedColumns: string[] = ['title', 'descr', 'configuration', 'actions'];
+  displayedColumns: string[] = ['title', 'descr', 'configuration', 'shared', 'actions'];
   isLoading: boolean = true;
 
   currentUserId: any;
