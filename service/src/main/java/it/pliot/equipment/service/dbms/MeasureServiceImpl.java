@@ -83,12 +83,12 @@ public class MeasureServiceImpl extends BaseServiceImpl<MeasureTO, Measure, Stri
                 break;
             case "HOUR":
                 select = " year_val || '-' || month_val || '-' || day_val || ':' || hour_val ";
-                groupBy = "  GROUP BY year_val, mon th_val , day_val , hour_val ";
+                groupBy = "  GROUP BY year_val, month_val , day_val , hour_val ";
                 break;
             case "ROW":
-                select = " reference_timestamp ";
-                groupBy = " ";
-
+                select = " TO_CHAR(reference_timestamp, 'YYYY-MM-DD HH24:MI')  ";
+                groupBy = "  GROUP BY reference_timestamp ";
+                break;
             default:
                 throw new IllegalArgumentException("Invalid level: " + level);
         }
