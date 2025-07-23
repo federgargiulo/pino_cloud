@@ -119,7 +119,7 @@ management:
   management:
     security:
       enabled: false
-      
+
 
 hawtio:
   authenticationEnabled: false

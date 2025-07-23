@@ -35,6 +35,21 @@
   overflow: auto;
 }
 
+.config-preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  font-family: monospace;
+  font-size: 13px;
+  max-width: 100%;
+  padding: 6px 10px;
+  border-radius: 4px;
+  word-break: break-word;
+}
+
 .json-content {
   white-space: pre-wrap;
   word-break: break-word;
