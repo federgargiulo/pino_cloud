@@ -66,18 +66,18 @@ export class DashMeasureComponent implements OnInit {
 
    }
 
- formatDateTime(input: string): string {
-  const date = new Date(input);
-  const pad = (n: number) => n.toString().padStart(2, '0');
+  formatDateTime(input: string): string {
+    const date = new Date(input);
+    const pad = (n: number) => n.toString().padStart(2, '0');
 
-  const day = pad(date.getDate());
-  const month = pad(date.getMonth() + 1);
-  const year = date.getFullYear();
-  const hour = pad(date.getHours());
-  const minute = pad(date.getMinutes());
+    const day = pad(date.getDate());
+    const month = pad(date.getMonth() + 1);
+    const year = date.getFullYear();
+    const hour = pad(date.getHours());
+    const minute = pad(date.getMinutes());
 
-  return `${day}/${month}/${year} ${hour}:${minute}`;
-}
+    return `${day}/${month}/${year} ${hour}:${minute}`;
+  }
 
    getNewConfiguration( tp: string , ll : string ): any  {
 
