@@ -14,10 +14,7 @@ import it.pliot.equipment.utils.MeasureSpecifications;
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -44,14 +41,16 @@ public class MeasureServiceImpl extends BaseServiceImpl<MeasureTO, Measure, Stri
     }
 
     public PagedResultTO<MeasureTO> search(String idSignal, Date from, String page ,int pageSize ){
+        Sort sort = Sort.by(Sort.Direction.ASC, "measureDttm"); // <-- Ordina per "timestamp" decrescente
 
-        Pageable nextPage  = PageRequest.of( Integer.valueOf( page ) ,  pageSize );
+        Pageable nextPage  = PageRequest.of( Integer.valueOf( page ) ,  pageSize , sort );
         Specification<Measure> spec = Specification
-                .where( MeasureSpecifications.isYoungerThan( from ) )  // Prezzo > valore (AND)
+                .where( MeasureSpecifications.isYoungerThan( from ) )
                 .and( MeasureSpecifications.isMeasureOfSignal( idSignal ) );
 
+
         try {
-            return findPaged(spec, nextPage);
+            return findPaged( spec , nextPage );
         }catch ( Exception e ){
             e.getStackTrace();
             throw  new RuntimeException( " errore in lettura ");
@@ -70,24 +69,30 @@ public class MeasureServiceImpl extends BaseServiceImpl<MeasureTO, Measure, Stri
         String groupBy;
         String select;
         String where =  " WHERE signal_id = ? AND reference_timestamp > ? AND  reference_timestamp < ? ";
-
+        String orderBy = "";
         switch (level) {
 
             case "MONTH":
                 select = " year_val || '-' || month_val ";
                 groupBy = " GROUP BY year_val, month_val ";
+                orderBy = " ORDER BY year_val asc , month_val asc ";
+
                 break;
             case "DAY":
                 select = " year_val || '-' || month_val || '-' || day_val ";
                 groupBy = "  GROUP BY year_val, month_val , day_val ";
+                orderBy = " ORDER BY year_val asc , month_val asc , day_val asc ";
                 break;
             case "HOUR":
                 select = " year_val || '-' || month_val || '-' || day_val || ':' || hour_val ";
-                groupBy = "  GROUP BY year_val, month_val , day_val , hour_val ";
+                groupBy = "  GROUP BY year_val , month_val , day_val , hour_val ";
+                orderBy = " ORDER BY year_val asc , month_val asc , day_val asc , hour_val asc ";
+
                 break;
             case "ROW":
                 select = " TO_CHAR(reference_timestamp, 'YYYY-MM-DD HH24:MI')  ";
-                groupBy = "  GROUP BY reference_timestamp ";
+                groupBy = " GROUP BY reference_timestamp ";
+                orderBy = " ORDER BY reference_timestamp asc ";
                 break;
             default:
                 throw new IllegalArgumentException("Invalid level: " + level);
@@ -98,7 +103,7 @@ public class MeasureServiceImpl extends BaseServiceImpl<MeasureTO, Measure, Stri
                 "min( max_val ) as min , " +
                 "AVG( mean_val ) as mean  " +
                 "FROM report_data_first_stg " +
-                where + groupBy + " ORDER BY label";
+                where + groupBy + orderBy;
         return jdbcTemplate.query(sql, new Object[]{ sigal_id , from , end }, (rs, rowNum) -> new AggregateResultTO(
                     rs.getString("label"),
                     rs.getDouble("min"),
