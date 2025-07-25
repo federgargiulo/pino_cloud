@@ -761,7 +761,7 @@ pdb:
 service:
   ## @param service.nameOverride MongoDB(&reg;) service name
   ##
-  nameOverride: pino-mongodb
+  nameOverride: pino-mongodb-v1
   ## @param service.type Kubernetes Service type (only for standalone architecture)
   ##
   type: ClusterIP

@@ -36,7 +36,7 @@ keywords:
 maintainers:
 - name: Broadcom, Inc. All Rights Reserved.
   url: https://github.com/bitnami/charts
-name: pino-mongodb
+name: pino-mongodb-v1
 sources:
 - https://github.com/bitnami/charts/tree/main/bitnami/mongodb
-version: 1.2.0
+version: 1.0.0
