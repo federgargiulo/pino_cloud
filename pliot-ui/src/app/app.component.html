@@ -61,7 +61,7 @@
         <!-- Home -->
         <div class="drawer-button-container" *ngIf="item.id === 'home' && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" [routerLink]="['/']" routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}">
+                  [routerLinkActiveOptions]="{exact: true}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">home</span>
               <span class="px-1">{{ item.label }}</span>
@@ -95,13 +95,16 @@
 
         <div class="drawer-button-container" *ngIf="item.id === 'tenant' && isPliotAdmin() && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" [routerLink]="['search-tenant']" routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}">
+                  [routerLinkActiveOptions]="{exact: true}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">business</span>
               <span class="px-1">{{ item.label }}</span>
             </span>
           </button>
         </div>
+
+
+
 
         <!-- Equipment -->
 
@@ -130,7 +133,7 @@
 
         <div class="drawer-button-container" *ngIf="item.id === 'equipment' && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" [routerLink]="['search-equipment']" routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}">
+                  [routerLinkActiveOptions]="{exact: true}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">manufacturing</span>
               <span class="px-1">{{ item.label }}</span>
@@ -140,46 +143,74 @@
 
         <!-- Users -->
         <div class="drawer-button-container" [class.opened]="showUserItems"
-          *ngIf="item.id === 'users' && isPliotAdmin() && isMenuItemVisible(item.id)">
+             *ngIf="item.id === 'users' && isPliotAdmin() && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" (click)="toggleDrawer('user')"
-            [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
+                  [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">person</span>
               <span class="px-1">{{ item.label }}</span>
             </span>
             <span class="material-symbols-outlined mat-drawer-button-closed"
-              [class.d-none]="showUserItems">stat_minus_1</span>
+                  [class.d-none]="showUserItems">stat_minus_1</span>
             <span class="material-symbols-outlined mat-drawer-button-opened"
-              [class.d-none]="!showUserItems">stat_1</span>
+                  [class.d-none]="!showUserItems">stat_1</span>
           </button>
           @if (showUserItems) {
           <ng-container *ngFor="let subItem of item.subItems">
             <button mat-button class="mat-drawer-button-item" [routerLink]="[subItem.id]" routerLinkActive="active-link"
-              *ngIf="isMenuItemVisible(subItem.id)">
+                    *ngIf="isMenuItemVisible(subItem.id)">
               {{ subItem.label }}
             </button>
           </ng-container>
           }
         </div>
 
-        <!-- Dashboard -->
+
+        <!-- Edge -->
+        <div class="drawer-button-container" [class.opened]="showEdgeItems"
+             *ngIf="item.id === 'edge' && isMenuItemVisible(item.id) && isServerMode()">
+          <button mat-button class="mat-drawer-button" (click)="toggleDrawer('edge')"
+                  [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
+            <span class="d-flex align-items-center gap-14">
+              <span class="material-symbols-outlined">hub</span>
+              <span class="px-1">{{ item.label }}</span>
+            </span>
+            <span class="material-symbols-outlined mat-drawer-button-closed" [class.d-none]="showEdgeItems">stat_minus_1</span>
+            <span class="material-symbols-outlined mat-drawer-button-opened" [class.d-none]="!showEdgeItems">stat_1</span>
+          </button>
+
+          @if (showEdgeItems) {
+          <ng-container *ngFor="let subItem of item.subItems">
+            <button mat-button class="mat-drawer-button-item"
+                    [routerLink]="[subItem.id]"
+                    routerLinkActive="active-link"
+                    *ngIf="isMenuItemVisible(subItem.id)">
+              {{ subItem.label }}
+            </button>
+          </ng-container>
+          }
+        </div>
+
+
+
+          <!-- Dashboard -->
         <div class="drawer-button-container" [class.opened]="showDashboardItems"
-          *ngIf="item.id === 'dashboard' && isMenuItemVisible(item.id)">
+             *ngIf="item.id === 'dashboard' && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" (click)="toggleDrawer('dashboard')"
-            [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
+                  [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">dashboard</span>
               <span class="px-1">{{ item.label }}</span>
             </span>
             <span class="material-symbols-outlined mat-drawer-button-closed"
-              [class.d-none]="showDashboardItems">stat_minus_1</span>
+                  [class.d-none]="showDashboardItems">stat_minus_1</span>
             <span class="material-symbols-outlined mat-drawer-button-opened"
-              [class.d-none]="!showDashboardItems">stat_1</span>
+                  [class.d-none]="!showDashboardItems">stat_1</span>
           </button>
           @if (showDashboardItems) {
           <ng-container *ngFor="let subItem of item.subItems">
             <button mat-button class="mat-drawer-button-item" [routerLink]="[subItem.id]" routerLinkActive="active-link"
-              *ngIf="isMenuItemVisible(subItem.id)">
+                    *ngIf="isMenuItemVisible(subItem.id)">
               {{ subItem.label }}
             </button>
           </ng-container>
@@ -189,7 +220,7 @@
         <!-- System Status -->
         <div class="drawer-button-container" *ngIf="item.id === 'system-status' && isMenuItemVisible(item.id)">
           <button mat-button class="mat-drawer-button" [routerLink]="['system-status']" routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: false}">
+                  [routerLinkActiveOptions]="{exact: false}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">browse_activity</span>
               <span class="px-1">{{ item.label }}</span>
@@ -199,11 +230,12 @@
       </ng-container>
     </div>
 
+
     <div>
       <div class="drawer-menu-items">
         <div class="drawer-button-container">
           <button mat-button class="mat-drawer-button" routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}">
+                  [routerLinkActiveOptions]="{exact: true}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">notifications</span>
               <span class="px-1">notifications</span>
@@ -215,7 +247,7 @@
         </div>
         <div class="drawer-button-container">
           <button mat-button class="mat-drawer-button" routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}">
+                  [routerLinkActiveOptions]="{exact: true}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">help</span>
               <span class="px-1">support</span>
@@ -224,7 +256,7 @@
         </div>
         <div class="drawer-button-container">
           <button mat-button class="mat-drawer-button" [routerLink]="['/profile']" routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{exact: true}">
+                  [routerLinkActiveOptions]="{exact: true}">
             <span class="d-flex align-items-center gap-14">
               <span class="material-symbols-outlined">settings</span>
               <span class="px-1">settings</span>

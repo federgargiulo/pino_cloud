@@ -79,6 +79,9 @@ import { EditUserDialogModule } from './feature/user/search-user/edit-user-dialo
 import { TenantDialogModule } from './feature/tenant/search-tenant/tenant-dialog/tenant-dialog.module';
 import { EquipmentDialogComponent } from './feature/equipment/search-equipment/equipment-dialog/equipment-dialog.component';
 
+import { EdgeDetailComponent } from './feature/edge/edge-detail/edge-detail.component';
+import { EdgeListComponent } from './feature/edge/edge-list/edge-list.component';
+
 var loc = new ConfigurationService();
 
 export const KEYCLOAK_PRIVIDER = () =>
@@ -125,6 +128,8 @@ export const KEYCLOAK_PRIVIDER = () =>
     DetailUserComponent,
     ProfileComponent,
     MonitorComponent,
+    EdgeDetailComponent,
+    EdgeListComponent,
     EquipmentDialogComponent,
   ],
   imports: [

@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -81,5 +82,10 @@ public class EdgeConnectionController {
 
     }
 
+    @GetMapping("/edge")
+    public List<EdgeTO> edges( @RequestParam("tenant") String tenant ){
+
+        return edgeServices.findByTenant( tenant );
+    }
 
 }

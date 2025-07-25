@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  nemo_pino_edge:
+    image: cogitoprediction/nemo_pino:4
+    container_name: nemo_pino_edge
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+    entrypoint: ["/bin/sh", "/app/entrypoint.sh"]
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+      - ./entrypoint.sh:/app/entrypoint.sh
+    environment:
+      JAVA_OPTS: "-Dspring.profiles.active=edge"
+      SPRING_OPTS: "--spring.config.location=/app/config/application.yml"
+
+  postgres:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: pliot
+      POSTGRES_USER: pliot
+      POSTGRES_PASSWORD: pliot
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data

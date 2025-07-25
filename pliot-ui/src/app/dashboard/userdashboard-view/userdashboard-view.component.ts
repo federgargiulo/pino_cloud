@@ -13,23 +13,23 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 })
 
 export class UserdashboardViewComponent implements OnInit {
-  
+
   dashBoardForm : FormGroup;
   successMessage: string = '';
-
+  isEditMode: boolean = false;
   isSubmitted: boolean = false;
   constructor(private router: Router,
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private equipmentServices: EquipmentServices,
-              private userDashboardService: UserDashboardService ) { 
-                
+              private userDashboardService: UserDashboardService ) {
+
                 this.dashBoardForm = this.fb.group({
                   id : [''],
                   title: ['', Validators.required], // Aggiunto title
                   descr: ['', Validators.required],
-                  configuration: [''], 
-                  shared: ['false']  // Aggiunto desc
+                  configuration: [''],
+                  shared: [false]  // Aggiunto desc
                 });
 
   }
@@ -39,17 +39,18 @@ export class UserdashboardViewComponent implements OnInit {
   signalId : string ="";
 
    ngOnInit()  {
-
+       const id = this.route.snapshot.paramMap.get('id');
+       this.isEditMode = !!id;
        this.route.paramMap.subscribe(params => {
             var dashId = params.get('id') || '';
-           
+
             if ( dashId ! ){
               this.isPersisted = true;
               this.userDashboardService.getUserDashboardById( dashId ).subscribe(
                 {
 
                   next: (data) => {
-                    
+
                     this.setFormValues( data.body );
                     this.isPersisted = true;
                   },
@@ -60,7 +61,7 @@ export class UserdashboardViewComponent implements OnInit {
                 }
               )
             }
-           
+
 
           })
 
@@ -79,11 +80,11 @@ export class UserdashboardViewComponent implements OnInit {
     }
 
     setFormValues( resultData : any ){
-      
+
       this.dashBoardForm.setValue( { id : resultData.id ,
         title: resultData.title, // Aggiunto title
         descr: resultData.descr,
-        shared: resultData.shared,
+         shared: resultData.shared === true || resultData.shared === 'true',
         configuration: resultData.configuration,
        } ) ;
     }
@@ -95,9 +96,9 @@ export class UserdashboardViewComponent implements OnInit {
         this.isPersisted = true;
         if (resultData != null && resultData.isSuccess) {
           this.successMessage = 'Dashboard creata con successo!';
-        
+
         }
-    
+
       }
     }
 
@@ -111,35 +112,42 @@ export class UserdashboardViewComponent implements OnInit {
         this.manageSuccessOnSaveDashboard( data )
       },
         async error => {
-          this.manageErrorOnSaveDashboard( error )  
+          this.manageErrorOnSaveDashboard( error )
       });
     }
     manageUpdate(){
-      alert( this.dashBoardForm.value.configuration )
+
       this.userDashboardService.updateUserDashboard( this.dashBoardForm.value ).subscribe(async data => {
         this.manageSuccessOnSaveDashboard( data )
       },
         async error => {
-          this.manageErrorOnSaveDashboard( error )  
+          this.manageErrorOnSaveDashboard( error )
       });
     }
-   
+
 
     onSubmit() {
-    
+
       if (this.dashBoardForm.valid) {
-        if ( this.dashBoardForm.value.id ! ) 
+        if ( this.dashBoardForm.value.id ! )
           this.manageUpdate();
         else
           this.manageSave();
-          
+
       }
     }
 
     updateJson(json: string) {
-      
+
       this.dashBoardForm.controls['configuration'].setValue(json);
     }
 
+onCancel() {
+  // Se sei in un dialog:
+  // this.dialogRef.close();
+
+  // Altrimenti:
+  this.router.navigate(['/']);
+}
 }
 

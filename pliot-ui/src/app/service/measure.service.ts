@@ -31,7 +31,7 @@ export class MeasureService {
     }
 
    public findMeasures( signalId: string, ): Observable<any> {
-
+    
      if (isMockEnabled) {
        // ✅ Simulazione di misura
        const mockData = {
@@ -54,10 +54,10 @@ export class MeasureService {
 
        return of({ body: mockData });
      } else {
-
         let dte = new Date();
         dte.setDate(dte.getDate() - 2);
-        let dateStr = this.datePipe.transform( dte , 'YYYY/MM/dd')
+        let dateStr = this.datePipe.transform( dte , 'yyyy/MM/dd')
+       
         return this.webApiService.get( httpLink.findMeasure ,
              { signalId: signalId ,
                from: ''+dateStr,

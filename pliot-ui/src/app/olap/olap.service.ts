@@ -28,7 +28,7 @@ export class OlapService {
       if ( dateRange.end )  
          url += "&endDate=" + dateRange.end;
     }
-    if ( aggregation ) url += `&parent=${aggregation}`;
+    if ( aggregation ) url += `&aggregation=${aggregation}`;
     return this.webApiService.get(url);
   }
 
