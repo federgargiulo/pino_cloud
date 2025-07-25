@@ -1,4 +1,4 @@
 apiVersion: v2
 description: Lightweight mongo-express chart to connect to Bitnami MongoDB
-name: pino-mongo-express
-version: 1.3.0
+name: pino-mongo-express-v1
+version: 1.0.0

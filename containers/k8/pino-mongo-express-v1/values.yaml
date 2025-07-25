@@ -4,7 +4,7 @@ image:
   pullPolicy: IfNotPresent
 
 mongodb:
-  host: pino-mongodb-v1.ca97aa82-6223-4f81-b6f3-6b96ce0fe62a.svc.cluster.local
+  host: pino-mongodb-v1.5aa62710-2766-47e7-a356-b0be01f26160.svc.cluster.local
   port: 27017
   username: root
   password: G1us3ppe
