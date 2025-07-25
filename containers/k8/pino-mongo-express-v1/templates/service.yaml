@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mongo_express.fullname" . }}
+  labels:
+    {{- include "mongo_express.labels" . | nindent 4 }}
+  {{- if .Values.ingress.annotations }}
+  annotations:
+    {{- .Values.ingress.annotations | toYaml | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "mongo_express.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

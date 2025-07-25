@@ -74,15 +74,15 @@ public class HttpLoaderImpl {
     private SignalTO findOrRegister(EquipmentPullerTO eqPuller , List<SignalTO> signals, KeyValueDTO x , SignalServices signlaServices ) {
         SignalTO s = null;
         if ( signals == null || signals.isEmpty() )
-            s = createSignal( eqPuller, x , signlaServices );
+            return createSignal( eqPuller, x , signlaServices );
         else{
             for ( int i = 0 ; i < signals.size() ; i ++ ){
                 SignalTO st =  signals.get( i );
                 if ( st.getName().equals( x.getName() ) )
                     return st;
             }
+            return createSignal( eqPuller, x , signlaServices );
         }
-        return createSignal( eqPuller , x , signlaServices );
 
 
     }
@@ -92,7 +92,12 @@ public class HttpLoaderImpl {
         s = signalServices.create( s );
         return s;
     }
-
+    public static String replaceIdInUrl(String url, String newId) {
+        if (url != null && url.endsWith("/{id}")) {
+            return url.replaceAll("/\\{id}$", "/" + newId);
+        }
+        return url;
+    }
     private static ResponseDTO callApi(EquipmentPullerTO eqPuller, ApplicationContext context) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-type", "application/json;charset=UTF-8");
@@ -105,7 +110,7 @@ public class HttpLoaderImpl {
 
             // Effettua la chiamata GET con le intestazioni
         ResponseEntity<ResponseDTO> response = restTemplate.exchange(
-                    eqPuller.getUrl() + "/" + eqPuller.getEquipmentId() , HttpMethod.GET, entity, ResponseDTO.class
+                    replaceIdInUrl( eqPuller.getUrl(), eqPuller.getEquipmentId() ) , HttpMethod.GET, entity, ResponseDTO.class
             );
 
         ResponseDTO o = response.getBody();

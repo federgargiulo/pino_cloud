@@ -1,0 +1,71 @@
+:host, form, .form-container {
+  display: flex;
+  flex-grow: 1;
+  overflow: auto;
+  flex-direction: column;
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #646464;
+  }
+}
+
+.form-container {
+  padding: 24px 120px;
+  > div {
+    gap: 24px;
+    display: flex;
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}
+
+.profile-user-details-info-container {
+  gap: 6px;
+  .profile-user-details-info-item-label {
+    font-weight: 500;
+  }
+}
+
+.user-details-item-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #00a0c4;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.user-details {
+  padding: 40px 40px 24px;
+  gap: 30px;
+  align-items: center;
+  .user-details-item {
+    gap: 6px;
+  }
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.mat-toolbar.mat-toolbar {
+  background-color: white;
+  border-top: 1px solid #e0e0e0;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 24px 35px;
+  button {
+    margin-top: 0 !important;
+  }
+}

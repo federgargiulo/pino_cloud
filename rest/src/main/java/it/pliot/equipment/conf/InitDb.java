@@ -56,6 +56,7 @@ public class InitDb {
     private GlobalConfig config;
 
 
+
     private void executeSqlScripts() {
         log.info( "Executing db script ");
         try {
@@ -95,6 +96,8 @@ public class InitDb {
     public void initDb( ) {
 
         executeSqlScripts();
+
+
 
         UserGrpTO adminGrp = UserGrpTO.newroleio( Const.ADMIN_GRP , "ADMINISTRATOR " ) ;
         log.info("Preloading Group" + usrGrp.save(  adminGrp  ) );

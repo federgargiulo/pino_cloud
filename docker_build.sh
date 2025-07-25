@@ -1,4 +1,4 @@
 docker buildx build \
-  --platform linux/amd64,linux/arm64 \
-  -t cogitoprediction/nemo_pino:latest \
+  --platform linux/amd64,linux/arm64/v8 \
+  -t cogitoprediction/nemo_pino:4 \
   --push .

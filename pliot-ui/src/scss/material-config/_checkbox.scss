@@ -46,6 +46,44 @@
           }
         }
       }
+      .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+      .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background {
+        background-color: transparent !important;
+        .mdc-checkbox__mixedmark {
+          transform: none !important;
+          transition: none !important;
+        }
+        &::before {
+          display: block;
+          left: -4.25px;
+          position: absolute;
+          content: 'check_indeterminate_small';
+          font-family: 'Material Symbols Outlined' !important;
+          font-size: 24px;  /* Preferred icon size */
+          text-transform: none;
+          white-space: nowrap;
+          font-variation-settings:
+          'FILL' 1,
+          'wght' 300,
+          'GRAD' -25,
+          'opsz' 48
+        }
+        &::after {
+          display: block;
+          position: absolute;
+          left: -4.25px;
+          content: 'check_box_outline_blank';
+          font-family: 'Material Symbols Outlined' !important;
+          font-size: 24px;  /* Preferred icon size */
+          text-transform: none;
+          white-space: nowrap;
+          font-variation-settings:
+          'FILL' 1,
+          'wght' 300,
+          'GRAD' -25,
+          'opsz' 48
+        }
+      }
     }
     &.mat-mdc-checkbox-checked {
       &.mat-mdc-checkbox {

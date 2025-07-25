@@ -40,7 +40,7 @@ export interface UserDashboardDetail { // Anche questa deve essere esportata
           return of({ body: mockDetail });
     } else {
       console.info( "Service is calling " + httpLink.baseDashboard + " With data " + model )
-      alert( httpLink.baseDashboard + '/' + model );
+      //alert( httpLink.baseDashboard + '/' + model );
       return this.webApiService.get(httpLink.baseDashboard + '/' + model);
     }
   }

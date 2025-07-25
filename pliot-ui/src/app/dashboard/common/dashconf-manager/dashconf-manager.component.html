@@ -1,29 +1,52 @@
 <form [formGroup]="signalForm">
-    <h4>Gestione Segnali</h4>
-    <div formArrayName="signals">
-      <div *ngFor="let signal of signals.controls; let i = index" [formGroupName]="i">
+  <h4 class="mt-4 mb-3">Signal Management</h4>
 
-        <label for="signalId">Signal ID:</label>
-        <input type="string" formControlName="signalId">
+  <div formArrayName="signals" class="d-flex flex-column gap-4">
+    <div *ngFor="let signal of signals.controls; let i = index" [formGroupName]="i" class="signal-row">
 
-        <label for="tipo">Tipo:</label>
-        <select formControlName="chartType">
-          <option value="bar">Bar Chart</option>
-          <option value="bubble">Bubble</option>
-          <option value="doughnut">Doughnut</option>
-          <option value="line">line</option>
-        </select>
-        <label for="label">Label</label>
-        <input type="string" formControlName="label">
-        <button type="button" (click)="removeSignal(i)">❌ Rimuovi</button>
-      </div>
+      <mat-form-field appearance="fill" class="signal-field">
+        <mat-label>Signal ID *</mat-label>
+        <input matInput type="text" formControlName="signalId" required>
+        <mat-error *ngIf="signal.get('signalId')?.invalid && signal.get('signalId')?.touched">
+          Signal ID is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="signal-field">
+        <mat-label>Type *</mat-label>
+        <mat-select formControlName="chartType" required>
+          <mat-option value="bar">Bar Chart</mat-option>
+          <mat-option value="bubble">Bubble</mat-option>
+          <mat-option value="doughnut">Doughnut</mat-option>
+          <mat-option value="line">Line</mat-option>
+        </mat-select>
+        <mat-error *ngIf="signal.get('chartType')?.invalid && signal.get('chartType')?.touched">
+          Type is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="signal-field">
+        <mat-label>Label</mat-label>
+        <input matInput type="text" formControlName="label">
+      </mat-form-field>
+
+      <button mat-icon-button color="warn" (click)="removeSignal(i)" aria-label="Remove signal">
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
-    <table>
-      <tr>
-        <td><button type="button" (click)="addSignal()">➕ Aggiungi Segnale</button></td>
-        <td><button type="button" (click)="submit()">📤 Mostra JSON</button></td>
-        <td><button type="button" (click)="conferma()">Conferma Segnali</button></td>
-      </tr>
-    </table>
-  </form>
+  </div>
 
+  <div class="d-flex flex-wrap gap-2 justify-content-end mt-4">
+    <button mat-button type="button" (click)="addSignal()">
+      <mat-icon>add</mat-icon> Add Signal
+    </button>
+
+    <button mat-button type="button" (click)="submit()">
+      <mat-icon>code</mat-icon> Show JSON
+    </button>
+
+    <button mat-flat-button color="primary" type="button" (click)="conferma()">
+      Confirm Signals
+    </button>
+  </div>
+</form>

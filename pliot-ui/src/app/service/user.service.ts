@@ -1,4 +1,4 @@
- import { inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpProviderService } from './http-provider.service';
 import { Observable, of } from 'rxjs';
 import Keycloak from 'keycloak-js';
@@ -102,6 +102,16 @@ export class UserService {
     }
   }
 
+  public deleteUser(userId: string): Observable<any> {
+    if (isMockEnabled) {
+      console.info(`Mock deleting user with id ${userId}`);
+      return of({ success: true });
+    } else {
+      console.info("Service is calling delete user with id: " + userId);
+      return this.webApiService.delete(httpLink.baseDashboard + '/' + userId);
+    }
+  }
+
   getUsername(): string | null {
 
     const keycloak = inject(Keycloak);
@@ -148,6 +158,16 @@ export class UserService {
       return false;
     }
     return token.realm_access.roles.includes(role);
+  }
+
+  public getCurrentUserFromBackend(): Observable<any> {
+    const userId = this.getCurrentUserId(); // usa il 'sub' dal token
+    if (userId) {
+      return this.getUserById(userId);
+    } else {
+      console.warn('Impossibile ottenere userId dal token');
+      return of(null);
+    }
   }
 
 }
