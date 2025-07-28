@@ -40,8 +40,10 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ ABILITA CORS
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/*").authenticated()
+
+                        .requestMatchers("/api/diagnosys/engine").permitAll()
                         .requestMatchers("/api/diagnosys/status").permitAll()
+                        .requestMatchers("/api/*").authenticated()
                         .anyRequest().permitAll()
                 ).oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
