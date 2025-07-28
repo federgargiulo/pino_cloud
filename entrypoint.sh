@@ -1,5 +1,12 @@
 #!/bin/sh
 
+
+t -e
+
+echo "==> AI engine start 5000..."
+python3 /app/ai_ext/app.py &
+
+
 echo "JAVA_OPTS: $JAVA_OPTS"
 echo "SPRING_OPTS: $SPRING_OPTS"
 

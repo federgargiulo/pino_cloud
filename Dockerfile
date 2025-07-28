@@ -2,18 +2,25 @@ FROM eclipse-temurin:24
 
 WORKDIR /app
 
-# Copia il JAR
+
+RUN apt-get update && apt-get install -y python3 python3-pip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
 COPY ./rest/target/rest-0.0.1-SNAPSHOT.jar /app/app.jar
 
-# Copia l'entrypoint
-COPY entrypoint.sh /entrypoint.sh
 
-# Rendi eseguibile lo script
+COPY ./ai_ext /app/ai_ext
+RUN pip3 install -r /app/ai_ext/requirements.txt
+
+
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Imposta le variabili di default (modificabili a runtime)
+
+
 ENV JAVA_OPTS=""
 ENV SPRING_OPTS=""
 
-# Usa lo script come entrypoint
+# Entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
