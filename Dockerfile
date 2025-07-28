@@ -8,7 +8,7 @@ COPY ./ai_ext /app/ai_ext
 
 # Crea e popola il virtualenv
 RUN python -m venv /opt/venv && \
-    /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+    /opt/venv/bin/pip install --no-cache-dir -r /app/ai_ext/requirements.txt
 
 # Stage 2: App Java + ambiente Python
 FROM eclipse-temurin:24
