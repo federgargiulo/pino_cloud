@@ -4,7 +4,8 @@
 t -e
 
 echo "==> AI engine start 5000..."
-python3 /app/ai_ext/app.py &
+
+/opt/venv/bin/python /app/ai_ext/app.py &
 
 
 echo "JAVA_OPTS: $JAVA_OPTS"

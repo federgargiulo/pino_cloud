@@ -3,21 +3,24 @@ FROM python:3.11-slim as python-base
 
 WORKDIR /app/ai_ext
 
-# Copia il modulo Python
-COPY ./ai_ext /app/ai_ext
 
-# Crea e popola il virtualenv
-RUN python -m venv  --copies /opt/venv && \
-    /opt/venv/bin/pip install --no-cache-dir -r /app/ai_ext/requirements.txt
+
 
 # Stage 2: App Java + ambiente Python
 FROM eclipse-temurin:24
 
-WORKDIR /app
+apt-get update && \
+    apt-get install -y python3 python3-pip
 
-# Copia virtualenv Python dal primo stage
-COPY --from=python-base /opt/venv /opt/venv
-COPY --from=python-base /app/ai_ext /app/ai_ext
+
+RUN python -m venv /opt/venv && \
+    /opt/venv/bin/pip install --no-cache-dir -r /app/ai_ext/requirements.txt
+
+
+# Copia il modulo Python
+COPY ./ai_ext /app/ai_ext
+
+WORKDIR /app
 
 # Attiva l'env virtuale nel PATH
 ENV PATH="/opt/venv/bin:$PATH"
