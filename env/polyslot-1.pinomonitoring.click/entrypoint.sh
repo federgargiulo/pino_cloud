@@ -1,5 +1,12 @@
 #!/bin/sh
 
+
+t -e
+
+echo "==> AI engine start 5000..."
+python3 /app/ai_ext/app.py &
+
+
 echo "JAVA_OPTS: $JAVA_OPTS"
 echo "SPRING_OPTS: $SPRING_OPTS"
 
@@ -9,24 +16,11 @@ ls -ltr /app/
 
 
 
-echo "🚀 Java Version..."
-
-java -version
-echo "🔍nuovo Checking for UrlDecoder in app.jar..."
-
-chmod +x /app/*
-
-ls -ltr /app/app.jar
-
-
-
-
 jar tf /app/app.jar | grep UrlDecoder || echo "UrlDecoder not found."
 
 echo "🚀 Starting application..."
 
-echo "command: java $JAVA_OPTS -cp /app/app.jar $SPRING_OPTS"
-
-exec  java $JAVA_OPTS -jar /app/app.jar $SPRING_OPTS
+echo "command: java $JAVA_OPTS -jar /app/app.jar $SPRING_OPTS"
 
 
+exec java $JAVA_OPTS -jar /app/app.jar $SPRING_OPTS

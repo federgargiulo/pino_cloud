@@ -14,7 +14,7 @@ echo "🔍 Checking content of /app/ ..."
 
 ls -ltr /app/
 
-echo "🔍Nuovo Checking for UrlDecoder in app.jar..."
+
 
 jar tf /app/app.jar | grep UrlDecoder || echo "UrlDecoder not found."
 
