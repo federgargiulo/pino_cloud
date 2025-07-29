@@ -20,6 +20,8 @@ pliot:
 logging:
   file:
     path: ./log
+  level:
+    org.springframework.security: DEBUG
 
 springdoc:
   swagger-ui:

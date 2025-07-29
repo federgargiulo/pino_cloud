@@ -16,7 +16,7 @@ echo "🔍 Checking content of /app/ ..."
 
 ls -ltr /app/
 
-jar tf /app/app.jar | grep UrlDecoder || echo "UrlDecoder not found."
+gijar tf /app/app.jar | grep UrlDecoder || echo "UrlDecoder not found."
 
 echo "🚀 Starting application..."
 
