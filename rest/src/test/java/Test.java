@@ -1,5 +1,3 @@
-import it.pliot.equipment.Const;
-
 public class Test {
 
     public static void main( String [ ] arg ){

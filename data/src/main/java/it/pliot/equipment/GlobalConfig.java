@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class GlobalConfig {
 
+
+
     private static final Logger log = LoggerFactory.getLogger(GlobalConfig.class);
 
     @Value("${pliot.mode:EDGE} ")

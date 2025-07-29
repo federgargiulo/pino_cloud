@@ -29,6 +29,7 @@ public class EquipmentPullerUtils extends BaseConvertUtil<EquipmentPuller, Equip
         puller.setApiKey( pullTo.getApiKey() );
         puller.setUrl( pullTo.getUrl() );
         puller.setTenant( pullTo.getTenant() );
+        puller.setPullType( pullTo.getPullType() );
         return  puller;
     }
 
@@ -50,6 +51,7 @@ public class EquipmentPullerUtils extends BaseConvertUtil<EquipmentPuller, Equip
         pullerTo.setApiKey( puller.getApiKey());
         pullerTo.setUrl( puller.getUrl() );
         pullerTo.setTenant( puller.getTenant() );
+        pullerTo.setPullType( puller.getPullType( ) );
         return  pullerTo;
     }
 }

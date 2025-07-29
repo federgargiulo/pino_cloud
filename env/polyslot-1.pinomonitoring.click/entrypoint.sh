@@ -1,11 +1,12 @@
 #!/bin/sh
 
 
-t -e
+
 
 echo "==> AI engine start 5000..."
 
-/opt/venv/bin/python /app/ai_ext/app.py &
+cd /app/ai_ext
+python3 /app/ai_ext/app.py &
 
 
 echo "JAVA_OPTS: $JAVA_OPTS"
@@ -14,8 +15,6 @@ echo "SPRING_OPTS: $SPRING_OPTS"
 echo "🔍 Checking content of /app/ ..."
 
 ls -ltr /app/
-
-
 
 jar tf /app/app.jar | grep UrlDecoder || echo "UrlDecoder not found."
 

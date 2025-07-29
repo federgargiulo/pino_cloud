@@ -4,7 +4,6 @@ import it.pliot.equipment.io.EquipmentIAPullerTO;
 import it.pliot.equipment.io.EquipmentPullerTO;
 import it.pliot.equipment.io.MeasureTO;
 import it.pliot.equipment.io.SignalTO;
-import it.pliot.equipment.service.business.EquipmentIAPullerServices;
 import it.pliot.equipment.service.business.EquipmentPullerServices;
 import it.pliot.equipment.service.business.MeasureServices;
 import it.pliot.equipment.service.business.SignalServices;
@@ -24,26 +23,23 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 
-public class HttpLoaderImpl {
+public class MeasurePuller implements  Cmd {
 
 
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpLoaderImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MeasurePuller.class);
 
 
 
-    public void executeRetrieve( EquipmentPullerTO eqPuller ,
+    public StringBuffer execute( EquipmentPullerTO eqPuller ,
                           EquipmentPullerServices pullerService ,
                           ApplicationContext context ){
 
         ResponseDTO response = null;
         StringBuffer buff = new StringBuffer();
-        try {
-            // manage the lock here
-            pullerService.startPull( eqPuller.getPullerId() );
 
-            response = callApi(eqPuller, context);
-            SignalServices signalService =
+        response = callApi(eqPuller, context);
+        SignalServices signalService =
                     (SignalServices) context.getBean( SignalServices.class );
             MeasureServices measureSignals =
                     ( MeasureServices ) context.getBean( MeasureServices.class );
@@ -64,56 +60,12 @@ public class HttpLoaderImpl {
                 measureSignals.create( m );
             });
 
-
-        } catch (Exception e) {
-            buff.append( e.getMessage() );
-        }finally {
-            pullerService.endPull(eqPuller.getPullerId(),  buff.toString() );
-        }
+        return buff;
 
     }
 
 
-    public void executeRetrieve( EquipmentIAPullerTO iaPullerTO ,
-                                 EquipmentIAPullerServices iaPullerService ,
-                                 ApplicationContext context ){
 
-        ResponseDTO response = null;
-        StringBuffer buff = new StringBuffer();
-        try {
-            // manage the lock here
-            iaPullerService.startPull( iaPullerTO.getIaPullerId() );
-
-            response = callApiIA(iaPullerTO, context);
-            SignalServices signalService =
-                    (SignalServices) context.getBean( SignalServices.class );
-            MeasureServices measureSignals =
-                    ( MeasureServices ) context.getBean( MeasureServices.class );
-
-          /*  List<SignalTO> signals  = signalService.getSignalsByEquipmentId( iaPullerTO.getEquipmentId() ) ;
-            List<KeyValueDTO> values  = response.getValues();
-            buff.append( "received signals " );
-            buff.append( values.size() );
-
-            values.forEach( x -> {
-                SignalTO signal = findOrRegister( iaPullerTO, signals , x  , signalService );
-                MeasureTO m = new MeasureTO();
-                m.setSignalId( signal.getSignalId() );
-                m.setEquipmentId( iaPullerTO.getEquipmentId() );
-                m.setTenantId( iaPullerTO.getTenant() );
-                m.setMeasureDttm( new Date());
-                m.setVal( x.getValue() );
-                measureSignals.create( m );
-            });
-*/
-
-        } catch (Exception e) {
-            buff.append( e.getMessage() );
-        }finally {
-            iaPullerService.endPull(iaPullerTO.getIaPullerId(),  buff.toString() );
-        }
-
-    }
 
     private SignalTO findOrRegister(EquipmentPullerTO eqPuller , List<SignalTO> signals, KeyValueDTO x , SignalServices signlaServices ) {
         SignalTO s = null;

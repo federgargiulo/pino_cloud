@@ -11,6 +11,16 @@ public class EquipmentPullerTO {
 
     private String equipmentId;
 
+    private String pullType = "MEASURE";
+
+    public String getPullType() {
+        return pullType;
+    }
+
+    public void setPullType(String pullType) {
+        this.pullType = pullType;
+    }
+
     private String tenant;
 
     private String url;

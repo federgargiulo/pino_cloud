@@ -38,12 +38,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+                .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ ABILITA CORS
                 .authorizeHttpRequests(auth -> auth
-
-                        .requestMatchers("/api/diagnosys/engine").permitAll()
-                        .requestMatchers("/api/diagnosys/status").permitAll()
-                        .requestMatchers("/api/*").authenticated()
+                        .requestMatchers("/api/diagnoses/engine").permitAll()
+                        .requestMatchers("/api/diagnoses/status").permitAll()
+                        .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 ).oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))

@@ -15,6 +15,13 @@ public class EquipmentIAPuller {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String iaPullerId;
 
+    // AI Puller or Measure Puller
+    private String pullType = "MEASURE";
+
+    public String getPullType() {
+        return pullType;
+    }
+
     private String equipmentId;
 
     private String tenant;
