@@ -1,6 +1,5 @@
 package it.pliot.equipment.service.business.task.impl;
 
-import it.pliot.equipment.io.EquipmentIAPullerTO;
 import it.pliot.equipment.io.EquipmentPullerTO;
 import it.pliot.equipment.io.MeasureTO;
 import it.pliot.equipment.io.SignalTO;
@@ -83,21 +82,6 @@ public class MeasurePuller implements  Cmd {
 
     }
 
-    private SignalTO findOrRegister(EquipmentIAPullerTO eqIAPuller , List<SignalTO> signals, KeyValueDTO x , SignalServices signlaServices ) {
-        SignalTO s = null;
-        if ( signals == null || signals.isEmpty() )
-            return createSignal( eqIAPuller, x , signlaServices );
-        else{
-            for ( int i = 0 ; i < signals.size() ; i ++ ){
-                SignalTO st =  signals.get( i );
-                if ( st.getName().equals( x.getName() ) )
-                    return st;
-            }
-            return createSignal( eqIAPuller, x , signlaServices );
-        }
-
-
-    }
 
     private SignalTO createSignal(EquipmentPullerTO eqPuller , KeyValueDTO x, SignalServices signalServices) {
         SignalTO s = SignalTO.newEmptyInstance( eqPuller.getEquipmentId() , x.getName(), eqPuller.getTenant() );
@@ -131,32 +115,7 @@ public class MeasurePuller implements  Cmd {
 
     }
 
-    private static ResponseDTO callApiIA(EquipmentIAPullerTO iaPullerTO, ApplicationContext context) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-type", "application/json;charset=UTF-8");
-        headers.set( "X-API-KEY" , iaPullerTO.getApiKey() );
 
-        RestTemplateBuilder restTemplateBuilder = ( RestTemplateBuilder ) context.getBean(RestTemplateBuilder.class);
-        RestTemplate restTemplate = restTemplateBuilder.connectTimeout( Duration.ofSeconds( 10 ) )
-                .build();
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        // Effettua la chiamata GET con le intestazioni
-        ResponseEntity<ResponseDTO> response = restTemplate.exchange(
-                replaceIdInUrl( iaPullerTO.getUrl(), iaPullerTO.getIaPullerId() ) , HttpMethod.GET, entity, ResponseDTO.class
-        );
-
-        ResponseDTO o = response.getBody();
-        LOGGER.info( " received response " + o );
-        return o;
-
-    }
-
-    private SignalTO createSignal(EquipmentIAPullerTO eqIAPuller , KeyValueDTO x, SignalServices signalServices) {
-        SignalTO s = SignalTO.newEmptyInstance( eqIAPuller.getIaPullerId() , x.getName(), eqIAPuller.getTenant() );
-        s = signalServices.create( s );
-        return s;
-    }
 }
 
 
