@@ -43,5 +43,10 @@ def diagnose(request: DiagnoseRequest):
         "statusDescription": "FAULTY" if pred else "HEALTHY"
     }
 
+@app.post("/predict", response_model=DiagnoseResponse)
+def predict(request: DiagnoseRequest):
+    return diagnose( request )
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=5000)

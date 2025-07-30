@@ -2,6 +2,7 @@ package it.pliot.equipment.service.business.task.impl;
 
 import it.pliot.equipment.io.*;
 import it.pliot.equipment.service.business.EquipmentPullerServices;
+import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.dto.ResponseDTO;
 import it.pliot.equipment.service.ext.DiagnosysService;
 import org.slf4j.Logger;
@@ -35,6 +36,10 @@ public class AIPuller implements  Cmd {
         buff.append(result.getStatusCode());
         buff.append(" - ");
         buff.append(result.getStatusDescription());
+
+        EquipmentServices equipment = context.getBean( EquipmentServices.class );
+        equipment.updateStatus( eqPuller.getEquipmentId() , buff.toString() );
+
         return buff;
 
     }
