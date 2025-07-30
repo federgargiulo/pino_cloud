@@ -60,6 +60,7 @@ public class EquipmentPullerServiceImpl
 
         EquipmentPuller probe = new EquipmentPuller();
         probe.setEquipmentId( equipmentId);
+        probe.setPullType( null );
         Example<EquipmentPuller> example = Example.of(probe);
         List<EquipmentPuller> sens= getRepo().findAll(example);
         return getConverter().converListData2IO(sens);
