@@ -43,7 +43,7 @@ public class PullerImpl {
 
 
     private Cmd getCommandObject(EquipmentPullerTO eqPuller) {
-        if ( Const.AI_PULLER.equals( eqPuller.getPullType() ) )
+        if ( Const.PREDICTION_PULLER.equals( eqPuller.getPullType() ) )
             return aiPuller;
         return mpuller;
     }

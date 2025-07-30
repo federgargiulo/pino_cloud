@@ -39,7 +39,7 @@ public interface Const {
     public static String ADMIN_PLIOT_LASTNAME   = "Pliot_admin";
     public static String ADMIN_PLIOT_FIRSFNAME  = "Pliot_admin";
     public static String ADMIN_PLIOT_TENANT     = "ALL";
-    public static final String AI_PULLER = "AI";
+    public static final String PREDICTION_PULLER = "PREDICTION";
     public static final String MEASURE_PULLER = "MEASURE";
 
 }
