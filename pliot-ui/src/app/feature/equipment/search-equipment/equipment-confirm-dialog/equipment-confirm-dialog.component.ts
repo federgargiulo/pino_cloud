@@ -150,7 +150,8 @@ export class EquipmentConfirmDialogComponent implements OnInit {
       nextExecutions: [''],
       lastStart: [''],
       lastEnd: [''],
-      lastExecutionReport: ['']
+      lastExecutionReport: [''],
+      pullType:['MEASURE']
     }, { validators: this.atLeastOneFieldRequired(['url', 'apiKey', 'intervalInSec']) });
   }
 
