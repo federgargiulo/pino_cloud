@@ -6,7 +6,7 @@
 echo "==> AI engine start 5000..."
 
 cd /app/ai_ext
-python3 /app/ai_ext/app.py &
+python3 /app/ai_ext/inference_service.py &
 
 
 echo "JAVA_OPTS: $JAVA_OPTS"
