@@ -19,7 +19,7 @@ RUN /opt/venv/bin/pip install --no-cache-dir -r /app/ai_ext/requirements.txt
 COPY ./rest/target/rest-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # Copia lo script di avvio
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Imposta PATH al virtualenv
