@@ -12,7 +12,7 @@ services:
     volumes:
       - ./config:/app/config
       - ./logs:/app/logs
-      - ./entrypoint.sh:/app/entrypoint.sh
+#      - ./entrypoint.sh:/app/entrypoint.sh
     environment:
       JAVA_OPTS: "-Dspring.profiles.active=edge"
       SPRING_OPTS: "--spring.config.location=/app/config/application.yml"

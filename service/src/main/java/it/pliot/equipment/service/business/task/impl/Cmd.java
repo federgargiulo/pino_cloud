@@ -8,5 +8,5 @@ public interface Cmd {
 
     public StringBuffer execute( EquipmentPullerTO eqPuller ,
                                  EquipmentPullerServices pullerService ,
-                                 ApplicationContext context );
+                                 ApplicationContext context ) ;
 }

@@ -1,12 +1,13 @@
+# inference_service.py
 from fastapi import FastAPI
-import uvicorn
 from pydantic import BaseModel
 from typing import List
 import joblib
 import pandas as pd
-
+import uvicorn
 
 app = FastAPI(title="Motor Diagnostic Service")
+
 model = joblib.load("rf_motor.pkl")
 
 class Sample(BaseModel):
@@ -28,11 +29,6 @@ class DiagnoseResponse(BaseModel):
     statusCode: str
     statusDescription: str
 
-@app.get("/status")
-def status():
-    return {"message": "Up and running!"}
-
-
 @app.post("/diagnose", response_model=DiagnoseResponse)
 def diagnose(request: DiagnoseRequest):
     df = pd.DataFrame([s.dict() for s in request.samples])
@@ -45,7 +41,14 @@ def diagnose(request: DiagnoseRequest):
 
 @app.post("/predict", response_model=DiagnoseResponse)
 def predict(request: DiagnoseRequest):
-    return diagnose( request )
+    return  diagnose( request )
+
+@app.get("/status")
+def status():
+    return {
+        "statusCode": 1,
+        "statusDescription": "Up And Running"
+    }
 
 
 if __name__ == "__main__":
