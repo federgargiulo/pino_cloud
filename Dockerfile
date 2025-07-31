@@ -20,7 +20,7 @@ COPY ./rest/target/rest-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # Copia lo script di avvio
 COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # Imposta PATH al virtualenv
 ENV PATH="/opt/venv/bin:$PATH"
