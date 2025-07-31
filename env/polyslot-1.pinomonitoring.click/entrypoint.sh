@@ -22,5 +22,5 @@ echo "🚀 Starting application..."
 
 echo "command: java $JAVA_OPTS -jar /app/app.jar $SPRING_OPTS"
 
-
+cd /app/
 exec java $JAVA_OPTS -jar /app/app.jar $SPRING_OPTS
