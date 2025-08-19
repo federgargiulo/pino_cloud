@@ -1,5 +1,0 @@
-apiVersion: v2
-appVersion: 8.0.9
-description: Helm chart MongoDB per NEMO con Ingress expose e credenziali personalizzate
-name: pino-mongodb
-version: 1.2.0
