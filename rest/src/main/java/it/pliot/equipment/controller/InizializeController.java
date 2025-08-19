@@ -28,7 +28,6 @@ public class InizializeController {
         SignalTO signal = inizializeServices.inizialize( initTo.getSignalTO() , initTo.getEquipmentName() );
         initTo.setSignalTO( signal );
         return initTo;
-
     }
 
 }

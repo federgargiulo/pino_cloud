@@ -1,9 +1,6 @@
 package it.pliot.equipment;
 
-import it.pliot.equipment.model.Equipment;
-
 public interface Const {
-
     public static String DEV_TENANT_ID = "dev_tenant";
     public static String DEV_TENANT_NAME = "tenant name";
     public static String DEV_TENANT_DESC = "tenant descr";
@@ -42,5 +39,7 @@ public interface Const {
     public static String ADMIN_PLIOT_LASTNAME   = "Pliot_admin";
     public static String ADMIN_PLIOT_FIRSFNAME  = "Pliot_admin";
     public static String ADMIN_PLIOT_TENANT     = "ALL";
+    public static final String PREDICTION_PULLER = "PREDICTION";
+    public static final String MEASURE_PULLER = "MEASURE";
 
 }

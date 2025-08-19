@@ -19,4 +19,5 @@ public interface EquipmentServices extends BaseServiceInterface<EquipmentTO,Stri
     public List<EquipmentTO> findUpdatedEquipmentInTheInterval(Date from , Date to );
 
     public List<EquipmentTO> findAllNotDeleted();
+    public EquipmentTO updateStatus(String equipmentId , String status );
 }

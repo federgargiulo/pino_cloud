@@ -108,5 +108,17 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
         return getConverter().converListData2IO(equipments);
     }
 
+    @Override
+    public EquipmentTO updateStatus(String equipmentId, String status) {
+        Optional<Equipment> opEquipment = getRepo().findById( equipmentId );
+        if( opEquipment.isEmpty() )
+            throw  new RuntimeException( " Equipment " + equipmentId + " not found " );
+        Equipment e = opEquipment.get();
+        e.setStatus( status );
+        e.setUpdateDttm( new Date( ));
+        e = getRepo().save( e );
+        return ( EquipmentTO ) getConverter().data2io( e );
+    }
+
 
 }
