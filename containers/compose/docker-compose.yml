@@ -5,6 +5,7 @@ services:
     container_name: java_app
     depends_on:
       - postgres
+      - keycloak
     ports:
       - "8080:8080"
     volumes:
@@ -15,16 +16,50 @@ services:
 
   postgres:
     image: postgres:17
-    container_name: postgres_db
+    container_name: postgres
     restart: always
     environment:
       POSTGRES_DB: pliot
       POSTGRES_USER: pliot
-      POSTGRES_PASSWORD: pliot
+      POSTGRES_PASSWORD: pliot     
     ports:
       - "5432:5432"
-    volumes:
-      - ./postgres/data:/var/lib/postgresql/data
+    #volumes:
+     # - ./postgres/data:/var/lib/postgresql/data
 
+  # Database PostgreSQL per Keycloak
+  keycloak-db:
+    image: postgres:17
+    container_name: keycloak_db
+    restart: always
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: pino
+      POSTGRES_PASSWORD: G1us3pp3
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./keycloak/postgres:/var/lib/postgresql/data
+
+  # Keycloak Server
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.1.4
+    container_name: keycloak
+    restart: always
+    depends_on:
+      - keycloak-db
+    command: >
+      start-dev --import-realm
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
+      KC_DB_USERNAME: pino
+      KC_DB_PASSWORD: G1us3pp3
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8081:8080"
+    volumes:
+      - ../../keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
 volumes:
   pgdata:
