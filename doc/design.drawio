@@ -637,7 +637,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9x-wbMU9laDsdIgulom2-85" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;rotation=90;flipV=0;flipH=0;direction=west;" vertex="1" parent="cmpXkZzeRqzqmJrKikh9-1">
+        <mxCell id="9x-wbMU9laDsdIgulom2-85" value="topic" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;rotation=90;flipV=0;flipH=0;direction=west;" vertex="1" parent="cmpXkZzeRqzqmJrKikh9-1">
           <mxGeometry x="522.53" y="715" width="23.55" height="118.22" as="geometry" />
         </mxCell>
         <mxCell id="9x-wbMU9laDsdIgulom2-86" value="Server Socket" style="aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#ffffff;fontSize=12;spacingTop=3;image;image=img/lib/ibm/applications/microservice.svg;strokeColor=#000000;" vertex="1" parent="cmpXkZzeRqzqmJrKikh9-1">
