@@ -1,6 +1,0 @@
-postgresReleaseName: postgres-release
-postgresNamespace: backed-services
-postgresPort: 5432
-postgresIP: localhost
-secretName: postgres-extra-config
-password: postgres-test-pwd01
