@@ -29,12 +29,25 @@ export class MonitorComponent implements OnInit {
     });
   }
    
+  
+ formatDateTime(date: Date): string {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+
+    const day = pad(date.getDate());
+    const month = pad(date.getMonth() + 1);
+    const year = date.getFullYear();
+    const hour = pad(date.getHours());
+    const minute = pad(date.getMinutes());
+
+    return `${day}/${month}/${year} ${hour}:${minute}`;
+  }
 
   renderMemoryChart( records:any  ) {
 
      const grouped = new Map<string, number>();
       for (const entry of records) {
-        const date = new Date(entry.report_dttm).toLocaleString();
+        const date = this.formatDateTime( new Date(entry.report_dttm) );
+      
         const val = parseInt(entry.val, 10);
         grouped.set(date, (grouped.get(date) || 0) + val);
       }
@@ -54,7 +67,7 @@ export class MonitorComponent implements OnInit {
         labels,
         datasets: [
           {
-            label: 'Valori (KB)',
+            label: 'Memory (KB)',
             data,
             backgroundColor: '#42A5F5',
             borderWidth: 1,
@@ -74,9 +87,8 @@ export class MonitorComponent implements OnInit {
 
 
 
-
   renderConnectionChart( records : any) {
-     alert( records );
+ 
      const grouped = new Map<string, number>();
      for (const entry of records) {
         const lab =  entry.status ;

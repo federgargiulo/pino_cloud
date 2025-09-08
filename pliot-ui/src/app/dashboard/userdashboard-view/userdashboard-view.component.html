@@ -1,44 +1,51 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Dashboard Detail' : 'Create Dashboard' }}</h2>
 
-<form [formGroup]="dashBoardForm" (ngSubmit)="onSubmit()">
-    <div>
-        <label for="title">Titolo:</label>
-        <input id="title" formControlName="title">
-        <div *ngIf="dashBoardForm.controls['title'].invalid && dashBoardForm.controls['title'].touched">
-          Il titolo è obbligatorio.
-        </div>
-    </div>
-
-    <div>
-        <label for="descr">Descrizione:</label>
-        <input id="descr" formControlName="descr">
-        <div *ngIf="dashBoardForm.controls['descr'].invalid && dashBoardForm.controls['descr'].touched">
-          La descrizione è obbligatoria.
-        </div>
-    </div>
-
-    <div class="form-check">
-      <label for="shared">Dashboard condivisa:</label>
-       
-      <select class="form-select" formControlName="shared">
-        <option value="false">NO</option>
-        <option value="true">Si</option>
-      </select>
-    </div>
+<div class="dashboard-form-container">
+  <form [formGroup]="dashBoardForm" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-4">
 
     <input type="hidden" formControlName="id">
     <input type="hidden" formControlName="configuration">
 
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+      <mat-error *ngIf="dashBoardForm.controls['title'].invalid && dashBoardForm.controls['title'].touched">
+        Title is mandatory.
+      </mat-error>
+    </mat-form-field>
 
-    <div *ngIf="this.isPersisted">
-            <app-dashconf-manager [initialSignals]="dashBoardForm.controls['configuration'].value" (jsonChanged)="updateJson($event)"></app-dashconf-manager>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="descr" rows="4"></textarea>
+      <mat-error *ngIf="dashBoardForm.controls['descr'].invalid && dashBoardForm.controls['descr'].touched">
+        Description is mandatory.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Dashboard Shared</mat-label>
+      <mat-select formControlName="shared">
+        <mat-option [value]="true">Yes</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="isPersisted">
+      <app-dashconf-manager
+        [initialSignals]="dashBoardForm.controls['configuration'].value"
+        (jsonChanged)="updateJson($event)">
+      </app-dashconf-manager>
     </div>
-    <table>
-      <tr>
-        <td><div><button type="submit" class="btn btn-primary mt-3"  [disabled]="dashBoardForm.invalid">Salva</button></div></td>
-        <td><div *ngIf="this.isPersisted">
-          <button class="btn btn-primary mt-3" [routerLink]="['/dash-measure', dashBoardForm.controls['id'].value]">View</button>
-        </div></td>
-      </tr>
-    </table>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <button mat-button (click)="onCancel()">Abort</button>
+      <button mat-flat-button color="primary" [disabled]="dashBoardForm.invalid">Save</button>
+      <button *ngIf="isPersisted" mat-button color="accent"
+              [routerLink]="['/dash-measure', dashBoardForm.controls['id'].value]">
+        View
+      </button>
+    </div>
+
     <p *ngIf="successMessage">{{ successMessage }}</p>
   </form>
+</div>

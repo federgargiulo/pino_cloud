@@ -9,6 +9,7 @@ import it.pliot.equipment.security.UserContext;
 import it.pliot.equipment.service.business.EquipmentPullerServices;
 import it.pliot.equipment.service.business.EquipmentServices;
 import it.pliot.equipment.service.business.SignalServices;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,15 @@ public class EquipmentController {
 
     @GetMapping("/equipments")
     public List<EquipmentTO> getEquipmentsForTenant(@RequestParam(value = "tenantId", required = false) String tenantId) {
-        if ( tenantId == null || tenantId.length() == 0 )
-            return equipmentService.findAllNotDeleted();
-        return equipmentService.findByTenant(tenantId);
+
+        if(StringUtils.isNotEmpty(tenantId) && !"ALL".equalsIgnoreCase(tenantId))
+            return equipmentService.findByTenant(tenantId);
+
+        String tenantIdFromContext = UserContext.currentUser().getTenantId();
+        if (  StringUtils.isNotEmpty(tenantIdFromContext)  && !"ALL".equalsIgnoreCase(tenantIdFromContext))
+            return  equipmentService.findByTenant(tenantIdFromContext);
+
+        return equipmentService.findAllNotDeleted();
     }
 
 

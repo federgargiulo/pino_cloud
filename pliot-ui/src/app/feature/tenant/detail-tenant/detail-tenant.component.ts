@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   selector: 'app-detail-tenant',
   standalone: false,
   templateUrl: './detail-tenant.component.html',
-  styleUrl: './detail-tenant.component.css'
+  styleUrl: './detail-tenant.component.scss'
 })
 export class DetailTenantComponent implements OnInit {
   tenantId!: string; // ID della risorsa
@@ -32,6 +32,19 @@ export class DetailTenantComponent implements OnInit {
 
 
  ngOnInit(): void {
+    this.tenantForm = this.formBuilder.group({
+      tenantId: [{ value: '', disabled: true }], // Campo non modificabile
+      name:  [''],
+      description:  [''],
+      updateDttm: [{ value: '', disabled: true }], // Campo non modificabile
+      createdDttm: [{ value: '', disabled: true }], // Campo non modificabile
+      email: ['', [Validators.required, Validators.email]],
+      profile: [''],
+      country: [''],
+      state: [''],
+      zipCode: [''],
+      address: ['']
+    });
      this.router.paramMap.subscribe(params => {
        this.tenantId = params.get('id') || ''; // Assicura che non sia null
        console.log("Tenant ID ricevuto:", this.tenantId);
@@ -39,19 +52,6 @@ export class DetailTenantComponent implements OnInit {
        // Chiamata al backend per ottenere i dettagli
        this.loadTenantDetail(this.tenantId);
      });
-        this.tenantForm = this.formBuilder.group({
-          tenantId: [{ value: '', disabled: true }], // Campo non modificabile
-          name:  [''],
-          description:  [''],
-          updateDttm: [{ value: '', disabled: true }], // Campo non modificabile
-          createdDttm: [{ value: '', disabled: true }], // Campo non modificabile
-          email: ['', [Validators.required, Validators.email]],
-          profile: [''],
-          country: [''],
-          state: [''],
-          zipCode: [''],
-          address: ['']
-        });
 
    }
 

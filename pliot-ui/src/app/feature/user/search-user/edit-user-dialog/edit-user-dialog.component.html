@@ -1,0 +1,105 @@
+<h2 mat-dialog-title>Gestione User</h2>
+
+<mat-dialog-content>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="d-flex flex-column">
+  <div class="form-container">
+    <input id="idpId" type="hidden" formControlName="idpId">
+
+    <div class="d-flex flex-row gap-4">
+      <mat-form-field class="form-group-item">
+        <mat-label>Tenant</mat-label>
+        <mat-select formControlName="tenant" required>
+          <mat-option *ngFor="let tenant of tenantList" [value]="tenant.tenantId">
+            {{ tenant.tenantId }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.controls['tenant'].invalid && userForm.controls['tenant'].touched">
+          Il tenant è obbligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-group-item">
+        <mat-label>User ID</mat-label>
+        <input matInput formControlName="userId">
+        <mat-error *ngIf="userForm.controls['userId'].invalid && userForm.controls['userId'].touched">
+          User ID è obbligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-group-item">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email">
+        <mat-error *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+          Email è obbligatoria
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="d-flex flex-row gap-4">
+      <mat-form-field class="form-group-item">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="firstName">
+        <mat-error *ngIf="userForm.controls['firstName'].invalid && userForm.controls['firstName'].touched">
+          Nome è obbligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-group-item">
+        <mat-label>Cognome</mat-label>
+        <input matInput formControlName="lastName">
+        <mat-error *ngIf="userForm.controls['lastName'].invalid && userForm.controls['lastName'].touched">
+          Cognome è obbligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="d-flex flex-row gap-4">
+      <mat-form-field class="form-group-item">
+        <mat-label>Indirizzo</mat-label>
+        <input matInput formControlName="address">
+      </mat-form-field>
+
+      <mat-form-field class="form-group-item">
+        <mat-label>Telefono</mat-label>
+        <input matInput formControlName="phone">
+      </mat-form-field>
+
+      <mat-form-field class="form-group-item">
+        <mat-label>Genere</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="">-- Seleziona --</mat-option>
+          <mat-option value="M">Maschio</mat-option>
+          <mat-option value="F">Femmina</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="d-flex flex-row gap-4">
+      <mat-form-field class="form-group-item">
+        <mat-label>Gruppi di Appartenenza</mat-label>
+        <mat-select multiple formControlName="usrGrp" [compareWith]="compareGroups">
+          <mat-option *ngFor="let grp of grpList" [value]="grp">
+            {{ grp.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="d-flex flex-row gap-4" *ngIf="!isPersisted">
+      <mat-form-field class="form-group-item">
+        <mat-label>Password *</mat-label>
+        <input matInput type="password" formControlName="password">
+        <mat-error *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched">
+          La password è obbligatoria
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Annulla</button>
+  <button mat-flat-button color="primary" [disabled]="userForm.invalid"
+    (click)="onYesClick()">Conferma</button>
+</mat-dialog-actions>

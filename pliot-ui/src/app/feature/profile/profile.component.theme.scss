@@ -1,0 +1,50 @@
+@mixin app-profile() {
+  app-profile {
+    mat-tab-group {
+      &.mat-mdc-tab-group {
+        flex-grow: 1;
+        mat-tab-header.mat-mdc-tab-header {
+          background-color: transparent;
+          margin: 0 35px;
+          margin-top: 32px;
+          .mat-mdc-tab-label-container {
+            .mat-mdc-tab-list {
+              .mat-mdc-tab-labels {
+                .mdc-tab.mat-mdc-tab {
+                  flex-grow: initial;
+                  &.mdc-tab--active.mdc-tab-indicator--active {
+                    border: 1px solid #e0e0e0;
+                    border-radius: 1px;
+                    background-color: #fff;
+                    border-bottom: none;
+                    font-weight: 600;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .mat-mdc-tab-body-wrapper {
+          margin: 0 35px 35px 35px;
+          border: 1px solid #e0e0e0;
+          background-color: #fff;
+          flex-grow: 1;
+          mat-tab-body.mat-mdc-tab-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            .mat-mdc-tab-body-content {
+              display: flex;
+              flex-grow: 1;
+              flex-direction: column;
+            }
+          }
+        }
+      }
+
+      .mdc-tab-indicator__content--underline {
+        border-top-width: 3px !important;
+      }
+    }
+  }
+}

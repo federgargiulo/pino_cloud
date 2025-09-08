@@ -39,7 +39,7 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
 
     @Override
     public EquipmentTO create(EquipmentTO io) {
-        if ( io.getEquipmentId() == null )
+        if ( null == io.getEquipmentId() || "".equals(io.getEquipmentId()) )
             io.setEquipmentId(UUID.randomUUID().toString());
         return super.create(io);
     }
@@ -106,6 +106,18 @@ public class EquipmentServiceImpl extends BaseServiceImpl<EquipmentTO,Equipment 
         );
         List<Equipment> equipments = getRepo().findAll(spec);
         return getConverter().converListData2IO(equipments);
+    }
+
+    @Override
+    public EquipmentTO updateStatus(String equipmentId, String status) {
+        Optional<Equipment> opEquipment = getRepo().findById( equipmentId );
+        if( opEquipment.isEmpty() )
+            throw  new RuntimeException( " Equipment " + equipmentId + " not found " );
+        Equipment e = opEquipment.get();
+        e.setStatus( status );
+        e.setUpdateDttm( new Date( ));
+        e = getRepo().save( e );
+        return ( EquipmentTO ) getConverter().data2io( e );
     }
 
 

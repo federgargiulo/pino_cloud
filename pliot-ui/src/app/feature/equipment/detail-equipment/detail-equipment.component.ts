@@ -40,10 +40,6 @@ export class DetailEquipmentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.equipmentId = params.get('id') || '';
-      this.loadEquipmentDetail(this.equipmentId);
-    });
 
     this.equipmentForm = this.formBuilder.group({
       equipmentId: [{ value: '', disabled: true }],
@@ -52,6 +48,10 @@ export class DetailEquipmentComponent implements OnInit {
       status: [''],
       createdDttm: [{ value: '', disabled: true }],
       updateDttm: [{ value: '', disabled: true }]
+    });
+    this.route.paramMap.subscribe(params => {
+      this.equipmentId = params.get('id') || '';
+      this.loadEquipmentDetail(this.equipmentId);
     });
 
     this.initSignalForm();

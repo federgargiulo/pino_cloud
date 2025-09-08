@@ -66,9 +66,21 @@ export class DashMeasureComponent implements OnInit {
 
    }
 
+  formatDateTime(input: string): string {
+    const date = new Date(input);
+    const pad = (n: number) => n.toString().padStart(2, '0');
 
+    const day = pad(date.getDate());
+    const month = pad(date.getMonth() + 1);
+    const year = date.getFullYear();
+    const hour = pad(date.getHours());
+    const minute = pad(date.getMinutes());
+
+    return `${day}/${month}/${year} ${hour}:${minute}`;
+  }
 
    getNewConfiguration( tp: string , ll : string ): any  {
+
     return {
       type: tp ,
       data: {
@@ -85,8 +97,23 @@ export class DashMeasureComponent implements OnInit {
   }
 
   loadChartsInfo( data:any  ){
-    var d = JSON.parse( data.configuration );
+    
+     let d: any;
 
+      try {
+        d = typeof data.configuration === 'string'
+          ? JSON.parse(data.configuration)
+          : data.configuration;
+      } catch (e) {
+        console.error('❌ Errore parsing JSON configuration:', data.configuration);
+        return;
+      }
+
+      if (!Array.isArray(d.signals)) {
+        console.warn('⚠️ Nessun campo signals valido in configurazione:', d);
+        return;
+      }
+ 
     d.signals.forEach( ( x :any , index : any)  => {
       var newconf = this.getNewConfiguration(x.chartType ,  x.label );
 
@@ -94,7 +121,7 @@ export class DashMeasureComponent implements OnInit {
           next: (data) => {
 
               data.body.results.forEach( ( x: any ) => {
-                newconf.data.labels.push( x.measureDttm );
+                newconf.data.labels.push( this.formatDateTime( x.measureDttm ) );
                 newconf.data.datasets[0].data.push( x.val );
               } );
               this.setDataAndChart( index , newconf );

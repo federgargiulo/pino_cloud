@@ -1,0 +1,64 @@
+.full-width-table {
+  width: 100%;
+  overflow: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mat-column-actions {
+  min-width: 160px;
+}
+
+.dashboard-list-title {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.mat-column-configuration {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 400px; /* o quello che preferisci */
+}
+
+.json-preview {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: monospace;
+  font-size: 13px;
+  background-color: #f5f5f5;
+  padding: 8px;
+  border-radius: 4px;
+  max-width: 400px;
+  overflow: auto;
+}
+
+.config-preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  font-family: monospace;
+  font-size: 13px;
+  max-width: 100%;
+  padding: 6px 10px;
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+.json-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 6px 10px;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  max-height: none;
+}

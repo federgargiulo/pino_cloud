@@ -1,5 +1,6 @@
 package it.pliot.equipment.model;
 
+import it.pliot.equipment.Const;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,9 +12,23 @@ import java.util.Objects;
 @Entity
 public class EquipmentPuller {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String pullerId;
+
+    public String getPullType() {
+        return pullType;
+    }
+
+    public void setPullType(String pullType) {
+        this.pullType = pullType;
+    }
+
+    // AI Puller or Measure Puller
+    private String pullType = Const.MEASURE_PULLER;
+
 
     private String equipmentId;
 
@@ -77,7 +92,7 @@ public class EquipmentPuller {
         return equipmentId;
     }
 
-    public void setIdEquipment(String equipmentId) {
+    public void setEquipmentId(String equipmentId) {
         this.equipmentId = equipmentId;
     }
 

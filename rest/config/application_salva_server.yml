@@ -20,6 +20,8 @@ pliot:
 logging:
   file:
     path: ./log
+  level:
+    org.springframework.security: DEBUG
 
 springdoc:
   swagger-ui:
@@ -108,13 +110,18 @@ management:
   endpoints:
     web:
       exposure:
-        include: hawtio,jolokia
+        include: hawtio,jolokia,health,info
       base-path: "/actuator"
       path-mapping:
         hawtio: "hawtio/console"
+  endpoint:
+    health:
+      probes:
+        enabled: true
   management:
     security:
       enabled: false
+
 
 hawtio:
   authenticationEnabled: false

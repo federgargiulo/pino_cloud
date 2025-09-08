@@ -1,13 +1,17 @@
 pliot:
   mode: SERVER
+  server:
+    url: http://localhost:8080  
   keycloak:
-    url: "https://pinocloud.duckdns.org:8081"
+    url: "http://keycloak:8080"
     realmName: "master"
-    realmManaged: "pliot_dev"
+    realmManaged: "pliot"
     webClientId: "edge_app_dev"
     user: "admin"
-    password: "4%VtlGbS)54\"}.l0A,rW:VAs*-0$/=+3zXYpT*-C<.4isbV6$2"
+    password: "admin"
     clientId: "admin-cli"
+  edge: 
+    client-id: ten1_system_api
   base_path: "api"
 
 logging:

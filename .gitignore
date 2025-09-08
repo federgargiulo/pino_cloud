@@ -33,13 +33,8 @@ build/
 ### VS Code ###
 .vscode/
 /rest/target/
-package-lock.json
-package.json
 
-yarn.lock
-
-*.lock
-*.yaml
+*.tgz
 
 *actions
 *logs
@@ -48,3 +43,7 @@ yarn.lock
 *.shellcheckrc
 *trunk
 .yarn-integrity
+
+
+### Python ###
+/ai_ext/__pycache__/

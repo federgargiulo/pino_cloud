@@ -1,0 +1,47 @@
+@mixin equipment-confirm-dialog-theme() {
+  app-equipment-confirm-dialog {
+    // background-color: red;
+
+    mat-dialog-content {
+      &.mat-mdc-dialog-content {
+        &.mdc-dialog__content {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+      }
+    }
+
+    .mat-expansion-panel-body {
+      display: flex;
+      flex-direction: row;
+      // gap: 40px !important;
+      padding: 0;
+
+      form, table {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      form {
+        padding-top: 24px;
+        > div {
+          padding: 0 24px;
+          gap: 24px;
+          mat-form-field {
+            flex-grow: 1;
+          }
+        }
+      }
+
+      .actions-table-bar {
+        margin: 32px 24px 0 24px;
+      }
+
+      table {
+        margin: 8px 24px 24px 24px;
+      }
+    }
+  }
+}

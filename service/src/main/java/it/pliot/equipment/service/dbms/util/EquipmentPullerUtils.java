@@ -17,7 +17,7 @@ public class EquipmentPullerUtils extends BaseConvertUtil<EquipmentPuller, Equip
             return null;
         EquipmentPuller puller  = new EquipmentPuller();
         puller.setPullerId( pullTo.getPullerId());
-        puller.setIdEquipment( pullTo.getEquipmentId() );
+        puller.setEquipmentId( pullTo.getEquipmentId() );
         puller.setIntervalInSec( pullTo.getIntervalInSec() );
         puller.setLastEnd( pullTo.getLastEnd() );
         puller.setLastStart( pullTo.getLastStart() );
@@ -29,6 +29,7 @@ public class EquipmentPullerUtils extends BaseConvertUtil<EquipmentPuller, Equip
         puller.setApiKey( pullTo.getApiKey() );
         puller.setUrl( pullTo.getUrl() );
         puller.setTenant( pullTo.getTenant() );
+        puller.setPullType( pullTo.getPullType() );
         return  puller;
     }
 
@@ -50,6 +51,7 @@ public class EquipmentPullerUtils extends BaseConvertUtil<EquipmentPuller, Equip
         pullerTo.setApiKey( puller.getApiKey());
         pullerTo.setUrl( puller.getUrl() );
         pullerTo.setTenant( puller.getTenant() );
+        pullerTo.setPullType( puller.getPullType( ) );
         return  pullerTo;
     }
 }
