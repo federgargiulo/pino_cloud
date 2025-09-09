@@ -8,7 +8,7 @@ pliot:
     password: "admin"
     clientId: "admin-cli"
   server:
-    url: "https://pino-server-app-v17-prod.workload.nemo.onelab.eu"
+    url: "https://pino-server-app-v18-prod.workload.nemo.onelab.eu"
   edge:
     name: "edge_name"
     tokenuri: ${pliot.keycloak.url}/realms/${pliot.keycloak.realmManaged}/protocol/openid-connect/token
@@ -19,7 +19,7 @@ pliot:
   load_data: "false"
 logging:
   file:
-    path: ./log
+    path: ./logs
 
 springdoc:
   swagger-ui:

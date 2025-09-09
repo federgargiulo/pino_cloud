@@ -43,3 +43,7 @@ build/
 *.shellcheckrc
 *trunk
 .yarn-integrity
+
+
+### Python ###
+/ai_ext/__pycache__/

@@ -22,26 +22,23 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 
-public class HttpLoaderImpl {
+public class MeasurePuller implements  Cmd {
 
 
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpLoaderImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MeasurePuller.class);
 
 
 
-    public void executeRetrieve( EquipmentPullerTO eqPuller ,
+    public StringBuffer execute( EquipmentPullerTO eqPuller ,
                           EquipmentPullerServices pullerService ,
                           ApplicationContext context ){
 
         ResponseDTO response = null;
         StringBuffer buff = new StringBuffer();
-        try {
-            // manage the lock here
-            pullerService.startPull( eqPuller.getPullerId() );
 
-            response = callApi(eqPuller, context);
-            SignalServices signalService =
+        response = callApi(eqPuller, context);
+        SignalServices signalService =
                     (SignalServices) context.getBean( SignalServices.class );
             MeasureServices measureSignals =
                     ( MeasureServices ) context.getBean( MeasureServices.class );
@@ -62,14 +59,12 @@ public class HttpLoaderImpl {
                 measureSignals.create( m );
             });
 
-
-        } catch (Exception e) {
-            buff.append( e.getMessage() );
-        }finally {
-            pullerService.endPull(eqPuller.getPullerId(),  buff.toString() );
-        }
+        return buff;
 
     }
+
+
+
 
     private SignalTO findOrRegister(EquipmentPullerTO eqPuller , List<SignalTO> signals, KeyValueDTO x , SignalServices signlaServices ) {
         SignalTO s = null;
@@ -86,6 +81,7 @@ public class HttpLoaderImpl {
 
 
     }
+
 
     private SignalTO createSignal(EquipmentPullerTO eqPuller , KeyValueDTO x, SignalServices signalServices) {
         SignalTO s = SignalTO.newEmptyInstance( eqPuller.getEquipmentId() , x.getName(), eqPuller.getTenant() );

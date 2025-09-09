@@ -2,7 +2,7 @@ package it.pliot.equipment.service.business.task;
 
 import it.pliot.equipment.io.EquipmentPullerTO;
 import it.pliot.equipment.service.business.EquipmentPullerServices;
-import it.pliot.equipment.service.business.task.impl.HttpLoaderImpl;
+import it.pliot.equipment.service.business.task.impl.PullerImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class EquipmentPuller {
 
    private static final Logger log = LoggerFactory.getLogger(EquipmentPuller.class);
    private static long MB = ( 1024*1024 );
-   private static HttpLoaderImpl IMP_HTTP = new HttpLoaderImpl();
+   private static PullerImpl IMP_HTTP = new PullerImpl();
 
 
    @Async
@@ -38,7 +38,6 @@ public class EquipmentPuller {
          listOfPulls.forEach( x -> {
             IMP_HTTP.executeRetrieve( x , equipmentService , context );
          });
-
       }
       //log.info( b.toString() );
 

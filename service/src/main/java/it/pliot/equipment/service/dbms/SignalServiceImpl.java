@@ -65,6 +65,7 @@ public class SignalServiceImpl extends BaseServiceImpl<SignalTO, Signal, String>
         return SignalUtils.instance().converListData2IO(signals);
     }
 
+
     @Override
     public Collection<Object> importFromEdge(List<SignalTO> signals, String edegeId, Date d) {
         SignalUtils u = ( SignalUtils) getConverter();

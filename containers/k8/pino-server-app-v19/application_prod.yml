@@ -1,12 +1,11 @@
 pliot:
-  mode: SERVER
   keycloak:
-    url: "http://localhost:8180"
+    url: "https://pinocloud.duckdns.org:8081"
     realmName: "master"
-    realmManaged: "pliot"
+    realmManaged: "nemo"
     webClientId: "pl_server"
     user: "admin"
-    password: "admin"
+    password: "4%VtlGbS)54\"}.l0A,rW:VAs*-0$/=+3zXYpT*-C<.4isbV6$2"
     clientId: "admin-cli"
   edge:
     tokenuri:
@@ -20,8 +19,6 @@ pliot:
 logging:
   file:
     path: ./log
-  level:
-    org.springframework.security: DEBUG
 
 springdoc:
   swagger-ui:
@@ -56,10 +53,10 @@ spring:
   jmx:
     enabled: true
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/pliot
-    username: pliot
-    password: pliot
+  datasource:  
+    url: jdbc:postgresql://pino-db-app-v2-prod.d38522f7-de28-479c-af3a-15bf1fd3775e.svc.cluster.local:5432/pino-app
+    username: pino
+    password: G1us3pp3
 #H2
 #    url: jdbc:h2:file:./equipment
 #    username: sa
@@ -104,6 +101,10 @@ spring:
 
 server:
   port: 8080
+  #ssl:
+  #  enabled: true
+  #  certificate: ./config/fullchain.pem
+  #  certificate-private-key: ./config/privkey.pem
 
 
 management:
@@ -121,7 +122,6 @@ management:
   management:
     security:
       enabled: false
-
 
 hawtio:
   authenticationEnabled: false

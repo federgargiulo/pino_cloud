@@ -10,7 +10,7 @@ export class ChartViewComponent implements OnChanges, AfterViewInit {
   @Input() data: any[] = []; // Dati in input
   @ViewChild('chartDiv') chartCanvas!: ElementRef; // Riferimento al canvas per Chart.js
 
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
+  public initialLineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [],
     datasets: [
       { data: [], label: 'Min', fill: false, borderColor: 'blue' },
@@ -59,11 +59,17 @@ export class ChartViewComponent implements OnChanges, AfterViewInit {
     const mean = this.data.map(row => row.mean);
     const max = this.data.map(row => row.max);
 
-    this.lineChartData.labels = labels;
-    this.lineChartData.datasets[0].data = min;
-    this.lineChartData.datasets[1].data = mean;
-    this.lineChartData.datasets[2].data = max;
-
+    if (this.chartInstance) {
+      this.chartInstance.data = {
+        labels: labels,
+        datasets: [
+          { data: min , label: 'Min', fill: false, borderColor: 'blue' },
+          { data: mean , label: 'Mean', fill: false, borderColor: 'green' },
+          { data: max , label: 'Max', fill: false, borderColor: 'red' }
+        ]
+      };
+    }
+    
     // Aggiorna il grafico se già esiste
     if (this.chartInstance) {
         this.chartInstance.update();
@@ -78,7 +84,7 @@ export class ChartViewComponent implements OnChanges, AfterViewInit {
       if (ctx) {
         this.chartInstance = new Chart(ctx, {
           type: "line",
-          data: this.lineChartData,
+          data: this.initialLineChartData,
           options: this.lineChartOptions
         });
       }
